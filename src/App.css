@@ -1,0 +1,1143 @@
+@font-face {
+  font-family: Poppins;
+  src: url(../public/fonts/Poppins-Regular.ttf);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  border: none;
+  text-decoration: none;
+  color: #060e30;
+  letter-spacing: 0.5%;
+}
+
+.home {
+  overflow-x: hidden;
+}
+
+input,
+select {
+  border-radius: 10px;
+  background-color: #dadada;
+  padding-left: 2%;
+  font-size: 18px;
+  height: 47px;
+}
+
+.home {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+nav {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  position: relative;
+}
+
+.menu {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+.line {
+  width: 1.5rem;
+  height: 4px;
+  background-color: black;
+  border-radius: 20px;
+}
+
+.left-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 32px;
+}
+
+.left-nav .image {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: gray;
+}
+
+.left-nav a {
+  font-weight: 700;
+  font-size: 24px;
+  letter-spacing: 3px;
+  font-family: "Montserrat-Alt1 Light", sans-serif;
+  background: linear-gradient(
+    to right,
+    #71c5ee,
+    #53a7d8,
+    #3889c1,
+    #1e6caa,
+    #025091
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.right-nav {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding-right: 32px;
+}
+/*
+.doctor-logo {
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  right: 229px;
+}
+*/
+.right-nav .doctor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 181px;
+}
+
+.right-nav .doctor .doctor-pic {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: grey;
+}
+
+.right-nav .doctor .doctor-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.right-nav .doctor .doctor-name a {
+  width: 125px;
+  font-size: 16px;
+  font-weight: 700;
+  color: black;
+}
+
+.right-nav .doctor .doctor-name span {
+  width: 77px;
+  font-size: 12px;
+}
+
+.lh {
+  width: 100%;
+  height: 1px;
+  background-color: #e1e1e1;
+}
+
+.aside-active {
+  width: 100vw;
+  height: calc(100vh - 90px);
+  position: absolute;
+  bottom: 0;
+  top: 85px;
+  background-color: white;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-150%);
+  transition: all 1s ease;
+  z-index: 99;
+}
+
+.aside-active.active {
+  transform: translateX(0);
+}
+
+.aside-active ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.aside-active li {
+  position: relative;
+  cursor: pointer;
+}
+
+.aside-active li::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #71c5ee;
+  border-radius: 1000px;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s ease-out;
+}
+
+.aside-active li:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.aside-active ul li a {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  text-transform: capitalize;
+  font-size: 22px;
+}
+
+.aside {
+  position: absolute;
+  top: 85px;
+  bottom: 10px;
+  left: 10px;
+  width: 60px;
+  overflow: hidden;
+  transition: width 0.2 linear;
+  padding-left: 9px;
+  background-color: #71c5ee;
+  border-radius: 10px;
+  z-index: 99;
+}
+
+.aside ul {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding-top: 30px;
+  list-style: none;
+}
+
+.aside ul li a {
+  position: relative;
+  color: black;
+  font-size: 14px;
+  display: table;
+  width: 232px;
+  text-transform: capitalize;
+}
+
+.aside ul li a .icon {
+  position: relative;
+  font-size: 24px;
+  text-align: center;
+  padding-left: 10px;
+  top: 5px;
+}
+
+.aside ul li:last-child {
+  position: absolute;
+  bottom: 20px;
+}
+
+.title {
+  position: relative;
+  margin-left: 40px;
+}
+
+.aside ul li a:hover {
+  line-height: 50px;
+  background-color: #fff;
+  border-radius: 20px 0 0 20px;
+  margin-left: 10px;
+  transition: all 1s ease;
+  padding-left: 10px;
+}
+
+.aside:hover {
+  width: 250px;
+  transition: all 1s ease;
+}
+
+.home-container {
+  width: 90%;
+  height: calc(100vh - 100px);
+  margin-left: 90px;
+  background-color: #f8f9fd;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.top-titre {
+  margin-top: 23px;
+  margin-left: 82px;
+}
+
+.top-titre h2 {
+  width: 217px;
+  font-weight: 600;
+  font-size: 28px;
+  font-family: "Poppins", sans-serif;
+}
+
+.top-right {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 212px;
+  padding-right: 100px;
+}
+
+.paraticien {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.service h3,
+.paraticien h3,
+.paraticien a {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.home-formulaire-swiper {
+  margin-top: 15px;
+  width: 95%;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 0 10px #060e30;
+  border-radius: 10px;
+}
+
+.swiper-formulaire {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Swipe {
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.Swipe::-webkit-scrollbar {
+  width: 0;
+}
+
+.formulaire-header {
+  width: 100%;
+  height: 73px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.formulaire-left,
+.formulaire-centre,
+.formulaire-right {
+  width: 33%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.formulaire-left h2,
+.formulaire-centre h2,
+.formulaire-right h2 {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.hr-nav {
+  background-color: gray;
+  height: 0.5px;
+}
+
+.hr-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hr-header hr {
+  width: 90%;
+  background-color: #4f81ff;
+  height: 0.5px;
+}
+
+.sexe-date-heure,
+.score-dapgar,
+.rea-duree-malf,
+.transfert-motif,
+.examen,
+.emission,
+.cathet,
+.recherche,
+.organes,
+.vitamine,
+.catheterisme,
+.date-poids-taille,
+.pre-fre {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-left: 70px;
+  margin-top: 44px;
+  gap: 20px;
+}
+
+.emission,
+.rea-duree-malf,
+.score-dapgar {
+  justify-content: center;
+  padding-left: 0;
+}
+
+.rea-duree-malf {
+  gap: 60px;
+}
+
+.transfert-motif {
+  justify-content: end;
+  gap: 80px;
+  padding-right: 124px;
+}
+
+.emission {
+  gap: 50px;
+}
+
+.examen-de-la-peau,
+.app-cardio,
+.pleuro-pul,
+.malformations,
+.traumatismes,
+.examen-neuro,
+.reflexes,
+.conclusion,
+.conj-eryth-globe,
+.depistage {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  padding-left: 40px;
+}
+
+.conclusion h2 {
+  padding-left: 40px;
+}
+
+.reflexes,
+.conclusion {
+  padding-left: 0;
+}
+
+.mat-art-mix1 {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.examen-de-la-peau {
+  margin-top: 35px;
+  height: 249px;
+}
+
+.malformations,
+.examen-neuro {
+  height: 357px;
+}
+
+.app-cardio,
+.pleuro-pul,
+.traumatismes,
+.mat-art-mix {
+  height: 125px;
+}
+
+.conclusion {
+  height: 287px;
+}
+
+.conj-eryth-globe,
+.depistage {
+  height: 185px;
+}
+
+.examen-de-la-peau h2,
+.app-cardio h2,
+.pleuro-pul h2,
+.malformations h2,
+.traumatismes h2,
+.examen-neuro h2,
+.conclusion h2 {
+  margin-left: 34px;
+}
+
+.reflexes span {
+  margin-left: 70px;
+}
+
+.sexe,
+.date,
+.heure,
+.date2,
+.poids,
+.taille,
+.perimetre,
+.frequence-car,
+.frequence-res {
+  width: 369px;
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.frequence-res {
+  gap: 15px;
+}
+
+.pre-fre {
+  padding-right: 40px;
+}
+
+.genitaux,
+.k1,
+.c-choanes,
+.choanes,
+.cordon,
+.atresie,
+.ictere,
+.paleur,
+.hematome,
+.fente,
+.bec,
+.hanches,
+.imperformation,
+.yeux,
+.obstetricaux,
+.succion,
+.signe-moro,
+.tonus,
+.reaction,
+.conjonctivite,
+.erytheme,
+.globe,
+.pheny,
+.hypoth,
+.autre,
+.maternal,
+.artificiel,
+.mixte {
+  display: flex;
+}
+
+.maternal,
+.artificiel,
+.mixte {
+  align-items: center;
+  gap: 20px;
+}
+
+.succion,
+.signe-moro {
+  padding-left: 55px;
+}
+
+.app1 {
+  margin-top: 35px;
+}
+
+.sexe span,
+.date span,
+.heure span,
+.score span,
+.minute-1 span,
+.minute-5 span,
+.reanimation span,
+.duree span,
+.malforamtion span,
+.transfert span,
+.motif span,
+.cordon span,
+.urine span,
+.meconium span,
+.choanes span,
+.atresie span,
+.genitaux span,
+.k1 span,
+.c-choanes span,
+.date2 span,
+.poids span,
+.taille span,
+.perimetre span,
+.frequence-car span,
+.frequence-res span,
+.ictere span,
+.paleur span,
+.hematome span,
+.fente span,
+.bec span,
+.hanches span,
+.imperformation span,
+.yeux span,
+.obstetricaux span,
+.reflexes span,
+.succionn span,
+.signe-moro span,
+.tonus span,
+.reaction span,
+.conjonctivite span,
+.erytheme span,
+.globe span,
+.pheny span,
+.hypoth span,
+.autre span,
+.maternal span,
+.artificiel span,
+.mixte span {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.span {
+  display: flex;
+  width: 348px;
+  height: 47px;
+  justify-content: center;
+  align-items: center;
+}
+.pheny {
+  margin-top: 20px;
+}
+
+.phe,
+.hyp {
+  width: 400px;
+}
+
+.span1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.atresie span {
+  width: 457px;
+  text-align: center;
+}
+
+.sexe select,
+.date input,
+.heure input,
+.date2 input,
+.poids input,
+.taille input,
+.perimetre input,
+.frequence-car input,
+.frequence-res input {
+  width: 175px;
+  text-align: center;
+}
+
+.score {
+  width: 192px;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.minute-1,
+.minute-5 {
+  width: 250px;
+  height: 47px;
+  margin-right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.minute-1 {
+  margin-left: 120px;
+}
+
+.minute-1 input,
+.minute-5 input,
+.reanimation input,
+.transfert input,
+.urine input,
+.meconium input,
+.hypoth input,
+.pheny input,
+.artificiel input,
+.mixte input,
+.maternal input {
+  width: 47px;
+}
+
+.hypoth input,
+.pheny input {
+  margin-left: 50px;
+}
+
+.reanimation,
+.duree,
+.malforamtion,
+.transfert,
+.motif,
+.urine,
+.meconium {
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.duree input,
+.malforamtion input {
+  width: 244px;
+}
+
+.motif input {
+  width: 536px;
+}
+
+.atresie input {
+  margin-left: 20px;
+}
+
+.atresie input {
+  width: 695px;
+}
+
+.genitaux input,
+.k1 input,
+.c-choanes input,
+.cordon input,
+.choanes input,
+.ictere input,
+.paleur input,
+.hematome input,
+.fente input,
+.bec input,
+.hanches input,
+.imperformation input,
+.yeux input,
+.obstetricaux input,
+.tonus input,
+.reaction input,
+.conjonctivite input,
+.erytheme input,
+.globe input,
+.autre input {
+  width: 820px;
+}
+
+.succion input,
+.signe-moro input {
+  width: 764px;
+}
+
+.cardio,
+.pleuro {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.cardio input,
+.pleuro input {
+  width: 1007px;
+}
+
+.textarea {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.conclusion{
+  margin-bottom: 0;
+}
+
+.conclusion textarea {
+  width: 1060px;
+  height: 200px;
+  border-radius: 10px;
+  background-color: #dadada;
+}
+
+.back-next-buttons{
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 50px;
+  padding-left: 50px;
+}
+
+.next1{
+  margin-top: 20px;
+  height: 80px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 50px;
+}
+
+.next1 button,
+.next2 button,
+.next3 button,
+.back1 button,
+.back2 button {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28.8px;
+  letter-spacing: 0.5%;
+  text-align: center;
+  color: #060e30;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.vl {
+  border-left: 3px solid #71c5ee;
+  height: 35px;
+}
+
+.line-hl {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.hl {
+  height: 2px;
+  width: 90%;
+  background-color: #71c5ee;
+  text-align: center;
+}
+.swiper-class {
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .home {
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+  }
+
+  .left-nav {
+    padding-left: 15px;
+  }
+
+  .right-nav {
+    padding-right: 0px;
+    gap: 20px;
+  }
+
+  .right-nav .doctor {
+    width: fit-content;
+  }
+
+  .aside {
+    display: none;
+  }
+
+  .title {
+    margin-left: 30px;
+  }
+
+  .menu {
+    display: flex;
+    margin-right: 5px;
+  }
+
+  .aside-active {
+    display: flex;
+  }
+
+  .home-container {
+    width: 100vw;
+    margin-left: 0;
+  }
+
+  .top-titre {
+    margin-top: 10px;
+    margin-left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .top-right {
+    gap: 10px;
+    align-items: flex-start;
+    padding-left: 5%;
+    flex-direction: column;
+    padding-right: 0;
+  }
+
+  .home-formulaire-swiper {
+    height: 75%;
+  }
+
+  .formulaire-left {
+    width: 100%;
+  }
+
+  .formulaire-centre,
+  .formulaire-right {
+    display: none;
+  }
+
+  .vl {
+    display: none;
+  }
+
+  .sexe-date-heure,
+  .date-poids-taille,
+  .pre-fre,
+  .app-cardio,
+  .pleuro-pul,
+  .conj-eryth-globe,
+  .depistage,
+  .malformations,
+  .examen-de-la-peau,
+  .traumatismes,
+  .examen-neuro {
+    flex-direction: column;
+    padding-left: 0;
+    margin-top: 22px;
+  }
+
+  .conclusion h2,
+  .succion,
+  .signe-moro{
+    padding-left: 0;
+  }
+
+  .examen-neuro,
+  .examen-de-la-peau,
+  .app-cardio,
+  .pleuro-pul,
+  .malforamtion,
+  .traumatismes,
+  .conclusion,
+  .fente,
+  .bec,
+  .hanches,
+  .imperformation,
+  .yeux,
+  .conjonctivite,
+  .erytheme,
+  .globe{
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .autre{
+    padding-left: 10px;
+  }
+
+  .depistage{
+    padding-right: 10px;
+  }
+  
+
+  .reflexes{
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .reflexes span{
+    margin-left: 0;
+  }
+
+
+  .pre-fre{
+    margin-top: 40px;
+  }
+
+  .score-dapgar {
+    gap: 0px;
+    padding-left: 0;
+  }
+
+  .minute-1,
+  .minute-5 {
+    margin-top: 20px;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .minute-1 {
+    margin-left: 20px;
+  }
+
+  .minute-5 {
+    margin-right: 20px;
+  }
+
+  .score {
+    margin-left: 20px;
+  }
+
+  .rea-duree-malf,
+  .transfert-motif {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .reanimation span {
+    margin-right: 20px;
+  }
+
+  .transfert span {
+    margin-left: 90px;
+  }
+
+  .transfert input {
+    margin-left: 20px;
+  }
+
+  .duree span {
+    margin-right: 38px;
+    margin-left: 40px;
+  }
+
+  .motif {
+    gap: 0px;
+  }
+
+  .motif span {
+    width: 200px;
+    margin-left: 60px;
+  }
+
+  .motif input {
+    width: 244px;
+  }
+
+  .cordon,
+  .choanes,
+  .atresie,
+  .genitaux,
+  .k1,
+  .c-choanes {
+    flex-direction: column;
+  }
+
+  .examen,
+  .cathet,
+  .organes,
+  .vitamine,
+  .catheterisme,
+  .recherche {
+    justify-content: center;
+    padding-left: 0;
+  }
+
+  .recherche {
+    padding-left: 20px;
+  }
+
+  .cordon span,
+  .choanes span,
+  .genitaux span,
+  .k1 span,
+  .c-choanes span {
+    margin-left: 40px;
+  }
+
+  .atresie {
+    gap: 10px;
+  }
+
+  .cordon input,
+  .choanes input,
+  .atresie input,
+  .genitaux input,
+  .k1 input,
+  .c-choanes input {
+    width: 400px;
+  }
+
+  .emission {
+    gap: 0;
+  }
+
+  .urine,
+  .meconium {
+    gap: 0;
+  }
+
+  .urine span,
+  .meconium span {
+    margin-left: 30px;
+  }
+
+  .urine input,
+  .meconium input {
+    margin-right: 30px;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1600px) {
+}
+
+@media screen and (min-width: 1600px) {
+  .top-titre h2 {
+    padding-top: 43px;
+  }
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
