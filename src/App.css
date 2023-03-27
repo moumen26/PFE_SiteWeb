@@ -3,6 +3,10 @@
   src: url(../public/fonts/Poppins-Regular.ttf);
 }
 
+.titre {
+  padding-left: 100px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,8 +19,9 @@
   letter-spacing: 0.5%;
 }
 
-.home {
+.AddPatient {
   overflow-x: hidden;
+  min-height: 100vh;
 }
 
 input,
@@ -28,9 +33,14 @@ select {
   height: 47px;
 }
 
+textarea{
+  padding-left: 1%;
+  font-size: 18px;
+}
+
 .home {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
 }
 
@@ -143,6 +153,16 @@ nav {
   background-color: #e1e1e1;
 }
 
+.lv {
+  width: 1px;
+  height: calc(100vh - 80px);
+  background-color: #e1e1e1;
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  z-index: 1;
+}
+
 .aside-active {
   width: 100vw;
   height: calc(100vh - 90px);
@@ -211,7 +231,7 @@ nav {
   overflow: hidden;
   transition: width 0.2 linear;
   padding-left: 9px;
-  background-color: #71c5ee;
+  background-color: #fff;
   border-radius: 10px;
   z-index: 99;
 }
@@ -253,19 +273,26 @@ nav {
 
 .aside ul li a:hover {
   line-height: 50px;
-  background-color: #fff;
+  background-color: #71c5ee;
   border-radius: 20px 0 0 20px;
   margin-left: 10px;
   transition: all 1s ease;
   padding-left: 10px;
 }
-
+/*
+.list-active{
+  line-height: 50px;
+  background-color: #71c5ee;
+  border-radius: 20px 0 0 20px;
+  width: 60px;
+}
+*/
 .aside:hover {
-  width: 250px;
+  width: 240px;
   transition: all 1s ease;
 }
 
-.home-container {
+.addpatient-container {
   width: 90%;
   height: calc(100vh - 100px);
   margin-left: 90px;
@@ -273,6 +300,7 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 10px;
 }
 
 .top {
@@ -316,7 +344,8 @@ nav {
   font-size: 20px;
 }
 
-.home-formulaire-swiper {
+.home-formulaire-swiper,
+.cahier-formulaire-swiper {
   margin-top: 15px;
   width: 95%;
   height: 80%;
@@ -326,6 +355,14 @@ nav {
   box-shadow: 0 0 10px #060e30;
   border-radius: 10px;
 }
+
+.cahier-formulaire-swiper{
+  margin-top: 54px;
+  width: 85%;
+  height: calc(100vh - 100px);
+  
+}
+
 
 .swiper-formulaire {
   width: 100%;
@@ -353,11 +390,13 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 2px;
 }
 
 .formulaire-left,
 .formulaire-centre,
-.formulaire-right {
+.formulaire-right,
+.formulaire-dossier-obstetrique {
   width: 33%;
   height: 100%;
   display: flex;
@@ -366,12 +405,34 @@ nav {
   text-align: center;
 }
 
+.formulaire-header-obster{
+  width: 100%;
+  height: 73px;
+  margin-bottom: 2px;
+}
+
+.formulaire-dossier-obstetrique{
+  width: 100%;
+}
+
+.swipe1,
+.swipe2,
+.swipe3{
+  background-color: #71c5ee;
+}
+
 .formulaire-left h2,
 .formulaire-centre h2,
 .formulaire-right h2 {
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
+}
+
+.formulaire-dossier-obstetrique h2{
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 28.8px;
 }
 
 .hr-nav {
@@ -453,7 +514,11 @@ nav {
   padding-left: 40px;
 }
 
-.conclusion h2 {
+.conclusion h2,
+.diag-sor h2,
+.resume-obser h2,
+.obser-entree h2,
+.antecedents h2 {
   padding-left: 40px;
 }
 
@@ -500,7 +565,11 @@ nav {
 .malformations h2,
 .traumatismes h2,
 .examen-neuro h2,
-.conclusion h2 {
+.conclusion h2,
+.diag-sor h2,
+.resume-obser h2,
+.obser-entree h2,
+.antecedents h2 {
   margin-left: 34px;
 }
 
@@ -793,7 +862,7 @@ nav {
   justify-content: center;
 }
 
-.conclusion{
+.conclusion {
   margin-bottom: 0;
 }
 
@@ -804,7 +873,7 @@ nav {
   background-color: #dadada;
 }
 
-.back-next-buttons{
+.back-next-buttons {
   width: 100%;
   height: 80px;
   display: flex;
@@ -814,7 +883,8 @@ nav {
   padding-left: 50px;
 }
 
-.next1{
+.next1,
+.next4 {
   margin-top: 20px;
   height: 80px;
   width: 100%;
@@ -824,11 +894,19 @@ nav {
   padding-right: 50px;
 }
 
+.next4,
+.back-next-dossier{
+  margin-top: 32px;
+}
+
 .next1 button,
 .next2 button,
 .next3 button,
+.next4 button,
 .back1 button,
-.back2 button {
+.back2 button,
+.back3 button,
+.next5 button {
   font-weight: 600;
   font-size: 24px;
   line-height: 28.8px;
@@ -860,6 +938,264 @@ nav {
   width: 100%;
   height: 100%;
 }
+
+.pere-class{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.obster-left-class{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 65px;
+  margin-left: 40px;
+}
+
+.obster-right-class{
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 107px;
+}
+
+.left-item,
+.right-item,
+.add-adm-vit-item,
+.pyscho-item,
+.examen-bio-item{
+  display: flex;
+}
+
+.pyscho-item,
+.examen-bio-item{
+  gap: 5px;
+}
+
+.right-item{
+  margin-right: 69px;
+}
+
+#date{
+  text-align: center;
+}
+
+.span-item{
+  width: 175px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.span-item span,
+.span-text span,
+.ddr-terme-span span,
+.psychologiques span,
+.examen-bio span{
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.span-item span,
+.span-text span,
+.ddr-terme-span span{
+  text-align: center;
+}
+
+.span-text{
+  padding-left: 92px;
+}
+
+.left-item input{
+  width: 523px;
+}
+
+.right-item input{
+  width: 275px;
+}
+
+.add-adm-vit-item input{
+  width: 932px;
+}
+
+.ddr-terme-item input{
+  width: 408px;
+}
+
+.pyscho-item input,
+.examen-bio-item input{
+  width: 769px;
+}
+
+.pyscho-right input,
+.pyscho-left input{
+  width: 296px;
+}
+
+.add-adm-vit-item,
+.diag-sor,
+.resume-obser,
+.obser-entree,
+.antecedents{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.diag-sor,
+.resume-obser{
+  flex-direction: column;
+  gap: 21px;
+  margin-top: 103px;
+}
+
+.obser-entree{
+  flex-direction: column;
+  margin-top: 66px;
+}
+
+.antecedents{
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.add-adm-vit{
+  display: flex;
+  flex-direction: column;
+  margin-top: 78px;
+  gap: 21px;
+}
+
+.resume-obser{
+  margin-top: 32px;
+  gap: 21px;
+}
+
+.diag-sor textarea,
+.resume-obser textarea,
+.motif-hosp textarea,
+.psychologiques .textarea textarea,
+.examen-comple .textarea textarea{
+  height: 175px;
+  width: 1060px;
+  border-radius: 10px;
+  background-color: #dadada;
+}
+
+.examen-comple .textarea textarea{
+  height: 47px;
+}
+
+.psychologiques .textarea,
+.examen-bio .textarea{
+  display: flex;
+  justify-content: flex-start;
+}
+
+.psychologiques .textarea textarea,
+.examen-bio .textarea textarea{
+  width: 986px;
+  margin-left: 8px;
+}
+
+.span-long{
+  width: 220px;
+}
+
+.resume-obser textarea{
+  height: 312px;
+}
+
+.motif-hosp textarea{
+  height: 175px;
+}
+
+.motif-hosp,
+.personnels,
+.examen-comple{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  gap: 23px;
+}
+
+.personnels{
+  margin-bottom: 41px;
+}
+
+.ddr-terme{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 58px;
+}
+
+.ddr-terme-item{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#motif-hosp{
+  width: 1107px;
+}
+
+.psychologiques,
+.examen-bio{
+  margin-left: 205px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.psycho-class,
+.pyscho-left,
+.pyscho-right{
+  display: flex;
+  align-items: center;
+}
+
+.psycho-class{
+  margin-left: 50px;
+}
+
+.addpatient-add-cahier{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 54px;
+  margin-bottom: 54px;
+}
+
+.add-cahier-sante h2{
+  font-size: 32px;
+  line-height: 38.4px;
+  font-weight: 700;
+  color: #4f81ff;
+  margin-right: 14px;
+  opacity: 0.7;
+}
+
+.add-cahier-sante h2:hover{
+  opacity: 1;
+}
+
+.add-cahier-sante{
+  width: 969px;
+  height: 182px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #4F81FF40;
+  border-radius: 40px;
+  cursor: pointer;
+}
+
 
 @media screen and (max-width: 768px) {
   .home {
@@ -953,7 +1289,7 @@ nav {
 
   .conclusion h2,
   .succion,
-  .signe-moro{
+  .signe-moro {
     padding-left: 0;
   }
 
@@ -971,31 +1307,29 @@ nav {
   .yeux,
   .conjonctivite,
   .erytheme,
-  .globe{
+  .globe {
     padding-right: 10px;
     padding-left: 10px;
   }
 
-  .autre{
+  .autre {
     padding-left: 10px;
   }
 
-  .depistage{
+  .depistage {
     padding-right: 10px;
   }
-  
 
-  .reflexes{
+  .reflexes {
     margin-left: 0;
     padding-left: 0;
   }
 
-  .reflexes span{
+  .reflexes span {
     margin-left: 0;
   }
 
-
-  .pre-fre{
+  .pre-fre {
     margin-top: 40px;
   }
 

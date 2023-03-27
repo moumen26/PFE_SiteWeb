@@ -7,7 +7,7 @@ import { useState } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
 
-export default function MySwiper() {
+export default function MyCahierSwiper() {
   return (
     <Swiper
       className="swiper-formulaire"
@@ -17,7 +17,7 @@ export default function MySwiper() {
       <SwiperSlide className="Swipe first">
         <div className="formulaire-examen">
           <div className="formulaire-header">
-            <div className="formulaire-left">
+            <div className="formulaire-left swipe1">
               <h2>Examen du nouveau-ne</h2>
             </div>
             <div className="vl"></div>
@@ -176,7 +176,7 @@ export default function MySwiper() {
               <h2>Examen du nouveau-ne</h2>
             </div>
             <div className="vl"></div>
-            <div className="formulaire-centre">
+            <div className="formulaire-centre swipe2">
               <h2>Le premier jour de vie</h2>
             </div>
             <div className="vl"></div>
@@ -374,7 +374,7 @@ export default function MySwiper() {
               <h2>Le premier jour de vie</h2>
             </div>
             <div className="vl"></div>
-            <div className="formulaire-right">
+            <div className="formulaire-right swipe3">
               <h2>
                 Dans les huits jours qui suivent <br /> naissance
               </h2>
@@ -519,6 +519,7 @@ export default function MySwiper() {
           </div>
         </div>
       </SwiperSlide>
+
     </Swiper>
   );
 }

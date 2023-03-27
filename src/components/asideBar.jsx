@@ -9,140 +9,87 @@ import { FiLogOut } from "react-icons/fi";
 import { IconContext } from "react-icons";
 
 export default function MyAsideBar() {
+  /*let list = document.querySelectorAll(".list");
+  for (let i = 0; i < list.length; i++) {
+    list[i].onclick = function () {
+      let j = 0;
+      while (j < list.length) {
+        list[j++].className = "list";
+      }
+      list[i].className = "list-active";
+    };
+  }*/
   return (
-    <aside className="aside">
-      <ul>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <MdDashboard />
-            </span>
-            <span className="title">dashboard</span>
-          </a>
-        </li>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <HiUserAdd />
-            </span>
-            <span className="title">add patient</span>
-          </a>
-        </li>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <BsFilePersonFill />
-            </span>
-            <span className="title">patients</span>
-          </a>
-        </li>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <BsFillCalendarFill />
-            </span>
-            <span className="title">calendrier</span>
-          </a>
-        </li>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <RiCoupon2Fill />
-            </span>
-            <span className="title">coupon</span>
-          </a>
-        </li>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <MdAnalytics />
-            </span>
-            <span className="title">analytics</span>
-          </a>
-        </li>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <IoIosSettings />
-            </span>
-            <span className="title">settings</span>
-          </a>
-        </li>
-        <li className="list">
-          <a href="#">
-            <span className="icon">
-              <FiLogOut />
-            </span>
-            <span className="title">log out</span>
-          </a>
-        </li>
-      </ul>
-      <ul className="aside-active">
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <MdDashboard />
-            </span>
-            <span className="title-active">dashboard</span>
-          </a>
-        </li>
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <HiUserAdd />
-            </span>
-            <span className="title-active">add patient</span>
-          </a>
-        </li>
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <BsFilePersonFill />
-            </span>
-            <span className="title-active">patients</span>
-          </a>
-        </li>
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <BsFillCalendarFill />
-            </span>
-            <span className="title-active">calendrier</span>
-          </a>
-        </li>
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <RiCoupon2Fill />
-            </span>
-            <span className="title-active">coupon</span>
-          </a>
-        </li>
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <MdAnalytics />
-            </span>
-            <span className="title-active">analytics</span>
-          </a>
-        </li>
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <IoIosSettings />
-            </span>
-            <span className="title-active">settings</span>
-          </a>
-        </li>
-        <li className="list-active">
-          <a href="#">
-            <span className="icon-active">
-              <FiLogOut />
-            </span>
-            <span className="title-active">log out</span>
-          </a>
-        </li>
-      </ul>
-    </aside>
+    <div className="asidebar">
+      <aside className="aside">
+        <ul>
+          <li className="list">
+            <a href="/dashboard">
+              <span className="icon">
+                <MdDashboard />
+              </span>
+              <span className="title">dashboard</span>
+            </a>
+          </li>
+          <li className="list">
+            <a href="/addpatients">
+              <span className="icon">
+                <HiUserAdd />
+              </span>
+              <span className="title">add patient</span>
+            </a>
+          </li>
+          <li className="list">
+            <a href="/patients">
+              <span className="icon">
+                <BsFilePersonFill />
+              </span>
+              <span className="title">patients</span>
+            </a>
+          </li>
+          <li className="list">
+            <a href="/calendrier">
+              <span className="icon">
+                <BsFillCalendarFill />
+              </span>
+              <span className="title">calendrier</span>
+            </a>
+          </li>
+          <li className="list">
+            <a href="/coupon">
+              <span className="icon">
+                <RiCoupon2Fill />
+              </span>
+              <span className="title">coupon</span>
+            </a>
+          </li>
+          <li className="list">
+            <a href="/analytics">
+              <span className="icon">
+                <MdAnalytics />
+              </span>
+              <span className="title">analytics</span>
+            </a>
+          </li>
+          <li className="list">
+            <a href="/settings">
+              <span className="icon">
+                <IoIosSettings />
+              </span>
+              <span className="title">settings</span>
+            </a>
+          </li>
+          <li className="list">
+            <a href="#">
+              <span className="icon">
+                <FiLogOut />
+              </span>
+              <span className="title">log out</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <div className="lv"></div>
+    </div>
   );
 }

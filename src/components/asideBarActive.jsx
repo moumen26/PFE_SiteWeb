@@ -15,7 +15,7 @@ export default function MyAsideBarActive({ act, setAct }) {
     <aside className={`aside-active ${act ? "active" : ""}`}>
       <ul>
         <li className="list-active">
-          <a href="#">
+          <a href="/dashboard">
             <span className="icon-active">
               <MdDashboard />
             </span>
@@ -23,7 +23,7 @@ export default function MyAsideBarActive({ act, setAct }) {
           </a>
         </li>
         <li className="list-active">
-          <a href="#">
+          <a href="/addpatients">
             <span className="icon-active">
               <HiUserAdd />
             </span>
@@ -31,7 +31,7 @@ export default function MyAsideBarActive({ act, setAct }) {
           </a>
         </li>
         <li className="list-active">
-          <a href="#">
+          <a href="/patients">
             <span className="icon-active">
               <BsFilePersonFill />
             </span>
@@ -39,7 +39,7 @@ export default function MyAsideBarActive({ act, setAct }) {
           </a>
         </li>
         <li className="list-active">
-          <a href="#">
+          <a href="/calendrier">
             <span className="icon-active">
               <BsFillCalendarFill />
             </span>
@@ -47,7 +47,7 @@ export default function MyAsideBarActive({ act, setAct }) {
           </a>
         </li>
         <li className="list-active">
-          <a href="#">
+          <a href="/coupon">
             <span className="icon-active">
               <RiCoupon2Fill />
             </span>
@@ -55,7 +55,7 @@ export default function MyAsideBarActive({ act, setAct }) {
           </a>
         </li>
         <li className="list-active">
-          <a href="#">
+          <a href="/analytics">
             <span className="icon-active">
               <MdAnalytics />
             </span>
