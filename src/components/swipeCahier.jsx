@@ -7,7 +7,7 @@ import { useState } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
 
-export default function MyCahierSwiper() {
+export default function MyCahierSwiper({ add, setAdd }) {
   return (
     <Swiper
       className="swiper-formulaire"
@@ -162,7 +162,7 @@ export default function MyCahierSwiper() {
             </div>
           </div>
 
-          <div className="next1">
+          <div className="next-first">
             <SwiperButtonNext>
               Suivant <BsChevronRight />
             </SwiperButtonNext>
@@ -350,12 +350,12 @@ export default function MyCahierSwiper() {
             </div>
           </div>
           <div className="back-next-buttons">
-            <div className="back1">
+            <div className="back">
               <SwiperButtonBack>
                 <BsChevronLeft /> Back
               </SwiperButtonBack>
             </div>
-            <div className="next2">
+            <div className="next">
               <SwiperButtonNext>
                 Suivant <BsChevronRight />
               </SwiperButtonNext>
@@ -506,12 +506,12 @@ export default function MyCahierSwiper() {
           </div>
 
           <div className="back-next-buttons">
-            <div className="back2">
+            <div className="back">
               <SwiperButtonBack>
                 <BsChevronLeft /> Back
               </SwiperButtonBack>
             </div>
-            <div className="next3">
+            <div className="next">
               <SwiperButtonNext>
                 Suivant <BsChevronRight />
               </SwiperButtonNext>
@@ -519,7 +519,6 @@ export default function MyCahierSwiper() {
           </div>
         </div>
       </SwiperSlide>
-
     </Swiper>
   );
 }

@@ -9,6 +9,7 @@ import AddPatient from "./pages/addPatient";
 import Calendrier from "./pages/calendrier";
 import Coupon from "./pages/coupon";
 import Analytics from "./pages/analytics";
+import Login from "./pages/loginPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "analytics",
     element: <Analytics />,
+  },
+  {
+    path: "login",
+    element: <Login />,
   },
 ]);
 

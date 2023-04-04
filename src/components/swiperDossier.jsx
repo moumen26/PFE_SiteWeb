@@ -6,6 +6,7 @@ import { BsChevronRight } from "react-icons/bs";
 import { useState } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
+import ObstetricauxTable from "./obstetricauxTable";
 
 export default function MySwiper() {
   return (
@@ -14,8 +15,164 @@ export default function MySwiper() {
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
+      
       <SwiperSlide className="Swipe">
-        <div className="formulaire-dossier-obster obster-first">
+        <div className="formulaire-dossier-obster">
+          <div className="formulaire-header-obster">
+            <div className="formulaire-dossier-obstetrique">
+              <h2>Dossier obstetrique</h2>
+            </div>
+          </div>
+          <div className="line-hl">
+            <div className="hl"></div>
+          </div>
+          <div className="pro-acc">
+            <h2>Protocole d’accouchement</h2>
+            <div className="date-heure-acc">
+              <div className="date-acc">
+                <div className="span-item span-long1">
+                  <span>Date d’accouchement :</span>
+                </div>
+                <input type="text" />
+              </div>
+              <div className="heure-acc">
+                <div className="span-item">
+                  <span>Heure :</span>
+                </div>
+                <input type="text" />
+              </div>
+            </div>
+            <div className="accoucheur">
+              <div className="span-text">
+                <span>Accoucheur :</span>
+              </div>
+              <div className="textarea">
+                <textarea name="accoucheur" id="accoucheur"></textarea>
+              </div>
+            </div>
+          </div>
+          <div className="examen-annexes">
+            <h2>Examen des annexes :</h2>
+            <div className="annexes">
+              <div className="annexe">
+                <div className="annexe-item">
+                  <div className="span-item">
+                    <span>Poids :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="annexe-item">
+                  <div className="span-item">
+                    <span>Aspect :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="annexe-item">
+                  <div className="span-item">
+                    <span>Anomalies :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+              </div>
+              <div className="annexe annexe-two">
+                <div className="annexe-item">
+                  <div className="span-item">
+                    <span>Placenta :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="annexe-item">
+                  <div className="span-item">
+                    <span>Membranes :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="annexe-item">
+                  <div className="span-item">
+                    <span>Cordon :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="examen-annexes">
+            <h2>Examen des annexes :</h2>
+            <div className="sexe-poids-taille-pc">
+              <div className="date-annexe">
+                <div className="span-item petit-span">
+                  <span>Date :</span>
+                </div>
+                <input type="date-annexe" name="date-annexe" id="date-annexe" />
+              </div>
+              <div className="poids-annexe">
+                <div className="span-item petit-span">
+                  <span>Poids :</span>
+                </div>
+                <input type="text" value="kg" />
+              </div>
+              <div className="taille-annexe">
+                <div className="span-item petit-span">
+                  <span>Taille :</span>
+                </div>
+
+                <input type="text" value="cm" />
+              </div>
+              <div className="pc-annexe">
+                <div className="span-item petit-span">
+                  <span>PC :</span>
+                </div>
+                <input type="text" />
+              </div>
+            </div>
+            <div className="score-dapgar">
+              <div className="score">
+                <span>Score d'Apgar :</span>
+              </div>
+              <div className="minute-1">
+                <span>1 minute</span>
+                <input type="checkbox" />
+              </div>
+              <div className="minute-5">
+                <span>5 minute</span>
+                <input type="checkbox" />
+              </div>
+            </div>
+            <div className="malforamtion-annexe">
+              <div className="span-item">
+                <span>Malformation :</span>
+              </div>
+              <input type="text" />
+            </div>
+            <div className="remarque-annexe">
+              <div className="span-item">
+                <span>Remarque :</span>
+              </div>
+              <input type="text" />
+            </div>
+            <div className="re-annexe-textarea">
+              <div className="textarea">
+                <textarea name="rem-annexe" id="rem-annexe"></textarea>
+              </div>
+            </div>
+            <div className="empre-digi">
+              <div className="span-text">
+                <span>Empreintes digitales :</span>
+              </div>
+              <div className="textarea">
+                <textarea name="empre-digi" id="empre-digi"></textarea>
+              </div>
+            </div>
+          </div>
+          <div className="next-first">
+            <SwiperButtonNext>
+              Suivant <BsChevronRight />
+            </SwiperButtonNext>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className="Swipe">
+        <div className="formulaire-dossier-obster">
           <div className="formulaire-header-obster">
             <div className="formulaire-dossier-obstetrique">
               <h2>Dossier obstetrique</h2>
@@ -119,15 +276,22 @@ export default function MySwiper() {
               <textarea name="resume-obser" id="resume-obser"></textarea>
             </div>
           </div>
-          <div className="next4">
-            <SwiperButtonNext>
-              Suivant <BsChevronRight />
-            </SwiperButtonNext>
+          <div className="back-next-buttons back-next-dossier">
+            <div className="back">
+              <SwiperButtonBack>
+                <BsChevronLeft /> Back
+              </SwiperButtonBack>
+            </div>
+            <div className="next">
+              <SwiperButtonNext>
+                Suivant <BsChevronRight />
+              </SwiperButtonNext>
+            </div>
           </div>
         </div>
       </SwiperSlide>
       <SwiperSlide className="Swipe">
-        <div className="formulaire-dossier-obster obster-first">
+        <div className="formulaire-dossier-obster">
           <div className="formulaire-header-obster">
             <div className="formulaire-dossier-obstetrique">
               <h2>Dossier obstetrique</h2>
@@ -147,13 +311,13 @@ export default function MySwiper() {
               </div>
               <div className="ddr-terme">
                 <div className="ddr-terme-item">
-                  <div className="ddr-terme-span">
+                  <div className="span-item petit-span">
                     <span>DDR :</span>
                   </div>
                   <input type="text" />
                 </div>
                 <div className="ddr-terme-item">
-                  <div className="ddr-terme-span">
+                  <div className="span-item">
                     <span>Terme calcule :</span>
                   </div>
                   <input type="text" />
@@ -273,12 +437,142 @@ export default function MySwiper() {
             </div>
           </div>
           <div className="back-next-buttons back-next-dossier">
-            <div className="back3">
+            <div className="back">
               <SwiperButtonBack>
                 <BsChevronLeft /> Back
               </SwiperButtonBack>
             </div>
-            <div className="next5">
+            <div className="next">
+              <SwiperButtonNext>
+                Suivant <BsChevronRight />
+              </SwiperButtonNext>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className="Swipe">
+        <div className="formulaire-dossier-obster">
+          <div className="formulaire-header-obster">
+            <div className="formulaire-dossier-obstetrique">
+              <h2>Dossier obstetrique</h2>
+            </div>
+          </div>
+          <div className="line-hl">
+            <div className="hl"></div>
+          </div>
+          <div className="obstetricaux-dossier">
+            <div className="span-text">
+              <span>Obstetricaux :</span>
+            </div>
+            <div className="obs-table">
+              <ObstetricauxTable></ObstetricauxTable>
+            </div>
+          </div>
+          <div className="pathologique">
+            <div className="span-text">
+              <span>Pathologiques :</span>
+            </div>
+            <div className="textarea">
+              <textarea name="pathologiques" id="Pathologiques"></textarea>
+            </div>
+          </div>
+          <div className="familiaux">
+            <div className="span-text">
+              <span>3- Familiaux :</span>
+            </div>
+            <div className="textarea">
+              <textarea name="familiaux" id="familiaux"></textarea>
+            </div>
+          </div>
+          <div className="back-next-buttons back-next-dossier">
+            <div className="back">
+              <SwiperButtonBack>
+                <BsChevronLeft /> Back
+              </SwiperButtonBack>
+            </div>
+            <div className="next">
+              <SwiperButtonNext>
+                Suivant <BsChevronRight />
+              </SwiperButtonNext>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className="Swipe">
+        <div className="formulaire-dossier-obster">
+          <div className="formulaire-header-obster">
+            <div className="formulaire-dossier-obstetrique">
+              <h2>Dossier obstetrique</h2>
+            </div>
+          </div>
+          <div className="line-hl">
+            <div className="hl"></div>
+          </div>
+          <div className="examen-entree">
+            <h2>Examen d’entree</h2>
+            <div className="examen-general">
+              <div className="span-text">
+                <span>1- Examen general :</span>
+              </div>
+              <div className="poids-taille-poule-ta">
+                <div className="poids-examen-general">
+                  <div className="span-item petit-span">
+                    <span>Poids :</span>
+                  </div>
+                  <input type="text" value="kg" />
+                </div>
+                <div className="taille-examen-general">
+                  <div className="span-item petit-span">
+                    <span>Taille :</span>
+                  </div>
+                  <input type="text" value="cm" />
+                </div>
+                <div className="poule-examen-general">
+                  <div className="span-item petit-span">
+                    <span>Poule :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="ta-examen-general">
+                  <div className="span-item petit-span">
+                    <span>TA :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+              </div>
+              <div className="examen-entree-item">
+                <div className="glycemie">
+                  <div className="span-item">
+                    <span>Glycemie :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="uree">
+                  <div className="span-item">
+                    <span>Uree sanguine :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+              </div>
+              <div className="examen-entree-item2">
+                <div className="span-item span-long">
+                  <span>Caractere de cycle :</span>
+                </div>
+                <input type="text" />
+              </div>
+              <div className="textarea">
+                <textarea name="exa-ent" id="exa-ent"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div className="back-next-buttons back-next-dossier">
+            <div className="back">
+              <SwiperButtonBack>
+                <BsChevronLeft /> Back
+              </SwiperButtonBack>
+            </div>
+            <div className="next">
               <SwiperButtonNext>
                 Suivant <BsChevronRight />
               </SwiperButtonNext>

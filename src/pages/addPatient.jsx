@@ -5,10 +5,11 @@ import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
 import MyCahierSwiper from "../components/swipeCahier";
 import MySwiper from "../components/swiperDossier";
+import MyVaccinationTable from "../components/vaccinationTable";
 
 export default function AddPatient() {
   const [act, setAct] = useState(false);
-  /*const [add, setAdd] = useState(false);*/
+  const [add, setAdd] = useState(false);
 
   return (
     <div className="AddPatient">
@@ -36,9 +37,21 @@ export default function AddPatient() {
         </div>
       </div>
       <div className="addpatient-add-cahier">
-        <AddCahierSante /* add={add} setAdd={setAdd}*/ />
-        <div className="cahier-formulaire-swiper">
+        <AddCahierSante add={add} setAdd={setAdd} />
+      </div>
+      <div className="cahier-vaccin">
+        <div
+          className={`cahier-formulaire-swiper ${
+            act ? "classToggleAddcahier" : ""
+          }`}
+        >
           <MyCahierSwiper></MyCahierSwiper>
+        </div>
+        <div className="vaccin-table">
+          <div className="vaccin-table-container">
+            <h2>Vaccination :</h2>
+            <MyVaccinationTable />
+          </div>
         </div>
       </div>
     </div>

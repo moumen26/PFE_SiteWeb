@@ -80,7 +80,7 @@ export default function MyAsideBar() {
             </a>
           </li>
           <li className="list">
-            <a href="#">
+            <a href="/login">
               <span className="icon">
                 <FiLogOut />
               </span>
