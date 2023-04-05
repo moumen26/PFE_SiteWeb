@@ -40,7 +40,7 @@ export default function MyChart() {
   return (
     <div className="chart-container">
       <div className="chart-header">
-        <h2>Nouveau-ne</h2>
+        <a href="#">New-born</a>
         <div className="select-chart">
           <select
             class="nouveau-ne-chart"
@@ -59,7 +59,16 @@ export default function MyChart() {
           />
         </div>
       </div>
-      <ResponsiveContainer width="100%" height="100%">
+      <div className="chart-line">
+        <div className="chart-line-container"></div>
+      </div>
+      <div className="chart-nombre-nouveau-ne">
+        <h2>
+          120 <span>/week</span>
+        </h2>
+        <span className="title-chart">Number of newborns</span>
+      </div>
+      <ResponsiveContainer width="100%" height="70%">
         <BarChart data={data} width={300}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />

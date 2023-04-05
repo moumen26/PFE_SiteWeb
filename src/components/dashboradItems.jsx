@@ -6,9 +6,9 @@ export default function MyDashboradTop() {
     <div className="dashboard-top">
       <div className="dashboard-item">
         <div className="dashboard-item-title">
-          <h2>
-            Nouveau-ne <span>/day</span>
-          </h2>
+          <a href="#">
+            New-born <span>/day</span>
+          </a>
           <AiOutlineArrowDown fill="#ff0000" />
         </div>
         <div className="dashboard-nombre">
@@ -18,7 +18,7 @@ export default function MyDashboradTop() {
       </div>
       <div className="dashboard-item">
         <div className="dashboard-item-title">
-          <h2>En attente</h2>
+          <a  href="#">En attente</a>
           <AiOutlineArrowUp fill="#008000" />
         </div>
         <div className="dashboard-nombre">
@@ -28,7 +28,7 @@ export default function MyDashboradTop() {
       </div>
       <div className="dashboard-item">
         <div className="dashboard-item-title">
-          <h2>Cas particulier</h2>
+          <a href="#">Particular case</a>
           <AiOutlineArrowUp fill="#008000" />
         </div>
         <div className="dashboard-nombre">
@@ -38,9 +38,9 @@ export default function MyDashboradTop() {
       </div>
       <div className="dashboard-item">
         <div className="dashboard-item-title">
-          <h2>
-            Mort <span>/day</span>
-          </h2>
+          <a href="#">
+            Dead <span>/day</span>
+          </a>
           <AiOutlineArrowDown fill="#008000" />
         </div>
         <div className="dashboard-nombre">

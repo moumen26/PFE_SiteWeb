@@ -15,7 +15,6 @@ export default function MySwiper() {
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
-      
       <SwiperSlide className="Swipe">
         <div className="formulaire-dossier-obster">
           <div className="formulaire-header-obster">
@@ -100,13 +99,13 @@ export default function MySwiper() {
             <h2>Examen des annexes :</h2>
             <div className="sexe-poids-taille-pc">
               <div className="date-annexe">
-                <div className="span-item petit-span">
+                <div className="span-item petit-span-span">
                   <span>Date :</span>
                 </div>
                 <input type="date-annexe" name="date-annexe" id="date-annexe" />
               </div>
               <div className="poids-annexe">
-                <div className="span-item petit-span">
+                <div className="span-item petit-span-span">
                   <span>Poids :</span>
                 </div>
                 <input type="text" value="kg" />
@@ -561,7 +560,65 @@ export default function MySwiper() {
                 <input type="text" />
               </div>
               <div className="textarea">
-                <textarea name="exa-ent" id="exa-ent"></textarea>
+                <textarea name="exa-gene" id="exa-gene"></textarea>
+              </div>
+            </div>
+
+            <div className="examen-obstetrical">
+              <div className="span-text">
+                <span>2- Examen obstetrical :</span>
+              </div>
+              <div className="hu-const">
+                <div className="hu">
+                  <div className="span-item petit-span">
+                    <span>Hu :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="constraction">
+                  <div className="span-item span-long1">
+                    <span>Constraction uterines :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+              </div>
+              <div className="pres-bfc">
+                <div className="presentation">
+                  <div className="span-item">
+                    <span>Presentation :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+                <div className="hu">
+                  <div className="span-item petit-span">
+                    <span>BFC :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+              </div>
+              <div className="examen-entree-item2">
+                <div className="span-item">
+                  <span>Uterus :</span>
+                </div>
+                <input type="text" />
+              </div>
+              <div className="examen-entree-item2">
+                <div className="span-item">
+                  <span>Speculum :</span>
+                </div>
+                <input type="text" />
+              </div>
+              <div className="textarea">
+                <textarea name="exa-obs1" id="exa-obs1"></textarea>
+              </div>
+              <div className="examen-entree-item2">
+                <div className="span-item">
+                  <span>Toucher vaginal :</span>
+                </div>
+                <input type="text" />
+              </div>
+              <div className="textarea">
+                <textarea name="exa-obs2" id="exa-obs2"></textarea>
               </div>
             </div>
           </div>

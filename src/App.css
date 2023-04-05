@@ -976,11 +976,18 @@ nav {
 .annexe-item,
 .glycemie,
 .uree,
-.examen-entree-item {
+.examen-entree-item,
+.hu-const,
+.pres-bfc,
+.hu,
+.constraction,
+.presentation {
   display: flex;
 }
 
-.examen-entree-item {
+.examen-entree-item,
+.hu-const,
+.pres-bfc {
   width: 100%;
   justify-content: center;
   gap: 24px;
@@ -1077,7 +1084,10 @@ nav {
 }
 
 .glycemie input,
-.uree input {
+.uree input,
+.hu input,
+.constraction input,
+.presentation input {
   width: 352px;
 }
 
@@ -1134,10 +1144,15 @@ nav {
   margin-top: 66px;
 }
 
-.examen-general {
+.examen-general,
+.examen-obstetrical {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.examen-obstetrical {
+  margin-top: 70px;
 }
 
 .sexe-poids-taille-pc,
@@ -1205,7 +1220,8 @@ nav {
 .empre-digi .textarea textarea,
 .accoucheur .textarea textarea,
 .re-annexe-textarea .textarea textarea,
-.examen-general .textarea textarea {
+.examen-general .textarea textarea,
+.examen-obstetrical .textarea textarea {
   height: 175px;
   width: 1060px;
   border-radius: 10px;
@@ -1216,7 +1232,8 @@ nav {
   margin-top: 29px;
 }
 
-.examen-general .textarea textarea {
+.examen-general .textarea textarea,
+.examen-obstetrical .textarea textarea {
   height: 105px;
 }
 
@@ -1338,6 +1355,14 @@ nav {
 .pyscho-right {
   display: flex;
   align-items: center;
+}
+
+.psycho-class {
+  margin-left: 20px;
+}
+
+.psycho-class .pyscho-left .span-item {
+  margin-right: 32px;
 }
 
 .obstetricaux-dossier .psycho-class {
@@ -1842,13 +1867,13 @@ form.sign-in-form {
   outline: none;
 }
 
-.input-field select{
+.input-field select {
   cursor: pointer;
 }
 
 .input-field input::placeholder,
-.sign-in-form .input-field select{
-  color:rgb(186, 186, 186);
+.sign-in-form .input-field select {
+  color: rgb(186, 186, 186);
 }
 
 .sign-in-form .input-field input,
@@ -2182,7 +2207,7 @@ form.sign-in-form {
   align-items: center;
 }
 
-.dashboard-item-title h2,
+.dashboard-item-title a,
 .dashboard-nombre h3 {
   font-weight: 700;
   font-size: 16px;
@@ -2190,28 +2215,30 @@ form.sign-in-form {
   cursor: pointer;
 }
 
-.dashboard-item-title h2:hover,
-.dashboard-nombre h3:hover {
+.dashboard-item-title a:hover,
+.dashboard-nombre h3:hover,
+.chart-header a:hover {
   transform: scale(1.1);
   transition: all 1s ease;
 }
 
-.dashboard-pourcentage-bad{
+.dashboard-pourcentage-bad {
   color: red;
 }
 
-.dashboard-pourcentage-good{
+.dashboard-pourcentage-good {
   color: green;
 }
 
-.dashboard-item-title h2 span {
+.dashboard-item-title a span,
+.chart-nombre-nouveau-ne h2 span {
   font-size: 12px;
   line-height: 14.4px;
+  font-weight: 700;
 }
 
-.dashboard-charts-calnedar{
+.dashboard-charts-calnedar {
   width: 100%;
-  height: 611px;
   display: flex;
   /* justify-content: center; */
   margin-top: 40px;
@@ -2219,14 +2246,16 @@ form.sign-in-form {
   padding-right: 31px;
 }
 
-.chart-container{
+.chart-container {
   width: 832px;
-  height: 100%;
+  height: 611px;
   border-radius: 8px;
+  display: flex;
+  flex-direction: column;
   background-color: #fff;
 }
 
-.chart-header{
+.chart-header {
   width: 100%;
   height: 80px;
   display: flex;
@@ -2236,23 +2265,59 @@ form.sign-in-form {
   padding-right: 34px;
 }
 
-.chart-header h2{
+.chart-header a {
   font-weight: 700;
   font-size: 16px;
   line-height: 19.2px;
 }
 
-.select-chart{
+.chart-line-container {
+  width: 800px;
+  height: 1px;
+  background-color: rgba(79, 129, 255, 0.42);
+}
+
+.chart-line {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.chart-nombre-nouveau-ne {
+  width: 100%;
+  padding-left: 16px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 23px;
+}
+
+.chart-nombre-nouveau-ne h2 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 28.8px;
+  cursor: pointer;
+}
+
+.title-chart {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: rgba(146, 146, 157, 1);
+}
+
+.select-chart {
   display: flex;
   align-items: center;
   gap: 34px;
 }
 
-.chart-select-icon{
+.chart-select-icon {
   cursor: pointer;
 }
 
-.chart-header select{
+.chart-header select {
   width: 169px;
   height: 40px;
   border-radius: 8px;
@@ -2260,6 +2325,266 @@ form.sign-in-form {
   color: #4f81ff;
   background-color: transparent;
   cursor: pointer;
+}
 
-;
+/* patient details style */
+
+.patient-details {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5;
+}
+
+.patient-details-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: #060e30;
+  margin-top: 26px;
+  padding-left: 30px;
+  padding-right: 55px;
+}
+
+.icon-button {
+  cursor: pointer;
+  font-size: 25px;
+  color: rgba(6, 14, 48, 1);
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+  transition: all 1s ease;
+}
+
+.patient-details-header-right {
+  display: flex;
+  gap: 21px;
+}
+
+.patient-details h2 {
+  width: 100%;
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28.8px;
+  color: #060e30;
+  margin-top: 31px;
+}
+
+.patient-details-container {
+  display: flex;
+  width: 100%;
+  height: 82vh;
+  margin-top: 25px;
+  gap: 27px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.patient-details-container-right {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 15px;
+}
+
+.about-patient,
+.patient-details-center,
+.patient-details-examen,
+.patient-details-reducation {
+  width: 299px;
+  height: 80vh;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-bottom: 20px;
+}
+
+.patient-details-center {
+  width: 864px;
+}
+
+.patient-details-examen,
+.patient-details-reducation {
+  height: 40vh;
+}
+
+.about-patients-image {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.about-patient-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 41px;
+  background-color: #d9d9d9;
+  margin-top: 25px;
+}
+
+.about-patient-description h2 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(6, 14, 48, 1);
+  text-align: start;
+  margin-left: 15px;
+}
+
+.about-patient-cart {
+  width: 100%;
+  margin-top: 15px;
+  padding-left: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patient-cart-item {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.patient-cart-item span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+  color: rgba(106, 110, 131, 1);
+}
+
+.patient-cart-item h3 {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: rgba(6, 14, 48, 1);
+}
+
+.patient-details-examen h2,
+.patient-details-reducation h2 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+  color: rgba(189, 189, 189, 1);
+}
+
+.patient-details-examen-container,
+.patient-details-reducation-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.patient-details-examen-item,
+.patient-details-examen-score,
+.patient-details-examen-alliaitment,
+.patient-details-reducation-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 30px;
+}
+
+.patient-details-examen-score,
+.patient-details-examen-alliaitment {
+  flex-direction: column;
+  align-items: start;
+}
+
+.patient-details-examen-alliaitment {
+  margin-top: 13px;
+}
+
+.patient-details-examen-item h3,
+.patient-details-examen-score h3,
+.patient-details-examen-alliaitment h3 {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 16.8px;
+  color: rgba(79, 129, 255, 1);
+}
+
+.patient-details-examen-item span {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgba(79, 129, 255, 1);
+}
+
+.patient-details-examen-score-inputs,
+.patient-details-examen-alli-inputs {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 38px;
+  margin-top: 10px;
+}
+.patient-details-examen-score-input,
+.patient-details-examen-alli-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.patient-details-examen-score-input span,
+.patient-details-examen-alli-input span {
+  font-weight: 400;
+  font-size: 10px;
+  line-height: 9.6px;
+  color: rgba(79, 129, 255, 1);
+}
+
+.patient-details-examen-score-input input,
+.patient-details-examen-alli-input input {
+  width: 15px;
+  height: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reducation-doctor {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reducation-doctor-name {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14.4px;
+  color: rgba(79, 129, 255, 1);
+}
+
+
+.reducation-doctor span{
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 12px;
+  color: rgba(189, 189, 189, 1);
+}
+
+.patient-details-reducation-item a{
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 12px;
+  color: rgba(79, 129, 255, 1);
+}
+
+.voir-reducation:hover{
+  transition: all 1s ease;
+  transform: scale(1.1);
+}
+
+.reducation-doctor-name:hover{
+  text-decoration: underline;
 }
