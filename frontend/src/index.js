@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import PatientProfile from "./pages/patientProfile";
 import AddPatient from "./pages/addPatient";
 import Calendrier from "./pages/calendrier";
@@ -12,12 +12,17 @@ import Analytics from "./pages/analytics";
 import Login from "./pages/loginPage";
 import PatientDetails from "./pages/patientDetails";
 import {AuthContextProvider} from "./context/Authcontext";
+import { useAuthContext } from "./hooks/useAuthContext";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
+const PrivateRoute = () => {
+  const {user} = useAuthContext();
+  if (user) {
+    return true;
+  }else{
+    return false;
+  }
+}
+const router = createBrowserRouter([   
   {
     path: "dashboard",
     element: <App />,

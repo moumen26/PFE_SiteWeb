@@ -1,4 +1,5 @@
 const express = require('express');
+const requireAuth = require('../middleware/requireAuth');
 const {
     Login,
     Signup,
@@ -15,6 +16,9 @@ router.post('/login', Login);
 
 //signup
 router.post('/signup', Signup);
+
+//require authentication
+router.use(requireAuth);
 
 //get all users
 router.get('/', GetAllUsers);
