@@ -5,12 +5,14 @@ import { useState } from "react";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
+
 export default function MyNavBar({ act, setAct }) {
   const classToggle = () => {
     setAct(!act);
   };
   const { logout } = useLogout();
   const { user } = useAuthContext();
+  
   const SubmitLogout = () => {
     logout();
   }
