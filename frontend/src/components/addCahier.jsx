@@ -1,19 +1,20 @@
 import { AiOutlinePlus } from "react-icons/ai";
 import { useState } from "react";
 export default function AddCahierSante({ add, setAdd }) {
-  const classToggleAddcahier = () => {
+  const handleClickAddCahier = () => {
     setAdd(!add);
-    console.log('cefeg');
+    console.log("cefeg");
   };
+
+  let toggleClassAdd = add ? " add-cahier-active" : "";
+
   return (
-    <div
-    className="add-cahier-sante"
-      add={add}
-      setAdd={setAdd}
-      onClick={classToggleAddcahier}
+    <button
+      className={`add-cahier-sante${toggleClassAdd}`}
+      onClick={handleClickAddCahier}
     >
       <h2>Carnet de sante</h2>
       <AiOutlinePlus size="32px" fill="#4F81FF" />
-    </div>
+    </button>
   );
 }

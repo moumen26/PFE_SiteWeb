@@ -1,3 +1,4 @@
+@import "antd/dist/antd.css";
 @font-face {
   font-family: Poppins;
   src: url(../public/fonts/Poppins-Regular.ttf);
@@ -337,11 +338,20 @@ nav {
   gap: 10px;
 }
 
+.paraticien a {
+  margin-bottom: 9px;
+}
+
+.paraticien a:hover {
+  text-decoration: underline;
+}
+
 .service h3,
 .paraticien h3,
 .paraticien a {
   font-weight: 700;
   font-size: 20px;
+  color: #060e30;
 }
 
 .home-formulaire-swiper,
@@ -470,6 +480,15 @@ nav {
   padding-left: 70px;
   margin-top: 44px;
   gap: 20px;
+}
+
+.examen,
+.cathet,
+.recherche,
+.organes,
+.vitamine,
+.catheterisme {
+  padding-left: 20px;
 }
 
 .emission,
@@ -1378,6 +1397,18 @@ nav {
   justify-content: center;
   margin-top: 54px;
   margin-bottom: 54px;
+  width: calc(100% - 82px);
+  position: absolute;
+  left: 82px;
+}
+
+.cahier-vaccin {
+  top: calc(100vh + 220px);
+}
+
+.add-cahier-active {
+  display: flex;
+  transition: all 1s ease;
 }
 
 .vaccin-table {
@@ -1477,12 +1508,11 @@ table td {
   border: 1.5px solid #025091;
 }
 
-/*
-.cahier-formulaire-swiper{
-  display: none;
+.cahier-formulaire-swiper {
+  display: flex;
 }
-*/
-.classToggleAddcahier {
+
+.classToggleAddcahier .cahier-formulaire-swiper {
   display: flex;
   transition: all 1s ease;
 }
@@ -1763,7 +1793,18 @@ table td {
 }
 
 ::-webkit-scrollbar {
+  display: flex;
+  width: 10px;
   display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4f81ff;
+  border-radius: 10px;
+}
+
+.calendrier-container {
+  padding-left: 100px;
 }
 
 .container {
@@ -2047,7 +2088,7 @@ form.sign-in-form {
   border: none;
   cursor: pointer;
   position: absolute;
-  top: -18rem;
+  top: -16.5rem;
   left: -45rem;
   display: none;
 }
@@ -2565,26 +2606,30 @@ form.sign-in-form {
   color: rgba(79, 129, 255, 1);
 }
 
-
-.reducation-doctor span{
+.reducation-doctor span {
   font-weight: 400;
   font-size: 11px;
   line-height: 12px;
   color: rgba(189, 189, 189, 1);
 }
 
-.patient-details-reducation-item a{
+.patient-details-reducation-item a {
   font-weight: 500;
   font-size: 12px;
   line-height: 12px;
   color: rgba(79, 129, 255, 1);
 }
 
-.voir-reducation:hover{
+.voir-reducation:hover {
   transition: all 1s ease;
   transform: scale(1.1);
 }
 
-.reducation-doctor-name:hover{
+.reducation-doctor-name:hover {
   text-decoration: underline;
+}
+
+.table-button {
+  width: 80px;
+  font-size: 10px;
 }
