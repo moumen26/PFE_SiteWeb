@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
+import ObstetricauxTable from "../components/ObstetricauxTable";
 import MyDashboradCalendar from "../components/dashboardCalendar";
 
 export default function Calendrier() {

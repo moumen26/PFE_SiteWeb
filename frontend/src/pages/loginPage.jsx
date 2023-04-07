@@ -1,52 +1,27 @@
 import { FaUserMd } from "react-icons/fa";
 import img from "../images/login-bg.png";
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import AcceeButton from "../components/acceeButton";
 import BackButton from "../components/backLoginbutton";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useSignup } from "../hooks/useSignup";
-import { useLogin } from "../hooks/useLogin";
 
 export default function Login() {
   const [openPanel, setOpenPanel] = useState(false);
 
   let toggleClassCheck = openPanel ? " sign-in-mode" : "";
 
-  const [loginemail, setloginEmail] = useState('');
-  const [loginpassword, setloginpassword] = useState('');
-  const { login, isloadingL, errorL } = useLogin();
-  async function submitLogin(e) {
-    e.preventDefault();
-    await login(loginemail,loginpassword);
-  }
-  const [signinemail, setSigninEmail] = useState('');
-  const [signinpassword, setSigninpassword] = useState('');
-  const [lname, setLname] = useState('');
-  const [fname, setFname] = useState('');
-  const [speciality, setSpeciality] = useState('');
-  const [phone, setPhone] = useState('');
-  const { sign_up, isloading, error } = useSignup();
-
-  async function submitSignup(e) {
-    e.preventDefault();
-    await sign_up(signinemail,signinpassword, lname, fname, speciality, phone);
-  }
-
   return (
     <div className={`container${toggleClassCheck}`}>
       <div className="forms-container">
         <div className="login-signin">
-          
-          <form action="/login" onSubmit={submitLogin} className="login-in-form">
+          <form action="" className="login-in-form">
             <h2 className="title-login">connexion</h2>
             <div className="input-field email">
               <label htmlFor="">email</label>
-              <input type="email" value={loginemail} name="loginEmail" onChange={(e) => {setloginEmail(e.target.value)}} placeholder="Enter your email.." />
+              <input type="text" placeholder="Enter your email.." />
             </div>
             <div className="input-field password">
               <label htmlFor="">password</label>
-              <input type="password" value={loginpassword} name="loginpassword" onChange={(e) => {setloginpassword(e.target.value)}} placeholder="Enter your password.." />
+              <input type="password" placeholder="Enter your password.." />
               <div className="forget-class">
                 <a>I forget my password</a>
               </div>
@@ -55,31 +30,29 @@ export default function Login() {
               type="submit"
               value="connexion"
               className="cnx-btn btn-solid"
-              disabled={isloadingL}
             />
-            {errorL && <div className="error">{errorL.error}</div>}
           </form>
 
-          <form action="/signup" onSubmit={submitSignup} className="sign-in-form">
+          <form action="" className="sign-in-form">
             <div className="input-field">
-              <label htmlFor="">Last name</label>
-              <input type="text" value={lname} name="Lname" onChange={(e) => {setLname(e.target.value)}} placeholder="Enter your name.." />
+              <label htmlFor="">name</label>
+              <input type="text" placeholder="Enter your name.." />
             </div>
             <div className="input-field">
               <label htmlFor="">first name</label>
-              <input type="text" value={fname} name="Fname" onChange={(e) => {setFname(e.target.value)}} placeholder="Enter your first name.." />
+              <input type="text" placeholder="Enter your first name.." />
             </div>
             <div className="input-field">
               <label htmlFor="">email</label>
-              <input type="text" value={signinemail} name="SigninEmail" onChange={(e) => {setSigninEmail(e.target.value)}} placeholder="Enter your email.." />
+              <input type="text" placeholder="Enter your email.." />
             </div>
             <div className="input-field">
               <label htmlFor="">password</label>
-              <input type="password" value={signinpassword} name="Signinpassword" onChange={(e) => {setSigninpassword(e.target.value)}} placeholder="Enter your password.." />
+              <input type="password" placeholder="Enter your password.." />
             </div>
             <div className="input-field">
               <label htmlFor="">speciality</label>
-              <input type="text" value={speciality} name="speciality" onChange={(e) => {setSpeciality(e.target.value)}} placeholder="Enter your speciality.." />
+              <input type="text" placeholder="Enter your speciality.." />
             </div>
             <div className="input-field">
               <label htmlFor="">hopital</label>
@@ -99,10 +72,11 @@ export default function Login() {
             </div>
             <div className="input-field">
               <label htmlFor="">phone number</label>
-              <input type="tel" value={phone} name="phone" onChange={(e) => {setPhone(e.target.value)}} placeholder="Enter your phone number.." />
+              <input type="tel" placeholder="Enter your phone number.." />
             </div>
-            <button className="demande-accee2" disabled={isloading}>demande accee</button>
-            {error && <div className="error">{error}</div>}
+            <button className="demande-accee2">
+              <a href="/doctor-profile">demande accee</a>
+            </button>
           </form>
         </div>
       </div>
