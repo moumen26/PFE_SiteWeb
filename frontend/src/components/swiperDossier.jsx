@@ -6,7 +6,7 @@ import { BsChevronRight } from "react-icons/bs";
 import { useState } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
-import ObstetricauxTable from "./ObstetricauxTable";
+import ObstetricauxTable from "./obstetricauxTable";
 
 export default function MySwiper() {
   return (
