@@ -12,6 +12,7 @@ import Analytics from "./pages/analytics";
 import Login from "./pages/loginPage";
 import PatientDetails from "./pages/patientDetails";
 import DoctorProfile from "./pages/doctorProfile";
+import { AuthContextProvider } from "./context/Authcontext";
 
 const router = createBrowserRouter([
   {
@@ -50,12 +51,18 @@ const router = createBrowserRouter([
     path: "doctor-profile",
     element: <DoctorProfile />,
   },
+  {
+    path: "doctor-profile",
+    element: <DoctorProfile />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthContextProvider>
+      <RouterProvider router={router} />
+    </AuthContextProvider>
   </React.StrictMode>
 );
 
