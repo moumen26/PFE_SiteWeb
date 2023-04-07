@@ -22,7 +22,11 @@ const PrivateRoute = () => {
     return false;
   }
 }
-const router = createBrowserRouter([   
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
   {
     path: "dashboard",
     element: <App />,

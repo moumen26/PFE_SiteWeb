@@ -295,7 +295,7 @@ nav {
 
 .addpatient-container {
   width: 90%;
-  height: calc(100vh - 100px);
+  height: calc(100vh - 90px);
   margin-left: 90px;
   background-color: #f8f9fd;
   display: flex;
@@ -358,7 +358,7 @@ nav {
 .cahier-formulaire-swiper {
   margin-top: 15px;
   width: 95%;
-  height: 80%;
+  height: 76%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1403,26 +1403,133 @@ nav {
 }
 
 .cahier-vaccin {
-  top: calc(100vh + 220px);
+  margin-top: 120px;
 }
 
-.add-cahier-active {
+.lock-icon,
+.lock-icon-ouvert {
+  font-size: 32px;
+  fill: #3889c1;
+  position: absolute;
+  right: 25px;
+  top: 40%;
+}
+
+.addpatient-add-cahier .add-cahier-active .lock-icon,
+.vaccin-visite-class .add-vaccin-active .lock-icon,
+.addpatient-add-visite .add-visite-active .lock-icon {
+  opacity: 0;
+}
+
+.cahier-sante-title {
+  width: 100%;
   display: flex;
-  transition: all 1s ease;
+  align-items: center;
+  padding-left: 50px;
+  margin-top: 30px;
 }
 
-.vaccin-table {
+.cahier-sante-title h2 {
+  font-weight: 500;
+  font-size: 28px;
+  line-height: 33.6px;
+  color: rgba(6, 14, 48, 1);
+}
+
+.addpatient-add-cahier,
+.vaccin-visite-class {
+  height: 40vh;
+  display: flex;
+  justify-content: start;
+  padding-top: 10vh;
+}
+
+
+.vaccin-visite-class{
+  position: relative;
+  padding-top: 15vh;
+}
+
+.add-vaccin-button{
+  position: absolute;
+  right: 50px;
+}
+
+.add-vaccin-button .lock-icon,
+.add-vaccin-button .lock-icon-ouvert,
+.add-visite-button .lock-icon,
+.add-visite-button .lock-icon-ouvert{
+  top: 33%;
+}
+
+.cahier-vaccin {
+  top: calc(100vh + 220px);
+  display: none;
+}
+
+
+.addpatient-add-visite{
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 5vh;
+}
+
+
+.addpatient-add-visite .add-visite-button{
+  width: 969px;
+  position: relative;
+  margin-top: 22vh;
+}
+
+
+.vaccin-table,
+.visite-table {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  display: none;
 }
 
-.vaccin-table-container {
+.add-cahier-active,
+.add-visite-active {
+  display: flex;
+  transition: all 1s ease;
+  transform: translateY(-10vh);
+}
+
+.add-vaccin-active,
+.add-visite-active{
+  display: flex;
+  transition: all 1s ease;
+
+}
+
+.add-vaccin-active .add-vaccin-button {
+  width: 969px;
+  transform: translateX(55%);
+  transition: all 1s ease;
+}
+
+.add-vaccin-active,
+.add-visite-active{
+  margin-top: -20px;
+}
+
+
+.vaccin-visite-class.add-vaccin-active .add-visite-button{
+  opacity: 0;
+}
+
+.vaccin-table-container,
+.visite-table-container {
   width: 85%;
+  height: 453px;
+  padding: 0 10px;
   box-shadow: 0 0 0px;
-  margin-top: 54px;
   display: flex;
   flex-direction: column;
   gap: 29px;
@@ -1431,12 +1538,93 @@ nav {
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
 }
 
-.vaccin-table-container h2 {
+
+
+.visite-table-container{
+  height: 859px;
+  margin-top: 10vh;
+}
+
+.visite-table-petit-case{
+  width: 305px;
+}
+
+.visite-table-grand-case{
+  width: 911px;
+}
+
+.visite-calendar-case{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.visite-table-icon-calendar{
+  font-size: 35px;
+}
+
+.vaccin-table-container h2,
+.visite-table-container h2 {
   margin-left: 30px;
   margin-top: 37px;
 }
 
-.add-cahier-sante h2 {
+.vaccination-table select,
+.vaccination-table input,
+.my-visite-table input {
+  width: 196px;
+  height: 59px;
+  border-radius: 20px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: 500;
+  background-color: transparent;
+  border: 1px solid rgba(6, 14, 48);
+  cursor: pointer;
+}
+
+.my-visite-table textarea{
+  width: 100%;
+  height: 98%;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.vaccination-add-button-class,
+.visite-add-button-class {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  padding-right: 34px;
+  padding-bottom: 28px;
+}
+
+.vaccination-add-button,
+.visite-add-button {
+  width: 364px;
+  height: 64px;
+  border-radius: 20px;
+  background-color: rgba(79, 129, 255, 1);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28.8px;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.vaccination-add-button:hover,
+.visite-add-button:hover {
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.add-cahier-sante h2,
+.add-vaccin-button h2,
+.add-visite-button h2 {
   font-size: 32px;
   line-height: 38.4px;
   font-weight: 700;
@@ -1445,11 +1633,15 @@ nav {
   opacity: 0.7;
 }
 
-.add-cahier-sante h2:hover {
+.add-cahier-sante h2:hover,
+.add-vaccin-button h2:hover,
+.add-visite-button h2:hover {
   opacity: 1;
 }
 
-.add-cahier-sante {
+.add-cahier-sante,
+.add-vaccin-button,
+.add-visite-button {
   width: 969px;
   height: 182px;
   display: flex;
@@ -1458,6 +1650,13 @@ nav {
   background-color: #4f81ff40;
   border-radius: 40px;
   cursor: pointer;
+  position: absolute;
+}
+
+.add-vaccin-button,
+.add-visite-button{
+  width: 541px;
+  height: 127px;
 }
 
 .obs-table {
@@ -1475,8 +1674,30 @@ nav {
   border-radius: 10px;
 }
 
-.vaccination-table {
+.vaccination-table,
+.my-visite-table {
   width: 100%;
+}
+
+.vaccination-table th,
+.my-visite-table th {
+  height: 73px;
+}
+
+.my-visite-table td{
+  height: 553px;
+}
+
+.vaccination-table td {
+  height: 156px;
+}
+
+.vaccination-table span,
+.my-visite-table span {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(6, 14, 48);
 }
 
 table td span {
@@ -1502,10 +1723,18 @@ table td {
   border: 1px solid black;
 }
 
+
+
 .vaccination-table th,
-.vaccination-table td {
+.vaccination-table td,
+.visite-table th,
+.visite-table td {
   text-align: center;
   border: 1.5px solid #025091;
+}
+
+.visite-table{
+  border: none;
 }
 
 .cahier-formulaire-swiper {
@@ -2285,6 +2514,7 @@ form.sign-in-form {
   margin-top: 40px;
   padding-left: 31px;
   padding-right: 31px;
+  gap: 18px;
 }
 
 .chart-container {
@@ -2294,6 +2524,23 @@ form.sign-in-form {
   display: flex;
   flex-direction: column;
   background-color: #fff;
+}
+
+.Calendrier {
+  width: 100%;
+  height: 100vh;
+}
+
+.dashboard-calendar-container {
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.calendar-container {
+  padding-left: 100px;
+  padding-right: 10px;
+  height: calc(100vh - 90px);
 }
 
 .chart-header {

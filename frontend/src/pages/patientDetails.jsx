@@ -1,4 +1,5 @@
 import { BsChevronLeft, BsDownload } from "react-icons/bs";
+import { FaShare } from "react-icons/fa";
 import AboutPatient from "../components/aboutPatient";
 import PatientDetailsCenter from "../components/patientDetails";
 import PatientDetailsExamen from "../components/patientDetailsExamen";
@@ -10,7 +11,7 @@ export default function PatientDetails() {
       <div className="patient-details-header">
         <BsChevronLeft className="icon-button" />
         <div className="patient-details-header-right">
-          <BsDownload className="icon-button" />
+          <FaShare className="icon-button" />
           <BsDownload className="icon-button" />
         </div>
       </div>

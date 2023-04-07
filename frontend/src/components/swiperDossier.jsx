@@ -6,7 +6,7 @@ import { BsChevronRight } from "react-icons/bs";
 import { useState } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
-import ObstetricauxTable from "./obstetricauxTable";
+import ObstetricauxTable from "./ObstetricauxTable";
 
 export default function MySwiper() {
   return (
@@ -99,13 +99,13 @@ export default function MySwiper() {
             <h2>Examen des annexes :</h2>
             <div className="sexe-poids-taille-pc">
               <div className="date-annexe">
-                <div className="span-item petit-span-span">
+                <div className="span-item petit-span">
                   <span>Date :</span>
                 </div>
                 <input type="date-annexe" name="date-annexe" id="date-annexe" />
               </div>
               <div className="poids-annexe">
-                <div className="span-item petit-span-span">
+                <div className="span-item petit-span">
                   <span>Poids :</span>
                 </div>
                 <input type="text" value="kg" />

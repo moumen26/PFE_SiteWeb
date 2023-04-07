@@ -1,9 +1,8 @@
-import { AiOutlinePlus } from "react-icons/ai";
+import { CiLock, CiUnlock } from "react-icons/ci";
 import { useState } from "react";
 export default function AddCahierSante({ add, setAdd }) {
   const handleClickAddCahier = () => {
     setAdd(!add);
-    console.log("cefeg");
   };
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
@@ -14,7 +13,8 @@ export default function AddCahierSante({ add, setAdd }) {
       onClick={handleClickAddCahier}
     >
       <h2>Carnet de sante</h2>
-      <AiOutlinePlus size="32px" fill="#4F81FF" />
+      <CiLock className="lock-icon" />
+      <CiUnlock className="lock-icon-ouvert" />
     </button>
   );
 }

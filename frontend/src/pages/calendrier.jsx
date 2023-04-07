@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
-
+import ObstetricauxTable from "../components/ObstetricauxTable";
+import MyDashboradCalendar from "../components/dashboardCalendar";
 
 export default function Calendrier() {
   const [act, setAct] = useState(false);
@@ -13,7 +14,9 @@ export default function Calendrier() {
       <div className="lh"></div>
       <MyAsideBar></MyAsideBar>
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
-      <h2 className="titre">calendrier</h2>
+      <div className="calendar-container">
+        <MyDashboradCalendar className="Calendar"></MyDashboradCalendar>
+      </div>
     </div>
   );
 }
