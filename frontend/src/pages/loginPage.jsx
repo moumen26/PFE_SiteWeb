@@ -57,7 +57,9 @@ export default function Login() {
               className="cnx-btn btn-solid"
               disabled={isloadingL}
             />
-            {errorL && <div className="error">{errorL.error}</div>}
+            {errorL && <div className="error">
+              <p>hey its error</p>
+              {errorL.error}</div>}
           </form>
 
           <form action="/signup" onSubmit={submitSignup} className="sign-in-form">

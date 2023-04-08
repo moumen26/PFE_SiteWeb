@@ -7,8 +7,32 @@ import { useState } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
 import ObstetricauxTable from "./obstetricauxTable";
+import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
 
 export default function MySwiper() {
+  const [Accoucheur, setAccoucheur] = useState('');
+  const [Poids, setPoids] = useState('');
+  const [Aspect, setAspect] = useState('');
+  const [Anomalies, setAnomalies] = useState('');
+  const [Placenta, setPlacenta] = useState('');
+  const [Membranes, setMembranes] = useState('');
+  const [Cordon, setCordon] = useState('');
+  const [Sexe, setSexe] = useState('');
+  const [Taille, setTaille] = useState('');
+  const [Pc, setPc] = useState('');
+  const [une_min, setUne_min] = useState('');
+  const [cinq_min, setCinq_min] = useState('');
+  const [Malformation, setMalformation] = useState('');
+  const [Remarque, setRemarque] = useState('');
+  const [Empreintes_digitales, setEmpreintes_digitales] = useState('');
+
+  const { AddPatientPart_1, isloadingPart_1, errorPart_1 } = useAddPatientPart_1();
+
+  async function submitLogin(e) {
+    e.preventDefault();
+    await AddPatientPart_1(Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+      ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales);
+  }
   return (
     <Swiper
       className="swiper-formulaire"
@@ -25,149 +49,153 @@ export default function MySwiper() {
           <div className="line-hl">
             <div className="hl"></div>
           </div>
-          <div className="pro-acc">
-            <h2>Protocole d’accouchement</h2>
-            <div className="date-heure-acc">
-              <div className="date-acc">
-                <div className="span-item span-long1">
-                  <span>Date d’accouchement :</span>
+          <form action="/addpatient" onSubmit={submitLogin}>
+            <div className="pro-acc">
+              <h2>Protocole d’accouchement</h2>
+              <div className="date-heure-acc">
+                <div className="date-acc">
+                  <div className="span-item span-long1">
+                    <span>Date d’accouchement :</span>
+                  </div>
+                  <input type="text" />
                 </div>
-                <input type="text" />
-              </div>
-              <div className="heure-acc">
-                <div className="span-item">
-                  <span>Heure :</span>
-                </div>
-                <input type="text" />
-              </div>
-            </div>
-            <div className="accoucheur">
-              <div className="span-text">
-                <span>Accoucheur :</span>
-              </div>
-              <div className="textarea">
-                <textarea name="accoucheur" id="accoucheur"></textarea>
-              </div>
-            </div>
-          </div>
-          <div className="examen-annexes">
-            <h2>Examen des annexes :</h2>
-            <div className="annexes">
-              <div className="annexe">
-                <div className="annexe-item">
+                <div className="heure-acc">
                   <div className="span-item">
+                    <span>Heure :</span>
+                  </div>
+                  <input type="text" />
+                </div>
+              </div>
+              <div className="accoucheur">
+                <div className="span-text">
+                  <span>Accoucheur :</span>
+                </div>
+                <div className="textarea">
+                  <textarea name="accoucheur" id="accoucheur" value={Accoucheur} onChange={(e) => {setAccoucheur(e.target.value)}}></textarea>
+                </div>
+              </div>
+            </div>
+            <div className="examen-annexes">
+              <h2>Examen des annexes :</h2>
+              <div className="annexes">
+                <div className="annexe">
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Poids :</span>
+                    </div>
+                    <input type="text"  value={Poids} name="Poids" onChange={(e) => {setPoids(e.target.value)}}/>
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Aspect :</span>
+                    </div>
+                    <input type="text" value={Aspect} name="Aspect" onChange={(e) => {setAspect(e.target.value)}}/>
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Anomalies :</span>
+                    </div>
+                    <input type="text" value={Anomalies} name="Anomalies" onChange={(e) => {setAnomalies(e.target.value)}}/>
+                  </div>
+                </div>
+                <div className="annexe annexe-two">
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Placenta :</span>
+                    </div>
+                    <input type="text" value={Placenta} name="Placenta" onChange={(e) => {setPlacenta(e.target.value)}}/>
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Membranes :</span>
+                    </div>
+                    <input type="text" value={Membranes} name="Membranes" onChange={(e) => {setMembranes(e.target.value)}}/>
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Cordon :</span>
+                    </div>
+                    <input type="text" value={Cordon} name="Cordon" onChange={(e) => {setCordon(e.target.value)}}/>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="examen-annexes">
+              <h2>Examen des annexes :</h2>
+              <div className="sexe-poids-taille-pc">
+                <div className="date-annexe">
+                  <div className="span-item petit-span">
+                    <span>Date :</span>
+                  </div>
+                  <input type="date-annexe" name="date-annexe" id="date-annexe" />
+                </div>
+                <div className="poids-annexe">
+                  <div className="span-item petit-span">
                     <span>Poids :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" value="kg" />
                 </div>
-                <div className="annexe-item">
-                  <div className="span-item">
-                    <span>Aspect :</span>
+                <div className="taille-annexe">
+                  <div className="span-item petit-span">
+                    <span>Taille :</span>
                   </div>
-                  <input type="text" />
-                </div>
-                <div className="annexe-item">
-                  <div className="span-item">
-                    <span>Anomalies :</span>
-                  </div>
-                  <input type="text" />
-                </div>
-              </div>
-              <div className="annexe annexe-two">
-                <div className="annexe-item">
-                  <div className="span-item">
-                    <span>Placenta :</span>
-                  </div>
-                  <input type="text" />
-                </div>
-                <div className="annexe-item">
-                  <div className="span-item">
-                    <span>Membranes :</span>
-                  </div>
-                  <input type="text" />
-                </div>
-                <div className="annexe-item">
-                  <div className="span-item">
-                    <span>Cordon :</span>
-                  </div>
-                  <input type="text" />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="examen-annexes">
-            <h2>Examen des annexes :</h2>
-            <div className="sexe-poids-taille-pc">
-              <div className="date-annexe">
-                <div className="span-item petit-span">
-                  <span>Date :</span>
-                </div>
-                <input type="date-annexe" name="date-annexe" id="date-annexe" />
-              </div>
-              <div className="poids-annexe">
-                <div className="span-item petit-span">
-                  <span>Poids :</span>
-                </div>
-                <input type="text" value="kg" />
-              </div>
-              <div className="taille-annexe">
-                <div className="span-item petit-span">
-                  <span>Taille :</span>
-                </div>
 
-                <input type="text" value="cm" />
-              </div>
-              <div className="pc-annexe">
-                <div className="span-item petit-span">
-                  <span>PC :</span>
+                  <input type="text" value={Taille} name="Taille" onChange={(e) => {setTaille(e.target.value)}} />
                 </div>
-                <input type="text" />
+                <div className="pc-annexe">
+                  <div className="span-item petit-span">
+                    <span>PC :</span>
+                  </div>
+                  <input type="text" value={Pc} name="Pc" onChange={(e) => {setPc(e.target.value)}}/>
+                </div>
+              </div>
+              <div className="score-dapgar">
+                <div className="score">
+                  <span>Score d'Apgar :</span>
+                </div>
+                <div className="minute-1">
+                  <span>1 minute</span>
+                  <input type="checkbox" name="une_min" onChange={(e) => {setUne_min(e.target.value)}}/>
+                </div>
+                <div className="minute-5">
+                  <span>5 minute</span>
+                  <input type="checkbox" name="cinq_min" onChange={(e) => {setCinq_min(e.target.value)}}/>
+                </div>
+              </div>
+              <div className="malforamtion-annexe">
+                <div className="span-item">
+                  <span>Malformation :</span>
+                </div>
+                <input type="text" value={Malformation} name="Malformation" onChange={(e) => {setMalformation(e.target.value)}}/>
+              </div>
+              <div className="remarque-annexe">
+                <div className="span-item">
+                  <span>Remarque :</span>
+                </div>
+                <input type="text" value={Remarque} name="Remarque" onChange={(e) => {setRemarque(e.target.value)}}/>
+              </div>
+              <div className="re-annexe-textarea">
+                <div className="textarea">
+                  <textarea name="rem-annexe" id="rem-annexe" ></textarea>
+                </div>
+              </div>
+              <div className="empre-digi">
+                <div className="span-text">
+                  <span>Empreintes digitales :</span>
+                </div>
+                <div className="textarea">
+                  <textarea name="empre-digi" id="empre-digi" value={Empreintes_digitales} onChange={(e) => {setEmpreintes_digitales(e.target.value)}}></textarea>
+                </div>
               </div>
             </div>
-            <div className="score-dapgar">
-              <div className="score">
-                <span>Score d'Apgar :</span>
-              </div>
-              <div className="minute-1">
-                <span>1 minute</span>
-                <input type="checkbox" />
-              </div>
-              <div className="minute-5">
-                <span>5 minute</span>
-                <input type="checkbox" />
-              </div>
+            <div className="next-first">
+              <SwiperButtonNext disabled={isloadingPart_1}>
+                Suivant <BsChevronRight />
+              </SwiperButtonNext>
             </div>
-            <div className="malforamtion-annexe">
-              <div className="span-item">
-                <span>Malformation :</span>
-              </div>
-              <input type="text" />
-            </div>
-            <div className="remarque-annexe">
-              <div className="span-item">
-                <span>Remarque :</span>
-              </div>
-              <input type="text" />
-            </div>
-            <div className="re-annexe-textarea">
-              <div className="textarea">
-                <textarea name="rem-annexe" id="rem-annexe"></textarea>
-              </div>
-            </div>
-            <div className="empre-digi">
-              <div className="span-text">
-                <span>Empreintes digitales :</span>
-              </div>
-              <div className="textarea">
-                <textarea name="empre-digi" id="empre-digi"></textarea>
-              </div>
-            </div>
-          </div>
-          <div className="next-first">
-            <SwiperButtonNext>
-              Suivant <BsChevronRight />
-            </SwiperButtonNext>
-          </div>
+          </form>
+          
+          
         </div>
       </SwiperSlide>
       <SwiperSlide className="Swipe">

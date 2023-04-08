@@ -3136,3 +3136,9 @@ form.sign-in-form {
   font-size: 12px;
   cursor: pointer;
 }
+.error{
+  width: 100px;
+  height: 20px;
+  background-color: red;
+  z-index: 99;
+}

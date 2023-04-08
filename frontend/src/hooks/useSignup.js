@@ -20,6 +20,7 @@ export const useSignup = () => {
             const json = await reponse.json();
             if (!reponse.ok) {
                 window.alert("signup failed");
+                setError(true);
                 setIsLoading(false);
                 setError(json.error);
             }
