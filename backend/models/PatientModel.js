@@ -135,14 +135,6 @@ PatientSchemaPart1.statics.AddPart_1 = async function(Accoucheur, Poids, Aspect,
     }catch(err){
         throw Error("error while creating patient");
     }
-
-
-   
-    
-    
-    
-    
-    
 }
 
 const patient_part1 = mongoose.model('patient', PatientSchemaPart1);

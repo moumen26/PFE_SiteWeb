@@ -10,7 +10,7 @@ import ObstetricauxTable from "./obstetricauxTable";
 import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
 
 export default function MySwiper() {
-  const [Accoucheur, setAccoucheur] = useState('');
+  const [Accoucheur, setAccoucheur] = useState();
   const [Poids, setPoids] = useState('');
   const [Aspect, setAspect] = useState('');
   const [Anomalies, setAnomalies] = useState('');
@@ -26,12 +26,12 @@ export default function MySwiper() {
   const [Remarque, setRemarque] = useState('');
   const [Empreintes_digitales, setEmpreintes_digitales] = useState('');
 
-  const { AddPatientPart_1, isloadingPart_1, errorPart_1 } = useAddPatientPart_1();
+  const { AddPatientPart_1, errorPart_1 } = useAddPatientPart_1();
 
-  async function submitLogin(e) {
+  async function submitPart_1(e) {
     e.preventDefault();
     await AddPatientPart_1(Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-      ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales);
+      ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales);
   }
   return (
     <Swiper
@@ -49,7 +49,7 @@ export default function MySwiper() {
           <div className="line-hl">
             <div className="hl"></div>
           </div>
-          <form action="/addpatient" onSubmit={submitLogin}>
+          <form action="" onSubmit={submitPart_1}>
             <div className="pro-acc">
               <h2>Protocole d’accouchement</h2>
               <div className="date-heure-acc">
@@ -125,15 +125,15 @@ export default function MySwiper() {
               <div className="sexe-poids-taille-pc">
                 <div className="date-annexe">
                   <div className="span-item petit-span">
-                    <span>Date :</span>
+                    <span>Sexe :</span>
                   </div>
-                  <input type="date-annexe" name="date-annexe" id="date-annexe" />
+                  <input type="date-annexe" name="Sexe" id="date-annexe" value={Sexe} onChange={(e) => {setSexe(e.target.value)}} />
                 </div>
                 <div className="poids-annexe">
                   <div className="span-item petit-span">
                     <span>Poids :</span>
                   </div>
-                  <input type="text" value="kg" />
+                  <input type="text" />
                 </div>
                 <div className="taille-annexe">
                   <div className="span-item petit-span">
@@ -189,7 +189,7 @@ export default function MySwiper() {
               </div>
             </div>
             <div className="next-first">
-              <SwiperButtonNext disabled={isloadingPart_1}>
+              <SwiperButtonNext >
                 Suivant <BsChevronRight />
               </SwiperButtonNext>
             </div>
