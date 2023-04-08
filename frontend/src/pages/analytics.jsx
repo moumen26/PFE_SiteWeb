@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
-import MyCahierSwiper from "../components/swipeCahier";
 
 export default function Analytics() {
   const [act, setAct] = useState(false);

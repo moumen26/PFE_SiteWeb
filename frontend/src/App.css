@@ -1444,13 +1444,12 @@ nav {
   padding-top: 10vh;
 }
 
-
-.vaccin-visite-class{
+.vaccin-visite-class {
   position: relative;
   padding-top: 15vh;
 }
 
-.add-vaccin-button{
+.add-vaccin-button {
   position: absolute;
   right: 50px;
 }
@@ -1458,7 +1457,7 @@ nav {
 .add-vaccin-button .lock-icon,
 .add-vaccin-button .lock-icon-ouvert,
 .add-visite-button .lock-icon,
-.add-visite-button .lock-icon-ouvert{
+.add-visite-button .lock-icon-ouvert {
   top: 33%;
 }
 
@@ -1467,8 +1466,7 @@ nav {
   display: none;
 }
 
-
-.addpatient-add-visite{
+.addpatient-add-visite {
   height: 40vh;
   display: flex;
   align-items: center;
@@ -1476,13 +1474,11 @@ nav {
   padding-bottom: 5vh;
 }
 
-
-.addpatient-add-visite .add-visite-button{
+.addpatient-add-visite .add-visite-button {
   width: 969px;
   position: relative;
   margin-top: 22vh;
 }
-
 
 .vaccin-table,
 .visite-table {
@@ -1502,10 +1498,9 @@ nav {
 }
 
 .add-vaccin-active,
-.add-visite-active{
+.add-visite-active {
   display: flex;
   transition: all 1s ease;
-
 }
 
 .add-vaccin-active .add-vaccin-button {
@@ -1515,12 +1510,11 @@ nav {
 }
 
 .add-vaccin-active,
-.add-visite-active{
+.add-visite-active {
   margin-top: -20px;
 }
 
-
-.vaccin-visite-class.add-vaccin-active .add-visite-button{
+.vaccin-visite-class.add-vaccin-active .add-visite-button {
   opacity: 0;
 }
 
@@ -1538,22 +1532,20 @@ nav {
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
 }
 
-
-
-.visite-table-container{
+.visite-table-container {
   height: 859px;
   margin-top: 10vh;
 }
 
-.visite-table-petit-case{
+.visite-table-petit-case {
   width: 305px;
 }
 
-.visite-table-grand-case{
+.visite-table-grand-case {
   width: 911px;
 }
 
-.visite-calendar-case{
+.visite-calendar-case {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1561,7 +1553,7 @@ nav {
   gap: 20px;
 }
 
-.visite-table-icon-calendar{
+.visite-table-icon-calendar {
   font-size: 35px;
 }
 
@@ -1585,7 +1577,7 @@ nav {
   cursor: pointer;
 }
 
-.my-visite-table textarea{
+.my-visite-table textarea {
   width: 100%;
   height: 98%;
   font-size: 18px;
@@ -1654,7 +1646,7 @@ nav {
 }
 
 .add-vaccin-button,
-.add-visite-button{
+.add-visite-button {
   width: 541px;
   height: 127px;
 }
@@ -1684,7 +1676,7 @@ nav {
   height: 73px;
 }
 
-.my-visite-table td{
+.my-visite-table td {
   height: 553px;
 }
 
@@ -1723,8 +1715,6 @@ table td {
   border: 1px solid black;
 }
 
-
-
 .vaccination-table th,
 .vaccination-table td,
 .visite-table th,
@@ -1733,7 +1723,7 @@ table td {
   border: 1.5px solid #025091;
 }
 
-.visite-table{
+.visite-table {
   border: none;
 }
 
@@ -2280,12 +2270,19 @@ form.sign-in-form {
   border-radius: 10px;
   cursor: pointer;
   background-color: rgba(6, 14, 48, 0.5);
+  border: none;
+  text-transform: capitalize;
   color: #fff;
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
-  border: none;
-  text-transform: capitalize;
+}
+
+.demande-accee2 a {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .demande-accee {
@@ -2304,6 +2301,7 @@ form.sign-in-form {
 .demande-accee2:hover {
   background-color: rgba(6, 14, 48, 1);
   transition: all 1s ease;
+  color: #fff;
 }
 
 .back-btn {
@@ -2879,4 +2877,262 @@ form.sign-in-form {
 .table-button {
   width: 80px;
   font-size: 10px;
+}
+
+/* doctor profile style */
+
+.Doctor-profile {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+}
+
+.doctor-profile-container {
+  width: 100%;
+  height: calc(100vh - 80px);
+  margin-top: 2px;
+}
+
+.doctor-profile-title {
+  padding-left: 50px;
+  padding-top: 25px;
+}
+
+.doctor-profile-title h2 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 33.6px;
+  color: rgba(6, 14, 48);
+  text-transform: capitalize;
+}
+
+.doctor-profile-title span,
+.doctor-profile-header span,
+.form-span span {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: rgba(106, 110, 131, 1);
+}
+
+.form-span span:hover {
+  color: rgba(6, 14, 48);
+  text-decoration: underline;
+}
+.doctor-profile-votre-photo {
+  display: flex;
+  flex-direction: column;
+  margin-top: 24px;
+  gap: 10px;
+}
+
+.doctor-profile-votre-photo h3 {
+  font-weight: 600;
+  line-height: 21.6px;
+  font-size: 18px;
+  color: rgba(6, 14, 48, 1);
+}
+
+.doctor-profile-votre-photo {
+  padding-left: 154px;
+  display: flex;
+  flex-direction: column;
+}
+
+.doctor-profile-photo-changer-btn {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+}
+
+.doctor-profile-photo {
+  width: 117px;
+  height: 124px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+}
+
+.doctor-profile-changer-btn {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.doctor-profile-changer-btn button {
+  width: 141px;
+  height: 39px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 12px;
+  color: #fff;
+}
+
+.doctor-profile-changer-btn button:first-child {
+  background-color: rgba(79, 129, 255, 1);
+}
+
+.doctor-profile-changer-btn button:last-child {
+  background-color: rgba(79, 129, 255, 0.4);
+  color: rgba(79, 129, 255, 1);
+}
+
+.doctor-profile-changer-btn button:hover,
+.doctor-profile-changer-btn button:hover,
+.doctor-profile-enregistrer-button:hover {
+  background-color: rgba(6, 14, 48, 1);
+  transition: all 1s ease;
+  color: #fff;
+}
+
+.doctor-profile-nom-hopital {
+  display: flex;
+  align-items: center;
+  gap: 43px;
+  position: absolute;
+  right: 157px;
+  top: 129px;
+}
+
+.doctor-profile-nom-hopital h2 {
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 36px;
+  color: rgba(6, 14, 48);
+}
+
+.doctor-profile-logo-hopital {
+  width: 116px;
+  height: 121px;
+  background-color: #d9d9d9;
+  border-radius: 20px;
+}
+
+.Doctor-profile form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 70px;
+  gap: 24px;
+  padding-bottom: 20px;
+  margin-left: 72px;
+}
+
+.doctor-profile-form-class,
+.doctor-profile-form-class2 {
+  width: 100%;
+  display: flex;
+  gap: 55px;
+}
+
+.doctor-profile-forme-left-item {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.doctor-profile-form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.doctor-profile-form-item label {
+  font-weight: 500;
+  line-height: 14.4px;
+  font-size: 12px;
+  color: rgba(6, 14, 48);
+  margin-left: 10px;
+}
+
+.doctor-profile-form-item input,
+.doctor-profile-form-item select,
+.doctor-profile-form-item textarea {
+  width: 310px;
+  height: 53px;
+  border: 1px solid rgba(106, 110, 131, 1);
+  border-radius: 10px;
+  padding-left: 15px;
+  color: rgba(106, 110, 131, 1);
+  background-color: transparent;
+  padding-right: 10px;
+}
+
+.doctor-profile-form-item textarea {
+  width: 310px;
+  height: 149px;
+  padding-top: 10px;
+}
+
+.telephone-input {
+  width: 310px;
+  height: 53px;
+  border: 1px solid rgba(106, 110, 131, 1);
+  border-radius: 10px;
+  padding-left: 15px;
+  color: rgba(106, 110, 131, 1);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.telephone-input span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14.4px;
+  color: rgba(106, 110, 131, 1);
+}
+
+.telephone-input input {
+  width: 90%;
+  height: 100%;
+  background-color: transparent;
+  border: 0;
+  padding-left: 5px;
+}
+
+.doctor-profile-form-item select,
+.form-span span {
+  cursor: pointer;
+}
+
+.form-span {
+  display: flex;
+  flex-direction: column;
+  margin-left: 154px;
+  margin-top: 50px;
+  gap: 30px;
+}
+
+.form-span-item {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.form-div-carre {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background-color: rgba(217, 217, 217, 1);
+}
+
+.doctor-profile-enregistrer-class{
+  margin-left: 153px;
+  margin-top: 80px;
+  padding-bottom: 40px;
+}
+
+.doctor-profile-enregistrer-button{
+  width: 141px;
+  height: 39px;
+  border-radius: 10px;
+  background-color: rgba(79, 129, 255, 1);
+  color: #fff;
+  font-weight: 400;
+  line-height: 14.4px;
+  font-size: 12px;
+  cursor: pointer;
 }
