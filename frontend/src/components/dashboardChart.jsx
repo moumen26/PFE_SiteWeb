@@ -1,54 +1,62 @@
+import React from "react";
 import { HiEllipsisVertical } from "react-icons/hi2";
 
-import React from "react";
 import {
-  BarChart,
-  Bar,
-  Cell,
-  XAxis,
-  YAxis,
-  CartesianGrid,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
   Tooltip,
   Legend,
-  ResponsiveContainer,
-} from "recharts";
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+const options = {
+  responsive: true,
+  scales: {
+    xAxes: [
+      {
+        barThickness: 6, // number (pixels) or 'flex'
+        maxBarThickness: 8, // number (pixels)
+      },
+    ],
+  },
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Chart.js Bar Chart",
+    },
+  },
+};
+
+const labels = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
+const data = {
+  labels,
+  datasets: [
+    {
+      label: "Numbre des nouveau-ne",
+      data: [10, 15, 28, 12, 40, 34, 8],
+      backgroundColor: "rgb(79, 129, 255, 0.69)",
+      barThickness: 16,
+      borderRadius: 4,
+    },
+  ],
+};
 
 export default function MyChart() {
-  const data = [
-    {
-      name: "Week 1",
-      Boy: 30,
-    },
-    {
-      name: "Week 2",
-      Boy: 34,
-    },
-    {
-      name: "Week 3",
-      Boy: 20,
-    },
-    {
-      name: "Week 4",
-      Boy: 22,
-    },
-    {
-      name: "Week 1",
-      Boy: 50,
-    },
-    {
-      name: "Week 2",
-      Boy: 10,
-    },
-    {
-      name: "Week 3",
-      Boy: 20,
-    },
-    {
-      name: "Week 4",
-      Boy: 22,
-    },
-  ];
-
   return (
     <div className="chart-container">
       <div className="chart-header">
@@ -80,16 +88,7 @@ export default function MyChart() {
         </h2>
         <span className="title-chart">Number of newborns</span>
       </div>
-      <ResponsiveContainer width="100%" height="70%">
-        <BarChart data={data} width={300}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="Boy" fill="#4f81ff" width="16px" />
-        </BarChart>
-      </ResponsiveContainer>
+      <Bar className="chart-dashboard1" options={options} data={data} />;
     </div>
   );
 }
