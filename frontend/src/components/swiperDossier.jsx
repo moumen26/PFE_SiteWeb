@@ -6,8 +6,11 @@ import { BsChevronRight } from "react-icons/bs";
 import { useState } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
+<<<<<<< Updated upstream
 import ObstetricauxTable from "./obstetricauxTable";
 import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
+=======
+>>>>>>> Stashed changes
 
 export default function MySwiper() {
   const [Accoucheur, setAccoucheur] = useState();
@@ -492,7 +495,7 @@ export default function MySwiper() {
               <span>Obstetricaux :</span>
             </div>
             <div className="obs-table">
-              <ObstetricauxTable></ObstetricauxTable>
+              
             </div>
           </div>
           <div className="pathologique">
