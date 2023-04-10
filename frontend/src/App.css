@@ -426,12 +426,20 @@ nav {
 .swipe1,
 .swipe2,
 .swipe3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #71c5ee;
 }
 
 .formulaire-left h2,
 .formulaire-centre h2,
-.formulaire-right h2 {
+.formulaire-right h2,
+.patient-details
+  .cahier-formulaire-swiper
+  .swiper-formulaire
+  .formulaire-header
+  h2 {
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
@@ -538,7 +546,8 @@ nav {
 .antecedents h2,
 .pro-acc h2,
 .examen-annexes h2,
-.examen-entree h2 {
+.examen-entree h2,
+.partogramme h2 {
   padding-left: 40px;
 }
 
@@ -592,7 +601,8 @@ nav {
 .antecedents h2,
 .pro-acc h2,
 .examen-annexes h2,
-.examen-entree h2 {
+.examen-entree h2,
+.partogramme h2 {
   margin-left: 34px;
 }
 
@@ -1131,7 +1141,8 @@ nav {
 .familiaux,
 .pro-acc,
 .malforamtion-annexe,
-.remarque-annexe {
+.remarque-annexe,
+.partogramme {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -1158,7 +1169,8 @@ nav {
 .obser-entree,
 .obstetricaux-dossier,
 .pro-acc,
-.examen-entree {
+.examen-entree,
+.partogramme {
   flex-direction: column;
   margin-top: 66px;
 }
@@ -1417,7 +1429,9 @@ nav {
 
 .addpatient-add-cahier .add-cahier-active .lock-icon,
 .vaccin-visite-class .add-vaccin-active .lock-icon,
-.addpatient-add-visite .add-visite-active .lock-icon {
+.vaccin-visite-class .add-visite-active2 .lock-icon,
+.addpatient-add-visite .add-visite-active .lock-icon,
+.addpatient-add-vaccin .add-vaccin-active2 .lock-icon {
   opacity: 0;
 }
 
@@ -1461,12 +1475,14 @@ nav {
   top: 33%;
 }
 
-.cahier-vaccin {
+.cahier-vaccin,
+.patient-details-cahier-vaccin {
   top: calc(100vh + 220px);
   display: none;
 }
 
-.addpatient-add-visite {
+.addpatient-add-visite,
+.addpatient-add-vaccin {
   height: 40vh;
   display: flex;
   align-items: center;
@@ -1474,14 +1490,21 @@ nav {
   padding-bottom: 5vh;
 }
 
-.addpatient-add-visite .add-visite-button {
+.addpatient-add-visite .add-visite-button,
+.addpatient-add-vaccin .add-vaccin-button {
   width: 969px;
   position: relative;
   margin-top: 22vh;
 }
 
+.addpatient-add-vaccin .add-vaccin-button {
+  margin-right: -100px;
+}
+
 .vaccin-table,
-.visite-table {
+.visite-table,
+.visite-table2,
+.vaccin-table2 {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1491,22 +1514,32 @@ nav {
 }
 
 .add-cahier-active,
-.add-visite-active {
+.add-visite-active,
+.add-visite-active2,
+.add-vaccin-active2 {
   display: flex;
-  transition: all 1s ease;
+  transition: all 2s ease;
   transform: translateY(-10vh);
 }
 
 .add-vaccin-active,
-.add-visite-active {
+.add-visite-active,
+.add-visite-active2,
+.add-vaccin-active2 {
   display: flex;
-  transition: all 1s ease;
+  transition: all 2s ease;
 }
 
 .add-vaccin-active .add-vaccin-button {
   width: 969px;
   transform: translateX(55%);
-  transition: all 1s ease;
+  transition: all 2s ease;
+}
+
+.add-visite-active2 .add-visite-button {
+  width: 969px;
+  transform: translateX(-50%);
+  transition: all 2s ease;
 }
 
 .add-vaccin-active,
@@ -1514,7 +1547,36 @@ nav {
   margin-top: -20px;
 }
 
-.vaccin-visite-class.add-vaccin-active .add-visite-button {
+.add-visite-active2,
+.add-vaccin-active2 {
+  margin-top: 10px;
+}
+
+.add-vaccin-active2 {
+  margin-top: 40px;
+}
+
+.patient-details .cahier-formulaire-swiper {
+  display: none;
+}
+
+.patient-details .cahier-vaccin {
+  position: relative;
+}
+
+.patient-details .add-cahier-active .cahier-formulaire-swiper {
+  position: absolute;
+  top: -3vh;
+  transition: all 1s ease-in-out;
+  display: flex;
+}
+
+.patient-details .add-cahier-active .lock-icon {
+  opacity: 0;
+}
+
+.vaccin-visite-class.add-vaccin-active .add-visite-button,
+.vaccin-visite-class.add-visite-active2 .add-vaccin-button {
   opacity: 0;
 }
 
@@ -1530,6 +1592,11 @@ nav {
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.15);
+}
+
+.add-visite-active2 .visite-table-container {
+  margin-top: -15px;
+  transition: all 1s ease;
 }
 
 .visite-table-container {
@@ -1616,18 +1683,22 @@ nav {
 
 .add-cahier-sante h2,
 .add-vaccin-button h2,
-.add-visite-button h2 {
-  font-size: 32px;
+.add-visite-button h2,
+.profile-details-add-cahier .add-cahier-sante h2 {
   line-height: 38.4px;
+  font-size: 32px;
   font-weight: 700;
   color: #4f81ff;
-  margin-right: 14px;
   opacity: 0.7;
+  text-shadow: 0 0 #fff, 0 38.4px #4f81ff;
+  overflow: hidden;
+  transition: 0.5s;
 }
 
 .add-cahier-sante h2:hover,
 .add-vaccin-button h2:hover,
 .add-visite-button h2:hover {
+  text-shadow: 0 -38.4px #fff, 0 0 #4f81ff;
   opacity: 1;
 }
 
@@ -1664,6 +1735,70 @@ nav {
   height: 509px;
   background-color: #dadada;
   border-radius: 10px;
+}
+
+.partogramme-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.partogramme-table {
+  width: 90%;
+  height: 1315px;
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.partogramme-table input,
+.partogramme-table textarea {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+}
+
+.partogramme-table textarea {
+  padding-top: 5px;
+  padding-left: 5px;
+}
+
+.obstetricaux-table .obstetricaux-td-title,
+.partogramme-table .partogramme-td-title {
+  width: 290px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(6, 14, 48);
+}
+
+.partogramme-table tr {
+  height: 80px;
+}
+
+.partogramme-table td {
+  border: 2px solid rgba(6, 14, 48);
+}
+
+.partogramme-display-td {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.td-right {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.partogramme-last-td {
+  width: 350px;
+}
+
+.obstetricaux-table input {
+  padding-left: 0;
 }
 
 .vaccination-table,
@@ -1718,7 +1853,8 @@ table td {
 .vaccination-table th,
 .vaccination-table td,
 .visite-table th,
-.visite-table td {
+.visite-table td,
+.visite-table-container th {
   text-align: center;
   border: 1.5px solid #025091;
 }
@@ -1731,7 +1867,7 @@ table td {
   display: flex;
 }
 
-.classToggleAddcahier .cahier-formulaire-swiper {
+.patient-details .classToggleAddcahier .cahier-formulaire-swiper {
   display: flex;
   transition: all 1s ease;
 }
@@ -2617,7 +2753,7 @@ form.sign-in-form {
 
 .patient-details {
   width: 100%;
-  height: 100vh;
+  height: 200vh;
   display: flex;
   flex-direction: column;
   background-color: #f5f5f5;
@@ -2662,7 +2798,6 @@ form.sign-in-form {
 .patient-details-container {
   display: flex;
   width: 100%;
-  height: 82vh;
   margin-top: 25px;
   gap: 27px;
   padding-left: 20px;
@@ -2681,7 +2816,7 @@ form.sign-in-form {
 .patient-details-examen,
 .patient-details-reducation {
   width: 299px;
-  height: 80vh;
+  height: 797px;
   border-radius: 10px;
   background-color: #fff;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
@@ -2694,9 +2829,12 @@ form.sign-in-form {
   width: 864px;
 }
 
-.patient-details-examen,
+.patient-details-examen {
+  height: 413px;
+}
+
 .patient-details-reducation {
-  height: 40vh;
+  height: 367px;
 }
 
 .about-patients-image {
@@ -2711,6 +2849,7 @@ form.sign-in-form {
   border-radius: 41px;
   background-color: #d9d9d9;
   margin-top: 25px;
+  margin-bottom: 25px;
 }
 
 .about-patient-description h2 {
@@ -2815,6 +2954,7 @@ form.sign-in-form {
   gap: 38px;
   margin-top: 10px;
 }
+
 .patient-details-examen-score-input,
 .patient-details-examen-alli-input {
   display: flex;
@@ -2879,6 +3019,227 @@ form.sign-in-form {
   font-size: 10px;
 }
 
+.patient-details-dossier-obse,
+.patient-details-cahier-vaccin {
+  width: 100%;
+  padding: 30px;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.patient-details-dossier-obse-swiper,
+.patient-details .cahier-formulaire-swiper {
+  border-radius: 15px;
+  background-color: #fff;
+  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  height: 1310px;
+  margin-bottom: 30px;
+}
+
+.patient-details .cahier-formulaire-swiper {
+  height: 1170px;
+}
+
+.profile-details-add-cahier {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 15vh;
+  height: 30vh;
+}
+
+/*patient details swiper style */
+
+/*patient details dossier swiper */
+.patient-details .pro-acc h2 {
+  padding-left: 0;
+  margin-left: -33%;
+}
+
+.patient-details .examen-annexes h2,
+.patient-details .obser-entree h2 {
+  margin-left: -35.5%;
+  padding-left: 0;
+}
+
+.patient-details .resume-obser h2 {
+  padding-left: 0;
+  margin-left: -34.5%;
+}
+
+.patient-details .traumatismes h2 {
+  padding-left: 0;
+  margin-left: -35.6%;
+}
+
+.patient-details .diag-sor h2 {
+  margin-left: -36.5%;
+  padding-left: 0;
+}
+
+.patient-details .app-cardio h2 {
+  margin-left: -36%;
+  padding-left: 0;
+}
+
+.patient-details .pleuro-pul h2 {
+  margin-left: -35.6%;
+  padding-left: 0;
+}
+
+.patient-details .antecedents h2,
+.patient-details .examen-de-la-peau h2,
+.patient-details .conclusion h2,
+.patient-details .partogramme h2 {
+  padding-left: 0;
+  margin-left: -39.1%;
+}
+
+.patient-details .malformations h2 {
+  margin-left: -41.4%;
+  padding-left: 0;
+}
+
+.patient-details .examen-entree h2 {
+  padding-left: 0;
+  margin-left: -37.5%;
+}
+
+.patient-details .examen-neuro h2 {
+  padding-left: 0;
+  margin-left: -38%;
+}
+
+.patient-details .date-acc input,
+.patient-details .heure-acc input {
+  width: 356px;
+}
+
+.patient-details .diag-sor textarea,
+.patient-details .resume-obser textarea,
+.patient-details .motif-hosp textarea,
+.patient-details .psychologiques .textarea textarea,
+.patient-details .examen-comple .textarea textarea,
+.patient-details .pathologique .textarea textarea,
+.patient-details .familiaux .textarea textarea,
+.patient-details .empre-digi .textarea textarea,
+.patient-details .accoucheur .textarea textarea,
+.patient-details .re-annexe-textarea .textarea textarea,
+.patient-details .examen-general .textarea textarea,
+.patient-details .examen-obstetrical .textarea textarea {
+  width: 1160px;
+}
+
+.patient-details .examen-annexes .annexe-item {
+  padding-left: 3%;
+}
+
+.patient-details .psychologiques .pyscho-item,
+.patient-details .examen-bio-item,
+.patient-details .pyscho-item {
+  padding-left: 5.8%;
+}
+
+.patient-details .examen-annexes .annexe input,
+.patient-details .malforamtion-annexe input,
+.patient-details .remarque-annexe input,
+.patient-details .add-adm-vit-item input,
+.patient-details .psychologiques .pyscho-item input,
+.patient-details .pyscho-item input,
+.patient-details .examen-bio-item input {
+  width: 869px;
+}
+
+.patient-details .examen-entree-item2 input {
+  width: 880px;
+}
+
+.patient-details .glycemie input,
+.patient-details .uree input,
+.patient-details .hu input,
+.patient-details .constraction input,
+.patient-details .presentation input {
+  width: 392px;
+}
+
+.patient-details .examen-annexes .annexe-two input {
+  width: 977px;
+}
+
+.patient-details .sexe-poids-taille-pc input,
+.patient-details .poids-taille-poule-ta input {
+  width: 200px;
+}
+
+.patient-details .psycho-class input {
+  width: 346px;
+}
+
+.patient-details .obster-left-class input {
+  width: 583px;
+}
+
+.patient-details .obster-right-class input {
+  width: 335px;
+}
+
+.patient-details .ddr-terme input {
+  width: 300px;
+}
+
+/*patient details cahier swiper */
+
+.patient-details .sexe-date-heure,
+.patient-details .date-poids-taille,
+.patient-details .pre-fre,
+.patient-details .transfert-motif {
+  display: flex;
+  justify-content: center;
+  padding-left: 0;
+}
+
+.patient-details .transfert-motif {
+  padding-left: 10%;
+}
+
+.patient-details .sexe-date-heure input,
+.patient-details .sexe-date-heure select,
+.patient-details .date-poids-taille input,
+.patient-details .pre-fre input {
+  width: 250px;
+}
+
+.patient-details .motif input {
+  width: 600px;
+}
+
+.patient-details .examen,
+.patient-details .cathet,
+.patient-details .recherche,
+.patient-details .organes,
+.patient-details .vitamine,
+.patient-details .catheterisme,
+.patient-details .ictere,
+.patient-details .paleur,
+.patient-details .hematome,
+.patient-details .fente,
+.patient-details .bec,
+.patient-details .hanches,
+.patient-details .imperformation,
+.patient-details .yeux,
+.patient-details .obstetricaux,
+.patient-details .succion,
+.patient-details .signe-moro,
+.patient-details .tonus,
+.patient-details .reaction,
+.patient-details .conjonctivite,
+.patient-details .erytheme,
+.patient-details .globe {
+  display: flex;
+  justify-content: center;
+}
+
 /* doctor profile style */
 
 .Doctor-profile {
@@ -2887,7 +3248,6 @@ form.sign-in-form {
   display: flex;
   flex-direction: column;
   position: relative;
-  
 }
 
 .doctor-profile-container {
@@ -3119,13 +3479,13 @@ form.sign-in-form {
   background-color: rgba(217, 217, 217, 1);
 }
 
-.doctor-profile-enregistrer-class{
+.doctor-profile-enregistrer-class {
   margin-left: 153px;
   margin-top: 80px;
   padding-bottom: 40px;
 }
 
-.doctor-profile-enregistrer-button{
+.doctor-profile-enregistrer-button {
   width: 141px;
   height: 39px;
   border-radius: 10px;
@@ -3136,9 +3496,36 @@ form.sign-in-form {
   font-size: 12px;
   cursor: pointer;
 }
-.error{
-  width: 100px;
-  height: 20px;
-  background-color: red;
-  z-index: 99;
+
+/* add table vaccination + */
+
+.AddPatient {
+  position: relative;
+}
+
+.add-tableau-vaccin2 {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  position: absolute;
+  top: 289.2vh;
+  display: none;
+  padding-right: 65px;
+
+}
+
+.add-tableau-vaccin2-container {
+  background-color: #fff;
+  width: 90%;
+}
+
+.add-Vaccin-Table-active {
+  display: flex;
+  transition: all 1s ease;
+}
+
+.vaccination-add-button.add-Vaccin-Table-active {
+  justify-content: center;
+  align-items: center;
 }
