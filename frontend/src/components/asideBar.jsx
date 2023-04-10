@@ -7,8 +7,6 @@ import { MdAnalytics } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { IconContext } from "react-icons";
-import { useLogout } from "../hooks/useLogout";
-import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function MyAsideBar() {
   /*let list = document.querySelectorAll(".list");
@@ -21,12 +19,6 @@ export default function MyAsideBar() {
       list[i].className = "list-active";
     };
   }*/
-  const { logout } = useLogout();
-  const { user } = useAuthContext();
-  
-  const SubmitLogout = () => {
-    logout();
-  }
   return (
     <div className="asidebar">
       <aside className="aside">
@@ -90,10 +82,7 @@ export default function MyAsideBar() {
           <li className="list">
             <a href="/login">
               <span className="icon">
-              {user && (
-                <FiLogOut onClick={SubmitLogout}/>
-              )}
-                
+                <FiLogOut />
               </span>
               <span className="title">log out</span>
             </a>

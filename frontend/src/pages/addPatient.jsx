@@ -11,17 +11,27 @@ import AddVaccinButton from "../components/addVaccinButton";
 import AddVisiteButton from "../components/addVisiteButton";
 import MyVisteTable from "../components/visiteTable";
 import VisiteAddButton from "../components/visiteAddButton";
+import AddVisiteButton2 from "../components/addVisiteButton2";
+import AddVaccinButtonTable from "../components/addVaccinButton2";
+import MyVaccinationTable2 from "../components/vaccinationTable2";
 
 export default function AddPatient() {
   const [act, setAct] = useState(false);
   const [add, setAdd] = useState(false);
   const [addVaccin, setAddvacin] = useState(false);
+  const [addVaccin2, setAddVaccin2] = useState(false);
   const [addVisite, setAddvisite] = useState(false);
-
+  const [addVisite2, setAddvisite2] = useState(false);
+  const [addVaccinTable, setaddVaccinTable] = useState(false);
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
   let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
+  let toggleClassAddVaccin2 = addVaccin2 ? " add-vaccin-active2" : "";
   let toggleClassAddVisite = addVisite ? " add-visite-active" : "";
+  let toggleClassAddVisite2 = addVisite2 ? " add-visite-active2" : "";
+  let toggleClassAddVaccinTable = addVaccinTable
+    ? " add-Vaccin-Table-active"
+    : "";
 
   return (
     <div className="AddPatient">
@@ -58,16 +68,24 @@ export default function AddPatient() {
         <div className="cahier-formulaire-swiper">
           <MyCahierSwiper></MyCahierSwiper>
         </div>
-        <div className={`vaccin-visite-class${toggleClassAddVaccin}`}>
+        <div
+          className={`vaccin-visite-class${toggleClassAddVaccin} vaccin-visite-class${toggleClassAddVisite2}`}
+        >
           <AddVaccinButton addVaccin={addVaccin} setAddvacin={setAddvacin} />
-          <AddVisiteButton />
+          <AddVisiteButton2
+            addVisite2={addVisite2}
+            setAddvisite2={setAddvisite2}
+          />
         </div>
         <div className={`vaccin-table${toggleClassAddVaccin}`}>
           <div className="vaccin-table-container">
             <h2>Vaccination :</h2>
             <MyVaccinationTable />
             <div className="vaccination-add-button-class">
-              <VaccinationAddButton />
+              <VaccinationAddButton
+                addVaccinTable={addVaccinTable}
+                setaddVaccinTable={setaddVaccinTable}
+              />
             </div>
           </div>
           <div className="addpatient-add-visite">
@@ -85,6 +103,35 @@ export default function AddPatient() {
               </div>
             </div>
           </div>
+        </div>
+        <div className={`visite-table2${toggleClassAddVisite2}`}>
+          <div className="visite-table-container">
+            <h2>Visites systematique de 1 a 3 mois</h2>
+            <MyVisteTable />
+            <div className="visite-add-button-class">
+              <VisiteAddButton />
+            </div>
+          </div>
+          <div className="addpatient-add-vaccin">
+            <AddVaccinButtonTable
+              addVaccin2={addVaccin2}
+              setAddVaccin2={setAddVaccin2}
+            />
+          </div>
+          <div className={`vaccin-table2${toggleClassAddVaccin2}`}>
+            <div className="vaccin-table-container">
+              <h2>Vaccination :</h2>
+              <MyVaccinationTable />
+              <div className="vaccination-add-button-class">
+                <VaccinationAddButton />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className={`add-tableau-vaccin2${toggleClassAddVaccinTable}`}>
+        <div className="add-tableau-vaccin2-container">
+          <MyVaccinationTable2 />
         </div>
       </div>
     </div>
