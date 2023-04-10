@@ -89,11 +89,11 @@ export default function MyAsideBar() {
           </li>
           <li className="list">
             <a href="/login">
+            {user && (
               <span className="icon">
-              {user && (
                 <FiLogOut onClick={SubmitLogout}/>
-              )}
               </span>
+            )}
               <span className="title">log out</span>
             </a>
           </li>
