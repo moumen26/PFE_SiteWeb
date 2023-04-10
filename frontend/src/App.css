@@ -3509,15 +3509,27 @@ form.sign-in-form {
   justify-content: end;
   align-items: center;
   position: absolute;
-  top: 289.2vh;
+  top: 278.2vh;
   display: none;
   padding-right: 65px;
-
 }
 
 .add-tableau-vaccin2-container {
-  background-color: #fff;
+  background-color: #F5F5F5;
   width: 90%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
+}
+
+.add-tableau-vaccin2-close-class {
+  width: 100%;
+  display: flex;
+  justify-content: end;
 }
 
 .add-Vaccin-Table-active {
@@ -3529,3 +3541,40 @@ form.sign-in-form {
   justify-content: center;
   align-items: center;
 }
+
+.add-tableau-vaccin-ajouter-btn{
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  padding-right: 26px;
+  margin-top: 10px;
+}
+
+.Ajoute-Vaccin-Btn{
+  width: 191px;
+  height: 46px;
+  border-radius: 20px;
+  background-color: rgba(79, 129, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  color: #fff;
+  font-size: 20px;
+  line-height: 24px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.Ajoute-Vaccin-Btn:hover,
+.close-button:hover{
+  opacity: 1;
+  transition: all 1s ease;
+}
+
+.close-button{
+  font-size: 28px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+

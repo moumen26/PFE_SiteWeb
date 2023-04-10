@@ -14,6 +14,8 @@ import VisiteAddButton from "../components/visiteAddButton";
 import AddVisiteButton2 from "../components/addVisiteButton2";
 import AddVaccinButtonTable from "../components/addVaccinButton2";
 import MyVaccinationTable2 from "../components/vaccinationTable2";
+import AjouteVaccinButton from "../components/ajouteVaccinButton";
+import CloseButton from "../components/closeButton";
 
 export default function AddPatient() {
   const [act, setAct] = useState(false);
@@ -131,7 +133,16 @@ export default function AddPatient() {
       </div>
       <div className={`add-tableau-vaccin2${toggleClassAddVaccinTable}`}>
         <div className="add-tableau-vaccin2-container">
+          <div className="add-tableau-vaccin2-close-class">
+            <CloseButton
+              addVaccinTable={addVaccinTable}
+              setaddVaccinTable={setaddVaccinTable}
+            />
+          </div>
           <MyVaccinationTable2 />
+          <div className="add-tableau-vaccin-ajouter-btn">
+            <AjouteVaccinButton />
+          </div>
         </div>
       </div>
     </div>
