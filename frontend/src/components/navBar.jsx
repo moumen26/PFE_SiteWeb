@@ -31,7 +31,7 @@ export default function MyNavBar({ act, setAct }) {
           <div className="doctor-pic"></div>
           <div className="doctor-name">
             {user && (
-              <a className="medcine-name" href="#">Dr. {user.Fname}</a>
+              <a className="medcine-name">Dr. {user.Fname}</a>
             )}
             {user && (
               <span>{user.speciality}</span>
