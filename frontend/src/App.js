@@ -19,7 +19,10 @@ function App() {
       <div className="dashboard-container">
         <MyDashboradTop></MyDashboradTop>
         <div className="dashboard-charts-calnedar">
-          <MyChart></MyChart>
+          <div className="dashboard-chart-container">
+            <MyChart></MyChart>
+          </div>
+
           <div className="dashboard-calendar-container">
             <MyDashboradCalendar></MyDashboradCalendar>
           </div>

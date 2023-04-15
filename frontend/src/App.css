@@ -4,6 +4,7 @@
   src: url(../public/fonts/Poppins-Regular.ttf);
 }
 
+
 .titre {
   padding-left: 100px;
 }
@@ -109,6 +110,7 @@ nav {
   gap: 50px;
   padding-right: 32px;
 }
+
 /*
 .doctor-logo {
   font-size: 24px;
@@ -117,6 +119,7 @@ nav {
   right: 229px;
 }
 */
+
 .right-nav .doctor {
   display: flex;
   align-items: center;
@@ -175,13 +178,15 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transform: translateX(-150%);
+  -webkit-transform: translateX(-150%);
+          transform: translateX(-150%);
   transition: all 1s ease;
   z-index: 99;
 }
 
 .aside-active.active {
-  transform: translateX(0);
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
 }
 
 .aside-active ul {
@@ -205,14 +210,20 @@ nav {
   height: 3px;
   background-color: #71c5ee;
   border-radius: 1000px;
-  transform: scaleX(0);
-  transform-origin: right;
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
+  -webkit-transform-origin: right;
+          transform-origin: right;
+  transition: -webkit-transform 0.35s ease-out;
   transition: transform 0.35s ease-out;
+  transition: transform 0.35s ease-out, -webkit-transform 0.35s ease-out;
 }
 
 .aside-active li:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  -webkit-transform-origin: left;
+          transform-origin: left;
 }
 
 .aside-active ul li a {
@@ -235,6 +246,7 @@ nav {
   background-color: #fff;
   border-radius: 10px;
   z-index: 99;
+  height: calc(100vh - 90px);
 }
 
 .aside ul {
@@ -280,6 +292,7 @@ nav {
   transition: all 1s ease;
   padding-left: 10px;
 }
+
 /*
 .list-active{
   line-height: 50px;
@@ -288,6 +301,7 @@ nav {
   width: 60px;
 }
 */
+
 .aside:hover {
   width: 240px;
   transition: all 1s ease;
@@ -295,7 +309,6 @@ nav {
 
 .addpatient-container {
   width: 90%;
-  height: calc(100vh - 90px);
   margin-left: 90px;
   background-color: #f8f9fd;
   display: flex;
@@ -358,7 +371,7 @@ nav {
 .cahier-formulaire-swiper {
   margin-top: 15px;
   width: 95%;
-  height: 76%;
+  height: 1200px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -369,7 +382,7 @@ nav {
 .cahier-formulaire-swiper {
   margin-top: 54px;
   width: 85%;
-  height: calc(100vh - 100px);
+  height: 1190px;
 }
 
 .swiper-formulaire {
@@ -743,6 +756,7 @@ nav {
   justify-content: center;
   align-items: center;
 }
+
 .pheny {
   margin-top: 20px;
 }
@@ -843,9 +857,6 @@ nav {
 
 .atresie input {
   margin-left: 20px;
-}
-
-.atresie input {
   width: 695px;
 }
 
@@ -967,6 +978,7 @@ nav {
   background-color: #71c5ee;
   text-align: center;
 }
+
 .swiper-class {
   width: 100%;
   height: 100%;
@@ -1012,6 +1024,10 @@ nav {
 .constraction,
 .presentation {
   display: flex;
+}
+
+.annexe-item{
+  margin-right: 70px;
 }
 
 .examen-entree-item,
@@ -1332,6 +1348,10 @@ nav {
   gap: 23px;
 }
 
+.annexes{
+  align-items: center;
+}
+
 .accoucheur {
   margin-top: 15px;
   gap: 14px;
@@ -1407,15 +1427,18 @@ nav {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 54px;
   margin-bottom: 54px;
   width: calc(100% - 82px);
   position: absolute;
   left: 82px;
 }
 
+.addpatient-add-cahier{
+  margin-top: 50px;
+}
+
 .cahier-vaccin {
-  margin-top: 120px;
+  margin-top: 112vh;
 }
 
 .lock-icon,
@@ -1519,7 +1542,8 @@ nav {
 .add-vaccin-active2 {
   display: flex;
   transition: all 2s ease;
-  transform: translateY(-10vh);
+  -webkit-transform: translateY(-10vh);
+          transform: translateY(-10vh);
 }
 
 .add-vaccin-active,
@@ -1532,13 +1556,15 @@ nav {
 
 .add-vaccin-active .add-vaccin-button {
   width: 969px;
-  transform: translateX(55%);
+  -webkit-transform: translateX(55%);
+          transform: translateX(55%);
   transition: all 2s ease;
 }
 
 .add-visite-active2 .add-visite-button {
   width: 969px;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   transition: all 2s ease;
 }
 
@@ -1676,8 +1702,10 @@ nav {
 }
 
 .vaccination-add-button:hover,
-.visite-add-button:hover {
+.visite-add-button:hover,
+.Ajoute-Vaccin-Btn:hover {
   opacity: 1;
+  border-radius: 10px;
   transition: all 1s ease;
 }
 
@@ -1889,6 +1917,8 @@ table td {
   }
 
   .right-nav .doctor {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
     width: fit-content;
   }
 
@@ -2178,7 +2208,8 @@ table td {
   background: linear-gradient(-45deg, #fff, #fff);
   top: -10px;
   right: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   z-index: 6;
   transition: 1.8s ease-in-out;
 }
@@ -2195,7 +2226,8 @@ table td {
   position: absolute;
   top: 50%;
   left: 75%;
-  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
   width: 50%;
   display: grid;
   grid-template-columns: 1fr;
@@ -2267,6 +2299,10 @@ form.sign-in-form {
   cursor: pointer;
 }
 
+.input-field input::-webkit-input-placeholder {
+  color: rgb(186, 186, 186);
+}
+
 .input-field input::placeholder,
 .sign-in-form .input-field select {
   color: rgb(186, 186, 186);
@@ -2309,7 +2345,6 @@ form.sign-in-form {
 .btn-solid {
   width: 392px;
   border-radius: 20px;
-  font-size: 16px;
   outline: none;
   border: none;
   color: #fff;
@@ -2363,7 +2398,6 @@ form.sign-in-form {
 }
 
 .right-panel {
-  pointer-events: none;
   width: 100%;
   height: 100vh;
   display: flex;
@@ -2518,7 +2552,8 @@ form.sign-in-form {
 
 .right-panel .content,
 .right-panel .image-login {
-  transform: translateX(800px);
+  -webkit-transform: translateX(800px);
+          transform: translateX(800px);
 }
 
 .sign-in-mode #demande-accee {
@@ -2530,18 +2565,21 @@ form.sign-in-form {
 }
 
 .sign-in-mode::before {
-  transform: translateX(100%, -50%);
+  -webkit-transform: translateX(100%, -50%);
+          transform: translateX(100%, -50%);
   right: -80%;
 }
 
 .sign-in-mode .left-panel .image-login,
 .sign-in-mode .left-panel .content {
-  transform: translateX(-800px);
+  -webkit-transform: translateX(-800px);
+          transform: translateX(-800px);
 }
 
 .sign-in-mode .right-panel .image-login,
 .sign-in-mode .right-panel .content {
-  transform: translateX(0px);
+  -webkit-transform: translateX(0px);
+          transform: translateX(0px);
 }
 
 .sign-in-mode .left-panel {
@@ -2569,6 +2607,7 @@ form.sign-in-form {
 #demande-accee {
   z-index: 1;
 }
+
 
 /* dashboard style */
 
@@ -2648,11 +2687,20 @@ form.sign-in-form {
   margin-top: 40px;
   padding-left: 31px;
   padding-right: 31px;
-  gap: 18px;
+  gap: 30px;
+}
+
+.dashboard-chart-container{
+  width: 900px;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 611px;
+  border-radius: 8px;
+  background-color: #fff;
 }
 
 .chart-dashboard1 {
-  width: 832px;
+  width: 880px;
   height: 611px;
   border-radius: 8px;
   display: flex;
@@ -2691,6 +2739,21 @@ form.sign-in-form {
   font-weight: 700;
   font-size: 16px;
   line-height: 19.2px;
+}
+
+.calendar-dashboard-header {
+  width: 100%;
+  height: 80px;
+  padding-left: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.calendar-dashboard-header h2 {
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 31px;
+  color: #000;
 }
 
 .chart-line-container {
@@ -2776,7 +2839,8 @@ form.sign-in-form {
 }
 
 .icon-button:hover {
-  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
   transition: all 1s ease;
 }
 
@@ -3007,7 +3071,8 @@ form.sign-in-form {
 
 .voir-reducation:hover {
   transition: all 1s ease;
-  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+          transform: scale(1.1);
 }
 
 .reducation-doctor-name:hover {
@@ -3052,6 +3117,7 @@ form.sign-in-form {
 /*patient details swiper style */
 
 /*patient details dossier swiper */
+
 .patient-details .pro-acc h2 {
   padding-left: 0;
   margin-left: -33%;
@@ -3282,6 +3348,7 @@ form.sign-in-form {
   color: rgba(6, 14, 48);
   text-decoration: underline;
 }
+
 .doctor-profile-votre-photo {
   display: flex;
   flex-direction: column;
@@ -3503,19 +3570,28 @@ form.sign-in-form {
   position: relative;
 }
 
+.add-tableau-vaccin1,
 .add-tableau-vaccin2 {
   width: 100%;
   display: flex;
   justify-content: end;
   align-items: center;
   position: absolute;
-  top: 278.2vh;
   display: none;
   padding-right: 65px;
 }
 
-.add-tableau-vaccin2-container {
-  background-color: #F5F5F5;
+.add-tableau-vaccin1 {
+  top: 447vh;
+}
+
+.add-tableau-vaccin2{
+  top: 593vh;
+}
+
+.add-tableau-vaccin1-container,
+.add-tableau-vaccin2-container{
+  background-color: #f5f5f5;
   width: 90%;
   height: 400px;
   display: flex;
@@ -3526,23 +3602,26 @@ form.sign-in-form {
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
 }
 
+.add-tableau-vaccin1-close-class,
 .add-tableau-vaccin2-close-class {
   width: 100%;
   display: flex;
   justify-content: end;
 }
 
-.add-Vaccin-Table-active {
+.add-Vaccin-Table-active,
+.add-Vaccin-Table-active2 {
   display: flex;
   transition: all 1s ease;
 }
 
-.vaccination-add-button.add-Vaccin-Table-active {
+.vaccination-add-button.add-Vaccin-Table-active,
+.vaccination-add-button.add-Vaccin-Table-active2 {
   justify-content: center;
   align-items: center;
 }
 
-.add-tableau-vaccin-ajouter-btn{
+.add-tableau-vaccin-ajouter-btn {
   width: 100%;
   display: flex;
   justify-content: end;
@@ -3550,7 +3629,7 @@ form.sign-in-form {
   margin-top: 10px;
 }
 
-.Ajoute-Vaccin-Btn{
+.Ajoute-Vaccin-Btn {
   width: 191px;
   height: 46px;
   border-radius: 20px;
@@ -3567,12 +3646,12 @@ form.sign-in-form {
 }
 
 .Ajoute-Vaccin-Btn:hover,
-.close-button:hover{
+.close-button:hover {
   opacity: 1;
   transition: all 1s ease;
 }
 
-.close-button{
+.close-button {
   font-size: 28px;
   cursor: pointer;
   opacity: 0.8;

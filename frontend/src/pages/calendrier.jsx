@@ -4,6 +4,7 @@ import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
 import MyDashboradCalendar from "../components/dashboardCalendar";
 
+
 export default function Calendrier() {
   const [act, setAct] = useState(false);
 
@@ -14,7 +15,8 @@ export default function Calendrier() {
       <MyAsideBar></MyAsideBar>
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="calendar-container">
-        <MyDashboradCalendar className="Calendar"></MyDashboradCalendar>
+        {/* <MyDashboradCalendar className="Calendar"></MyDashboradCalendar> */}
+        <h1 class="text-3xl font-bold underline">Hello world!</h1>
       </div>
     </div>
   );
