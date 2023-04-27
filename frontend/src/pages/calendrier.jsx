@@ -2,11 +2,16 @@ import React, { useState } from "react";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
-import MyDashboradCalendar from "../components/dashboardCalendar";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import FullCalendar from "@fullcalendar/react";
 
 
 export default function Calendrier() {
   const [act, setAct] = useState(false);
+
+  
 
   return (
     <div className="Calendrier">
@@ -15,8 +20,17 @@ export default function Calendrier() {
       <MyAsideBar></MyAsideBar>
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="calendar-container">
-        {/* <MyDashboradCalendar className="Calendar"></MyDashboradCalendar> */}
-        <h1 class="text-3xl font-bold underline">Hello world!</h1>
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView={"dayGridMonth"}
+          headerToolbar={{
+            start: "dayGridMonth,timeGridWeek,timeGridDay",
+            center: "title",
+            end: "today prev,next",
+          }}
+          height={"88vh"}
+         
+        />
       </div>
     </div>
   );

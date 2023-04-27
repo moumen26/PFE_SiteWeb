@@ -164,7 +164,9 @@ export default function MyCahierSwiper({ add, setAdd }) {
 
           <div className="next-first">
             <SwiperButtonNext>
-              Suivant <BsChevronRight />
+              <div className="flex items-center justify-items-center gap-2">
+                Suivant <BsChevronRight />
+              </div>
             </SwiperButtonNext>
           </div>
         </div>
@@ -352,12 +354,16 @@ export default function MyCahierSwiper({ add, setAdd }) {
           <div className="back-next-buttons">
             <div className="back">
               <SwiperButtonBack>
-                <BsChevronLeft /> Back
+                <div className="flex items-center justify-items-center gap-2">
+                  <BsChevronLeft /> Back
+                </div>
               </SwiperButtonBack>
             </div>
             <div className="next">
               <SwiperButtonNext>
-                Suivant <BsChevronRight />
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
               </SwiperButtonNext>
             </div>
           </div>
@@ -508,12 +514,16 @@ export default function MyCahierSwiper({ add, setAdd }) {
           <div className="back-next-buttons">
             <div className="back">
               <SwiperButtonBack>
-                <BsChevronLeft /> Back
+                <div className="flex items-center justify-items-center gap-2">
+                  <BsChevronLeft /> Back
+                </div>
               </SwiperButtonBack>
             </div>
             <div className="next">
               <SwiperButtonNext>
-                Suivant <BsChevronRight />
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
               </SwiperButtonNext>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { BsChevronLeft, BsDownload } from "react-icons/bs";
+import { BsChevronLeft, BsFillCloudDownloadFill } from "react-icons/bs";
 import { FaShare } from "react-icons/fa";
 import AboutPatient from "../components/aboutPatient";
 import PatientDetailsCenter from "../components/patientDetails";
@@ -10,8 +10,9 @@ import MyCahierSwiper from "../components/swipeCahier";
 import { useState } from "react";
 
 export default function PatientDetails() {
-  const [add, setAdd] = useState(false);
 
+  const [add, setAdd] = useState(false);
+  
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
   return (
@@ -20,7 +21,7 @@ export default function PatientDetails() {
         <BsChevronLeft className="icon-button" />
         <div className="patient-details-header-right">
           <FaShare className="icon-button" />
-          <BsDownload className="icon-button" />
+          <BsFillCloudDownloadFill className="icon-button" />
         </div>
       </div>
       <h2>Patient details</h2>

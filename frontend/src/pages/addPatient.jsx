@@ -5,19 +5,13 @@ import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
 import MyCahierSwiper from "../components/swipeCahier";
 import MySwiper from "../components/swiperDossier";
-import MyVaccinationTable from "../components/vaccinationTable";
-import VaccinationAddButton from "../components/vaccinationAddButton";
 import AddVaccinButton from "../components/addVaccinButton";
 import AddVisiteButton from "../components/addVisiteButton";
 import MyVisteTable from "../components/visiteTable";
 import VisiteAddButton from "../components/visiteAddButton";
 import AddVisiteButton2 from "../components/addVisiteButton2";
 import AddVaccinButtonTable from "../components/addVaccinButton2";
-import MyVaccinationTable2 from "../components/vaccinationTable2";
-import AjouteVaccinButton from "../components/ajouteVaccinButton";
-import CloseButton from "../components/closeButtonTableVaccin";
-import VaccinationAddButton2 from "../components/vaccinationAddButton2";
-import CloseButton2 from "../components/closeButtonTableVaccin2";
+import VaccinTable from "../components/addPatientVaccinTable";
 
 export default function AddPatient() {
   const [act, setAct] = useState(false);
@@ -28,7 +22,6 @@ export default function AddPatient() {
   const [addVisite2, setAddvisite2] = useState(false);
   const [addVaccinTable, setaddVaccinTable] = useState(false);
   const [addVaccinTable2, setaddVaccinTable2] = useState(false);
-
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
   let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
@@ -87,16 +80,7 @@ export default function AddPatient() {
           />
         </div>
         <div className={`vaccin-table${toggleClassAddVaccin}`}>
-          <div className="vaccin-table-container">
-            <h2>Vaccination :</h2>
-            <MyVaccinationTable />
-            <div className="vaccination-add-button-class">
-              <VaccinationAddButton
-                addVaccinTable={addVaccinTable}
-                setaddVaccinTable={setaddVaccinTable}
-              />
-            </div>
-          </div>
+          <VaccinTable />
           <div className="addpatient-add-visite">
             <AddVisiteButton
               addVisite={addVisite}
@@ -113,6 +97,8 @@ export default function AddPatient() {
             </div>
           </div>
         </div>
+
+        
         <div className={`visite-table2${toggleClassAddVisite2}`}>
           <div className="visite-table-container">
             <h2>Visites systematique de 1 a 3 mois</h2>
@@ -127,48 +113,15 @@ export default function AddPatient() {
               setAddVaccin2={setAddVaccin2}
             />
           </div>
-          <div className={`vaccin-table2${toggleClassAddVaccin2}`}>
-            <div className="vaccin-table-container">
-              <h2>Vaccination :</h2>
-              <MyVaccinationTable />
-              <div className="vaccination-add-button-class">
-                <VaccinationAddButton2
-                  addVaccinTable2={addVaccinTable2}
-                  setaddVaccinTable2={setaddVaccinTable2}
-                />
-              </div>
-            </div>
-          </div>
+          
         </div>
       </div>
-      <div className={`add-tableau-vaccin1${toggleClassAddVaccinTable}`}>
-        <div className="add-tableau-vaccin1-container">
-          <div className="add-tableau-vaccin1-close-class">
-            <CloseButton
-              addVaccinTable={addVaccinTable}
-              setaddVaccinTable={setaddVaccinTable}
-            />
-          </div>
-          <MyVaccinationTable2 />
-          <div className="add-tableau-vaccin-ajouter-btn">
-            <AjouteVaccinButton />
-          </div>
-        </div>
-      </div>
-      <div className={`add-tableau-vaccin2${toggleClassAddVaccinTable2}`}>
-        <div className="add-tableau-vaccin2-container">
-          <div className="add-tableau-vaccin2-close-class">
-            <CloseButton2
-              addVaccinTable2={addVaccinTable2}
-              setaddVaccinTable2={setaddVaccinTable2}
-            />
-          </div>
-          <MyVaccinationTable2 />
-          <div className="add-tableau-vaccin-ajouter-btn">
-            <AjouteVaccinButton />
-          </div>
-        </div>
-      </div>
+
+
+
+
+
+
     </div>
   );
 }

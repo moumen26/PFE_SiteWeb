@@ -11,16 +11,16 @@ import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function MyAsideBar() {
-  /*let list = document.querySelectorAll(".list");
-  for (let i = 0; i < list.length; i++) {
-    list[i].onclick = function () {
-      let j = 0;
-      while (j < list.length) {
-        list[j++].className = "list";
-      }
-      list[i].className = "list-active";
-    };
-  }*/
+  // let list = document.querySelectorAll(".list");
+  // for (let i = 0; i < list.length; i++) {
+  //   list[i].onclick = function () {
+  //     let j = 0;
+  //     while (j < list.length) {
+  //       list[j++].className = "list";
+  //     }
+  //     list[i].className = "list-active";
+  //   };
+  // }
   const { logout } = useLogout();
   const { user } = useAuthContext();
   
@@ -30,71 +30,71 @@ export default function MyAsideBar() {
   return (
     <div className="asidebar">
       <aside className="aside">
-        <ul>
+        <ul className="flex flex-col gap-20">
           <li className="list">
-            <a href="/dashboard">
-              <span className="icon">
-                <MdDashboard />
-              </span>
-              <span className="title">dashboard</span>
+            <a href="/dashboard" className="mb-2 h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <MdDashboard className="w-6 h-6 ml-2" />
+                <span className="title">Dashboard</span>
+              </div>
             </a>
           </li>
           <li className="list">
-            <a href="/addpatients">
-              <span className="icon">
-                <HiUserAdd />
-              </span>
-              <span className="title">add patient</span>
+            <a href="/addpatients" className="mb-2 h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <HiUserAdd className="w-6 h-6 ml-2 " />
+                <span className="title">Add Patient</span>
+              </div>
             </a>
           </li>
           <li className="list">
-            <a href="/patients">
-              <span className="icon">
-                <BsFilePersonFill />
-              </span>
-              <span className="title">patients</span>
+            <a href="/patients" className="mb-2 h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <BsFilePersonFill className="w-6 h-6 ml-2 " />
+                <span className="title">Patients</span>
+              </div>
             </a>
           </li>
           <li className="list">
-            <a href="/calendrier">
-              <span className="icon">
-                <BsFillCalendarFill />
-              </span>
-              <span className="title">calendrier</span>
+            <a href="/calendrier" className="mb-2 h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <BsFillCalendarFill className="w-6 h-6 ml-2 " />
+                <span className="title">Calendar</span>
+              </div>
             </a>
           </li>
           <li className="list">
-            <a href="/coupon">
-              <span className="icon">
-                <RiCoupon2Fill />
-              </span>
-              <span className="title">coupon</span>
+            <a href="/coupon" className="mb-2 h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <RiCoupon2Fill className="w-6 h-6 ml-2 " />
+                <span className="title">Coupon</span>
+              </div>
             </a>
           </li>
           <li className="list">
-            <a href="/analytics">
-              <span className="icon">
-                <MdAnalytics />
-              </span>
-              <span className="title">analytics</span>
+            <a href="/analytics" className="mb-2 h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <MdAnalytics className="w-6 h-6 ml-2 " />
+                <span className="title">Analytics</span>
+              </div>
             </a>
           </li>
           <li className="list">
-            <a href="/settings">
-              <span className="icon">
-                <IoIosSettings />
-              </span>
-              <span className="title">settings</span>
+            <a href="/seetings" className="h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <IoIosSettings className="w-6 h-6 ml-2" />
+                <span className="title">Seetings</span>
+              </div>
             </a>
           </li>
           <li className="list">
-            <a href="/login">
+            <a href="/login" className="h-10 pt-1">
             {user && (
-              <span className="icon">
-                <FiLogOut onClick={SubmitLogout}/>
-              </span>
+              <div className="flex items-center justify-items-center" onClick={SubmitLogout} >
+                <FiLogOut className="w-6 h-6 ml-2" />
+                <span className="title">Log Out</span>
+              </div>
             )}
-              <span className="title">log out</span>
             </a>
           </li>
         </ul>

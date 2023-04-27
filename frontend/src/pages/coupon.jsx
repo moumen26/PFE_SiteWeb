@@ -13,6 +13,7 @@ export default function Coupon() {
       <MyAsideBar></MyAsideBar>
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <h2 className="titre">coupon</h2>
+      <h1 class="text-3xl font-bold underline">Hello world!</h1>
     </div>
   );
 }

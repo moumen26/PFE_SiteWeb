@@ -18,11 +18,11 @@ export default function MyNavBar({ act, setAct }) {
         </div>
         <div className="image"></div>
         <a href="#">
-          H
-          <span>
-            <FaUserMd size="24px" fill="#3889c1" />
-          </span>
-          SPITALI
+        <div className="logo flex items-center justify-items-center">
+            H
+            <FaUserMd size="24px" fill="#3889c1" className="pb-1" />
+            SPITALI
+          </div>
         </a>
       </div>
       <div className="right-nav">

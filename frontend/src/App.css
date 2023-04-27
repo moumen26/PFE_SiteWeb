@@ -4,7 +4,6 @@
   src: url(../public/fonts/Poppins-Regular.ttf);
 }
 
-
 .titre {
   padding-left: 100px;
 }
@@ -86,7 +85,7 @@ nav {
   background-color: gray;
 }
 
-.left-nav a {
+.left-nav .logo {
   font-weight: 700;
   font-size: 24px;
   letter-spacing: 3px;
@@ -179,14 +178,14 @@ nav {
   align-items: center;
   justify-content: center;
   -webkit-transform: translateX(-150%);
-          transform: translateX(-150%);
+  transform: translateX(-150%);
   transition: all 1s ease;
   z-index: 99;
 }
 
 .aside-active.active {
   -webkit-transform: translateX(0);
-          transform: translateX(0);
+  transform: translateX(0);
 }
 
 .aside-active ul {
@@ -211,9 +210,9 @@ nav {
   background-color: #71c5ee;
   border-radius: 1000px;
   -webkit-transform: scaleX(0);
-          transform: scaleX(0);
+  transform: scaleX(0);
   -webkit-transform-origin: right;
-          transform-origin: right;
+  transform-origin: right;
   transition: -webkit-transform 0.35s ease-out;
   transition: transform 0.35s ease-out;
   transition: transform 0.35s ease-out, -webkit-transform 0.35s ease-out;
@@ -221,9 +220,9 @@ nav {
 
 .aside-active li:hover::after {
   -webkit-transform: scaleX(1);
-          transform: scaleX(1);
+  transform: scaleX(1);
   -webkit-transform-origin: left;
-          transform-origin: left;
+  transform-origin: left;
 }
 
 .aside-active ul li a {
@@ -281,7 +280,7 @@ nav {
 
 .title {
   position: relative;
-  margin-left: 40px;
+  margin-left: 30px;
 }
 
 .aside ul li a:hover {
@@ -549,6 +548,18 @@ nav {
   justify-content: center;
   gap: 15px;
   margin-bottom: 20px;
+}
+
+.examen-de-la-peau h2,
+.app-cardio h2,
+.pleuro-pul h2,
+.malformations h2,
+.traumatismes h2,
+.examen-neuro h2,
+.reflexes h2,
+.conclusion h2,
+.conj-eryth-globe h2,
+.depistage h2 {
   padding-left: 40px;
 }
 
@@ -560,8 +571,16 @@ nav {
 .pro-acc h2,
 .examen-annexes h2,
 .examen-entree h2,
-.partogramme h2 {
+.partogramme h2,
+.vaccin-table-container h2 {
   padding-left: 40px;
+  font-size: 24px;
+  line-height: 28.8px;
+  color: rgba(6, 14, 48);
+  font-weight: 700;
+}
+.vaccin-table-container h2{
+  padding-left: 0;
 }
 
 .reflexes,
@@ -617,10 +636,14 @@ nav {
 .examen-entree h2,
 .partogramme h2 {
   margin-left: 34px;
+  font-size: 24px;
+  line-height: 28.8px;
+  color: rgba(6, 14, 48);
+  font-weight: 700;
 }
 
 .reflexes span {
-  margin-left: 70px;
+  margin-left: 110px;
 }
 
 .sexe,
@@ -685,6 +708,11 @@ nav {
 .mixte {
   align-items: center;
   gap: 20px;
+}
+
+.pheny,
+.hypoth {
+  margin-left: 60px;
 }
 
 .succion,
@@ -1026,7 +1054,7 @@ nav {
   display: flex;
 }
 
-.annexe-item{
+.annexe-item {
   margin-right: 70px;
 }
 
@@ -1348,7 +1376,7 @@ nav {
   gap: 23px;
 }
 
-.annexes{
+.annexes {
   align-items: center;
 }
 
@@ -1433,7 +1461,7 @@ nav {
   left: 82px;
 }
 
-.addpatient-add-cahier{
+.addpatient-add-cahier {
   margin-top: 50px;
 }
 
@@ -1543,7 +1571,7 @@ nav {
   display: flex;
   transition: all 2s ease;
   -webkit-transform: translateY(-10vh);
-          transform: translateY(-10vh);
+  transform: translateY(-10vh);
 }
 
 .add-vaccin-active,
@@ -1557,14 +1585,14 @@ nav {
 .add-vaccin-active .add-vaccin-button {
   width: 969px;
   -webkit-transform: translateX(55%);
-          transform: translateX(55%);
+  transform: translateX(55%);
   transition: all 2s ease;
 }
 
 .add-visite-active2 .add-visite-button {
   width: 969px;
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   transition: all 2s ease;
 }
 
@@ -1606,10 +1634,16 @@ nav {
   opacity: 0;
 }
 
+.vaccin-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .vaccin-table-container,
 .visite-table-container {
   width: 85%;
-  height: 453px;
+
   padding: 0 10px;
   box-shadow: 0 0 0px;
   display: flex;
@@ -1656,8 +1690,16 @@ nav {
   margin-top: 37px;
 }
 
-.vaccination-table select,
-.vaccination-table input,
+.add-tableau-vaccin1-container .form-table{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.add-tableau-vaccin1-container form select,
+.add-tableau-vaccin1-container form input,
 .my-visite-table input {
   width: 196px;
   height: 59px;
@@ -2177,7 +2219,7 @@ table td {
   }
 }
 
-::-webkit-scrollbar {
+body::-webkit-scrollbar {
   display: flex;
   width: 10px;
   display: none;
@@ -2209,7 +2251,7 @@ table td {
   top: -10px;
   right: 50%;
   -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  transform: translateY(-50%);
   z-index: 6;
   transition: 1.8s ease-in-out;
 }
@@ -2227,7 +2269,7 @@ table td {
   top: 50%;
   left: 75%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   width: 50%;
   display: grid;
   grid-template-columns: 1fr;
@@ -2494,8 +2536,8 @@ form.sign-in-form {
   color: rgba(6, 14, 48, 1);
 }
 
-.left-panel .content a,
-.right-panel .content a {
+.left-panel .content .logo,
+.right-panel .content .logo {
   font-weight: 700;
   font-size: 40px;
   letter-spacing: 3px;
@@ -2553,7 +2595,7 @@ form.sign-in-form {
 .right-panel .content,
 .right-panel .image-login {
   -webkit-transform: translateX(800px);
-          transform: translateX(800px);
+  transform: translateX(800px);
 }
 
 .sign-in-mode #demande-accee {
@@ -2566,20 +2608,20 @@ form.sign-in-form {
 
 .sign-in-mode::before {
   -webkit-transform: translateX(100%, -50%);
-          transform: translateX(100%, -50%);
+  transform: translateX(100%, -50%);
   right: -80%;
 }
 
 .sign-in-mode .left-panel .image-login,
 .sign-in-mode .left-panel .content {
   -webkit-transform: translateX(-800px);
-          transform: translateX(-800px);
+  transform: translateX(-800px);
 }
 
 .sign-in-mode .right-panel .image-login,
 .sign-in-mode .right-panel .content {
   -webkit-transform: translateX(0px);
-          transform: translateX(0px);
+  transform: translateX(0px);
 }
 
 .sign-in-mode .left-panel {
@@ -2608,12 +2650,11 @@ form.sign-in-form {
   z-index: 1;
 }
 
-
 /* dashboard style */
 
 .dashboard-container {
   width: calc(100% - 82px);
-  height: 200vh;
+  min-height: 200vh;
   position: absolute;
   background-color: #f8f9fd;
   left: 82px;
@@ -2683,46 +2724,41 @@ form.sign-in-form {
 .dashboard-charts-calnedar {
   width: 100%;
   display: flex;
-  /* justify-content: center; */
+  justify-content: space-between;
   margin-top: 40px;
   padding-left: 31px;
-  padding-right: 31px;
-  gap: 30px;
+  padding-right: 2.5%;
 }
 
-.dashboard-chart-container{
-  width: 900px;
+.dashboard-chart-container,
+.dashboard-sexe-chart-container {
+  width: 70%;
   padding-left: 10px;
   padding-right: 10px;
-  height: 611px;
+  height: 680px;
   border-radius: 8px;
   background-color: #fff;
+}
+
+.dashboard-sexe-chart-container {
+  width: 95%;
+  height: fit-content;
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .chart-dashboard1 {
   width: 880px;
-  height: 611px;
   border-radius: 8px;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-}
-
-.Calendrier {
-  width: 100%;
-  height: 100vh;
 }
 
 .dashboard-calendar-container {
   border-radius: 8px;
   padding: 10px;
   background-color: #fff;
-}
-
-.calendar-container {
-  padding-left: 100px;
-  padding-right: 10px;
-  height: calc(100vh - 90px);
+  height: 680px;
 }
 
 .chart-header {
@@ -2749,15 +2785,106 @@ form.sign-in-form {
   align-items: center;
 }
 
-.calendar-dashboard-header h2 {
+.calendar-dashboard-header h2,
+.upcomping h2 {
   font-size: 21px;
   font-weight: 500;
   line-height: 31px;
   color: #000;
 }
 
-.chart-line-container {
-  width: 800px;
+.dashboard-calendar-lh {
+  width: 100%;
+  background-color: rgba(210, 210, 210, 1);
+  height: 0.8px;
+  margin-top: 5px;
+}
+
+.dashboard-calendar-bottom {
+  margin-top: 16px;
+  padding-right: 16px;
+  padding-left: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upcomping {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 45px;
+}
+
+.upcomping a {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 25px;
+  color: #1a71ff;
+  text-transform: capitalize;
+  padding-top: 5px;
+}
+
+.upcomping a:hover {
+  text-decoration: underline;
+}
+
+.dashboard-calendar-doctor-meet {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: rgba(240, 249, 253, 1);
+  border-radius: 10px;
+  padding-left: 12px;
+  height: 63px;
+}
+
+.monthly-doctor {
+  width: 47px;
+  height: 47px;
+  background: linear-gradient(
+    66.15deg,
+    #57b4de -5.25%,
+    #58b6dd 35.43%,
+    #3b29ab 98.77%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.monthly-doctor span {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24.5px;
+  color: #fff;
+}
+
+.monthly-meet a {
+  font-weight: 500;
+  color: #23262f;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.monthly-meet h3 {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  margin-top: 4px;
+  cursor: pointer;
+  color: rgba(13, 13, 13, 0.6);
+}
+
+.monthly-meet h3:hover {
+  text-decoration: underline;
+}
+
+.chart-line-container,
+.sexe-chart-line-container {
+  width: 95%;
   height: 1px;
   background-color: rgba(79, 129, 255, 0.42);
 }
@@ -2792,7 +2919,8 @@ form.sign-in-form {
   color: rgba(146, 146, 157, 1);
 }
 
-.select-chart {
+.select-chart,
+.select-table-traitement {
   display: flex;
   align-items: center;
   gap: 34px;
@@ -2802,7 +2930,8 @@ form.sign-in-form {
   cursor: pointer;
 }
 
-.chart-header select {
+.chart-header select,
+.select-table-traitement select {
   width: 169px;
   height: 40px;
   border-radius: 8px;
@@ -2810,6 +2939,242 @@ form.sign-in-form {
   color: #4f81ff;
   background-color: transparent;
   cursor: pointer;
+}
+
+.select-table-traitement {
+  margin-left: 50px;
+}
+
+.dashboard-table-traitement {
+  width: 95%;
+  height: 611px;
+  margin-top: 28px;
+  background-color: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-table-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 80px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.dashboard-table-header h2 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: rgba(17, 20, 45, 1);
+}
+
+.dashboard-table-header-right {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.table-right-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 80px;
+  width: 100px;
+}
+
+.table-right-lv {
+  width: 1px;
+  height: 47px;
+  background-color: rgba(189, 189, 189, 1);
+}
+
+.table-right-item h3 {
+  font-weight: 500;
+  position: absolute;
+  top: 5px;
+  font-size: 24px;
+  color: rgba(6, 14, 48, 1);
+}
+.table-right-item span {
+  font-weight: 400;
+  position: absolute;
+  top: 40px;
+  font-size: 16px;
+  color: rgba(189, 189, 189, 1);
+}
+
+.dashboard-table-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.dashboard-table-lh {
+  width: 95%;
+  height: 1px;
+  background-color: rgba(79, 129, 255, 0.25);
+}
+
+.dashboard-table-container table {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.dashboard-table-container table tr {
+  display: flex;
+  align-items: center;
+}
+
+.dashboard-table-container table td {
+  border: none;
+  width: 20%;
+}
+
+.table-traitement-nom input {
+  width: 31px;
+  height: 29px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.title-table-traitement-nom,
+.title-table-traitement-date,
+.title-table-traitement-status,
+.title-table-traitement-progres,
+.title-table-traitement-cas {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21.6px;
+  color: rgba(189, 189, 189, 1);
+  height: 40px;
+  /* background-color: brown; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-traitement-nom,
+.table-traitement-date,
+.table-traitement-status,
+.table-traitement-progres,
+.table-traitement-cas {
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21.6px;
+  color: rgba(6, 14, 48, 1);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-traitement-date {
+  flex-direction: column;
+  font-size: 16px;
+  line-height: 19.2px;
+  color: rgba(6, 14, 48, 1);
+}
+
+.table-traitement-date span {
+  font-size: 12px;
+  line-height: 14.4px;
+  color: rgba(106, 110, 131, 1);
+}
+
+.table-status-item {
+  width: 107px;
+  height: 27px;
+  background-color: rgba(79, 129, 255, 0.15);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-status-item.termine {
+  background-color: #6cab7626;
+}
+
+.table-status-item.encours span,
+.table-status-item.termine span {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.2px;
+  color: rgba(79, 129, 255, 1);
+}
+
+.table-status-item.termine span {
+  color: #6cab76;
+}
+
+.table-traitement-progres {
+  display: flex;
+  gap: 5px;
+}
+
+.table-progres-item {
+  height: 24px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4f81ff80;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.table-progres-item span {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 9.6px;
+  color: #060e30;
+}
+
+.bleu {
+  background-color: #4f81ff80;
+}
+
+.bleu span {
+  color: #fff;
+}
+
+.yellow {
+  background-color: rgba(250, 255, 0, 0.5);
+}
+
+.green {
+  background-color: rgba(108, 171, 118, 0.15);
+}
+
+.green span {
+  color: rgba(108, 171, 118, 1);
+}
+
+.gray {
+  background-color: rgba(225, 225, 225, 1);
+}
+
+.gray span {
+  color: rgba(174, 174, 174, 1);
+}
+
+.title-table-traitement-status,
+.table-traitement-status {
+  justify-content: start;
+  padding-left: 40px;
+}
+
+.title-table-traitement-status {
+  padding-left: 65px;
 }
 
 /* patient details style */
@@ -2840,7 +3205,7 @@ form.sign-in-form {
 
 .icon-button:hover {
   -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
   transition: all 1s ease;
 }
 
@@ -3072,7 +3437,7 @@ form.sign-in-form {
 .voir-reducation:hover {
   transition: all 1s ease;
   -webkit-transform: scale(1.1);
-          transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .reducation-doctor-name:hover {
@@ -3388,7 +3753,8 @@ form.sign-in-form {
   gap: 14px;
 }
 
-.doctor-profile-changer-btn button {
+.doctor-profile-changer-btn button,
+.doctor-profile-changer-btn .changer-image-btn {
   width: 141px;
   height: 39px;
   border-radius: 10px;
@@ -3398,8 +3764,19 @@ form.sign-in-form {
   color: #fff;
 }
 
-.doctor-profile-changer-btn button:first-child {
+.doctor-profile-changer-btn .changer-image-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.doctor-profile-changer-btn .changer-image-btn {
   background-color: rgba(79, 129, 255, 1);
+}
+
+.input-file {
+  display: none;
 }
 
 .doctor-profile-changer-btn button:last-child {
@@ -3408,8 +3785,8 @@ form.sign-in-form {
 }
 
 .doctor-profile-changer-btn button:hover,
-.doctor-profile-changer-btn button:hover,
-.doctor-profile-enregistrer-button:hover {
+.doctor-profile-enregistrer-button:hover,
+.doctor-profile-changer-btn .changer-image-btn:hover {
   background-color: rgba(6, 14, 48, 1);
   transition: all 1s ease;
   color: #fff;
@@ -3566,6 +3943,30 @@ form.sign-in-form {
 
 /* add table vaccination + */
 
+.action-table{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  width: 100%;
+  height: 100%;
+}
+
+.action-table button{
+  width: 80%;
+  height: 40px;
+  border-radius: 10px;
+  border: 1px solid #4F81FF;
+}
+
+.action-table button:hover{
+  background-color: #4F81FF;
+  border-radius: 5px;
+  color: white;
+  transition: all 1s ease;
+}
+
 .AddPatient {
   position: relative;
 }
@@ -3578,22 +3979,26 @@ form.sign-in-form {
   align-items: center;
   position: absolute;
   display: none;
-  padding-right: 65px;
 }
 
 .add-tableau-vaccin1 {
-  top: 447vh;
+  /* top: 215vh; */
+  justify-content: center;
+  bottom: 20%;
 }
 
-.add-tableau-vaccin2{
+.vaccination-table{
+  width: 100%;
+}
+
+.add-tableau-vaccin2 {
   top: 593vh;
 }
 
 .add-tableau-vaccin1-container,
-.add-tableau-vaccin2-container{
+.add-tableau-vaccin2-container {
   background-color: #f5f5f5;
   width: 90%;
-  height: 400px;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -3622,10 +4027,9 @@ form.sign-in-form {
 }
 
 .add-tableau-vaccin-ajouter-btn {
-  width: 100%;
+  width: 110%;
   display: flex;
   justify-content: end;
-  padding-right: 26px;
   margin-top: 10px;
 }
 
@@ -3655,5 +4059,39 @@ form.sign-in-form {
   font-size: 28px;
   cursor: pointer;
   opacity: 0.8;
+}
+
+/*calendier style */
+.Calendrier{
+  position: relative;
+}
+
+.Calendrier .calendar-container{
+  position: absolute;
+  top: 90px;
+  left: 80px;
+  width: calc(100% - 80px);
+  background-color: #fff;
+}
+
+
+.dashboard-table-container::-webkit-scrollbar,
+.patient-details-examen::-webkit-scrollbar {
+  background-color: rgba(79, 129, 255, 0.25);
+  border-radius: 2px;
+  width: 5px;
+}
+
+.dashboard-table-container::-webkit-scrollbar-thumb,
+.patient-details-examen::-webkit-slider-thumb {
+  background-color: rgba(79, 129, 255, 1);
+  width: 5px;
+  border-radius: 2px;
+}
+
+.about-patient::-webkit-scrollbar,
+.patient-details-reducation::-webkit-scrollbar,
+.patient-details-center::-webkit-scrollbar {
+  width: 0;
 }
 

@@ -47,22 +47,29 @@ const data = {
   labels,
   datasets: [
     {
-      label: "Numbre des nouveau-ne",
+      label: "Male",
       data: [10, 15, 28, 12, 38, 34, 8],
       backgroundColor: "rgb(79, 129, 255, 0.69)",
       hoverBackgroundColor: "rgb(79, 129, 255, 0.8)",
-
+      barThickness: 16,
+      borderRadius: 4,
+    },
+    {
+      label: "Female",
+      data: [20, 24, 8, 10, 15, 28, 12],
+      backgroundColor: "rgba(255, 0, 0, 0.69)",
+      hoverBackgroundColor: "rgba(255, 0, 0, 0.8)",
       barThickness: 16,
       borderRadius: 4,
     },
   ],
 };
 
-export default function MyChart() {
+export default function SexeChart() {
   return (
-    <div className="dashboard-chart-container">
+    <div className="dashboard-sexe-chart-container">
       <div className="chart-header">
-        <a href="#">New-born</a>
+        <a href="#">Sexe</a>
         <div className="select-chart">
           <select
             className="nouveau-ne-chart"
@@ -82,11 +89,11 @@ export default function MyChart() {
         </div>
       </div>
       <div className="chart-line">
-        <div className="chart-line-container"></div>
+        <div className="sexe-chart-line-container"></div>
       </div>
       <div className="chart-nombre-nouveau-ne">
         <h2>
-          120 <span>/week</span>
+          200 <span>/week</span>
         </h2>
         <span className="title-chart">Number of newborns</span>
       </div>

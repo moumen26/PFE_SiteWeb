@@ -21,10 +21,14 @@ export default function DoctorProfile() {
           <div className="doctor-profile-photo-changer-btn">
             <div className="doctor-profile-photo"></div>
             <div className="doctor-profile-changer-btn">
-              <button className="changer-image-btn">
-                {/* <input type="" value="Changer" /> */}
-                Changer la photo
-              </button>
+              <label for="file" class="changer-image-btn">
+                Choisir la photo
+              </label>
+              <input
+                id="file"
+                class="input-file"
+                type="file"
+              ></input>
               <button>Supprimer</button>
             </div>
           </div>
