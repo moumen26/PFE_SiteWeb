@@ -4,11 +4,11 @@ const jwt = require('jsonwebtoken');
 
 
 //post a patient part 1
-const CreateNewUser_part1 = async (req, res) => {
-    const { Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+const CreateNewPatient_part1 = async (req, res) => {
+    const { Date_daccouchement,Heure_daccouchement,Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
         ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales} = req.body;
     try{
-        const patient = await Patient.AddPart_1(Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+        const patient = await Patient.AddPart_1(Date_daccouchement,Heure_daccouchement,Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
             ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales);
         
         res.status(200).json(patient);
@@ -78,7 +78,7 @@ const UpdatePatient = async (req, res) => {
 }
 
 module.exports = {
-    CreateNewUser_part1,
+    CreateNewPatient_part1,
     GetAllPatient,
     GetPatient,
     DeletePatient,

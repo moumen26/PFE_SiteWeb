@@ -3,13 +3,23 @@ import "swiper/css";
 
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
-import { useState } from "react";
+import { useState ,ChangeEvent} from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
 import ObstetricauxTable from "./ObstetricauxTable";
 import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
 
 export default function MySwiper() {
+  const current = new Date();
+  const date = `${current.getDate()}-${current.getMonth()+1}-${current.getFullYear()}`;
+  const time = current.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  const [Date_daccouchement, setDate_daccouchement] = useState(date);
+  const [Heure_daccouchement, setHeure_daccouchement] = useState(time);
   const [Accoucheur, setAccoucheur] = useState();
   const [Poids, setPoids] = useState('');
   const [Aspect, setAspect] = useState('');
@@ -30,9 +40,11 @@ export default function MySwiper() {
 
   async function submitPart_1(e) {
     e.preventDefault();
-    await AddPatientPart_1(Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+    await AddPatientPart_1(Date_daccouchement, Heure_daccouchement, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
       ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales);
   }
+  
+  
   return (
     <Swiper
       className="swiper-formulaire"
@@ -57,13 +69,13 @@ export default function MySwiper() {
                   <div className="span-item span-long1">
                     <span>Date d’accouchement :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" name="Date_daccouchement" defaultValue={date} readOnly />
                 </div>
                 <div className="heure-acc">
                   <div className="span-item">
                     <span>Heure :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" name="Heure_daccouchement" defaultValue={time} readOnly  />
                 </div>
               </div>
               <div className="accoucheur">
@@ -172,11 +184,11 @@ export default function MySwiper() {
                 <div className="span-item">
                   <span>Remarque :</span>
                 </div>
-                <input type="text" value={Remarque} name="Remarque" onChange={(e) => {setRemarque(e.target.value)}}/>
+                <input type="text" name="Remarque" value={Remarque} onChange={(e) => {setRemarque(e.target.value)}} />
               </div>
               <div className="re-annexe-textarea">
                 <div className="textarea">
-                  <textarea name="rem-annexe" id="rem-annexe" ></textarea>
+                  <textarea name="rem-annexe" id="rem-annexe"  ></textarea>
                 </div>
               </div>
               <div className="empre-digi">

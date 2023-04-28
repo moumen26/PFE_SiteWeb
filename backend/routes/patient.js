@@ -1,7 +1,7 @@
 const express = require('express');
 //const requireAuth = require('../middleware/requireAuth');
 const {
-    CreateNewUser_part1,
+    CreateNewPatient_part1,
     CreateNewPatient,
     GetAllPatient,
     GetPatient,
@@ -20,7 +20,7 @@ router.get('/', GetAllPatient);
 router.get('/:id', GetPatient);
 
 //post a patient part 1
-router.post('/',CreateNewUser_part1);
+router.post('/',CreateNewPatient_part1);
 
 //delete a patient
 router.delete('/:id', DeletePatient);

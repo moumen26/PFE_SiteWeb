@@ -3,7 +3,7 @@ import { useState } from "react";
 export const useAddPatientPart_1 = () => {
     const [error, setError] = useState(null);
 
-    const AddPatientPart_1 = async (Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+    const AddPatientPart_1 = async (Date_daccouchement, Heure_daccouchement,Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
         ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales) => {
         
         try{
@@ -12,7 +12,7 @@ export const useAddPatientPart_1 = () => {
                 method: "POST",
                 headers: {'content-type': 'application/json',
                 'Accept': 'application/json'},
-                body: JSON.stringify({Accoucheur: Accoucheur, Poids: Poids, Aspect: Aspect, Anomalies: Anomalies, Placenta: Placenta, Membranes: Membranes, Cordon: Cordon
+                body: JSON.stringify({Date_daccouchement: Date_daccouchement,Heure_daccouchement: Heure_daccouchement,Accoucheur: Accoucheur, Poids: Poids, Aspect: Aspect, Anomalies: Anomalies, Placenta: Placenta, Membranes: Membranes, Cordon: Cordon
                     ,Sexe: Sexe, Taille: Taille, Pc: Pc, Malformation: Malformation, Remarque: Remarque, Empreintes_digitales: Empreintes_digitales})
             });
     

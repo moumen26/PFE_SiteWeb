@@ -3,6 +3,14 @@ const validator = require('validator');
 
 const PatientSchemaPart1 = new mongoose.Schema({
     Protocole_daccouchement:{
+        Date_daccouchement:{
+            type: String,
+            required: false,
+        },
+        Heure_daccouchement:{
+            type: String,
+            required: false,
+        },
         Accoucheur:{
             type: String,
             required: true,
@@ -74,14 +82,22 @@ const PatientSchemaPart1 = new mongoose.Schema({
             }
         }
     },
-});
+},{timestamps: true});
+PatientSchemaPart1.statics.CreateNullProfil = async function(){
+    try{
+        const patient = await this.create();
+        return patient;
+    }catch(err){
+        throw Error("error while creating patient");
+    }
+}
 
 // static method to add new patient
-PatientSchemaPart1.statics.AddPart_1 = async function(Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+PatientSchemaPart1.statics.AddPart_1 = async function(Date_daccouchement, Heure_daccouchement, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
     ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales){
     
     // validation
-    if(!Accoucheur || !Poids || !Aspect || !Anomalies || !Placenta || !Membranes || !Cordon
+    if(!Date_daccouchement || !Heure_daccouchement || !Accoucheur || !Poids || !Aspect || !Anomalies || !Placenta || !Membranes || !Cordon
         || !Sexe || !Taille || !Pc || !Malformation || !Remarque || !Empreintes_digitales){
         throw Error('All fields mast be filled');
     }
@@ -105,6 +121,8 @@ PatientSchemaPart1.statics.AddPart_1 = async function(Accoucheur, Poids, Aspect,
     try{
         const data = {
             Protocole_daccouchement:{
+                Date_daccouchement: Date_daccouchement,
+                Heure_daccouchement: Heure_daccouchement,
                 Accoucheur: Accoucheur,
                 Examen_des_annexes:{
                     Poids: Poids,
