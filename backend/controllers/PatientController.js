@@ -30,11 +30,10 @@ const CreateNewPatient = async (req, res) => {
     
         // Save the patient to the database
         newPatient.save()
-            .then((savedPatient) => {
+            .then(async (savedPatient) => {
             // Access the saved patient's _id
             const savedPatientId = savedPatient._id;
-            console.log('Patient created with ID:', savedPatientId);
-            res.status(201).json({ id: savedPatientId });
+            await res.status(201).json({id: savedPatientId});
             })
             .catch((error) => {
             console.error('Error saving patient:', error);
@@ -50,19 +49,23 @@ const CreateNewPatient = async (req, res) => {
 // Define a route for fetching a patient by ID
 const GetPatient = async (req, res) => {
     const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: 'Specified id is not valid' });
+    }
     // Find the patient by ID in the database
-    Patient.findById(id)
+    await Patient.findById(id)
         .then((patient) => {
             if (!patient) {
                 return res.status(404).json({ message: 'Patient not found' });
             }
-
             res.status(200).json(patient);
         })
         .catch((error) => {
             console.error('Error retrieving patient:', error);
             res.status(500).json({ message: 'Error retrieving patient' });
         });
+
+    
 
 }
 //get all Patients

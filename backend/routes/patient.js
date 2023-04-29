@@ -16,11 +16,11 @@ const router = express.Router();
 //get all patients
 router.get('/', GetAllPatient);
 
-//get a specific patient
-router.get('/:id', GetPatient);
-
 //post a patient 
 router.post('/',CreateNewPatient);
+
+//get a specific patient
+router.get('/:id', GetPatient);
 
 //post a patient part 1
 //router.post('/',CreateNewPatient_part1);

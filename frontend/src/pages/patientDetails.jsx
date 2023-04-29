@@ -28,7 +28,6 @@ export default function PatientDetails() {
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
 
-  const [currentArticleId, setCurrentArticleId] = useState(null);
   const history = useNavigate ();
 
   const handleAddArticle = async () => {
@@ -42,9 +41,12 @@ export default function PatientDetails() {
       });
 
       const data = await response.json();
-      const newPatientId = data.id; // Assuming the response contains the newly created patient's _id
-      // Redirect to the AddPatients interface with the new patient's ID
-      history(`/patients/${newPatientId}`); // Assuming you are using React Router and 'history' is accessible
+      if (!response.ok) {
+        window.alert("Add patient failed",data.error);
+      }
+      if (response.ok) {
+        history(`/patients/${await data.id}`); // Assuming you are using React Router and 'history' is accessible
+      } 
     } catch (error) {
       console.error('Error adding article:', error);
     }

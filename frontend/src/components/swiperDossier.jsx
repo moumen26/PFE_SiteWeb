@@ -10,6 +10,7 @@ import ObstetricauxTable from "./ObstetricauxTable";
 import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate  } from 'react-router-dom';
 
 export default function MySwiper() {
   const current = new Date();
@@ -42,10 +43,11 @@ export default function MySwiper() {
   const  {id}  = useParams();
   const [PatientData, setPatientData] = useState(null);
   
+  const history = useNavigate ('/patients');
 
   useEffect(() => {
     const fetchPatientData = async () => {
-      try {
+      if(id !== undefined){
         await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
           if (response.ok) {
             response.json().then((data) => {
@@ -54,16 +56,16 @@ export default function MySwiper() {
               console.error('Error fetching article data:', error);
             });
           } else {
-            throw new Error("Something went wrong ...");
+            console.error('Error fetching article data:', response.status);
           }
         });
-      } catch (error) {
-        console.error('Error fetching article data:', error);
+      }else{
+        history()
       }
     };
 
     fetchPatientData();
-  }, [id]);
+  }, [history, id]);
   const [errorPart_1, setErrorPart_1] = useState(null);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,17 +74,17 @@ export default function MySwiper() {
     const dateac = PatientData?.Date_daccouchement;
     const timeac = PatientData?.Heure_daccouchement;
     try {
+
       const response = await axios.patch(`http://localhost:8000/patients/${id}`, { 
         dateac, timeac, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
         ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
       });
       // Handle response as needed
-      const json = await response.json();
-      if (!response.ok) {
-          window.alert("Add patient failed",json.errorPart_1);
-          setErrorPart_1(json.errorPart_1);
-      }else if (response.ok) {
-          window.alert("Add patient success", json.message);
+      if (!response.status === 200) {
+          window.alert("Add patient failed", response.data.message);
+          setErrorPart_1(errorPart_1);
+      }else if (response.status === 200) {
+          window.alert("Add patient success", response.data.message);
       } 
     } catch (error) {
       console.log(error);
