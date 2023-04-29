@@ -18,6 +18,19 @@ const CreateNewPatient_part1 = async (req, res) => {
     }
 }
 
+//post a null patient
+const CreateNewPatient = async (req, res) => {
+    const Date_daccouchement = req.body.Date_daccouchement;
+    const Heure_daccouchement = req.body.Heure_daccouchement;
+    try{
+        const patient = await Patient.AddNewPatient(Date_daccouchement,Heure_daccouchement);
+        res.status(200).json("Patient added successfully with id = "+ patient._id);     
+        res.status(200).json(patient._id);
+    }catch(err){
+        res.status(400).json({err: err.message});
+    }
+}
+
 //get all Patients
 const GetAllPatient = async (req, res) => {
     const patients = await Patient.find({}).sort({createdAt: -1});
@@ -79,6 +92,7 @@ const UpdatePatient = async (req, res) => {
 
 module.exports = {
     CreateNewPatient_part1,
+    CreateNewPatient,
     GetAllPatient,
     GetPatient,
     DeletePatient,

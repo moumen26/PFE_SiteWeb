@@ -13,7 +13,7 @@ const PatientSchemaPart1 = new mongoose.Schema({
         },
         Accoucheur:{
             type: String,
-            required: true,
+            required: false,
         },
         Examen_des_annexes:{
             Poids: {
@@ -83,12 +83,28 @@ const PatientSchemaPart1 = new mongoose.Schema({
         }
     },
 },{timestamps: true});
-PatientSchemaPart1.statics.CreateNullProfil = async function(){
+PatientSchemaPart1.statics.AddNewPatient = async function(Date_daccouchement,Heure_daccouchement){
+    // validation
+    if(!Date_daccouchement ||!Heure_daccouchement){
+        throw Error('All fields mast be filled');
+    }
+    if(!validator.isNumeric(Date_daccouchement) ||!validator.isNumeric(Heure_daccouchement)){
+        throw Error('must be a number');
+    }
     try{
-        const patient = await this.create();
+        const data = {
+            Protocole_daccouchement:{
+                Date_daccouchement: Date_daccouchement,
+                Heure_daccouchement: Heure_daccouchement,
+            }
+        }
+        const patient = await this.create([data]);
+
         return patient;
+        
     }catch(err){
-        throw Error("error while creating patient");
+        console.log(err);
+        throw Error(err.message);
     }
 }
 

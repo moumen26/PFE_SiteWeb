@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 export const useAddPatientPart_1 = () => {
-    const [error, setError] = useState(null);
+    
+    const [errorPart_1, setErrorPart_1] = useState(null);
 
     const AddPatientPart_1 = async (Date_daccouchement, Heure_daccouchement,Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
         ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales) => {
@@ -19,19 +20,19 @@ export const useAddPatientPart_1 = () => {
             const json = await reponse.json();
             
             if (!reponse.ok) {
-                window.alert("Add patient failed",json.error.error);
-                setError(json.error);
+                window.alert("Add patient failed",json.errorPart_1);
+                setErrorPart_1(json.errorPart_1);
             }
             if (reponse.ok) {
                 window.alert("Add patient success", json.message);
             } 
-        }catch(error){
-            window.alert(error)
+        }catch(err){
+            window.alert(err)
         }
         
 
         
     };
-    return {AddPatientPart_1, error};
+    return { AddPatientPart_1,  errorPart_1};
     
 }

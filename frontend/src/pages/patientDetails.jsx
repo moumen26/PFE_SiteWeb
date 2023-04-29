@@ -11,12 +11,28 @@ import { useState } from "react";
 import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
+import { useAddPatient } from "../hooks/useAddPatient";
 
 export default function PatientDetails() {
+
+  const current = new Date();
+  const date = `${current.getDate()}-${current.getMonth()+1}-${current.getFullYear()}`;
+  const time = current.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
 
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
 
+  const { AddPatient, error } = useAddPatient();
+
+  async function submitNewPatient(e) {
+    e.preventDefault();
+    await AddPatient(date, time);
+  }
   
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
@@ -58,7 +74,11 @@ export default function PatientDetails() {
               <input id="search" class="input-search" type="search"></input>
             </div>
             <div className="ajoute-nouveau-ne-item">
-              <a href="/addpatients">Ajouter un nouveau-ne</a>
+              <a href="">
+                <form action="/addpatients/" onSubmit={submitNewPatient}>
+                  <input type="submit" value="Ajouter un nouveau-ne" />
+                </form>
+              </a>
             </div>
           </div>
           <div className="table-patients">
