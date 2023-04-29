@@ -2,7 +2,6 @@ import { FaUserMd } from "react-icons/fa";
 import { BsBell } from "react-icons/bs";
 import { useAuthContext } from "../hooks/useAuthContext";
 
-
 export default function MyNavBar({ act, setAct }) {
   const classToggle = () => {
     setAct(!act);
@@ -18,7 +17,7 @@ export default function MyNavBar({ act, setAct }) {
         </div>
         <div className="image"></div>
         <a href="#">
-        <div className="logo flex items-center justify-items-center">
+          <div className="logo flex items-center justify-items-center">
             H
             <FaUserMd size="24px" fill="#3889c1" className="pb-1" />
             SPITALI
@@ -26,16 +25,12 @@ export default function MyNavBar({ act, setAct }) {
         </a>
       </div>
       <div className="right-nav">
-        <BsBell size="24px" cursor="pointer"/>
+        <BsBell size="24px" cursor="pointer" />
         <div className="doctor">
           <div className="doctor-pic"></div>
           <div className="doctor-name">
-            {user && (
-              <a className="medcine-name">Dr. {user.Fname}</a>
-            )}
-            {user && (
-              <span>{user.speciality}</span>
-            )}
+            {user && <a className="medcine-name">Dr. {user.Fname}</a>}
+            {user && <span>{user.speciality}</span>}
           </div>
         </div>
       </div>

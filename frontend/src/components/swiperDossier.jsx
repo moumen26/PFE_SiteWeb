@@ -69,13 +69,23 @@ export default function MySwiper() {
                   <div className="span-item span-long1">
                     <span>Date d’accouchement :</span>
                   </div>
-                  <input type="text" name="Date_daccouchement" defaultValue={date} readOnly />
+                  <input
+                    type="text"
+                    name="Date_daccouchement"
+                    defaultValue={date}
+                    readOnly
+                  />
                 </div>
                 <div className="heure-acc">
                   <div className="span-item">
                     <span>Heure :</span>
                   </div>
-                  <input type="text" name="Heure_daccouchement" defaultValue={time} readOnly  />
+                  <input
+                    type="text"
+                    name="Heure_daccouchement"
+                    defaultValue={time}
+                    readOnly
+                  />
                 </div>
               </div>
               <div className="accoucheur">
@@ -83,7 +93,14 @@ export default function MySwiper() {
                   <span>Accoucheur :</span>
                 </div>
                 <div className="textarea">
-                  <textarea name="accoucheur" id="accoucheur" value={Accoucheur} onChange={(e) => {setAccoucheur(e.target.value)}}></textarea>
+                  <textarea
+                    name="accoucheur"
+                    id="accoucheur"
+                    value={Accoucheur}
+                    onChange={(e) => {
+                      setAccoucheur(e.target.value);
+                    }}
+                  ></textarea>
                 </div>
               </div>
             </div>
@@ -95,19 +112,40 @@ export default function MySwiper() {
                     <div className="span-item">
                       <span>Poids :</span>
                     </div>
-                    <input type="text"  value={Poids} name="Poids" onChange={(e) => {setPoids(e.target.value)}}/>
+                    <input
+                      type="text"
+                      value={Poids}
+                      name="Poids"
+                      onChange={(e) => {
+                        setPoids(e.target.value);
+                      }}
+                    />
                   </div>
                   <div className="annexe-item">
                     <div className="span-item">
                       <span>Aspect :</span>
                     </div>
-                    <input type="text" value={Aspect} name="Aspect" onChange={(e) => {setAspect(e.target.value)}}/>
+                    <input
+                      type="text"
+                      value={Aspect}
+                      name="Aspect"
+                      onChange={(e) => {
+                        setAspect(e.target.value);
+                      }}
+                    />
                   </div>
                   <div className="annexe-item">
                     <div className="span-item">
                       <span>Anomalies :</span>
                     </div>
-                    <input type="text" value={Anomalies} name="Anomalies" onChange={(e) => {setAnomalies(e.target.value)}}/>
+                    <input
+                      type="text"
+                      value={Anomalies}
+                      name="Anomalies"
+                      onChange={(e) => {
+                        setAnomalies(e.target.value);
+                      }}
+                    />
                   </div>
                 </div>
                 <div className="annexe annexe-two">
@@ -115,19 +153,40 @@ export default function MySwiper() {
                     <div className="span-item">
                       <span>Placenta :</span>
                     </div>
-                    <input type="text" value={Placenta} name="Placenta" onChange={(e) => {setPlacenta(e.target.value)}}/>
+                    <input
+                      type="text"
+                      value={Placenta}
+                      name="Placenta"
+                      onChange={(e) => {
+                        setPlacenta(e.target.value);
+                      }}
+                    />
                   </div>
                   <div className="annexe-item">
                     <div className="span-item">
                       <span>Membranes :</span>
                     </div>
-                    <input type="text" value={Membranes} name="Membranes" onChange={(e) => {setMembranes(e.target.value)}}/>
+                    <input
+                      type="text"
+                      value={Membranes}
+                      name="Membranes"
+                      onChange={(e) => {
+                        setMembranes(e.target.value);
+                      }}
+                    />
                   </div>
                   <div className="annexe-item">
                     <div className="span-item">
                       <span>Cordon :</span>
                     </div>
-                    <input type="text" value={Cordon} name="Cordon" onChange={(e) => {setCordon(e.target.value)}}/>
+                    <input
+                      type="text"
+                      value={Cordon}
+                      name="Cordon"
+                      onChange={(e) => {
+                        setCordon(e.target.value);
+                      }}
+                    />
                   </div>
                 </div>
               </div>
@@ -139,7 +198,15 @@ export default function MySwiper() {
                   <div className="span-item petit-span">
                     <span>Sexe :</span>
                   </div>
-                  <input type="date-annexe" name="Sexe" id="date-annexe" value={Sexe} onChange={(e) => {setSexe(e.target.value)}} />
+                  <input
+                    type="date-annexe"
+                    name="Sexe"
+                    id="date-annexe"
+                    value={Sexe}
+                    onChange={(e) => {
+                      setSexe(e.target.value);
+                    }}
+                  />
                 </div>
                 <div className="poids-annexe">
                   <div className="span-item petit-span">
@@ -152,13 +219,27 @@ export default function MySwiper() {
                     <span>Taille :</span>
                   </div>
 
-                  <input type="text" value={Taille} name="Taille" onChange={(e) => {setTaille(e.target.value)}} />
+                  <input
+                    type="text"
+                    value={Taille}
+                    name="Taille"
+                    onChange={(e) => {
+                      setTaille(e.target.value);
+                    }}
+                  />
                 </div>
                 <div className="pc-annexe">
                   <div className="span-item petit-span">
                     <span>PC :</span>
                   </div>
-                  <input type="text" value={Pc} name="Pc" onChange={(e) => {setPc(e.target.value)}}/>
+                  <input
+                    type="text"
+                    value={Pc}
+                    name="Pc"
+                    onChange={(e) => {
+                      setPc(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
               <div className="score-dapgar">
@@ -167,28 +248,54 @@ export default function MySwiper() {
                 </div>
                 <div className="minute-1">
                   <span>1 minute</span>
-                  <input type="checkbox" name="une_min" onChange={(e) => {setUne_min(e.target.value)}}/>
+                  <input
+                    type="checkbox"
+                    name="une_min"
+                    onChange={(e) => {
+                      setUne_min(e.target.value);
+                    }}
+                  />
                 </div>
                 <div className="minute-5">
                   <span>5 minute</span>
-                  <input type="checkbox" name="cinq_min" onChange={(e) => {setCinq_min(e.target.value)}}/>
+                  <input
+                    type="checkbox"
+                    name="cinq_min"
+                    onChange={(e) => {
+                      setCinq_min(e.target.value);
+                    }}
+                  />
                 </div>
               </div>
               <div className="malforamtion-annexe">
                 <div className="span-item">
                   <span>Malformation :</span>
                 </div>
-                <input type="text" value={Malformation} name="Malformation" onChange={(e) => {setMalformation(e.target.value)}}/>
+                <input
+                  type="text"
+                  value={Malformation}
+                  name="Malformation"
+                  onChange={(e) => {
+                    setMalformation(e.target.value);
+                  }}
+                />
               </div>
               <div className="remarque-annexe">
                 <div className="span-item">
                   <span>Remarque :</span>
                 </div>
-                <input type="text" name="Remarque" value={Remarque} onChange={(e) => {setRemarque(e.target.value)}} />
+                <input
+                  type="text"
+                  name="Remarque"
+                  value={Remarque}
+                  onChange={(e) => {
+                    setRemarque(e.target.value);
+                  }}
+                />
               </div>
               <div className="re-annexe-textarea">
                 <div className="textarea">
-                  <textarea name="rem-annexe" id="rem-annexe"  ></textarea>
+                  <textarea name="rem-annexe" id="rem-annexe"></textarea>
                 </div>
               </div>
               <div className="empre-digi">
@@ -196,18 +303,25 @@ export default function MySwiper() {
                   <span>Empreintes digitales :</span>
                 </div>
                 <div className="textarea">
-                  <textarea name="empre-digi" id="empre-digi" value={Empreintes_digitales} onChange={(e) => {setEmpreintes_digitales(e.target.value)}}></textarea>
+                  <textarea
+                    name="empre-digi"
+                    id="empre-digi"
+                    value={Empreintes_digitales}
+                    onChange={(e) => {
+                      setEmpreintes_digitales(e.target.value);
+                    }}
+                  ></textarea>
                 </div>
               </div>
             </div>
             <div className="next-first">
-              <SwiperButtonNext >
-                Suivant <BsChevronRight />
+              <SwiperButtonNext>
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
               </SwiperButtonNext>
             </div>
           </form>
-          
-          
         </div>
       </SwiperSlide>
       <SwiperSlide className="Swipe">
@@ -318,12 +432,16 @@ export default function MySwiper() {
           <div className="back-next-buttons back-next-dossier">
             <div className="back">
               <SwiperButtonBack>
-                <BsChevronLeft /> Back
+                <div className="flex items-center justify-items-center gap-2">
+                  <BsChevronLeft /> Back
+                </div>
               </SwiperButtonBack>
             </div>
             <div className="next">
               <SwiperButtonNext>
-                Suivant <BsChevronRight />
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
               </SwiperButtonNext>
             </div>
           </div>
@@ -478,12 +596,16 @@ export default function MySwiper() {
           <div className="back-next-buttons back-next-dossier">
             <div className="back">
               <SwiperButtonBack>
-                <BsChevronLeft /> Back
+                <div className="flex items-center justify-items-center gap-2">
+                  <BsChevronLeft /> Back
+                </div>
               </SwiperButtonBack>
             </div>
             <div className="next">
               <SwiperButtonNext>
-                Suivant <BsChevronRight />
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
               </SwiperButtonNext>
             </div>
           </div>
@@ -526,12 +648,16 @@ export default function MySwiper() {
           <div className="back-next-buttons back-next-dossier">
             <div className="back">
               <SwiperButtonBack>
-                <BsChevronLeft /> Back
+                <div className="flex items-center justify-items-center gap-2">
+                  <BsChevronLeft /> Back
+                </div>
               </SwiperButtonBack>
             </div>
             <div className="next">
               <SwiperButtonNext>
-                Suivant <BsChevronRight />
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
               </SwiperButtonNext>
             </div>
           </div>
@@ -665,12 +791,16 @@ export default function MySwiper() {
           <div className="back-next-buttons back-next-dossier">
             <div className="back">
               <SwiperButtonBack>
-                <BsChevronLeft /> Back
+                <div className="flex items-center justify-items-center gap-2">
+                  <BsChevronLeft /> Back
+                </div>
               </SwiperButtonBack>
             </div>
             <div className="next">
               <SwiperButtonNext>
-                Suivant <BsChevronRight />
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
               </SwiperButtonNext>
             </div>
           </div>
