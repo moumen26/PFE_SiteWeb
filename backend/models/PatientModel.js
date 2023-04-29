@@ -2,86 +2,74 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const PatientSchemaPart1 = new mongoose.Schema({
-    Protocole_daccouchement:{
-        Date_daccouchement:{
-            type: String,
-            required: false,
-        },
-        Heure_daccouchement:{
-            type: String,
-            required: false,
-        },
-        Accoucheur:{
-            type: String,
-            required: false,
-        },
-        Examen_des_annexes:{
-            Poids: {
-               type: String,
-                required: false, 
-            },
-            Aspect: {
-                type: String,
-                required: false,
-            },
-            Anomalies: {
-                type: String,
-                required: false,
-            },
-            Placenta: {
-                type: String,
-                required: false,
-            },
-            Membranes: {
-                type: String,
-                required: false,
-            },
-            Cordon: {
-                type: String,
-                required: false,
-            }
-        },
-        Examen_du_nouveaune: {
-            Sexe : {
-                type: String,
-                required: false,
-            },
-            Poids: {
-                type: String,
-                required: false,
-            },
-            Taille: {
-                type: String,
-                required: false,
-            },
-            Pc: {
-                type: String,
-                required: false,
-            },
-            Score_apgar: {
-                une_min: {
-                    type: Boolean,
-                    required: false,
-                },
-                cinq_min: {
-                    type: Boolean,
-                    required: false,
-                }
-            },
-            Malformation: {
-                type: String,
-                required: false,
-            },
-            Remarque : {
-                type: String,
-                required: false,
-            },
-            Empreintes_digitales: {
-                type: String,
-                required: false,
-            }
-        }
+    Date_daccouchement:{
+        type: String,
+        required: false,
     },
+    Heure_daccouchement:{
+        type: String,
+        required: false,
+    },
+    Accoucheur:{
+        type: String,
+        required: false,
+    },
+    Poids: {
+        type: String,
+        required: false, 
+    },
+    Aspect: {
+        type: String,
+        required: false,
+    },
+    Anomalies: {
+        type: String,
+        required: false,
+    },
+    Placenta: {
+        type: String,
+        required: false,
+    },
+    Membranes: {
+        type: String,
+        required: false,
+    },
+    Cordon: {
+        type: String,
+        required: false,
+    },
+    Sexe : {
+        type: String,
+        required: false,
+    },
+    Taille: {
+        type: String,
+        required: false,
+    },
+    Pc: {
+        type: String,
+        required: false,
+    },
+    une_min: {
+        type: Boolean,
+        required: false,
+    },
+    cinq_min: {
+        type: Boolean,
+        required: false,
+    },
+    Malformation: {
+        type: String,
+        required: false,
+    },
+    Remarque : {
+        type: String,
+        required: false,
+    },
+    Empreintes_digitales: {
+        type: String,
+        required: false,
+    }
 },{timestamps: true});
 PatientSchemaPart1.statics.AddNewPatient = async function(Date_daccouchement,Heure_daccouchement){
     // validation
@@ -93,10 +81,8 @@ PatientSchemaPart1.statics.AddNewPatient = async function(Date_daccouchement,Heu
     }
     try{
         const data = {
-            Protocole_daccouchement:{
-                Date_daccouchement: Date_daccouchement,
-                Heure_daccouchement: Heure_daccouchement,
-            }
+            Date_daccouchement: Date_daccouchement,
+            Heure_daccouchement: Heure_daccouchement,
         }
         const patient = await this.create([data]);
 
@@ -163,7 +149,8 @@ PatientSchemaPart1.statics.AddPart_1 = async function(Date_daccouchement, Heure_
                 }
             },
         }
-        const patient = await this.create([data]);
+        const patient = await this.create({Date_daccouchement, Heure_daccouchement, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+            ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales});
 
         return patient;
     }catch(err){

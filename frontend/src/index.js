@@ -24,12 +24,12 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "patients",
+    path: "/patients",
     element: <PatientDetails />,
   },
   {
-    path: "addpatients",
-    element: <AddPatient />,
+    path: "/patients/:id",
+    element: <AddPatient/>,
   },
   {
     path: "calendrier",

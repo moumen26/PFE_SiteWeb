@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use('/user', usersroutes); 
-app.use('/addpatients', patientsroute); 
+app.use('/patients', patientsroute); 
 
 //connect to db
 mongoose.connect(process.env.MONGO_URL)

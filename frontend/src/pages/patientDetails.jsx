@@ -12,6 +12,7 @@ import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import { useAddPatient } from "../hooks/useAddPatient";
+import { useNavigate  } from 'react-router-dom';
 
 export default function PatientDetails() {
 
@@ -27,12 +28,28 @@ export default function PatientDetails() {
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
 
-  const { AddPatient, error } = useAddPatient();
+  const [currentArticleId, setCurrentArticleId] = useState(null);
+  const history = useNavigate ();
 
-  async function submitNewPatient(e) {
-    e.preventDefault();
-    await AddPatient(date, time);
-  }
+  const handleAddArticle = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/patients/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ Date_daccouchement: date,Heure_daccouchement: time }),
+      });
+
+      const data = await response.json();
+      const newPatientId = data.id; // Assuming the response contains the newly created patient's _id
+      // Redirect to the AddPatients interface with the new patient's ID
+      history(`/patients/${newPatientId}`); // Assuming you are using React Router and 'history' is accessible
+    } catch (error) {
+      console.error('Error adding article:', error);
+    }
+  };
+
   
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
@@ -75,7 +92,7 @@ export default function PatientDetails() {
             </div>
             <div className="ajoute-nouveau-ne-item">
               <a href="">
-                <form action="/addpatients/" onSubmit={submitNewPatient}>
+                <form action="" onClick={handleAddArticle}>
                   <input type="submit" value="Ajouter un nouveau-ne" />
                 </form>
               </a>

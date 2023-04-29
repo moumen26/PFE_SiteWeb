@@ -3,11 +3,13 @@ import "swiper/css";
 
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
-import { useState ,ChangeEvent} from "react";
+import { useState, useEffect ,ChangeEvent} from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
 import ObstetricauxTable from "./ObstetricauxTable";
 import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
+import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 export default function MySwiper() {
   const current = new Date();
@@ -36,14 +38,59 @@ export default function MySwiper() {
   const [Remarque, setRemarque] = useState('');
   const [Empreintes_digitales, setEmpreintes_digitales] = useState('');
 
-  const { AddPatientPart_1, errorPart_1 } = useAddPatientPart_1();
-
-  async function submitPart_1(e) {
-    e.preventDefault();
-    await AddPatientPart_1(Date_daccouchement, Heure_daccouchement, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-      ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales);
-  }
   
+  const  {id}  = useParams();
+  const [PatientData, setPatientData] = useState(null);
+  
+
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      try {
+        await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
+          if (response.ok) {
+            response.json().then((data) => {
+              setPatientData(data);
+            }).catch((error) => {
+              console.error('Error fetching article data:', error);
+            });
+          } else {
+            throw new Error("Something went wrong ...");
+          }
+        });
+      } catch (error) {
+        console.error('Error fetching article data:', error);
+      }
+    };
+
+    fetchPatientData();
+  }, [id]);
+  const [errorPart_1, setErrorPart_1] = useState(null);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    // Logic for handling form submission and updating article data
+    // ...
+    const dateac = PatientData?.Date_daccouchement;
+    const timeac = PatientData?.Heure_daccouchement;
+    try {
+      const response = await axios.patch(`http://localhost:8000/patients/${id}`, { 
+        dateac, timeac, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+        ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
+      });
+      // Handle response as needed
+      const json = await response.json();
+      if (!response.ok) {
+          window.alert("Add patient failed",json.errorPart_1);
+          setErrorPart_1(json.errorPart_1);
+      }else if (response.ok) {
+          window.alert("Add patient success", json.message);
+      } 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  if (!PatientData) {
+    return <p>Loading...</p>;
+  }
   
   return (
     <Swiper
@@ -61,7 +108,7 @@ export default function MySwiper() {
           <div className="line-hl">
             <div className="hl"></div>
           </div>
-          <form action="" onSubmit={submitPart_1}>
+          <form action="" onSubmit={handleSubmit}>
             <div className="pro-acc">
               <h2>Protocole d’accouchement</h2>
               <div className="date-heure-acc">
@@ -72,7 +119,7 @@ export default function MySwiper() {
                   <input
                     type="text"
                     name="Date_daccouchement"
-                    defaultValue={date}
+                    defaultValue={PatientData?.Date_daccouchement}
                     readOnly
                   />
                 </div>
@@ -83,7 +130,7 @@ export default function MySwiper() {
                   <input
                     type="text"
                     name="Heure_daccouchement"
-                    defaultValue={time}
+                    defaultValue={PatientData?.Heure_daccouchement}
                     readOnly
                   />
                 </div>

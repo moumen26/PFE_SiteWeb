@@ -20,10 +20,10 @@ router.get('/', GetAllPatient);
 router.get('/:id', GetPatient);
 
 //post a patient 
-router.post('/patient',CreateNewPatient);
+router.post('/',CreateNewPatient);
 
 //post a patient part 1
-router.post('/',CreateNewPatient_part1);
+//router.post('/',CreateNewPatient_part1);
 
 //delete a patient
 router.delete('/:id', DeletePatient);
