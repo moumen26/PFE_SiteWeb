@@ -3,7 +3,7 @@ const User = require('../models/UserModel');
 
 const requireAuth = async (req, res, next) => {
     // Check if user is logged in
-    const {authorization} =req.headers;
+    const {authorization} = req.headers;
     
     if(!authorization){
         // If user is not logged in, return error

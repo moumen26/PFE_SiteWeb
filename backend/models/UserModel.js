@@ -18,6 +18,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    sexe: {
+        type: String,
+        required: false,
+    },
     speciality: {
         type: String,
         required: true,
@@ -25,6 +29,22 @@ const userSchema = new mongoose.Schema({
     phone: {
         type: String,
         required: true,
+    },
+    DateDeNaissance: {
+        type: String,
+        required: false,
+    },
+    LieuDeNaissance: {
+        type: String,
+        required: false,
+    },
+    AddressActuel: {
+        type: String,
+        required: false,
+    },
+    Biographie: {
+        type: String,
+        required: false,
     },
     validation: {
         type: Boolean,

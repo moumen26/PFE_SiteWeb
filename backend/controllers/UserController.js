@@ -14,7 +14,8 @@ const Login = async (req, res) => {
         const token = createToken(user._id);
         var Fname = user.Fname;
         var speciality = user.speciality;
-        res.status(200).json({email,Fname,speciality,token});
+        var id = user._id;
+        res.status(200).json({id, Fname, speciality, token});
     }catch(err){
         res.status(400).json({err: err.message});
     }
@@ -42,18 +43,21 @@ const GetAllUsers = async (req, res) => {
 //get a specific user
 const GetUser = async (req, res) => {
     const {id} = req.params;
-    //check if id is valid
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({err: 'user not found'});
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: 'Specified id is not valid' });
     }
-    //find id in db
-    const user = await User.findById(id);
-    //if not found return error
-    if(!user){
-        return res.status(404).json({err: 'user not found'});
-    }
-    //return user
-    res.status(200).json(user);
+    // Find the user by ID in the database
+    await User.findById(id)
+        .then((user) => {
+            if (!user) {
+                return res.status(404).json({ message: 'user not found' });
+            }
+            res.status(200).json(user);
+        })
+        .catch((error) => {
+            console.error('Error retrieving user:', error);
+            res.status(500).json({ message: 'Error retrieving user' });
+        });
 }
 
 //create a new user
@@ -89,20 +93,25 @@ const DeleteUser = async (req, res) => {
 //update a user
 const UpdateUser = async (req, res) => {
     const {id} = req.params;
-    //check if id is valid
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({err: 'user not found'});
+    const {DateDeNaissance,LieuDeNaissance, sexe, AddressActuel, Biographie} = req.body;
+    try{
+        //check if id is valid
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(400).json({err: 'user not found'});
+        }
+        //find id in db and update
+        const user = await User.findOneAndUpdate({_id: id},
+            {DateDeNaissance, sexe, LieuDeNaissance, AddressActuel, Biographie}
+        );
+        //if not found return error
+        if(!user){
+            return res.status(404).json({err: 'user not found'});
+        }
+        //return user
+        res.status(200).json(user);
+    }catch(err){
+        res.status(400).json({err: err.message});
     }
-    //find id in db and update
-    const user = await User.findOneAndUpdate({_id: id},
-        {...req.body}
-    );
-    //if not found return error
-    if(!user){
-        return res.status(404).json({err: 'user not found'});
-    }
-    //return user
-    res.status(200).json(user);
 }
 
 module.exports = {
