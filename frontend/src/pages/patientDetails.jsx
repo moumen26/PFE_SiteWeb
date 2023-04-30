@@ -93,11 +93,7 @@ export default function PatientDetails() {
               <input id="search" class="input-search" type="search"></input>
             </div>
             <div className="ajoute-nouveau-ne-item">
-              <a href="">
-                <form action="" onClick={handleAddArticle}>
-                  <input type="submit" value="Ajouter un nouveau-ne" />
-                </form>
-              </a>
+            <input type="submit"  onClick={handleAddArticle} value="Ajouter un nouveau-ne" />
             </div>
           </div>
           <div className="table-patients">
