@@ -3246,6 +3246,10 @@ form.sign-in-form {
  border-bottom: 1px solid rgba(79, 129, 255, 1);
 }
 
+.table-patients table tr:nth-child(2n){
+  background-color: rgba(218, 218, 218, 1);
+}
+
 .table-patients td{
   border: none;
 }
@@ -3860,8 +3864,8 @@ form.sign-in-form {
 
 .doctor-profile-changer-btn button,
 .doctor-profile-changer-btn .changer-image-btn,
-.patient-table-container .search-button,
-.patient-table-container .ajoute-nouveau-ne-item {
+.patient-table-container .ajoute-nouveau-ne-item input,
+.patient-table-container .search-item input{
   width: 141px;
   height: 39px;
   border-radius: 10px;
@@ -3871,36 +3875,24 @@ form.sign-in-form {
   color: #fff;
 }
 
-.patient-table-container .search-button{
+.patient-table-container .search-item,
+.patient-table-container .ajoute-nouveau-ne-item{
   margin-top: 20px;
 }
 
-.patient-table-container .ajoute-nouveau-ne-item {
+.patient-table-container .ajoute-nouveau-ne-item input {
   width: 203px;
-  margin-top: 20px;
+  border-radius: 10px;
 }
 
-.patient-table-container .ajoute-nouveau-ne-item a {
-  font-weight: 400;
-  font-size: 12px;
-  color: #fff;
-}
-.doctor-profile-changer-btn .changer-image-btn,
-.patient-table-container .search-button,
-.patient-table-container .ajoute-nouveau-ne-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 .doctor-profile-changer-btn .changer-image-btn,
-.patient-table-container .search-button,
-.patient-table-container .ajoute-nouveau-ne-item {
+.patient-table-container .search-item input,
+.patient-table-container .ajoute-nouveau-ne-item input {
   background-color: rgba(79, 129, 255, 1);
 }
 
-.input-file,
-.input-search {
+.input-file{
   display: none;
 }
 
@@ -3912,7 +3904,7 @@ form.sign-in-form {
 .doctor-profile-changer-btn button:hover,
 .doctor-profile-enregistrer-button:hover,
 .doctor-profile-changer-btn .changer-image-btn:hover,
-.patient-table-container .ajoute-nouveau-ne-item:hover {
+.patient-table-container .ajoute-nouveau-ne-item input:hover {
   background-color: rgba(6, 14, 48, 1);
   transition: all 1s ease;
   color: #fff;

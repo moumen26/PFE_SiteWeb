@@ -12,12 +12,13 @@ import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import { useAddPatient } from "../hooks/useAddPatient";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 export default function PatientDetails() {
-
   const current = new Date();
-  const date = `${current.getDate()}-${current.getMonth()+1}-${current.getFullYear()}`;
+  const date = `${current.getDate()}-${
+    current.getMonth() + 1
+  }-${current.getFullYear()}`;
   const time = current.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
@@ -28,31 +29,33 @@ export default function PatientDetails() {
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
 
-  const history = useNavigate ();
+  const history = useNavigate();
 
   const handleAddArticle = async () => {
     try {
-      const response = await fetch('http://localhost:8000/patients/', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/patients/", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ Date_daccouchement: date,Heure_daccouchement: time }),
+        body: JSON.stringify({
+          Date_daccouchement: date,
+          Heure_daccouchement: time,
+        }),
       });
 
       const data = await response.json();
       if (!response.ok) {
-        window.alert("Add patient failed",data.error);
+        window.alert("Add patient failed", data.error);
       }
       if (response.ok) {
         history(`/patients/${await data.id}`); // Assuming you are using React Router and 'history' is accessible
-      } 
+      }
     } catch (error) {
-      console.error('Error adding article:', error);
+      console.error("Error adding article:", error);
     }
   };
 
-  
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
   return (
@@ -87,13 +90,14 @@ export default function PatientDetails() {
               </select>
             </div>
             <div className="search-item">
-              <label for="search" class="search-button">
-                Search
-              </label>
-              <input id="search" class="input-search" type="search"></input>
+              <input type="submit" value="Search" />
             </div>
             <div className="ajoute-nouveau-ne-item">
-            <input type="submit"  onClick={handleAddArticle} value="Ajouter un nouveau-ne" />
+              <input
+                type="submit"
+                onClick={handleAddArticle}
+                value="Ajouter un nouveau-ne"
+              />
             </div>
           </div>
           <div className="table-patients">
