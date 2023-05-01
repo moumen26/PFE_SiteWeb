@@ -11,6 +11,7 @@ import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate  } from 'react-router-dom';
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function MySwiper() {
   const current = new Date();
@@ -39,7 +40,8 @@ export default function MySwiper() {
   const [Remarque, setRemarque] = useState('');
   const [Empreintes_digitales, setEmpreintes_digitales] = useState('');
 
-  
+  const { user } = useAuthContext();
+
   const  {id}  = useParams();
   const [PatientData, setPatientData] = useState(null);
   
@@ -66,6 +68,59 @@ export default function MySwiper() {
 
     fetchPatientData();
   }, [history, id]);
+
+  const [DossObsData, setDossObsData] = useState(null);
+  useEffect(() => {
+    const fetchDossObsData = async () => {
+      if(PatientData.idDossObs !== undefined){
+        await fetch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`).then((response) => {
+          if (response.ok) {
+            response.json().then((data) => {
+              setDossObsData(data);
+            }).catch((error) => {
+              console.error('Error fetching article data:', error);
+            });
+          } else {
+            console.error('Error fetching article data:', response.status);
+          }
+        });
+      }else{
+        history()
+      }
+    };
+
+    fetchDossObsData();
+  }, [history, PatientData?.idDossObs]);
+
+  const [UserData, setUserData] = useState(null);
+
+  useEffect(() => {
+    const fetchUsertData = async () => {
+      if(DossObsData.AccoucheurID !== undefined){
+        await fetch(`http://localhost:8000/user/${DossObsData?.AccoucheurID}`,{
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${user.token}`
+          }
+        }).then((response) => {
+          if (response.ok) {
+            response.json().then((data) => {
+              setUserData(data);
+            }).catch((error) => {
+              console.error('Error fetching article data:', error);
+            });
+          } else {
+            console.error('Error fetching article data:', response.status);
+          }
+        });
+      }else{
+        history('/login')
+      }
+    };
+  
+    fetchUsertData();
+  }, [UserData,DossObsData?.AccoucheurID]);
+
   const [errorPart_1, setErrorPart_1] = useState(null);
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -73,22 +128,27 @@ export default function MySwiper() {
     // ...
     const dateac = PatientData?.Date_daccouchement;
     const timeac = PatientData?.Heure_daccouchement;
-    try {
-
-      const response = await axios.patch(`http://localhost:8000/patients/${id}`, { 
-        dateac, timeac, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-        ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
-      });
-      // Handle response as needed
-      if (!response.status === 200) {
-          window.alert("Add patient failed", response.data.message);
-          setErrorPart_1(errorPart_1);
-      }else if (response.status === 200) {
-          window.alert("Add patient success", response.data.message);
+    
+    if(PatientData?.idDossObs !== undefined){
+       try {
+        const response = await axios.patch(`http://localhost:8000/patients/${PatientData?.idDossObs}`, { 
+          dateac, timeac, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+          ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
+        });
+        // Handle response as needed
+        if (!response.status === 200) {
+            window.alert("Add patient failed", response.data.message);
+            setErrorPart_1(errorPart_1);
+        }else if (response.status === 200) {
+            window.alert("Add patient success", response.data.message);
+        } 
+      } catch (error) {
+        console.log(error);
       } 
-    } catch (error) {
-      console.log(error);
+    }else{
+      history()
     }
+    
   };
   if (!PatientData) {
     return <p>Loading...</p>;
@@ -121,7 +181,7 @@ export default function MySwiper() {
                   <input
                     type="text"
                     name="Date_daccouchement"
-                    defaultValue={PatientData?.Date_daccouchement}
+                    defaultValue={DossObsData?.Date_daccouchement}
                     readOnly
                   />
                 </div>
@@ -132,7 +192,7 @@ export default function MySwiper() {
                   <input
                     type="text"
                     name="Heure_daccouchement"
-                    defaultValue={PatientData?.Heure_daccouchement}
+                    defaultValue={DossObsData?.Heure_daccouchement}
                     readOnly
                   />
                 </div>
@@ -145,10 +205,8 @@ export default function MySwiper() {
                   <textarea
                     name="accoucheur"
                     id="accoucheur"
-                    value={Accoucheur}
-                    onChange={(e) => {
-                      setAccoucheur(e.target.value);
-                    }}
+                    defaultValue={UserData?.Fname}
+                    readOnly
                   ></textarea>
                 </div>
               </div>

@@ -13,6 +13,8 @@ import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import { useAddPatient } from "../hooks/useAddPatient";
 import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
+
 
 export default function PatientDetails() {
   const current = new Date();
@@ -25,6 +27,7 @@ export default function PatientDetails() {
     second: "2-digit",
     hour12: false,
   });
+  const { user } = useAuthContext();
 
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
@@ -41,6 +44,7 @@ export default function PatientDetails() {
         body: JSON.stringify({
           Date_daccouchement: date,
           Heure_daccouchement: time,
+          idAccoucheur: user?.id,
         }),
       });
 

@@ -1,10 +1,10 @@
 const express = require('express');
 //const requireAuth = require('../middleware/requireAuth');
 const {
-    CreateNewPatient_part1,
     CreateNewPatient,
     GetAllPatient,
     GetPatient,
+    GetDossObs,
     DeletePatient,
     UpdatePatient
 } = require('../controllers/PatientController');
@@ -22,8 +22,8 @@ router.post('/',CreateNewPatient);
 //get a specific patient
 router.get('/:id', GetPatient);
 
-//post a patient part 1
-//router.post('/',CreateNewPatient_part1);
+//get a specific patient
+router.get('/DossObs/:id', GetDossObs);
 
 //delete a patient
 router.delete('/:id', DeletePatient);
