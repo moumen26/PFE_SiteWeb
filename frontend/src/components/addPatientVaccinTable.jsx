@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import AjouteVaccinButton from "./ajouteVaccinButton";
 import CloseButton from "./closeButtonTableVaccin";
 import VaccinationAddButton from "./vaccinationAddButton";
 import data from "../VaccinDataBase.json";
 import { nanoid } from "nanoid";
+import ReadOnlyRow from "./addPatientVaccinTableReadOnlyRow";
+import EditRow from "./addPatientVaccinTableEditRow";
+
 export default function VaccinTable() {
   const [addVaccinTable, setaddVaccinTable] = useState(false);
 
@@ -20,6 +23,9 @@ export default function VaccinTable() {
     vaccinationNumero: "",
     vaccinationDate: "",
   });
+  
+
+  const [editVaccinId, setEditVaccinId] = useState(null);
 
   const handleAddFormChange = (event) => {
     event.preventDefault();
@@ -49,72 +55,63 @@ export default function VaccinTable() {
     const newVaccinDB = [...VaccinDB, newVaccin];
     setVaccinDB(newVaccinDB);
   };
+
+  const handleEditRowClick = (event, Vaccin) => {
+    event.preventDefault();
+    setEditVaccinId(Vaccin.id);
+  };
+
   return (
     <div className="vaccin-container">
       <div className="vaccin-table-container">
         <h2>Vaccination :</h2>
-        <table className="vaccination-table">
-          <tr>
-            <th>
-              <span>Age</span>
-            </th>
-            <th>
-              <span>Vaccin</span>
-            </th>
-            <th>
-              <span>Contre</span>
-            </th>
-            <th>
-              <span>
-                Technique
-                <br />
-                vaccinale
-              </span>
-            </th>
-            <th>
-              <span>
-                Numero du
-                <br />
-                lot
-              </span>
-            </th>
-            <th>
-              <span>Date</span>
-            </th>
-            <th>
-              <span>Action</span>
-            </th>
-          </tr>
-          {VaccinDB.map((Vaccin) => (
+        <form>
+          <table className="vaccination-table">
             <tr>
-              <td className="vaccination-table-title-line2">
-                <span>{Vaccin.Age}</span>
-              </td>
-              <td>
-                <span>{Vaccin.Vaccin}</span>
-              </td>
-              <td>
-                <span>{Vaccin.Contre}</span>
-              </td>
-              <td>
-                <span>{Vaccin.Technique}</span>
-              </td>
-              <td>
-                <span>{Vaccin.Numero}</span>
-              </td>
-              <td>
-                <span>{Vaccin.Date}</span>
-              </td>
-
-              <td>
-                <div className="action-table">
-                  <button>Edit</button>
-                  <button>Delete</button>
-                </div>
-              </td>
+              <th>
+                <span>Age</span>
+              </th>
+              <th>
+                <span>Vaccin</span>
+              </th>
+              <th>
+                <span>Contre</span>
+              </th>
+              <th>
+                <span>
+                  Technique
+                  <br />
+                  vaccinale
+                </span>
+              </th>
+              <th>
+                <span>
+                  Numero du
+                  <br />
+                  lot
+                </span>
+              </th>
+              <th>
+                <span>Date</span>
+              </th>
+              <th>
+                <span>Actions</span>
+              </th>
             </tr>
-          ))}
-        </table>
+            {VaccinDB.map((Vaccin) => (
+              <Fragment>
+                {editVaccinId === Vaccin.id ? (
+                  <EditRow />
+                ) : (
+                  <ReadOnlyRow
+                    Vaccin={Vaccin}
+                    handleEditRowClick={handleEditRowClick}
+                  />
+                )}
+              </Fragment>
+            ))}
+          </table>
+        </form>
         <div className="vaccination-add-button-class">
           <VaccinationAddButton
             addVaccinTable={addVaccinTable}

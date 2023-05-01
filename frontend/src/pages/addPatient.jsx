@@ -98,7 +98,6 @@ export default function AddPatient() {
           </div>
         </div>
 
-        
         <div className={`visite-table2${toggleClassAddVisite2}`}>
           <div className="visite-table-container">
             <h2>Visites systematique de 1 a 3 mois</h2>
@@ -113,15 +112,11 @@ export default function AddPatient() {
               setAddVaccin2={setAddVaccin2}
             />
           </div>
-          
+          <div className={`visite-table2${toggleClassAddVaccin2}`}>
+            <VaccinTable />
+          </div>
         </div>
       </div>
-
-
-
-
-
-
     </div>
   );
 }
