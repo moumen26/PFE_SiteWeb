@@ -1693,18 +1693,67 @@ nav {
   margin-top: 37px;
 }
 
-.add-tableau-vaccin1-container .form-table {
+
+.vaccination-select,
+.form-table input{
+  background-color: transparent;
+  border: 1px solid black;
+}
+
+.vaccination-table-add{
+  display: flex;
+  margin-top: 15px;
+}
+
+.add-vaccin-table-item{
+  width: 220px;
+  height: 73px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin-bottom: 30px;
+  border: 1px solid #4F81FF;
+}
+
+.form-table2{
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.form-table-item{
+  width: 212px;
+  height: 150px;
+  border: 1px solid #4F81FF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: none;
+}
+
+.s-table-item{
+  width: 214px;
+}
+
+
+.l-border{
+  border-left: none;
+}
+
+.r-border{
+  border-right: none;
+}
+
+.add-vaccin-table-item span{
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(6, 14, 48, 1);
+  text-align: center;
 }
 
 .add-tableau-vaccin1-container form select,
 .add-tableau-vaccin1-container form input,
 .my-visite-table input {
-  width: 196px;
+  width: 190px;
   height: 59px;
   border-radius: 20px;
   font-size: 15px;
@@ -4124,6 +4173,12 @@ form.sign-in-form {
   padding: 15px;
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
 }
+
+.add-tableau-vaccin1-container{
+  gap: 0;
+  padding: 10px;
+}
+
 
 .add-tableau-vaccin1-close-class,
 .add-tableau-vaccin2-close-class {
