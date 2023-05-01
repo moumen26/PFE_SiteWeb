@@ -502,13 +502,22 @@ nav {
   gap: 20px;
 }
 
+.sexe-date-heure{
+  padding-left: 0px;
+}
+
+.transfert-motif{
+  margin-left: 200px;
+}
+
 .examen,
 .cathet,
 .recherche,
 .organes,
 .vitamine,
 .catheterisme {
-  padding-left: 20px;
+  padding-left: 0px;
+  margin-right: 120px;
 }
 
 .emission,
@@ -703,6 +712,7 @@ nav {
   display: flex;
 }
 
+
 .maternal,
 .artificiel,
 .mixte {
@@ -860,6 +870,10 @@ nav {
   margin-left: 50px;
 }
 
+.long-span{
+  width: 200px;
+}
+
 .reanimation,
 .duree,
 .malforamtion,
@@ -963,10 +977,6 @@ nav {
   display: flex;
   align-items: center;
   justify-content: end;
-}
-
-.formulaire-examen .next-first{
-  padding-right: 50px;
 }
 
 .next,
@@ -2082,7 +2092,7 @@ table td {
   .traumatismes,
   .examen-neuro {
     flex-direction: column;
-    padding-left: 0;
+    padding-left: 0px;
     margin-top: 22px;
   }
 

@@ -195,7 +195,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
 
             <div className="rea-duree-malf">
               <div className="reanimation">
-                <span>Reanimation :</span>
+                <span>Reanimation:</span>
                 <input type="checkbox" />
               </div>
               <div className="duree">
@@ -222,7 +222,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
 
             <div className="transfert-motif">
               <div className="transfert">
-                <span>Transfert :</span>
+                <span>Transfert:</span>
                 <input type="checkbox" 
                   value={Transfert}
                   name="Transfert"
@@ -232,7 +232,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 />
               </div>
               <div className="motif">
-                <span>Motif du transfert :</span>
+                <span className="long-span">Motif du transfert :</span>
                 <input type="text" 
                   value={MotifTransfert}
                   name="MotifTransfert"
