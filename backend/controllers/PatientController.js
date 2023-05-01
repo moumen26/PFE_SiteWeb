@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
 
-//post a null patient
+// post a new patient
 const CreateNewPatient = async (req, res) => {
     try {
         const Date_daccouchement = req.body.Date_daccouchement;
@@ -49,7 +49,7 @@ const CreateNewPatient = async (req, res) => {
       }
 }
 
-// Define a route for fetching a patient by ID
+// get a specific Patient by ID
 const GetPatient = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -69,7 +69,7 @@ const GetPatient = async (req, res) => {
         });
 }
 
-// Define a route for fetching a patient by ID
+// Define a route for fetching a Dossier Obstitrique by ID
 const GetDossObs = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -95,23 +95,6 @@ const GetAllPatient = async (req, res) => {
     res.status(200).json(patients);
 }
 
-//get a specific Patient
-/*const GetPatient = async (req, res) => {
-    const {id} = req.params;
-    //check if id is valid
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({err: 'Patient not found'});
-    }
-    //find id in db
-    const patient = await Patient.findById(id);
-    //if not found return error
-    if(!patient){
-        return res.status(404).json({err: 'Patient not found'});
-    }
-    //return user
-    res.status(200).json(patient);
-}*/
-
 //delete a user
 const DeletePatient = async (req, res) => {
     const {id} = req.params;
@@ -130,7 +113,7 @@ const DeletePatient = async (req, res) => {
 }
 
 //update a user
-const UpdatePatient = async (req, res) => {
+const UpdateDossObs = async (req, res) => {
     const {id} = req.params;
     const { Date_daccouchement,Heure_daccouchement,Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
         ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales} = req.body;
@@ -162,5 +145,5 @@ module.exports = {
     GetPatient,
     GetDossObs,
     DeletePatient,
-    UpdatePatient
+    UpdateDossObs
 }

@@ -6,7 +6,7 @@ const {
     GetPatient,
     GetDossObs,
     DeletePatient,
-    UpdatePatient
+    UpdateDossObs
 } = require('../controllers/PatientController');
 
 const router = express.Router();
@@ -29,6 +29,6 @@ router.get('/DossObs/:id', GetDossObs);
 router.delete('/:id', DeletePatient);
 
 //update a patient
-router.patch('/:id', UpdatePatient);
+router.patch('/DossObs/:id', UpdateDossObs);
 
 module.exports = router;

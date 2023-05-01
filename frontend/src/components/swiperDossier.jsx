@@ -131,7 +131,7 @@ export default function MySwiper() {
     
     if(PatientData?.idDossObs !== undefined){
        try {
-        const response = await axios.patch(`http://localhost:8000/patients/${PatientData?.idDossObs}`, { 
+        const response = await axios.patch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`, { 
           dateac, timeac, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
           ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
         });
