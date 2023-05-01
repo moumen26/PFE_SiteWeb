@@ -1,12 +1,9 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const DossierObstetriqueSchema = new mongoose.Schema({
+const CarnetSanteSchema = new mongoose.Schema({
     patientID: {
         type: mongoose.Schema.Types.ObjectId, ref: "patients"
-    },
-    AccoucheurID:{
-        type: mongoose.Schema.Types.ObjectId, ref: "users"
     },
     Date_daccouchement:{
         type: String,
@@ -16,40 +13,7 @@ const DossierObstetriqueSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    
-    Poids: {
-        type: String,
-        required: false, 
-    },
-    Aspect: {
-        type: String,
-        required: false,
-    },
-    Anomalies: {
-        type: String,
-        required: false,
-    },
-    Placenta: {
-        type: String,
-        required: false,
-    },
-    Membranes: {
-        type: String,
-        required: false,
-    },
-    Cordon: {
-        type: String,
-        required: false,
-    },
     Sexe : {
-        type: String,
-        required: false,
-    },
-    Taille: {
-        type: String,
-        required: false,
-    },
-    Pc: {
         type: String,
         required: false,
     },
@@ -61,28 +25,65 @@ const DossierObstetriqueSchema = new mongoose.Schema({
         type: Boolean,
         required: false,
     },
+    Reanimation: {
+        type: String,
+        required: false, 
+    },
+    Duree: {
+        type: String,
+        required: false,
+    },
     Malformation: {
         type: String,
         required: false,
     },
-    Remarque : {
+    Transfert: {
         type: String,
         required: false,
     },
-    Empreintes_digitales: {
+    MotifTransfert: {
         type: String,
         required: false,
-    }
+    },
+    ExamenCordon: {
+        type: String,
+        required: false,
+    },
+    EmissionUrine: {
+        type: String,
+        required: false,
+    },
+    EmissionMeconium: {
+        type: String,
+        required: false,
+    },
+    CatheterismeChoanes: {
+        type: String,
+        required: false,
+    },
+    RechercheAtresieLoesophage : {
+        type: String,
+        required: false,
+    },
+    OrganesGenitauxExternes: {
+        type: String,
+        required: false,
+    },
+    VitamineK1:{
+        type: String,
+        required: false,
+    },
+    Collyre:{
+        type: String,
+        required: false,
+    },
 });
 
-// Create a new DossierObstetrique
-DossierObstetriqueSchema.statics.AddNewDossObs = async function(patientID, Date_daccouchement,Heure_daccouchement){
+// Create a new CarnetSante
+CarnetSanteSchema.statics.AddNewCarnetSante = async function(patientID, Date_daccouchement,Heure_daccouchement){
     // validation
-    if(!Date_daccouchement ||!Heure_daccouchement){
-        throw Error('All fields mast be filled');
-    }
-    if(!validator.isNumeric(Date_daccouchement) ||!validator.isNumeric(Heure_daccouchement)){
-        throw Error('must be a number');
+    if(!Date_daccouchement || !Heure_daccouchement || !patientID){
+        throw Error('there is field missing');
     }
     try{
         const data = {
@@ -90,9 +91,9 @@ DossierObstetriqueSchema.statics.AddNewDossObs = async function(patientID, Date_
             Date_daccouchement: Date_daccouchement,
             Heure_daccouchement: Heure_daccouchement,
         }
-        const patient = await this.create([data]);
+        const CarnetSante = await this.create([data]);
 
-        return patient;
+        return CarnetSante;
         
     }catch(err){
         console.log(err);
@@ -100,6 +101,6 @@ DossierObstetriqueSchema.statics.AddNewDossObs = async function(patientID, Date_
     }
 }
 
-const patient_part1 = mongoose.model('dossierObstetrique', DossierObstetriqueSchema);
+const CarnetSante = mongoose.model('CarnetDeSante', CarnetSanteSchema);
 
-module.exports = patient_part1;
+module.exports = CarnetSante;

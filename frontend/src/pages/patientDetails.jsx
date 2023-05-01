@@ -11,7 +11,6 @@ import { useState } from "react";
 import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
-import { useAddPatient } from "../hooks/useAddPatient";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -47,13 +46,13 @@ export default function PatientDetails() {
           idAccoucheur: user?.id,
         }),
       });
-
+      // get the patientID via response from the server patientRouter.post
       const data = await response.json();
       if (!response.ok) {
         window.alert("Add patient failed", data.error);
       }
       if (response.ok) {
-        history(`/patients/${await data.id}`); // Assuming you are using React Router and 'history' is accessible
+        history(`/patients/${await data.id}`);
       }
     } catch (error) {
       console.error("Error adding article:", error);

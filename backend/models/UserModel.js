@@ -46,6 +46,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    PatientID: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "patients"
+    }],
+    progress: {
+        type: String,
+        required: false,
+    },
     validation: {
         type: Boolean,
     }

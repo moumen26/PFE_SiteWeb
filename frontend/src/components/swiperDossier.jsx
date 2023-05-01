@@ -14,17 +14,6 @@ import { useNavigate  } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function MySwiper() {
-  const current = new Date();
-  const date = `${current.getDate()}-${current.getMonth()+1}-${current.getFullYear()}`;
-  const time = current.toLocaleTimeString("en-US", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false,
-  });
-  const [Date_daccouchement, setDate_daccouchement] = useState(date);
-  const [Heure_daccouchement, setHeure_daccouchement] = useState(time);
-  const [Accoucheur, setAccoucheur] = useState();
   const [Poids, setPoids] = useState('');
   const [Aspect, setAspect] = useState('');
   const [Anomalies, setAnomalies] = useState('');
@@ -92,12 +81,13 @@ export default function MySwiper() {
     fetchDossObsData();
   }, [history, PatientData?.idDossObs]);
 
+//User data
   const [UserData, setUserData] = useState(null);
-
+  
   useEffect(() => {
     const fetchUsertData = async () => {
-      if(DossObsData.AccoucheurID !== undefined){
-        await fetch(`http://localhost:8000/user/${DossObsData?.AccoucheurID}`,{
+      if(PatientData.idAccoucheur !== undefined){
+        await fetch(`http://localhost:8000/user/${PatientData?.idAccoucheur}`,{
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${user.token}`
@@ -119,20 +109,17 @@ export default function MySwiper() {
     };
   
     fetchUsertData();
-  }, [UserData,DossObsData?.AccoucheurID]);
+  }, [UserData,PatientData?.idAccoucheur]);
 
+//Update Dossier Obstetricaux
   const [errorPart_1, setErrorPart_1] = useState(null);
-  const handleSubmit = async (event) => {
+  const handleDossObsSubmit = async (event) => {
     event.preventDefault();
-    // Logic for handling form submission and updating article data
-    // ...
-    const dateac = PatientData?.Date_daccouchement;
-    const timeac = PatientData?.Heure_daccouchement;
-    
+
     if(PatientData?.idDossObs !== undefined){
        try {
         const response = await axios.patch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`, { 
-          dateac, timeac, Accoucheur, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
+          Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
           ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
         });
         // Handle response as needed
@@ -150,6 +137,8 @@ export default function MySwiper() {
     }
     
   };
+
+
   if (!PatientData) {
     return <p>Loading...</p>;
   }
@@ -170,7 +159,7 @@ export default function MySwiper() {
           <div className="line-hl">
             <div className="hl"></div>
           </div>
-          <form action="" onSubmit={handleSubmit}>
+          <form action="" onSubmit={handleDossObsSubmit}>
             <div className="pro-acc">
               <h2>Protocole d’accouchement</h2>
               <div className="date-heure-acc">
