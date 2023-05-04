@@ -1,6 +1,6 @@
 import React from "react";
 
-function EditRow({editFromData, handleEditFromChange}) {
+function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
   return (
     <tr>
       <td>
@@ -9,7 +9,7 @@ function EditRow({editFromData, handleEditFromChange}) {
           name="vaccinationAge"
           id="vaccination-age"
           required="required"
-          
+          value={editFromData.vaccinationAge}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -27,6 +27,7 @@ function EditRow({editFromData, handleEditFromChange}) {
           name="vaccinationVaccin"
           id="vaccination-vaccin"
           required="required"
+          value={editFromData.vaccinationVaccin}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -44,6 +45,7 @@ function EditRow({editFromData, handleEditFromChange}) {
           name="vaccinationContre"
           id="vaccination-contre"
           required="required"
+          value={editFromData.vaccinationContre}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -61,6 +63,7 @@ function EditRow({editFromData, handleEditFromChange}) {
           name="vaccinationTechnique"
           id="vaccination-technique"
           required="required"
+          value={editFromData.vaccinationTechnique}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -78,6 +81,7 @@ function EditRow({editFromData, handleEditFromChange}) {
           name="vaccinationNumero"
           id="vaccination-numero"
           required="required"
+          value={editFromData.vaccinationNumero}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -90,13 +94,20 @@ function EditRow({editFromData, handleEditFromChange}) {
         </select>
       </td>
       <td>
-        onChange={handleEditFromChange}
         <input
+          className="editDate"
           type="date"
           name="vaccinationDate"
           required="required"
+          value={editFromData.vaccinationDate}
           onChange={handleEditFromChange}
         />
+      </td>
+      <td>
+        <div className="action-table">
+          <button type="submit">Save</button>
+          <button onClick={handleCancelClick}>Cancel</button>
+        </div>
       </td>
     </tr>
   );

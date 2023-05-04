@@ -4120,6 +4120,12 @@ form.sign-in-form {
 
 /* add table vaccination + */
 
+.editDate{
+  width: 150px;
+  background-color: transparent;
+  border: 1px solid black;
+}
+
 .action-table {
   display: flex;
   flex-direction: column;

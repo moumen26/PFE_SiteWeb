@@ -2,21 +2,21 @@
     
     {
         "id": 1,
-        "Age": "1 mois",
-        "Vaccin" : "Vaccin1",
-        "Contre": "Contre1",
-        "Technique": "Technique1",
-        "Numero": "Numero1",
-        "Date": "26-04-2023"
+        "vaccinationAge": "1 mois",
+        "vaccinationVaccin" : "Vaccin1",
+        "vaccinationContre": "Contre1",
+        "vaccinationTechnique": "Technique1",
+        "vaccinationNumero": "Numero1",
+        "vaccinationDate": "26-04-2023"
     },
     {
         "id": 2,
-        "Age": "2 mois",
-        "Vaccin" : "Vaccin2",
-        "Contre": "Contre2",
-        "Technique": "Technique2",
-        "Numero": "Numero2",
-        "Date": "26-04-2023"
+        "vaccinationAge": "2 mois",
+        "vaccinationVaccin" : "Vaccin2",
+        "vaccinationContre": "Contre2",
+        "vaccinationTechnique": "Technique2",
+        "vaccinationNumero": "Numero2",
+        "vaccinationDate": "26-04-2023"
     }
 
 ]

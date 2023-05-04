@@ -1,32 +1,32 @@
 import React from "react";
 
-const ReadOnlyRow = ({ Vaccin, handleEditRowClick }) => {
+const ReadOnlyRow = ({ Vaccin, handleEditRowClick, handleDeleteClick }) => {
   return (
     <tr>
       <td className="vaccination-table-title-line2">
-        <span>{Vaccin.Age}</span>
+        <span>{Vaccin.vaccinationAge}</span>
       </td>
       <td>
-        <span>{Vaccin.Vaccin}</span>
+        <span>{Vaccin.vaccinationVaccin}</span>
       </td>
       <td>
-        <span>{Vaccin.Contre}</span>
+        <span>{Vaccin.vaccinationContre}</span>
       </td>
       <td>
-        <span>{Vaccin.Technique}</span>
+        <span>{Vaccin.vaccinationTechnique}</span>
       </td>
       <td>
-        <span>{Vaccin.Numero}</span>
+        <span>{Vaccin.vaccinationNumero}</span>
       </td>
       <td>
-        <span>{Vaccin.Date}</span>
+        <span>{Vaccin.vaccinationDate}</span>
       </td>
       <td>
         <div className="action-table">
           <button onClick={(event) => handleEditRowClick(event, Vaccin)}>
             Edit
           </button>
-          <button>Delete</button>
+          <button onClick={() => handleDeleteClick(Vaccin.id)}>Delete</button>
         </div>
       </td>
     </tr>

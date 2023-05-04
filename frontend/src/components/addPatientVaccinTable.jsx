@@ -24,6 +24,15 @@ export default function VaccinTable() {
     vaccinationDate: "",
   });
 
+  const [editFormData, setEditFormData] = useState({
+    vaccinationAge: "",
+    vaccinationVaccin: "",
+    vaccinationContre: "",
+    vaccinationTechnique: "",
+    vaccinationNumero: "",
+    vaccinationDate: "",
+  });
+
   const [editVaccinId, setEditVaccinId] = useState(null);
 
   const handleAddFormChange = (event) => {
@@ -38,33 +47,93 @@ export default function VaccinTable() {
     setAddFormData(newFormData);
   };
 
+  const handleEditFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newFormData = { ...editFormData };
+    newFormData[fieldName] = fieldValue;
+
+    setEditFormData(newFormData);
+  };
+
   const handleAddFormSubmit = (event) => {
     event.preventDefault();
 
     const newVaccin = {
       id: nanoid(),
-      Age: addFormData.vaccinationAge,
-      Vaccin: addFormData.vaccinationVaccin,
-      Contre: addFormData.vaccinationContre,
-      Technique: addFormData.vaccinationTechnique,
-      Numero: addFormData.vaccinationNumero,
-      Date: addFormData.vaccinationDate,
+      vaccinationAge: addFormData.vaccinationAge,
+      vaccinationVaccin: addFormData.vaccinationVaccin,
+      vaccinationContre: addFormData.vaccinationContre,
+      vaccinationTechnique: addFormData.vaccinationTechnique,
+      vaccinationNumero: addFormData.vaccinationNumero,
+      vaccinationDate: addFormData.vaccinationDate,
     };
 
     const newVaccinDB = [...VaccinDB, newVaccin];
     setVaccinDB(newVaccinDB);
   };
 
+  const handleEditFormSubmit = (event) => {
+    event.preventDefault();
+
+    const editVaccin = {
+      id: editVaccinId,
+      vaccinationAge: editFormData.vaccinationAge,
+      vaccinationVaccin: editFormData.vaccinationVaccin,
+      vaccinationContre: editFormData.vaccinationContre,
+      vaccinationTechnique: editFormData.vaccinationTechnique,
+      vaccinationNumero: editFormData.vaccinationNumero,
+      vaccinationDate: editFormData.vaccinationDate,
+    };
+
+    const newVaccin = [...VaccinDB];
+
+    const index = VaccinDB.findIndex((Vaccin) => Vaccin.id === editVaccinId);
+
+    newVaccin[index] = editVaccin;
+
+    setVaccinDB(newVaccin);
+    setEditVaccinId(null);
+  };
+
   const handleEditRowClick = (event, Vaccin) => {
     event.preventDefault();
     setEditVaccinId(Vaccin.id);
+
+    const formValues = {
+      vaccinationAge: Vaccin.vaccinationAge,
+      vaccinationVaccin: Vaccin.vaccinationVaccin,
+      vaccinationContre: Vaccin.vaccinationContre,
+      vaccinationTechnique: Vaccin.vaccinationTechnique,
+      vaccinationNumero: Vaccin.vaccinationNumero,
+      vaccinationDate: Vaccin.vaccinationDate,
+    };
+
+    setEditFormData(formValues);
+  };
+
+  const handleCancelClick = () => {
+    setEditVaccinId(null);
+  };
+
+  const handleDeleteClick = (VaccinId) => {
+    const newVaccin = [...VaccinDB];
+
+    const index = VaccinDB.findIndex((Vaccin) => Vaccin.id === VaccinId);
+
+    newVaccin.splice(index, 1);
+
+    setVaccinDB(newVaccin);
   };
 
   return (
     <div className="vaccin-container">
       <div className="vaccin-table-container">
         <h2>Vaccination :</h2>
-        <form>
+        <form onSubmit={handleEditFormSubmit}>
           <table className="vaccination-table">
             <tr>
               <th>
@@ -100,11 +169,16 @@ export default function VaccinTable() {
             {VaccinDB.map((Vaccin) => (
               <Fragment>
                 {editVaccinId === Vaccin.id ? (
-                  <EditRow />
+                  <EditRow
+                    editFromData={editFormData}
+                    handleEditFromChange={handleAddFormChange}
+                    handleCancelClick={handleCancelClick}
+                  />
                 ) : (
                   <ReadOnlyRow
                     Vaccin={Vaccin}
                     handleEditRowClick={handleEditRowClick}
+                    handleDeleteClick={handleDeleteClick}
                   />
                 )}
               </Fragment>
@@ -258,11 +332,10 @@ export default function VaccinTable() {
             </div>
 
             <div className="add-tableau-vaccin-ajouter-btn">
-              {/* <AjouteVaccinButton
+              <AjouteVaccinButton
                 addVaccinTable={addVaccinTable}
                 setaddVaccinTable={setaddVaccinTable}
-              /> */}
-              <AjouteVaccinButton />
+              />
             </div>
           </form>
         </div>
