@@ -171,7 +171,7 @@ export default function VaccinTable() {
                 {editVaccinId === Vaccin.id ? (
                   <EditRow
                     editFromData={editFormData}
-                    handleEditFromChange={handleAddFormChange}
+                    handleEditFromChange={handleEditFromChange}
                     handleCancelClick={handleCancelClick}
                   />
                 ) : (
