@@ -1,5 +1,4 @@
 const express = require('express');
-//const requireAuth = require('../middleware/requireAuth');
 const {
     CreateNewPatient,
     GetAllPatient,
@@ -12,7 +11,13 @@ const {
     GetCarnetSante,
     DeleteCarnetSante,
 } = require('../controllers/PatientController');
-
+const {
+    GetAllVaccins,
+    GetVaccinById,
+    UpdateVaccin,
+    DeleteVaccin,
+    CreateNewVaccin,
+} = require('../controllers/VaccinController');
 const router = express.Router();
 
 
@@ -23,7 +28,7 @@ router.get('/', GetAllPatient);
 //get a specific patient
 router.get('/:id', GetPatient);
 
-//post a patient 
+//post a new patient 
 router.post('/',CreateNewPatient);
 
 //delete a patient
@@ -50,5 +55,22 @@ router.patch('/CarnetSante/:id', UpdateCarnetSante);
 
 //delete a carnet de sante
 router.delete('/CarnetSante/:id', DeleteCarnetSante);
+
+// VACCIN
+
+//get all vaccins
+router.get('/Vaccin', GetAllVaccins);
+
+//get a specific vaccin
+router.get('/Vaccin/:id', GetVaccinById);
+
+//post a new vaccin
+router.post('/Vaccin',CreateNewVaccin);
+
+//update a vaccin
+router.patch('/Vaccin/:id', UpdateVaccin);
+
+//delete a vaccin
+router.delete('/Vaccin/:id', DeleteVaccin);
 
 module.exports = router;
