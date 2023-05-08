@@ -6,7 +6,10 @@ import data from "../VaccinDataBase.json";
 import { nanoid } from "nanoid";
 import ReadOnlyRow from "./addPatientVaccinTableReadOnlyRow";
 import EditRow from "./addPatientVaccinTableEditRow";
-
+import axios from 'axios';
+import { useNavigate  } from 'react-router-dom';
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useParams } from 'react-router-dom';
 export default function VaccinTable() {
   const [addVaccinTable, setaddVaccinTable] = useState(false);
 
@@ -129,6 +132,48 @@ export default function VaccinTable() {
     setVaccinDB(newVaccin);
   };
 
+  // Vaccin data
+  const [Nom_vaccin, setNom_vaccin] = useState("Date_vaccination");
+  const [Date_vaccination, setDate_vaccination] = useState("Date_vaccination");
+  const [Age_vaccination, setAge_vaccination] = useState("Date_vaccination");
+  const [Contre_vaccin, setContre_vaccin] = useState("Date_vaccination");
+  const [Technique_vaccinale, setTechnique_vaccinale] = useState("Date_vaccination");
+  const [Numero_lot, setNumero_lot] = useState("Date_vaccination");
+  //Get patient id from url
+  const  {id}  = useParams();
+  //Get user id 
+  const { user } = useAuthContext();
+
+  const history = useNavigate ('/patients');
+
+  //Create new Vaccin 
+  const handleNewVaccinSubmit = async (event) => {
+    event.preventDefault();
+    
+    if(id !== undefined){
+       try {
+        const response = await axios.post(`http://localhost:8000/patients/AddVaccin/${id}`, { 
+          ID_vaccinateur : user?._id, Nom_vaccin :"a", Date_vaccination:"a", Age_vaccination:"a", 
+          Contre_vaccin:"a", Technique_vaccinale:"a", Numero_lot:"a"
+        });
+        // Handle response as needed
+        if (!response.status === 200) {
+            window.alert("Add Vaccin failed", response.data.message);
+        }else if (response.status === 200) {
+            window.alert("Add Vaccin success", response.data.message);
+        } 
+      } catch (error) {
+        console.log(error);
+      } 
+    }else{
+      history()
+    }
+
+
+    /*if (!VaccinData) {
+      return <p>Loading...</p>;
+    }*/
+  };
   return (
     <div className="vaccin-container">
       <div className="vaccin-table-container">
@@ -228,7 +273,7 @@ export default function VaccinTable() {
               <span>Date</span>
             </div>
           </div>
-          <form onSubmit={handleAddFormSubmit}>
+          <form onSubmit={handleNewVaccinSubmit}>
             <div className="form-table2">
               <div className="form-table-item">
                 <select
@@ -335,6 +380,7 @@ export default function VaccinTable() {
               <AjouteVaccinButton
                 addVaccinTable={addVaccinTable}
                 setaddVaccinTable={setaddVaccinTable}
+        
               />
             </div>
           </form>

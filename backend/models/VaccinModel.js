@@ -32,8 +32,8 @@ const VaccinationSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-});
+},{ timestamps: true });
 
-const Vaccination = mongoose.model('vaccin', VaccinationSchema);
+const Vaccination = mongoose.model('vaccins', VaccinationSchema);
 
 module.exports = Vaccination;

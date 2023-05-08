@@ -47,7 +47,7 @@ const CreateNewPatient = async (req, res) => {
             const patientID = savedPatient._id;
 
 
-            // Save to db user
+            // Save to user the patientID
             const user = await User.findOne({_id :idAccoucheur}).then((user) => {
                 if (!user) {
                     return res.status(404).json({ message: 'User not found' });

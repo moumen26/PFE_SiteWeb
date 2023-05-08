@@ -11,6 +11,9 @@ const PatientSchema = new mongoose.Schema({
     idAccoucheur: {
         type: mongoose.Schema.Types.ObjectId, ref: "users"
     },
+    idVaccin: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "vaccins"
+    }],
 });
 
 

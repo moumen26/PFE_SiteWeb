@@ -1,14 +1,9 @@
 const Vaccin = require('../models/VaccinModel');
-
+const Patient = require('../models/PatientModel');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 
 
-//get all Vaccins
-const GetAllVaccins = async (req, res) => {
-    const vaccins = await Vaccin.find({}).sort({createdAt: -1});
-    res.status(200).json(vaccins);
-}
 // get a specific Vaccin by ID
 const GetVaccinById = async (req, res) => {
     const { id } = req.params;
@@ -28,9 +23,22 @@ const GetVaccinById = async (req, res) => {
             res.status(500).json({ message: 'Error retrieving Vaccin' });
         });
 }
+
+//get all Vaccins
+const GetAllVaccins = async (req, res) => {
+    try {
+        const vaccins = await Vaccin.find({}).sort({createdAt: -1});
+        res.status(200).json(vaccins);
+    }catch (error) {
+        console.error('Error retrieving Vaccins:', error);
+        res.status(500).json({ message: 'Error retrieving Vaccins' });
+    }
+}
+
 // Create a new Vaccin
 const CreateNewVaccin = async (req, res) => {
     try {
+        const {id} = req.params;
         const {ID_Patient, ID_vaccinateur, Nom_vaccin, Date_vaccination, Age_vaccination, 
             Contre_vaccin, Technique_vaccinale, Numero_lot} = req.body;
         if (!ID_Patient || !ID_vaccinateur || !Nom_vaccin || !Date_vaccination || !Age_vaccination || 
@@ -38,13 +46,27 @@ const CreateNewVaccin = async (req, res) => {
             return res.status(400).json({ error: 'You must provide all fields' });
         }
         const vaccin = new Vaccin({
-            ID_Patient, ID_vaccinateur, Nom_vaccin, Date_vaccination, Age_vaccination, 
+            ID_Patient : id, ID_vaccinateur, Nom_vaccin, Date_vaccination, Age_vaccination, 
             Contre_vaccin, Technique_vaccinale, Numero_lot
         });
         vaccin.save().then(async (savedVaccin) => {
             const vaccinID = savedVaccin._id;
+
+            // Save to user the vaccinID
+            const patient = await Patient.findOne({_id : id})
+            .then((patient) => {
+                if (!patient) {
+                    return res.status(404).json({ message: 'patient not found' });
+                }
+                patient.idVaccin.push(vaccinID);
+                patient.save();
+            }).catch((error) => {
+                console.error('Error creating patient:', error);
+                res.status(500).json({ message: 'Failed to create patient' });
+            });
+            
             // Send vaccinID to server
-            await res.status(201).json({id: vaccinID});
+            await res.status(201).json(savedVaccin);
         }).catch((error) => {
             console.error('Error creating vaccin:', error);
             res.status(500).json({ message: 'Failed to create vaccin' });
