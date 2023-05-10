@@ -91,12 +91,12 @@ export default function VaccinTable() {
     
 
     const formValues = {
-      Nom_vaccin: editFormData.vaccinationVaccin,
-      Date_vaccination: editFormData.vaccinationDate,
-      Age_vaccination: editFormData.vaccinationAge,
-      Contre_vaccin: editFormData.vaccinationContre,
-      Technique_vaccinale: editFormData.vaccinationTechnique,
-      Numero_lot: editFormData.vaccinationNumero,
+      Nom_vaccin: VaccinData.vaccinationVaccin,
+      Date_vaccination: VaccinData.vaccinationDate,
+      Age_vaccination: VaccinData.vaccinationAge,
+      Contre_vaccin: VaccinData.vaccinationContre,
+      Technique_vaccinale: VaccinData.vaccinationTechnique,
+      Numero_lot: VaccinData.vaccinationNumero,
     };
 
     setEditFormData(formValues);
