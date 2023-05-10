@@ -2,11 +2,8 @@ import { useState, Fragment, useEffect } from "react";
 import AjouteVaccinButton from "./ajouteVaccinButton";
 import CloseButton from "./closeButtonTableVaccin";
 import VaccinationAddButton from "./vaccinationAddButton";
-import data from "../VaccinDataBase.json";
-import { nanoid } from "nanoid";
 import ReadOnlyRow from "./addPatientVaccinTableReadOnlyRow";
 import EditRow from "./addPatientVaccinTableEditRow";
-import axios from 'axios';
 import { useNavigate  } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useParams } from 'react-router-dom';
@@ -19,21 +16,21 @@ export default function VaccinTable() {
 
   const [VaccinDB, setVaccinDB] = useState();
   const [addFormData, setAddFormData] = useState({
-    vaccinationAge: "",
-    vaccinationVaccin: "",
-    vaccinationContre: "",
-    vaccinationTechnique: "",
-    vaccinationNumero: "",
-    vaccinationDate: "",
+    Nom_vaccin: "",
+    Date_vaccination: "",
+    Age_vaccination: "",
+    Contre_vaccin: "",
+    Technique_vaccinale: "",
+    Numero_lot: "",
   });
 
   const [editFormData, setEditFormData] = useState({
-    vaccinationAge: "",
-    vaccinationVaccin: "",
-    vaccinationContre: "",
-    vaccinationTechnique: "",
-    vaccinationNumero: "",
-    vaccinationDate: "",
+    Nom_vaccin: "",
+    Date_vaccination: "",
+    Age_vaccination: "",
+    Contre_vaccin: "",
+    Technique_vaccinale: "",
+    Numero_lot: "",
   });
 
   const [editVaccinId, setEditVaccinId] = useState(null);
@@ -66,18 +63,18 @@ export default function VaccinTable() {
     event.preventDefault();
 
     const editVaccin = {
-      id: editVaccinId,
-      vaccinationAge: editFormData.vaccinationAge,
-      vaccinationVaccin: editFormData.vaccinationVaccin,
-      vaccinationContre: editFormData.vaccinationContre,
-      vaccinationTechnique: editFormData.vaccinationTechnique,
-      vaccinationNumero: editFormData.vaccinationNumero,
-      vaccinationDate: editFormData.vaccinationDate,
+      id: "",
+      Nom_vaccin: "",
+      Date_vaccination: "",
+      Age_vaccination: "",
+      Contre_vaccin: "",
+      Technique_vaccinale: "",
+      Numero_lot: "",
     };
 
     const newVaccin = [...VaccinDB];
 
-    const index = VaccinDB.findIndex((Vaccin) => Vaccin.id === editVaccinId);
+    const index = VaccinDB.findIndex((Vaccin) => Vaccin._id === editVaccinId);
 
     newVaccin[index] = editVaccin;
 
@@ -87,15 +84,15 @@ export default function VaccinTable() {
 
   const handleEditRowClick = (event, Vaccin) => {
     event.preventDefault();
-    setEditVaccinId(Vaccin.id);
+    setEditVaccinId(Vaccin._id);
 
     const formValues = {
-      vaccinationAge: Vaccin.vaccinationAge,
-      vaccinationVaccin: Vaccin.vaccinationVaccin,
-      vaccinationContre: Vaccin.vaccinationContre,
-      vaccinationTechnique: Vaccin.vaccinationTechnique,
-      vaccinationNumero: Vaccin.vaccinationNumero,
-      vaccinationDate: Vaccin.vaccinationDate,
+      Nom_vaccin: addFormData.vaccinationVaccin,
+      Date_vaccination: addFormData.vaccinationDate,
+      Age_vaccination: addFormData.vaccinationAge,
+      Contre_vaccin: addFormData.vaccinationContre,
+      Technique_vaccinale: addFormData.vaccinationTechnique,
+      Numero_lot: addFormData.vaccinationNumero,
     };
 
     setEditFormData(formValues);
@@ -106,13 +103,7 @@ export default function VaccinTable() {
   };
 
   const handleDeleteClick = (VaccinId) => {
-    const newVaccin = [...VaccinDB];
-
-    const index = VaccinDB.findIndex((Vaccin) => Vaccin.id === VaccinId);
-
-    newVaccin.splice(index, 1);
-
-    setVaccinDB(newVaccin);
+    
   };
 
   //Get patient id from url
@@ -166,32 +157,26 @@ export default function VaccinTable() {
   };
   useEffect(() => {
     const fetchVaccinData = async () => {
-      if (id !== undefined) {
-        await fetch(`http://localhost:8000/Vaccin/all/${id}`, {
-          method: "GET",
-        }).then((response) => {
+      if(id !== undefined){
+        await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`).then((response) => {
           if (response.ok) {
-            response
-              .json()
-              .then((data) => {
-                setVaccinDB(data);
-              })
-              .catch((error) => {
-                console.error("Error fetching Vaccin data:", error);
-              });
+            response.json().then((data) => {
+              const newVaccinDB = [data];
+              setVaccinDB(newVaccinDB);
+            }).catch((error) => {
+              console.error("Error fetching Vaccin data:", error);
+            });
           } else {
-            console.error("Error fetching Vaccin data:", response.status);
+            console.error("Error resieving vaccin date", response.error);
           }
         });
-      } else {
-        history();
+      }else{
+        history()
       }
     };
     fetchVaccinData();
   }, [history, id]);
-  if (!VaccinDB) {
-      return <p>Loading...</p>;
-    }
+  
   return (
     <div className="vaccin-container">
       <div className="vaccin-table-container">
@@ -230,6 +215,7 @@ export default function VaccinTable() {
               </th>
             </tr>
             {VaccinDB?.map((VaccinData) => (
+              console.log(VaccinData),
               <Fragment>
                 {editVaccinId === VaccinData?._id ? (
                   <EditRow

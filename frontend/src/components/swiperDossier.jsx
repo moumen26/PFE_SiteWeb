@@ -47,7 +47,7 @@ export default function MySwiper() {
               console.error('Error fetching article data:', error);
             });
           } else {
-            console.error('Error fetching article data:', response.status);
+            console.error('Error fetching article data:', response.error);
           }
         });
       }else{

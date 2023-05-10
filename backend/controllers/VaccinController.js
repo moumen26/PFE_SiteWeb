@@ -31,10 +31,8 @@ const GetAllVaccins = async (req, res) => {
       return res.status(400).json({ message: "Specified id is not valid" });
     }
     await Patient.findById({_id: id}).then(async (patient)=>{
-        const AllVaccin = patient.idVaccin;
-        AllVaccin[0] 
         // Find the Vaccin by ID in the database
-        const vaccin = await Vaccin.findById({_id : AllVaccin[0]})
+        await Vaccin.find({ID_Patient : patient._id})
         .then((vaccin) => {
             if (!vaccin) {
             return res.status(404).json({ message: "Vaccin not found" });
@@ -45,6 +43,7 @@ const GetAllVaccins = async (req, res) => {
             console.error("Error retrieving Vaccin:", error);
             res.status(500).json({ message: "Error retrieving Vaccin" });
       });
+      
     }).catch((error)=>{
         console.error("Error retrieving Patient :", error);
         res.status(500).json({ message: "Error retrieving Patient" });
