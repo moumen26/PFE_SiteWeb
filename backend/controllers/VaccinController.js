@@ -132,18 +132,21 @@ const UpdateVaccin = async (req, res) => {
             return res.status(400).json({err: 'Vaccin not found'});
         }
         //find id in db and update
-        const vaccin = await Vaccin.findOneAndUpdate({_id: id},
+        await Vaccin.findByIdAndUpdate({_id: id},
             {Nom_vaccin, Date_vaccination, Age_vaccination, 
                 Contre_vaccin, Technique_vaccinale, Numero_lot}
-        );
-        //if not found return error
-        if(!vaccine){
-            return res.status(404).json({err: 'Vaccin not found'});
-        }
-        //return user
-        res.status(200).json(vaccin);
+            ).then(async (vaccin) => {
+                if(!vaccin){
+                    return res.status(404).json({err: 'Vaccin not found'});
+                }
+                //return vaccin
+                res.status(200).json(vaccin);
+            }).catch((error) => {
+                console.error('Error updating vaccin:', error);
+            });
     }catch(err){
         res.status(400).json({err: err.message});
+        console.error("Error updating vaccin ", err);
     }
     
 }

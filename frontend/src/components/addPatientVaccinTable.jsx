@@ -7,6 +7,8 @@ import EditRow from "./addPatientVaccinTableEditRow";
 import { useNavigate  } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useParams } from 'react-router-dom';
+import axios from "axios";
+
 export default function VaccinTable() {
   const [addVaccinTable, setaddVaccinTable] = useState(false);
 
@@ -178,12 +180,39 @@ export default function VaccinTable() {
     };
     fetchVaccinData();
   }, [history, id]);
-  
+  //
+  const handleEditRowSubmitt = async (event) => {
+    event.preventDefault();
+
+    if(editVaccinId !== undefined){
+       try {
+        const response = await axios.patch(`http://localhost:8000/patients/Vaccin/${editVaccinId}`, { 
+          Nom_vaccin: addFormData.vaccinationVaccin,
+          Date_vaccination: addFormData.vaccinationDate,
+          Age_vaccination: addFormData.vaccinationAge,
+          Contre_vaccin: addFormData.vaccinationContre,
+          Technique_vaccinale: addFormData.vaccinationTechnique,
+          Numero_lot: addFormData.vaccinationNumero,
+        });
+        // Handle response as needed
+        if (!response.status === 200) {
+            window.alert("Add patient failed", response.error);
+        }else if (response.status === 200) {
+            window.alert("Add patient success", response.error);
+        } 
+      } catch (error) {
+        window.alert(error);
+      } 
+    }else{
+      window.alert("editVaccinId undefined");
+    }
+    
+  };
   return (
     <div className="vaccin-container">
       <div className="vaccin-table-container">
         <h2>Vaccination :</h2>
-        <form onSubmit={handleEditFormSubmit}>
+        <form onSubmit={handleEditRowSubmitt}>
           <table className="vaccination-table">
             <tr>
               <th>
