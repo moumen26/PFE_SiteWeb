@@ -8,15 +8,6 @@
         "vaccinationTechnique": "Technique1",
         "vaccinationNumero": "Numero1",
         "vaccinationDate": "26-04-2023"
-    },
-    {
-        "id": 2,
-        "vaccinationAge": "2 mois",
-        "vaccinationVaccin" : "Vaccin2",
-        "vaccinationContre": "Contre2",
-        "vaccinationTechnique": "Technique2",
-        "vaccinationNumero": "Numero2",
-        "vaccinationDate": "26-04-2023"
     }
 
 ]

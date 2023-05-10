@@ -11,28 +11,45 @@ const GetVaccinById = async (req, res) => {
         return res.status(400).json({ message: 'Specified id is not valid' });
     }
     // Find the Vaccin by ID in the database
-    await Vaccin.findById(id)
-        .then((vaccin) => {
-            if (!vaccin) {
-                return res.status(404).json({ message: 'Vaccin not found' });
-            }
-            res.status(200).json(vaccin);
-        })
-        .catch((error) => {
-            console.error('Error retrieving Vaccin:', error);
-            res.status(500).json({ message: 'Error retrieving Vaccin' });
-        });
+    await Vaccin.findById({_id: id})
+      .then((vaccin) => {
+        if (!vaccin) {
+          return res.status(404).json({ message: "Vaccin not found" });
+        }
+        res.status(200).json(vaccin);
+      })
+      .catch((error) => {
+        console.error("Error retrieving Vaccin:", error);
+        res.status(500).json({ message: "Error retrieving Vaccin" });
+      });
 }
 
 //get all Vaccins
 const GetAllVaccins = async (req, res) => {
-    try {
-        const vaccins = await Vaccin.find({}).sort({createdAt: -1});
-        res.status(200).json(vaccins);
-    }catch (error) {
-        console.error('Error retrieving Vaccins:', error);
-        res.status(500).json({ message: 'Error retrieving Vaccins' });
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Specified id is not valid" });
     }
+    await Patient.findById({_id: id}).then(async (patient)=>{
+        const AllVaccin = patient.idVaccin;
+        AllVaccin[0] 
+        // Find the Vaccin by ID in the database
+        const vaccin = await Vaccin.findById({_id : AllVaccin[0]})
+        .then((vaccin) => {
+            if (!vaccin) {
+            return res.status(404).json({ message: "Vaccin not found" });
+            }
+            res.status(200).json(vaccin);
+        })
+        .catch((error) => {
+            console.error("Error retrieving Vaccin:", error);
+            res.status(500).json({ message: "Error retrieving Vaccin" });
+      });
+    }).catch((error)=>{
+        console.error("Error retrieving Patient :", error);
+        res.status(500).json({ message: "Error retrieving Patient" });
+    });
+   
 }
 
 // Create a new Vaccin
@@ -41,9 +58,19 @@ const CreateNewVaccin = async (req, res) => {
         const {id} = req.params;
         const {ID_Patient, ID_vaccinateur, Nom_vaccin, Date_vaccination, Age_vaccination, 
             Contre_vaccin, Technique_vaccinale, Numero_lot} = req.body;
-        if (!ID_Patient || !ID_vaccinateur || !Nom_vaccin || !Date_vaccination || !Age_vaccination || 
-            !Contre_vaccin || !Technique_vaccinale || !Numero_lot) {
-            return res.status(400).json({ error: 'You must provide all fields' });
+        if (
+          !id ||
+          !ID_vaccinateur ||
+          !Nom_vaccin ||
+          !Date_vaccination ||
+          !Age_vaccination ||
+          !Contre_vaccin ||
+          !Technique_vaccinale ||
+          !Numero_lot
+        ) {
+          return res
+            .status(400)
+            .json({ message: "You must provide all fields" });
         }
         const vaccin = new Vaccin({
             ID_Patient : id, ID_vaccinateur, Nom_vaccin, Date_vaccination, Age_vaccination, 
@@ -66,7 +93,7 @@ const CreateNewVaccin = async (req, res) => {
             });
             
             // Send vaccinID to server
-            await res.status(201).json(savedVaccin);
+            await res.status(200).json(savedVaccin);
         }).catch((error) => {
             console.error('Error creating vaccin:', error);
             res.status(500).json({ message: 'Failed to create vaccin' });

@@ -1,32 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ReadOnlyRow = ({ Vaccin, handleEditRowClick, handleDeleteClick }) => {
+const ReadOnlyRow = ({ VaccinData, handleEditRowClick, handleDeleteClick }) => {
+
   return (
     <tr>
       <td className="vaccination-table-title-line2">
-        <span>{Vaccin.vaccinationAge}</span>
+        <span>{VaccinData?.Age_vaccination}</span>
       </td>
       <td>
-        <span>{Vaccin.vaccinationVaccin}</span>
+        <span>{VaccinData?.Nom_vaccin}</span>
       </td>
       <td>
-        <span>{Vaccin.vaccinationContre}</span>
+        <span>{VaccinData?.Contre_vaccin}</span>
       </td>
       <td>
-        <span>{Vaccin.vaccinationTechnique}</span>
+        <span>{VaccinData?.Technique_vaccinale}</span>
       </td>
       <td>
-        <span>{Vaccin.vaccinationNumero}</span>
+        <span>{VaccinData?.Numero_lot}</span>
       </td>
       <td>
-        <span>{Vaccin.vaccinationDate}</span>
+        <span>{VaccinData?.Date_vaccination}</span>
       </td>
       <td>
         <div className="action-table">
-          <button onClick={(event) => handleEditRowClick(event, Vaccin)}>
+          <button onClick={(event) => handleEditRowClick(event, VaccinData)}>
             Edit
           </button>
-          <button onClick={() => handleDeleteClick(Vaccin.id)}>Delete</button>
+          <button onClick={() => handleDeleteClick(VaccinData?._id)}>
+            Delete
+          </button>
         </div>
       </td>
     </tr>

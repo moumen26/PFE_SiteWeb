@@ -1,4 +1,4 @@
-import { useState, Fragment } from "react";
+import { useState, Fragment, useEffect } from "react";
 import AjouteVaccinButton from "./ajouteVaccinButton";
 import CloseButton from "./closeButtonTableVaccin";
 import VaccinationAddButton from "./vaccinationAddButton";
@@ -17,7 +17,7 @@ export default function VaccinTable() {
     ? " add-Vaccin-Table-active"
     : "";
 
-  const [VaccinDB, setVaccinDB] = useState(data);
+  const [VaccinDB, setVaccinDB] = useState();
   const [addFormData, setAddFormData] = useState({
     vaccinationAge: "",
     vaccinationVaccin: "",
@@ -60,23 +60,6 @@ export default function VaccinTable() {
     newFormData[fieldName] = fieldValue;
 
     setEditFormData(newFormData);
-  };
-
-  const handleAddFormSubmit = (event) => {
-    event.preventDefault();
-
-    const newVaccin = {
-      id: nanoid(),
-      vaccinationAge: addFormData.vaccinationAge,
-      vaccinationVaccin: addFormData.vaccinationVaccin,
-      vaccinationContre: addFormData.vaccinationContre,
-      vaccinationTechnique: addFormData.vaccinationTechnique,
-      vaccinationNumero: addFormData.vaccinationNumero,
-      vaccinationDate: addFormData.vaccinationDate,
-    };
-
-    const newVaccinDB = [...VaccinDB, newVaccin];
-    setVaccinDB(newVaccinDB);
   };
 
   const handleEditFormSubmit = (event) => {
@@ -132,48 +115,83 @@ export default function VaccinTable() {
     setVaccinDB(newVaccin);
   };
 
-  // Vaccin data
-  const [Nom_vaccin, setNom_vaccin] = useState("Date_vaccination");
-  const [Date_vaccination, setDate_vaccination] = useState("Date_vaccination");
-  const [Age_vaccination, setAge_vaccination] = useState("Date_vaccination");
-  const [Contre_vaccin, setContre_vaccin] = useState("Date_vaccination");
-  const [Technique_vaccinale, setTechnique_vaccinale] = useState("Date_vaccination");
-  const [Numero_lot, setNumero_lot] = useState("Date_vaccination");
   //Get patient id from url
-  const  {id}  = useParams();
-  //Get user id 
+  const { id } = useParams();
+  //Get user id
   const { user } = useAuthContext();
 
-  const history = useNavigate ('/patients');
-
-  //Create new Vaccin 
+  const history = useNavigate("/patients");
+  //Create new Vaccin
   const handleNewVaccinSubmit = async (event) => {
     event.preventDefault();
-    
-    if(id !== undefined){
-       try {
-        const response = await axios.post(`http://localhost:8000/patients/AddVaccin/${id}`, { 
-          ID_vaccinateur : user?._id, Nom_vaccin :"a", Date_vaccination:"a", Age_vaccination:"a", 
-          Contre_vaccin:"a", Technique_vaccinale:"a", Numero_lot:"a"
-        });
-        // Handle response as needed
-        if (!response.status === 200) {
-            window.alert("Add Vaccin failed", response.data.message);
-        }else if (response.status === 200) {
-            window.alert("Add Vaccin success", response.data.message);
-        } 
-      } catch (error) {
-        console.log(error);
-      } 
-    }else{
-      history()
-    }
 
+    if (id !== undefined) {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/patients/AddVaccin/${id}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              ID_vaccinateur: user?.id,
+              Nom_vaccin: addFormData.vaccinationVaccin,
+              Date_vaccination: addFormData.vaccinationDate,
+              Age_vaccination: addFormData.vaccinationAge,
+              Contre_vaccin: addFormData.vaccinationContre,
+              Technique_vaccinale: addFormData.vaccinationTechnique,
+              Numero_lot: addFormData.vaccinationNumero,
+            }),
+          }
+        );
+        // get the patientID via response from the server patientRouter.post
+        const data = await response.json();
+        if (!response.ok) {
+          window.alert("Add patient failed", data.error);
+        }
+        if (response.ok) {
+          window.alert("Add patient success", data.error);
+        }
+      } catch (error) {
+        window.alert("Add Vaccin error");
+      }
+    } else {
+      history();
+    }
 
     /*if (!VaccinData) {
       return <p>Loading...</p>;
     }*/
   };
+  useEffect(() => {
+    const fetchVaccinData = async () => {
+      if (id !== undefined) {
+        await fetch(`http://localhost:8000/Vaccin/all/${id}`, {
+          method: "GET",
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setVaccinDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Vaccin data:", error);
+              });
+          } else {
+            console.error("Error fetching Vaccin data:", response.status);
+          }
+        });
+      } else {
+        history();
+      }
+    };
+    fetchVaccinData();
+  }, [history, id]);
+  if (!VaccinDB) {
+      return <p>Loading...</p>;
+    }
   return (
     <div className="vaccin-container">
       <div className="vaccin-table-container">
@@ -211,9 +229,9 @@ export default function VaccinTable() {
                 <span>Actions</span>
               </th>
             </tr>
-            {VaccinDB.map((Vaccin) => (
+            {VaccinDB?.map((VaccinData) => (
               <Fragment>
-                {editVaccinId === Vaccin.id ? (
+                {editVaccinId === VaccinData?._id ? (
                   <EditRow
                     editFromData={editFormData}
                     handleEditFromChange={handleEditFormChange}
@@ -221,7 +239,7 @@ export default function VaccinTable() {
                   />
                 ) : (
                   <ReadOnlyRow
-                    Vaccin={Vaccin}
+                    VaccinData={VaccinData}
                     handleEditRowClick={handleEditRowClick}
                     handleDeleteClick={handleDeleteClick}
                   />
@@ -280,7 +298,6 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationAge"
                   id="vaccination-age"
-                  required="required"
                   onChange={handleAddFormChange}
                 >
                   <option selected disabled>
@@ -298,7 +315,6 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationVaccin"
                   id="vaccination-vaccin"
-                  required="required"
                   onChange={handleAddFormChange}
                 >
                   <option selected disabled>
@@ -316,7 +332,6 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationContre"
                   id="vaccination-contre"
-                  required="required"
                   onChange={handleAddFormChange}
                 >
                   <option selected disabled>
@@ -334,7 +349,6 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationTechnique"
                   id="vaccination-technique"
-                  required="required"
                   onChange={handleAddFormChange}
                 >
                   <option selected disabled>
@@ -352,7 +366,6 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationNumero"
                   id="vaccination-numero"
-                  required="required"
                   onChange={handleAddFormChange}
                 >
                   <option selected disabled>
@@ -370,7 +383,6 @@ export default function VaccinTable() {
                   className="vaccination-input"
                   type="date"
                   name="vaccinationDate"
-                  required="required"
                   onChange={handleAddFormChange}
                 />
               </div>
@@ -380,7 +392,6 @@ export default function VaccinTable() {
               <AjouteVaccinButton
                 addVaccinTable={addVaccinTable}
                 setaddVaccinTable={setaddVaccinTable}
-        
               />
             </div>
           </form>

@@ -59,7 +59,7 @@ router.delete('/CarnetSante/:id', DeleteCarnetSante);
 // VACCIN
 
 //get all vaccins
-router.get('/Vaccin/all', GetAllVaccins);
+router.get("/Vaccin/all/:id", GetAllVaccins);
 
 //post a new vaccin
 router.post('/AddVaccin/:id',CreateNewVaccin);
