@@ -16,21 +16,22 @@ export default function VaccinTable() {
 
   const [VaccinDB, setVaccinDB] = useState();
   const [addFormData, setAddFormData] = useState({
-    Nom_vaccin: "",
-    Date_vaccination: "",
-    Age_vaccination: "",
-    Contre_vaccin: "",
-    Technique_vaccinale: "",
-    Numero_lot: "",
+    vaccinationAge: "",
+    vaccinationVaccin: "",
+    vaccinationContre: "",
+    vaccinationTechnique: "",
+    vaccinationNumero: "",
+    vaccinationDate: "",
   });
 
   const [editFormData, setEditFormData] = useState({
-    Nom_vaccin: "",
-    Date_vaccination: "",
-    Age_vaccination: "",
-    Contre_vaccin: "",
-    Technique_vaccinale: "",
-    Numero_lot: "",
+    id: "",
+    vaccinationAge: "",
+    vaccinationVaccin: "",
+    vaccinationContre: "",
+    vaccinationTechnique: "",
+    vaccinationNumero: "",
+    vaccinationDate: "",
   });
 
   const [editVaccinId, setEditVaccinId] = useState(null);
@@ -63,18 +64,18 @@ export default function VaccinTable() {
     event.preventDefault();
 
     const editVaccin = {
-      id: "",
-      Nom_vaccin: "",
-      Date_vaccination: "",
-      Age_vaccination: "",
-      Contre_vaccin: "",
-      Technique_vaccinale: "",
-      Numero_lot: "",
+      id: addFormData._id,
+      Nom_vaccin: addFormData.vaccinationVaccin,
+      Date_vaccination: addFormData.vaccinationDate,
+      Age_vaccination: addFormData.vaccinationAge,
+      Contre_vaccin: addFormData.vaccinationContre,
+      Technique_vaccinale: addFormData.vaccinationTechnique,
+      Numero_lot: addFormData.vaccinationNumero,
     };
 
     const newVaccin = [...VaccinDB];
 
-    const index = VaccinDB.findIndex((Vaccin) => Vaccin._id === editVaccinId);
+    const index = VaccinDB.findIndex((VaccinData) => VaccinData?._id === editVaccinId);
 
     newVaccin[index] = editVaccin;
 
@@ -82,11 +83,13 @@ export default function VaccinTable() {
     setEditVaccinId(null);
   };
 
-  const handleEditRowClick = (event, Vaccin) => {
+  const handleEditRowClick = (event, VaccinData) => {
     event.preventDefault();
-    setEditVaccinId(Vaccin._id);
+    setEditVaccinId(VaccinData?._id);
+    console.log(VaccinData?._id);
 
     const formValues = {
+      id: addFormData._id,
       Nom_vaccin: addFormData.vaccinationVaccin,
       Date_vaccination: addFormData.vaccinationDate,
       Age_vaccination: addFormData.vaccinationAge,
@@ -161,8 +164,7 @@ export default function VaccinTable() {
         await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`).then((response) => {
           if (response.ok) {
             response.json().then((data) => {
-              const newVaccinDB = [data];
-              setVaccinDB(newVaccinDB);
+              setVaccinDB(data);
             }).catch((error) => {
               console.error("Error fetching Vaccin data:", error);
             });

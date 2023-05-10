@@ -9,7 +9,7 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationAge"
           id="vaccination-age"
           required="required"
-          value={editFromData.vaccinationAge}
+          value={editFromData?.Age_vaccination}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -27,7 +27,7 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationVaccin"
           id="vaccination-vaccin"
           required="required"
-          value={editFromData.vaccinationVaccin}
+          value={editFromData?.Nom_vaccin}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -45,7 +45,7 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationContre"
           id="vaccination-contre"
           required="required"
-          value={editFromData.vaccinationContre}
+          value={editFromData?.Contre_vaccin}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -63,7 +63,7 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationTechnique"
           id="vaccination-technique"
           required="required"
-          value={editFromData.vaccinationTechnique}
+          value={editFromData?.Technique_vaccinale}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -81,7 +81,7 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationNumero"
           id="vaccination-numero"
           required="required"
-          value={editFromData.vaccinationNumero}
+          value={editFromData?.Numero_lot}
           onChange={handleEditFromChange}
         >
           <option selected disabled>
@@ -99,7 +99,7 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           type="date"
           name="vaccinationDate"
           required="required"
-          value={editFromData.vaccinationDate}
+          value={editFromData?.Date_vaccination}
           onChange={handleEditFromChange}
         />
       </td>
