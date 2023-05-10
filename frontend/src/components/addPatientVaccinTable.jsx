@@ -91,13 +91,12 @@ export default function VaccinTable() {
     console.log(VaccinData?._id);
 
     const formValues = {
-      id: addFormData._id,
-      Nom_vaccin: addFormData.vaccinationVaccin,
-      Date_vaccination: addFormData.vaccinationDate,
-      Age_vaccination: addFormData.vaccinationAge,
-      Contre_vaccin: addFormData.vaccinationContre,
-      Technique_vaccinale: addFormData.vaccinationTechnique,
-      Numero_lot: addFormData.vaccinationNumero,
+      Nom_vaccin: editFormData.vaccinationVaccin,
+      Date_vaccination: editFormData.vaccinationDate,
+      Age_vaccination: editFormData.vaccinationAge,
+      Contre_vaccin: editFormData.vaccinationContre,
+      Technique_vaccinale: editFormData.vaccinationTechnique,
+      Numero_lot: editFormData.vaccinationNumero,
     };
 
     setEditFormData(formValues);
@@ -187,12 +186,12 @@ export default function VaccinTable() {
     if(editVaccinId !== undefined){
        try {
         const response = await axios.patch(`http://localhost:8000/patients/Vaccin/${editVaccinId}`, { 
-          Nom_vaccin: addFormData.vaccinationVaccin,
-          Date_vaccination: addFormData.vaccinationDate,
-          Age_vaccination: addFormData.vaccinationAge,
-          Contre_vaccin: addFormData.vaccinationContre,
-          Technique_vaccinale: addFormData.vaccinationTechnique,
-          Numero_lot: addFormData.vaccinationNumero,
+          Nom_vaccin: editFormData.vaccinationVaccin,
+          Date_vaccination: editFormData.vaccinationDate,
+          Age_vaccination: editFormData.vaccinationAge,
+          Contre_vaccin: editFormData.vaccinationContre,
+          Technique_vaccinale: editFormData.vaccinationTechnique,
+          Numero_lot: editFormData.vaccinationNumero,
         });
         // Handle response as needed
         if (!response.status === 200) {
