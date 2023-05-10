@@ -28,7 +28,7 @@ const ReadOnlyRow = ({ VaccinData, handleEditRowClick, handleDeleteClick }) => {
           <button onClick={(event) => handleEditRowClick(event, VaccinData)}>
             Edit
           </button>
-          <button onClick={() => handleDeleteClick(VaccinData?._id)}>
+          <button onClick={(event) => handleDeleteClick(event, VaccinData?._id)}>
             Delete
           </button>
         </div>

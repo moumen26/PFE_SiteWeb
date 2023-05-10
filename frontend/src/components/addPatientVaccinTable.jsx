@@ -88,7 +88,7 @@ export default function VaccinTable() {
   const handleEditRowClick = (event, VaccinData) => {
     event.preventDefault();
     setEditVaccinId(VaccinData?._id);
-    console.log(VaccinData?._id);
+    
 
     const formValues = {
       Nom_vaccin: editFormData.vaccinationVaccin,
@@ -106,9 +106,7 @@ export default function VaccinTable() {
     setEditVaccinId(null);
   };
 
-  const handleDeleteClick = (VaccinId) => {
-    
-  };
+  
 
   //Get patient id from url
   const { id } = useParams();
@@ -116,10 +114,10 @@ export default function VaccinTable() {
   const { user } = useAuthContext();
 
   const history = useNavigate("/patients");
-  //Create new Vaccin
+  
+//Create new Vaccin
   const handleNewVaccinSubmit = async (event) => {
     event.preventDefault();
-
     if (id !== undefined) {
       try {
         const response = await fetch(
@@ -154,11 +152,8 @@ export default function VaccinTable() {
     } else {
       history();
     }
-
-    /*if (!VaccinData) {
-      return <p>Loading...</p>;
-    }*/
   };
+// Fetch Vaccins
   useEffect(() => {
     const fetchVaccinData = async () => {
       if(id !== undefined){
@@ -179,7 +174,7 @@ export default function VaccinTable() {
     };
     fetchVaccinData();
   }, [history, id]);
-  //
+// Edit Vaccin
   const handleEditRowSubmitt = async (event) => {
     event.preventDefault();
 
@@ -195,9 +190,9 @@ export default function VaccinTable() {
         });
         // Handle response as needed
         if (!response.status === 200) {
-            window.alert("Add patient failed", response.error);
+            window.alert("Update vaccin failed", response.error);
         }else if (response.status === 200) {
-            window.alert("Add patient success", response.error);
+            window.alert("Update vaccin success", response.error);
         } 
       } catch (error) {
         window.alert(error);
@@ -206,6 +201,26 @@ export default function VaccinTable() {
       window.alert("editVaccinId undefined");
     }
     
+  };
+// Delete Vaccin
+  const handleDeleteClick = async (event, VaccinData) => {
+    event.preventDefault();
+
+    if(VaccinData !== undefined){
+      try {
+        const response = await axios.delete(`http://localhost:8000/patients/Vaccin/${VaccinData}`);
+        // Handle response as needed
+        if (!response.status === 200) {
+            window.alert("Deleting vaccin failed", response.error);
+        }else if (response.status === 200) {
+            window.alert("Deleting vaccin success", response.error);
+        } 
+      } catch (error) {
+        window.alert(error);
+      } 
+    }else{
+      window.alert("VaccinData undefined");
+    }
   };
   return (
     <div className="vaccin-container">
