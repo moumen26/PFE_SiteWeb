@@ -62,34 +62,9 @@ export default function VaccinTable() {
     setEditFormData(newFormData);
   };
 
-  const handleEditFormSubmit = (event) => {
-    event.preventDefault();
-
-    const editVaccin = {
-      id: addFormData._id,
-      Nom_vaccin: addFormData.vaccinationVaccin,
-      Date_vaccination: addFormData.vaccinationDate,
-      Age_vaccination: addFormData.vaccinationAge,
-      Contre_vaccin: addFormData.vaccinationContre,
-      Technique_vaccinale: addFormData.vaccinationTechnique,
-      Numero_lot: addFormData.vaccinationNumero,
-    };
-
-    const newVaccin = [...VaccinDB];
-
-    const index = VaccinDB.findIndex((VaccinData) => VaccinData?._id === editVaccinId);
-
-    newVaccin[index] = editVaccin;
-
-    setVaccinDB(newVaccin);
-    setEditVaccinId(null);
-  };
-
   const handleEditRowClick = (event, VaccinData) => {
     event.preventDefault();
     setEditVaccinId(VaccinData?._id);
-    
-
     const formValues = {
       Nom_vaccin: VaccinData.vaccinationVaccin,
       Date_vaccination: VaccinData.vaccinationDate,
@@ -106,11 +81,9 @@ export default function VaccinTable() {
     setEditVaccinId(null);
   };
 
-  
-
-  //Get patient id from url
+//Get patient id from url
   const { id } = useParams();
-  //Get user id
+//Get user id
   const { user } = useAuthContext();
 
   const history = useNavigate("/patients");
@@ -141,10 +114,10 @@ export default function VaccinTable() {
         // get the patientID via response from the server patientRouter.post
         const data = await response.json();
         if (!response.ok) {
-          window.alert("Add patient failed", data.error);
+          window.alert("Add vaccin failed", data.error);
         }
         if (response.ok) {
-          window.alert("Add patient success", data.error);
+          window.alert("Add vaccin success", data.error);
         }
       } catch (error) {
         window.alert("Add Vaccin error");
