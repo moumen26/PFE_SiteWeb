@@ -3,136 +3,166 @@ import "swiper/css";
 
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
-import { useState ,useEffect} from "react";
+import { useState, useEffect } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
-import axios from 'axios';
-import { useNavigate  } from 'react-router-dom';
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 
 export default function MyCahierSwiper({ add, setAdd }) {
-  const [Duree, setDuree] = useState('');
-  const [Reanimation, setReanimation] = useState('');
-  const [Transfert, setTransfert] = useState('');
-  const [MotifTransfert, setMotifTransfert] = useState('');
-  const [EmissionUrine, setEmissionUrine] = useState('');
-  const [EmissionMeconium, setEmissionMeconium] = useState('');
-  const [Sexe, setSexe] = useState('');
-  const [RechercheAtresieLoesophage, setRechercheAtresieLoesophage] = useState('');
-  const [OrganesGenitauxExternes, setOrganesGenitauxExternes] = useState('');
-  const [une_min, setUne_min] = useState('');
-  const [cinq_min, setCinq_min] = useState('');
-  const [Malformation, setMalformation] = useState('');
-  const [VitamineK1, setVitamineK1] = useState('');
-  const [Collyre, setCollyre] = useState('');
-  const [CatheterismeChoanes, setCatheterismeChoanes] = useState('');
-  const [ExamenCordon, setExamenCordon] = useState('');
-  
+  const [Duree, setDuree] = useState("");
+  const [Reanimation, setReanimation] = useState("");
+  const [Transfert, setTransfert] = useState("");
+  const [MotifTransfert, setMotifTransfert] = useState("");
+  const [EmissionUrine, setEmissionUrine] = useState("");
+  const [EmissionMeconium, setEmissionMeconium] = useState("");
+  const [Sexe, setSexe] = useState("");
+  const [RechercheAtresieLoesophage, setRechercheAtresieLoesophage] =
+    useState("");
+  const [OrganesGenitauxExternes, setOrganesGenitauxExternes] = useState("");
+  const [une_min, setUne_min] = useState("");
+  const [cinq_min, setCinq_min] = useState("");
+  const [Malformation, setMalformation] = useState("");
+  const [VitamineK1, setVitamineK1] = useState("");
+  const [Collyre, setCollyre] = useState("");
+  const [CatheterismeChoanes, setCatheterismeChoanes] = useState("");
+  const [ExamenCordon, setExamenCordon] = useState("");
+
   const { user } = useAuthContext();
 
-  const  {id}  = useParams();
+  const { id } = useParams();
   const [PatientData, setPatientData] = useState(null);
-  
-  const history = useNavigate ('/patients');
+
+  const history = useNavigate("/patients");
 
   useEffect(() => {
     const fetchPatientData = async () => {
-      if(id !== undefined){
+      if (id !== undefined) {
         await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setPatientData(data);
-            }).catch((error) => {
-              console.error('Error fetching article data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setPatientData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching article data:", error);
+              });
           } else {
-            console.error('Error fetching article data:', response.status);
+            console.error("Error fetching article data:", response.status);
           }
         });
-      }else{
-        history()
+      } else {
+        history();
       }
     };
 
     fetchPatientData();
   }, [history, id]);
-//Get Dossier Obstetricale Data
+  //Get Dossier Obstetricale Data
   const [DossObsData, setDossObsData] = useState(null);
   useEffect(() => {
     const fetchDossObsData = async () => {
-      if(PatientData.idDossObs !== undefined){
-        await fetch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`).then((response) => {
+      if (PatientData.idDossObs !== undefined) {
+        await fetch(
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`
+        ).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setDossObsData(data);
-            }).catch((error) => {
-              console.error('Error fetching article data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setDossObsData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching article data:", error);
+              });
           } else {
-            console.error('Error fetching article data:', response.status);
+            console.error("Error fetching article data:", response.status);
           }
         });
-      }else{
-        history()
+      } else {
+        history();
       }
     };
 
     fetchDossObsData();
   }, [history, PatientData?.idDossObs]);
-//Get Carnet de Sante Data
+  //Get Carnet de Sante Data
   const [CarnetSanteData, setCarnetSante] = useState(null);
   useEffect(() => {
     const fetchCarnetSanteData = async () => {
-      if(PatientData.idCarnetSante !== undefined){
-        await fetch(`http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`).then((response) => {
+      if (PatientData.idCarnetSante !== undefined) {
+        await fetch(
+          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`
+        ).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setCarnetSante(data);
-            }).catch((error) => {
-              console.error('Error fetching Carnet sante data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setCarnetSante(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Carnet sante data:", error);
+              });
           } else {
-            console.error('Error fetching Carnet sante data:', response.status);
+            console.error("Error fetching Carnet sante data:", response.status);
           }
         });
-      }else{
-        history()
+      } else {
+        history();
       }
     };
     fetchCarnetSanteData();
   }, [history, PatientData?.idCarnetSante]);
 
-//Update Carnet de Sante
+  //Update Carnet de Sante
   const handleCarnetSanteSubmit = async (event) => {
     event.preventDefault();
     const Date_daccouchement = DossObsData?.Date_daccouchement;
     const Heure_daccouchement = DossObsData?.Heure_daccouchement;
     const Sexe = DossObsData?.Sexe;
-    if(PatientData?.idCarnetSante !== undefined){
-       try {
-        const response = await axios.patch(`http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`, { 
-          Date_daccouchement,Heure_daccouchement,Sexe,Reanimation,
-          Duree,Malformation,Transfert,MotifTransfert,ExamenCordon,EmissionUrine,EmissionMeconium,
-          CatheterismeChoanes,RechercheAtresieLoesophage,OrganesGenitauxExternes,VitamineK1,Collyre
-        });
+    if (PatientData?.idCarnetSante !== undefined) {
+      try {
+        const response = await axios.patch(
+          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`,
+          {
+            Date_daccouchement,
+            Heure_daccouchement,
+            Sexe,
+            Reanimation,
+            Duree,
+            Malformation,
+            Transfert,
+            MotifTransfert,
+            ExamenCordon,
+            EmissionUrine,
+            EmissionMeconium,
+            CatheterismeChoanes,
+            RechercheAtresieLoesophage,
+            OrganesGenitauxExternes,
+            VitamineK1,
+            Collyre,
+          }
+        );
         // Handle response as needed
         if (!response.status === 200) {
-            window.alert("Add Carnet de Sante failed", response.data.message);
-        }else if (response.status === 200) {
-            window.alert("Add Carnet de Sante success", response.data.message);
-        } 
+          window.alert("Add Carnet de Sante failed", response.data.message);
+        } else if (response.status === 200) {
+          window.alert("Add Carnet de Sante success", response.data.message);
+        }
       } catch (error) {
         console.log(error);
-      } 
-    }else{
-      history()
+      }
+    } else {
+      history();
     }
-    
   };
 
   if (!PatientData) {
-    return <p>Loading...</p>;
+    return <CircularProgress />;
   }
   return (
     <Swiper
@@ -161,21 +191,35 @@ export default function MyCahierSwiper({ add, setAdd }) {
             <div className="hl"></div>
           </div>
           <form action="" onSubmit={handleCarnetSanteSubmit}>
-          <div className="sexe-date-heure">
+            <div className="sexe-date-heure">
               <div className="sexe">
                 <span>Sexe :</span>
-                  <input type="text"
-                    value={DossObsData?.Sexe}
-                    name="Sexe"
-                    readOnly/>
+                <input
+                  type="text"
+                  value={DossObsData?.Sexe}
+                  name="Sexe"
+                  readOnly
+                />
               </div>
               <div className="date">
                 <span>Date :</span>
-                <input type="text" name="date" id="date" defaultValue={CarnetSanteData?.Date_daccouchement} readOnly/>
+                <input
+                  type="text"
+                  name="date"
+                  id="date"
+                  defaultValue={CarnetSanteData?.Date_daccouchement}
+                  readOnly
+                />
               </div>
               <div className="heure">
                 <span>Heure :</span>
-                <input type="text" name="time" id="time" defaultValue={CarnetSanteData?.Heure_daccouchement} readOnly/>
+                <input
+                  type="text"
+                  name="time"
+                  id="time"
+                  defaultValue={CarnetSanteData?.Heure_daccouchement}
+                  readOnly
+                />
               </div>
             </div>
 
@@ -200,7 +244,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
               </div>
               <div className="duree">
                 <span>Duree :</span>
-                <input type="text" 
+                <input
+                  type="text"
                   value={Duree}
                   name="Duree"
                   onChange={(e) => {
@@ -210,7 +255,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
               </div>
               <div className="malforamtion">
                 <span>Malformation :</span>
-                <input type="text" 
+                <input
+                  type="text"
                   value={Malformation}
                   name="Malformation"
                   onChange={(e) => {
@@ -223,7 +269,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
             <div className="transfert-motif">
               <div className="transfert">
                 <span>Transfert:</span>
-                <input type="checkbox" 
+                <input
+                  type="checkbox"
                   value={Transfert}
                   name="Transfert"
                   onChange={(e) => {
@@ -233,7 +280,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
               </div>
               <div className="motif">
                 <span className="long-span">Motif du transfert :</span>
-                <input type="text" 
+                <input
+                  type="text"
                   value={MotifTransfert}
                   name="MotifTransfert"
                   onChange={(e) => {
@@ -249,7 +297,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
                   <span>Examen du cordon 2A/1V</span>
                 </div>
 
-                <input type="text" 
+                <input
+                  type="text"
                   value={ExamenCordon}
                   name="ExamenCordon"
                   onChange={(e) => {
@@ -262,7 +311,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
             <div className="emission">
               <div className="urine">
                 <span>Emission d’urine :</span>
-                <input type="checkbox" 
+                <input
+                  type="checkbox"
                   value={EmissionUrine}
                   name="EmissionUrine"
                   onChange={(e) => {
@@ -272,7 +322,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
               </div>
               <div className="meconium">
                 <span>Emission du meconium :</span>
-                <input type="checkbox" 
+                <input
+                  type="checkbox"
                   value={EmissionMeconium}
                   name="EmissionMeconium"
                   onChange={(e) => {
@@ -287,7 +338,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <div className="span">
                   <span>Catheterisme des choanes</span>
                 </div>
-                <input type="text" 
+                <input
+                  type="text"
                   value={CatheterismeChoanes}
                   name="CatheterismeChoanes"
                   onChange={(e) => {
@@ -302,7 +354,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <div className="span1">
                   <span>Recherche d’une atresie de l'oesophage</span>
                 </div>
-                <input type="text" 
+                <input
+                  type="text"
                   value={RechercheAtresieLoesophage}
                   name="RechercheAtresieLoesophage"
                   onChange={(e) => {
@@ -317,7 +370,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <div className="span">
                   <span>Organes genitaux externes</span>
                 </div>
-                <input type="text" 
+                <input
+                  type="text"
                   value={OrganesGenitauxExternes}
                   name="OrganesGenitauxExternes"
                   onChange={(e) => {
@@ -332,7 +386,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <div class="span">
                   <span>Vitamine K1</span>
                 </div>
-                <input type="text" 
+                <input
+                  type="text"
                   value={VitamineK1}
                   name="VitamineK1"
                   onChange={(e) => {
@@ -347,7 +402,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <div className="span">
                   <span>Collyre</span>
                 </div>
-                <input type="text" 
+                <input
+                  type="text"
                   value={Collyre}
                   name="Collyre"
                   onChange={(e) => {
@@ -357,12 +413,12 @@ export default function MyCahierSwiper({ add, setAdd }) {
               </div>
             </div>
             <div className="next-first">
-            <SwiperButtonNext>
-              <div className="flex items-center justify-items-center gap-2">
-                Suivant <BsChevronRight />
-              </div>
-            </SwiperButtonNext>
-          </div>
+              <SwiperButtonNext>
+                <div className="flex items-center justify-items-center gap-2">
+                  Suivant <BsChevronRight />
+                </div>
+              </SwiperButtonNext>
+            </div>
           </form>
         </div>
       </SwiperSlide>

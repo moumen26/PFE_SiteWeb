@@ -124,7 +124,7 @@ export default function DoctorProfile() {
             </div>
             <div className="doctor-profile-form-item">
               <label htmlFor="">Date de naissance</label>
-              <input type="date" placeholder="Entez votre Nom.." 
+              <input type="date" 
                 defaultValue={userData?.DateDeNaissance}
                 name="DateDeNaissance"
                 onChange={(e) => {

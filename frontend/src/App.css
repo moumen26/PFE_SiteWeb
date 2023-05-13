@@ -307,8 +307,7 @@ nav {
 }
 
 .addpatient-container {
-  width: 90%;
-  margin-left: 90px;
+  width: 100%;
   background-color: #f8f9fd;
   display: flex;
   flex-direction: column;
@@ -369,7 +368,7 @@ nav {
 .home-formulaire-swiper,
 .cahier-formulaire-swiper {
   margin-top: 15px;
-  width: 95%;
+  width: 90%;
   height: 1200px;
   display: flex;
   flex-direction: column;
@@ -502,11 +501,11 @@ nav {
   gap: 20px;
 }
 
-.sexe-date-heure{
+.sexe-date-heure {
   padding-left: 0px;
 }
 
-.transfert-motif{
+.transfert-motif {
   margin-left: 200px;
 }
 
@@ -712,7 +711,6 @@ nav {
   display: flex;
 }
 
-
 .maternal,
 .artificiel,
 .mixte {
@@ -870,7 +868,7 @@ nav {
   margin-left: 50px;
 }
 
-.long-span{
+.long-span {
   width: 200px;
 }
 
@@ -1479,7 +1477,7 @@ nav {
 }
 
 .cahier-vaccin {
-  margin-top: 112vh;
+  margin-top: 120vh;
 }
 
 .lock-icon,
@@ -1703,56 +1701,54 @@ nav {
   margin-top: 37px;
 }
 
-
 .vaccination-select,
-.form-table input{
+.form-table input {
   background-color: transparent;
   border: 1px solid black;
 }
 
-.vaccination-table-add{
+.vaccination-table-add {
   display: flex;
   margin-top: 15px;
 }
 
-.add-vaccin-table-item{
+.add-vaccin-table-item {
   width: 220px;
   height: 73px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #4F81FF;
+  border: 1px solid #4f81ff;
 }
 
-.form-table2{
+.form-table2 {
   display: flex;
   margin-bottom: 20px;
 }
 
-.form-table-item{
+.form-table-item {
   width: 13.25rem;
   height: 150px;
-  border: 1px solid #4F81FF;
+  border: 1px solid #4f81ff;
   display: flex;
   align-items: center;
   justify-content: center;
   border-top: none;
 }
 
-.s-table-item{
+.s-table-item {
   width: 13.3rem;
 }
 
-
-.l-border{
+.l-border {
   border-left: none;
 }
 
-.r-border{
+.r-border {
   border-right: none;
 }
 
-.add-vaccin-table-item span{
+.add-vaccin-table-item span {
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
@@ -3078,9 +3074,9 @@ form.sign-in-form {
   overflow-y: scroll;
 }
 
-.table-patients{
+.table-patients {
   height: 74vh;
-} 
+}
 
 .dashboard-table-lh {
   width: 95%;
@@ -3291,25 +3287,25 @@ form.sign-in-form {
   background-color: transparent;
 }
 
-.table-patients{
+.table-patients {
   width: 100%;
   margin-top: 20px;
 }
 
-.table-patients table{
+.table-patients table {
   width: 100%;
 }
 
-.table-patients table tr{
+.table-patients table tr {
   height: 50px;
- border-bottom: 1px solid rgba(79, 129, 255, 1);
+  border-bottom: 1px solid rgba(79, 129, 255, 1);
 }
 
-.table-patients table tr:nth-child(2n){
+.table-patients table tr:nth-child(2n) {
   background-color: rgba(218, 218, 218, 1);
 }
 
-.table-patients td{
+.table-patients td {
   border: none;
 }
 
@@ -3317,35 +3313,33 @@ form.sign-in-form {
 .table-patients-header-annee,
 .table-patients-header-willaya,
 .table-patients-header-region,
-.table-patients-td{
+.table-patients-td {
   font-weight: 700;
   font-size: 12px;
   line-height: 14.4px;
   color: rgba(106, 110, 131, 1);
   height: 50px;
-
 }
 
-.table-patients-td{
+.table-patients-td {
   color: rgba(6, 14, 48, 1);
 }
 
-.table-patients-header-nom{
+.table-patients-header-nom {
   width: 30%;
 }
 
-.table-patients-header-annee{
+.table-patients-header-annee {
   width: 20%;
 }
 
-.table-patients-header-willaya{
+.table-patients-header-willaya {
   width: 25%;
 }
 
-.table-patients-header-region{
+.table-patients-header-region {
   width: 25%;
 }
-
 
 .patient-details {
   width: 100%;
@@ -3839,6 +3833,87 @@ form.sign-in-form {
   justify-content: center;
 }
 
+/* antecedent style */
+.Antecedent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+}
+
+.antecedent-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 1px;
+}
+
+.antecedent-hedear,
+.addpatient-hedear {
+  width: 100%;
+  height: 96px;
+  display: flex;
+  background-color: rgba(79, 129, 255, 0.25);
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 59px;
+  padding-right: 59px;
+}
+
+.antecedent-container input,
+.addpatient-hedear input {
+  padding: 0;
+  height: 39px;
+  background-color: rgba(79, 129, 255, 1);
+  font-size: 16px;
+  line-height: 21.6px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.antecedent-hedear input:last-child,
+.addpatient-hedear input:last-child {
+  width: 195px;
+}
+
+.antecedent-hedear input:first-child,
+.addpatient-hedear input:first-child {
+  width: 114px;
+}
+
+.ajout-bebe {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.ajout-bebe input {
+  width: 333px;
+  height: 75px;
+  font-size: 20px;
+  line-height: 74px;
+  margin-top: 40px;
+}
+
+.antecedent-hedear h2,
+.addpatient-hedear h2 {
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 33.6px;
+  color: rgba(6, 14, 48);
+}
+
+.antecedent-container .antecedent-swipe {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 32px;
+  align-items: center;
+}
+
 /* doctor profile style */
 
 .Doctor-profile {
@@ -3849,18 +3924,21 @@ form.sign-in-form {
   position: relative;
 }
 
-.doctor-profile-container {
+.doctor-profile-container,
+.rendezvous-container {
   width: 100%;
   height: calc(100vh - 80px);
   margin-top: 2px;
 }
 
-.doctor-profile-title {
+.doctor-profile-title,
+.rendezvous-profile-title {
   padding-left: 50px;
   padding-top: 25px;
 }
 
-.doctor-profile-title h2 {
+.doctor-profile-title h2,
+.rendezvous-profile-title h2 {
   font-weight: 600;
   font-size: 28px;
   line-height: 33.6px;
@@ -3869,6 +3947,7 @@ form.sign-in-form {
 }
 
 .doctor-profile-title span,
+.rendezvous-profile-title span,
 .doctor-profile-header span,
 .form-span span {
   font-weight: 400;
@@ -3924,7 +4003,7 @@ form.sign-in-form {
 .doctor-profile-changer-btn button,
 .doctor-profile-changer-btn .changer-image-btn,
 .patient-table-container .ajoute-nouveau-ne-item input,
-.patient-table-container .search-item input{
+.patient-table-container .search-item input {
   width: 141px;
   height: 39px;
   border-radius: 10px;
@@ -3935,7 +4014,7 @@ form.sign-in-form {
 }
 
 .patient-table-container .search-item,
-.patient-table-container .ajoute-nouveau-ne-item{
+.patient-table-container .ajoute-nouveau-ne-item {
   margin-top: 20px;
 }
 
@@ -3944,32 +4023,47 @@ form.sign-in-form {
   border-radius: 10px;
 }
 
-
 .doctor-profile-changer-btn .changer-image-btn,
 .patient-table-container .search-item input,
 .patient-table-container .ajoute-nouveau-ne-item input {
   background-color: rgba(79, 129, 255, 1);
 }
 
-.input-file{
+.input-file {
   display: none;
 }
 
-.doctor-profile-changer-btn button:last-child{
+.patient-table-container .class-search {
+  width: 242px;
+  height: 47px;
+  border-radius: 10px;
+  border: 1px solid rgba(6, 14, 48);
+  background-color: transparent;
+  padding-left: 1%;
+  font-size: 12px;
+  line-height: 14.4px;
+  margin-top: 20px;
+}
+
+.doctor-profile-changer-btn button:last-child {
   background-color: rgba(79, 129, 255, 0.4);
   color: rgba(79, 129, 255, 1);
 }
 
 .doctor-profile-changer-btn button:hover,
 .doctor-profile-enregistrer-button:hover,
+.rendezvous-enregistrer-button:hover,
 .doctor-profile-changer-btn .changer-image-btn:hover,
+.antecedent-hedear input:hover,
+.addpatient-hedear input:hover,
 .patient-table-container .ajoute-nouveau-ne-item input:hover {
   background-color: rgba(6, 14, 48, 1);
   transition: all 1s ease;
   color: #fff;
 }
 
-.doctor-profile-nom-hopital {
+.doctor-profile-nom-hopital,
+.rendezvous-nom-hopital {
   display: flex;
   align-items: center;
   gap: 43px;
@@ -3978,14 +4072,16 @@ form.sign-in-form {
   top: 129px;
 }
 
-.doctor-profile-nom-hopital h2 {
+.doctor-profile-nom-hopital h2,
+.rendezvous-nom-hopital h2 {
   font-size: 30px;
   font-weight: 500;
   line-height: 36px;
   color: rgba(6, 14, 48);
 }
 
-.doctor-profile-logo-hopital {
+.doctor-profile-logo-hopital,
+.rendezvous-logo-hopital {
   width: 116px;
   height: 121px;
   background-color: #d9d9d9;
@@ -4106,7 +4202,8 @@ form.sign-in-form {
   padding-bottom: 40px;
 }
 
-.doctor-profile-enregistrer-button {
+.doctor-profile-enregistrer-button,
+.rendezvous-enregistrer-button {
   width: 141px;
   height: 39px;
   border-radius: 10px;
@@ -4118,9 +4215,11 @@ form.sign-in-form {
   cursor: pointer;
 }
 
+
+
 /* add table vaccination + */
 
-.editDate{
+.editDate {
   width: 150px;
   background-color: transparent;
   border: 1px solid black;
@@ -4190,11 +4289,10 @@ form.sign-in-form {
   box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.15);
 }
 
-.add-tableau-vaccin1-container{
+.add-tableau-vaccin1-container {
   gap: 0;
   padding: 10px;
 }
-
 
 .add-tableau-vaccin1-close-class,
 .add-tableau-vaccin2-close-class {
@@ -4263,6 +4361,87 @@ form.sign-in-form {
   background-color: #fff;
 }
 
+/* rendez-vous style */
+.Rendezvous form{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 85px;
+  gap: 24px;
+}
+
+.rendezvous-container{
+  height: 100vh;
+}
+
+.rendezvous-form-class{
+  display: flex;
+  gap: 49px;
+}
+
+.rendezvous-form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.rendezvous-form-item label {
+  font-weight: 500;
+  line-height: 14.4px;
+  font-size: 12px;
+  color: rgba(6, 14, 48);
+  margin-left: 10px;
+}
+
+.rendezvous-form-item input,
+.rendezvous-form-item select{
+  width: 310px;
+  height: 53px;
+  border: 1px solid rgba(106, 110, 131, 1);
+  border-radius: 10px;
+  padding-left: 15px;
+  color: rgba(106, 110, 131, 1);
+  background-color: transparent;
+  padding-right: 10px;
+}
+
+.telephone-input {
+  width: 310px;
+  height: 53px;
+  border: 1px solid rgba(106, 110, 131, 1);
+  border-radius: 10px;
+  padding-left: 15px;
+  color: rgba(106, 110, 131, 1);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.telephone-input span {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14.4px;
+  color: rgba(106, 110, 131, 1);
+}
+
+.telephone-input input {
+  width: 90%;
+  height: 100%;
+  background-color: transparent;
+  border: 0;
+  padding-left: 5px;
+}
+
+.rendezvous-form-item select{
+  cursor: pointer;
+}
+
+.rendezvous-enregistrer-class{
+  margin-top: 10px;
+}
+
+
+
 .dashboard-table-container::-webkit-scrollbar,
 .patient-details-examen::-webkit-scrollbar,
 .table-patients::-webkit-scrollbar {
@@ -4281,6 +4460,7 @@ form.sign-in-form {
 
 .about-patient::-webkit-scrollbar,
 .patient-details-reducation::-webkit-scrollbar,
-.patient-details-center::-webkit-scrollbar {
+.patient-details-center::-webkit-scrollbar,
+.AddPatient::-webkit-scrollbar {
   width: 0;
 }

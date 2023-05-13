@@ -10,9 +10,12 @@ import Calendrier from "./pages/calendrier";
 import Coupon from "./pages/coupon";
 import Analytics from "./pages/analytics";
 import Login from "./pages/loginPage";
-import PatientDetails from "./pages/patientDetails";
+import PatientDetails from "./pages/patientMaman";
 import DoctorProfile from "./pages/doctorProfile";
 import { AuthContextProvider } from "./context/Authcontext";
+import Antecedent from "./pages/antecedent";
+import Patient from "./pages/patient";
+import Rendezvous from "./pages/rendezvous";
 
 const router = createBrowserRouter([
   {
@@ -29,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/patients/:id",
-    element: <AddPatient/>,
+    element: <AddPatient />,
   },
   {
     path: "calendrier",
@@ -50,6 +53,19 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: <DoctorProfile />,
+  },
+
+  {
+    path: "seetings",
+    element: <Rendezvous />,
+  },
+  {
+    path: "antecedent",
+    element: <Antecedent />,
+  },
+  {
+    path: "patientss",
+    element: <Patient />,
   },
 ]);
 

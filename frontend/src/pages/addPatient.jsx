@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import AddCahierSante from "../components/addCahierButton";
-import MyAsideBar from "../components/asideBar";
-import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
 import MyCahierSwiper from "../components/swipeCahier";
 import MySwiper from "../components/swiperDossier";
@@ -39,9 +37,12 @@ export default function AddPatient() {
     <div className="AddPatient">
       <MyNavBar act={act} setAct={setAct}></MyNavBar>
       <div className="lh"></div>
-      <MyAsideBar></MyAsideBar>
-      <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="addpatient-container">
+        <div className="addpatient-hedear">
+          <input type="submit" value="Annuler" />
+          <h2>Dossier nouveau-ne</h2>
+          <input type="submit" value="Enregistrer tout" />
+        </div>
         <div className="top">
           <div className="top-titre">
             <h2>Dossier patient</h2>

@@ -232,24 +232,28 @@ export default function VaccinTable() {
                 <span>Actions</span>
               </th>
             </tr>
-            {VaccinDB?.map((VaccinData) => (
-              console.log(VaccinData),
-              <Fragment>
-                {editVaccinId === VaccinData?._id ? (
-                  <EditRow
-                    editFromData={editFormData}
-                    handleEditFromChange={handleEditFormChange}
-                    handleCancelClick={handleCancelClick}
-                  />
-                ) : (
-                  <ReadOnlyRow
-                    VaccinData={VaccinData}
-                    handleEditRowClick={handleEditRowClick}
-                    handleDeleteClick={handleDeleteClick}
-                  />
-                )}
-              </Fragment>
-            ))}
+            {VaccinDB?.map(
+              (VaccinData) => (
+                console.log(VaccinData),
+                (
+                  <Fragment>
+                    {editVaccinId === VaccinData?._id ? (
+                      <EditRow
+                        editFromData={editFormData}
+                        handleEditFromChange={handleEditFormChange}
+                        handleCancelClick={handleCancelClick}
+                      />
+                    ) : (
+                      <ReadOnlyRow
+                        VaccinData={VaccinData}
+                        handleEditRowClick={handleEditRowClick}
+                        handleDeleteClick={handleDeleteClick}
+                      />
+                    )}
+                  </Fragment>
+                )
+              )
+            )}
           </table>
         </form>
         <div className="vaccination-add-button-class">
@@ -331,7 +335,7 @@ export default function VaccinTable() {
                 </select>
               </div>
 
-              <div className="form-table-item l-border">
+              <div className="form-table-item l-border s-table-item">
                 <select
                   className="vaccination-select"
                   name="vaccinationContre"

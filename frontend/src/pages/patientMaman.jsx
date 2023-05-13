@@ -1,12 +1,3 @@
-import { BsChevronLeft, BsFillCloudDownloadFill } from "react-icons/bs";
-import { FaShare } from "react-icons/fa";
-import AboutPatient from "../components/aboutPatient";
-import PatientDetailsCenter from "../components/patientDetails";
-import PatientDetailsExamen from "../components/patientDetailsExamen";
-import PatientDetailsReducation from "../components/patientDetailsReducation";
-import MySwiper from "../components/swiperDossier";
-import AddCahierSante from "../components/addCahierButton";
-import MyCahierSwiper from "../components/swipeCahier";
 import { useState } from "react";
 import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
@@ -59,7 +50,6 @@ export default function PatientDetails() {
     }
   };
 
-  let toggleClassAdd = add ? " add-cahier-active" : "";
 
   return (
     <div className="Patients-Details">
@@ -87,19 +77,29 @@ export default function PatientDetails() {
               </select>
             </div>
             <div className="table-header-item">
-              <label>Annee</label>
-              <select className="Annee-select" name="Annee-age" id="Annee-age">
+              <label>Region</label>
+              <select
+                className="Region-select"
+                name="Region-age"
+                id="Region-age"
+              >
                 <option value="">All</option>
               </select>
             </div>
+            <input
+              type="search"
+              className="class-search"
+              placeholder="Search.."
+            />
             <div className="search-item">
               <input type="submit" value="Search" />
             </div>
+
             <div className="ajoute-nouveau-ne-item">
               <input
                 type="submit"
                 onClick={handleAddArticle}
-                value="Ajouter un nouveau-ne"
+                value="Ajouter un patient"
               />
             </div>
           </div>
@@ -181,37 +181,7 @@ export default function PatientDetails() {
           </div>
         </div>
       </div>
-      <div className="patient-details">
-        <div className="patient-details-header">
-          <BsChevronLeft className="icon-button" />
-          <div className="patient-details-header-right">
-            <FaShare className="icon-button" />
-            <BsFillCloudDownloadFill className="icon-button" />
-          </div>
-        </div>
-        <h2>Patient details</h2>
-        <div className="patient-details-container">
-          <AboutPatient></AboutPatient>
-          <PatientDetailsCenter></PatientDetailsCenter>
-          <div className="patient-details-container-right">
-            <PatientDetailsExamen></PatientDetailsExamen>
-            <PatientDetailsReducation></PatientDetailsReducation>
-          </div>
-        </div>
-        <div className="patient-details-dossier-obse">
-          <div className="patient-details-dossier-obse-swiper">
-            <MySwiper></MySwiper>
-          </div>
-          <div className="profile-details-add-cahier">
-            <AddCahierSante add={add} setAdd={setAdd} />
-          </div>
-          <div className={`profile-details-cahier-vaccin${toggleClassAdd}`}>
-            <div className="cahier-formulaire-swiper">
-              <MyCahierSwiper></MyCahierSwiper>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   );
 }

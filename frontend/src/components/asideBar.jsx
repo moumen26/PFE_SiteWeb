@@ -47,6 +47,15 @@ export default function MyAsideBar() {
               </div>
             </a>
           </li>
+
+          <li className="list">
+            <a href="/patientss" className="mb-2 h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <BsFilePersonFill className="w-6 h-6 ml-2 " />
+                <span className="title">Patients 2</span>
+              </div>
+            </a>
+          </li>
           <li className="list">
             <a href="/calendrier" className="mb-2 h-10 pt-1">
               <div className="flex items-center justify-items-center">
@@ -80,13 +89,24 @@ export default function MyAsideBar() {
             </a>
           </li>
           <li className="list">
-            <a href="/login" className="h-10 pt-1">
-            {user && (
-              <div className="flex items-center justify-items-center" onClick={SubmitLogout} >
-                <FiLogOut className="w-6 h-6 ml-2" />
-                <span className="title">Log Out</span>
+            <a href="/antecedent" className="h-10 pt-1">
+              <div className="flex items-center justify-items-center">
+                <IoIosSettings className="w-6 h-6 ml-2" />
+                <span className="title">Seetings</span>
               </div>
-            )}
+            </a>
+          </li>
+          <li className="list">
+            <a href="/login" className="h-10 pt-1">
+              {user && (
+                <div
+                  className="flex items-center justify-items-center"
+                  onClick={SubmitLogout}
+                >
+                  <FiLogOut className="w-6 h-6 ml-2" />
+                  <span className="title">Log Out</span>
+                </div>
+              )}
             </a>
           </li>
         </ul>

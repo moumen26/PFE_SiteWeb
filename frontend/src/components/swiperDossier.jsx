@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate  } from 'react-router-dom';
 import { useAuthContext } from "../hooks/useAuthContext";
+import { CircularProgress } from "@mui/material";
 
 export default function MySwiper() {
   const [Poids, setPoids] = useState('');
@@ -140,7 +141,7 @@ export default function MySwiper() {
 
 
   if (!PatientData) {
-    return <p>Loading...</p>;
+    return <CircularProgress />;
   }
   
   return (
