@@ -89,14 +89,6 @@ export default function MyAsideBar() {
             </a>
           </li>
           <li className="list">
-            <a href="/antecedent" className="h-10 pt-1">
-              <div className="flex items-center justify-items-center">
-                <IoIosSettings className="w-6 h-6 ml-2" />
-                <span className="title">Seetings</span>
-              </div>
-            </a>
-          </li>
-          <li className="list">
             <a href="/login" className="h-10 pt-1">
               {user && (
                 <div
