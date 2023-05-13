@@ -335,7 +335,7 @@ export default function VaccinTable() {
                 </select>
               </div>
 
-              <div className="form-table-item l-border s-table-item">
+              <div className="form-table-item l-border">
                 <select
                   className="vaccination-select"
                   name="vaccinationContre"
@@ -386,7 +386,7 @@ export default function VaccinTable() {
                 </select>
               </div>
 
-              <div className="form-table-item s-table-item">
+              <div className="form-table-item">
                 <input
                   className="vaccination-input"
                   type="date"

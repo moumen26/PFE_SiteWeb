@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddCahierSante from "../components/addCahierButton";
 import MyNavBar from "../components/navBar";
 import MyCahierSwiper from "../components/swipeCahier";
-import MySwiper from "../components/swiperDossier";
+import FichierPatient from "../components/fichierPatient";
 import AddVaccinButton from "../components/addVaccinButton";
 import AddVisiteButton from "../components/addVisiteButton";
 import MyVisteTable from "../components/visiteTable";
@@ -57,8 +57,8 @@ export default function AddPatient() {
             </div>
           </div>
         </div>
-        <div className="home-formulaire-swiper">
-          <MySwiper></MySwiper>
+        <div className="home-formulaire">
+          <FichierPatient />
         </div>
       </div>
       <div className="addpatient-add-cahier">

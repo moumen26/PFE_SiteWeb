@@ -22,7 +22,7 @@
 
 .AddPatient {
   overflow-x: hidden;
-  min-height: 100vh;
+  height: fit-content;
 }
 
 input,
@@ -365,6 +365,8 @@ nav {
   color: #060e30;
 }
 
+
+.home-formulaire,
 .home-formulaire-swiper,
 .cahier-formulaire-swiper {
   margin-top: 15px;
@@ -375,6 +377,10 @@ nav {
   align-items: center;
   box-shadow: 0 0 10px #060e30;
   border-radius: 10px;
+}
+
+.home-formulaire{
+  height: fit-content;
 }
 
 .cahier-formulaire-swiper {
@@ -982,6 +988,10 @@ nav {
   margin-top: 32px;
 }
 
+.formulaire-dossier-obster .next-first{
+  padding-right: 50px;
+}
+
 .next button,
 .back button,
 .next-first button,
@@ -1467,9 +1477,7 @@ nav {
   align-items: center;
   justify-content: center;
   margin-bottom: 54px;
-  width: calc(100% - 82px);
-  position: absolute;
-  left: 82px;
+  
 }
 
 .addpatient-add-cahier {
@@ -1477,7 +1485,7 @@ nav {
 }
 
 .cahier-vaccin {
-  margin-top: 120vh;
+  margin-top: -10vh;
 }
 
 .lock-icon,
@@ -1501,7 +1509,7 @@ nav {
   width: 100%;
   display: flex;
   align-items: center;
-  padding-left: 50px;
+  padding-left: 5%;
   margin-top: 30px;
 }
 
@@ -1709,11 +1717,13 @@ nav {
 
 .vaccination-table-add {
   display: flex;
+  width: 100%;
   margin-top: 15px;
+  
 }
 
 .add-vaccin-table-item {
-  width: 220px;
+  width: 14rem;
   height: 73px;
   display: flex;
   align-items: center;
@@ -1724,20 +1734,18 @@ nav {
 .form-table2 {
   display: flex;
   margin-bottom: 20px;
+  margin-right: 17px;
 }
 
 .form-table-item {
-  width: 13.25rem;
+  width: 14rem;
   height: 150px;
   border: 1px solid #4f81ff;
   display: flex;
   align-items: center;
   justify-content: center;
   border-top: none;
-}
-
-.s-table-item {
-  width: 13.3rem;
+  
 }
 
 .l-border {
@@ -2016,6 +2024,10 @@ table td {
     gap: 20px;
   }
 
+  .home-formulaire-swiper {
+    height: 75%;
+  }
+  
   .right-nav .doctor {
     width: -webkit-fit-content;
     width: -moz-fit-content;
@@ -2059,9 +2071,6 @@ table td {
     padding-right: 0;
   }
 
-  .home-formulaire-swiper {
-    height: 75%;
-  }
 
   .formulaire-left {
     width: 100%;
@@ -3863,8 +3872,9 @@ form.sign-in-form {
   padding-right: 59px;
 }
 
-.antecedent-container input,
-.addpatient-hedear input {
+.antecedent-hedear input,
+.addpatient-hedear input,
+.ajout-bebe input {
   padding: 0;
   height: 39px;
   background-color: rgba(79, 129, 255, 1);
@@ -3896,6 +3906,7 @@ form.sign-in-form {
   font-size: 20px;
   line-height: 74px;
   margin-top: 40px;
+  background-color: rgba(79, 129, 255, 1);
 }
 
 .antecedent-hedear h2,
@@ -4266,7 +4277,7 @@ form.sign-in-form {
 .add-tableau-vaccin1 {
   /* top: 215vh; */
   justify-content: center;
-  bottom: 20%;
+  
 }
 
 .vaccination-table {
