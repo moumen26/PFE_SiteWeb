@@ -24,7 +24,7 @@ export default function PatientDetails() {
 
   const history = useNavigate();
 
-  const handleAddArticle = async () => {
+  const handleAddPatient = async () => {
     try {
       const response = await fetch("http://localhost:8000/patients/", {
         method: "POST",
@@ -96,7 +96,7 @@ export default function PatientDetails() {
             <div className="ajoute-nouveau-ne-item">
               <input
                 type="submit"
-                onClick={handleAddArticle}
+                onClick={handleAddPatient}
                 value="Ajouter un patient"
               />
             </div>

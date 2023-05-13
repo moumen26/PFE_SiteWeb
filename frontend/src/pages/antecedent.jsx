@@ -31,6 +31,28 @@ export default function Antecedent() {
         window.alert("Add patient failed", data.error);
       }
       if (response.ok) {
+        try {
+          const response = await fetch(`http://localhost:8000/patients/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              idNouveauNe: data._id
+            }),
+          });
+          // get the patientID via response from the server patientRouter.post
+          const data = await response.json();
+          if (!response.ok) {
+            window.alert("Add idNouveauNe failed", data.error);
+          }
+          if (response.ok) {
+            
+            history(`/patients/${await data.id}`);
+          }
+        } catch (error) {
+          console.error("Error adding article:", error);
+        }
         history(`/patients/${await data.id}`);
       }
     } catch (error) {

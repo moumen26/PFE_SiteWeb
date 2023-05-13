@@ -35,7 +35,7 @@ export default function MySwiper() {
   const { id } = useParams();
   const [PatientData, setPatientData] = useState(null);
 
-  const history = useNavigate("/patients");
+  const history = useNavigate();
 
   useEffect(() => {
     const fetchPatientData = async () => {

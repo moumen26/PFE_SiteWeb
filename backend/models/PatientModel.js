@@ -5,6 +5,9 @@ const PatientSchema = new mongoose.Schema({
     idMaman: {
         type: mongoose.Schema.Types.ObjectId, ref: "patients"
     },
+    idNouveauNe: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "patients"
+    }],
     idDossObs: {
         type: mongoose.Schema.Types.ObjectId, ref: "dossierObstetrique"
     },

@@ -14,7 +14,7 @@ import PatientDetails from "./pages/patientMaman";
 import DoctorProfile from "./pages/doctorProfile";
 import { AuthContextProvider } from "./context/Authcontext";
 import Antecedent from "./pages/antecedent";
-import Patient from "./pages/patient";
+import NouveauNe from "./pages/nouveaune";
 import Rendezvous from "./pages/rendezvous";
 
 const router = createBrowserRouter([
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: "patients",
     element: <PatientDetails />,
+  },
+  {
+    path: "Nouveaune",
+    element: <NouveauNe/>,
   },
   {
     path: "/patients/:id",
@@ -63,10 +67,7 @@ const router = createBrowserRouter([
     path: "antecedent/:id",
     element: <Antecedent />,
   },
-  {
-    path: "patientss",
-    element: <Patient />,
-  },
+  
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

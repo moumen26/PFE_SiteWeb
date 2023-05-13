@@ -218,6 +218,30 @@ const DeletePatient = async (req, res) => {
     //return user
     res.status(200).json(patient);
 }
+// update a Patient by ID
+const UpdatePatient = async (req, res) => {
+    const {id} = req.params;
+    const { idNouveauNe } = req.body;
+    try{
+        //check if id is valid
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(400).json({err: 'patient not found'});
+        }
+        //find id in db and update
+        const patient = await Patient.findOneAndUpdate({_id: id},
+            {idNouveauNe}
+        );
+        //if not found return error
+        if(!patient){
+            return res.status(404).json({err: 'patient not found'});
+        }
+        //return user
+        res.status(200).json(patient);
+    }catch(err){
+        res.status(400).json({err: err.message});
+    }
+}
+
 
 // DOSSIER OBSTITRIQUE
 
@@ -374,6 +398,7 @@ module.exports = {
     GetAllPatient,
     GetPatient,
     DeletePatient,
+    UpdatePatient,
     GetDossObs,
     UpdateDossObs,
     DeleteDossObs,

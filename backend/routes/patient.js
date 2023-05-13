@@ -6,6 +6,7 @@ const {
     GetAllPatient,
     GetPatient,
     DeletePatient,
+    UpdatePatient,
     GetDossObs,
     UpdateDossObs,
     DeleteDossObs,
@@ -38,6 +39,9 @@ router.post('/Nouveau-ne/:id',CreateNewNouveaune);
 
 //delete a patient
 router.delete('/:id', DeletePatient);
+
+//update a patient
+router.patch('/:id', UpdatePatient);
 
 // DOSSIER OBSTITRIQUE
 

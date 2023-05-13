@@ -47,12 +47,11 @@ export default function MyAsideBar() {
               </div>
             </a>
           </li>
-
           <li className="list">
-            <a href="/patientss" className="mb-2 h-10 pt-1">
+            <a href="/Nouveaune" className="mb-2 h-10 pt-1">
               <div className="flex items-center justify-items-center">
                 <BsFilePersonFill className="w-6 h-6 ml-2 " />
-                <span className="title">Patients 2</span>
+                <span className="title">Nouveau-ne</span>
               </div>
             </a>
           </li>

@@ -14,7 +14,7 @@ import MyCahierSwiper from "../components/swipeCahier";
 //import { CircularProgress } from "@mui/material";
 
 
-export default function Patient() {
+export default function NouveauNe() {
    const [add, setAdd] = useState(false);
    const [act, setAct] = useState(false);
 
@@ -147,7 +147,7 @@ export default function Patient() {
         </div>
       </div>
       <div className="patient-details">
-        {loading ? (
+        {/*loading ? (
           <p>loading</p>
         ) : (
           <div>
@@ -181,7 +181,7 @@ export default function Patient() {
               </div>
             </div>
           </div>
-        )}
+        )*/}
       </div>
     </div>
   );
