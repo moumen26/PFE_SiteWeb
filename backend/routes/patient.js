@@ -1,5 +1,7 @@
 const express = require('express');
 const {
+    CreateNewNouveaune,
+    UpdateDossObsNouveaune,
     CreateNewPatient,
     GetAllPatient,
     GetPatient,
@@ -31,6 +33,9 @@ router.get('/:id', GetPatient);
 //post a new patient 
 router.post('/',CreateNewPatient);
 
+//post a new nouveau ne 
+router.post('/Nouveau-ne/:id',CreateNewNouveaune);
+
 //delete a patient
 router.delete('/:id', DeletePatient);
 
@@ -41,6 +46,9 @@ router.get('/DossObs/:id', GetDossObs);
 
 //update a dossier obstirique
 router.patch('/DossObs/:id', UpdateDossObs);
+
+//update a dossier obstirique nouveau ne
+router.patch('/DossObs/Nouveau-ne/:id', UpdateDossObs);
 
 //delete a dossier obstirique
 router.delete('/DossObs/:id', DeleteDossObs);
