@@ -161,9 +161,9 @@ export default function MyCahierSwiper({ add, setAdd }) {
     }
   };
 
-  if (!PatientData) {
-    return <CircularProgress />;
-  }
+  // if (!PatientData) {
+  //   return <CircularProgress />;
+  // }
   return (
     <Swiper
       className="swiper-formulaire"

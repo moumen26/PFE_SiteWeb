@@ -3,56 +3,59 @@ import "swiper/css";
 
 import { BsChevronLeft } from "react-icons/bs";
 import { BsChevronRight } from "react-icons/bs";
-import { useState, useEffect ,ChangeEvent} from "react";
+import { useState, useEffect, ChangeEvent } from "react";
 import SwiperButtonNext from "./nextButton";
 import SwiperButtonBack from "./backButton";
 import ObstetricauxTable from "./ObstetricauxTable";
 import { useAddPatientPart_1 } from "../hooks/useAddPatientPart_1";
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
-import { useNavigate  } from 'react-router-dom';
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { CircularProgress } from "@mui/material";
 
 export default function MySwiper() {
-  const [Poids, setPoids] = useState('');
-  const [Aspect, setAspect] = useState('');
-  const [Anomalies, setAnomalies] = useState('');
-  const [Placenta, setPlacenta] = useState('');
-  const [Membranes, setMembranes] = useState('');
-  const [Cordon, setCordon] = useState('');
-  const [Sexe, setSexe] = useState('');
-  const [Taille, setTaille] = useState('');
-  const [Pc, setPc] = useState('');
-  const [une_min, setUne_min] = useState('');
-  const [cinq_min, setCinq_min] = useState('');
-  const [Malformation, setMalformation] = useState('');
-  const [Remarque, setRemarque] = useState('');
-  const [Empreintes_digitales, setEmpreintes_digitales] = useState('');
+  const [Poids, setPoids] = useState("");
+  const [Aspect, setAspect] = useState("");
+  const [Anomalies, setAnomalies] = useState("");
+  const [Placenta, setPlacenta] = useState("");
+  const [Membranes, setMembranes] = useState("");
+  const [Cordon, setCordon] = useState("");
+  const [Sexe, setSexe] = useState("");
+  const [Taille, setTaille] = useState("");
+  const [Pc, setPc] = useState("");
+  const [une_min, setUne_min] = useState("");
+  const [cinq_min, setCinq_min] = useState("");
+  const [Malformation, setMalformation] = useState("");
+  const [Remarque, setRemarque] = useState("");
+  const [Empreintes_digitales, setEmpreintes_digitales] = useState("");
 
   const { user } = useAuthContext();
 
-  const  {id}  = useParams();
+  const { id } = useParams();
   const [PatientData, setPatientData] = useState(null);
-  
-  const history = useNavigate ('/patients');
+
+  const history = useNavigate("/patients");
 
   useEffect(() => {
     const fetchPatientData = async () => {
-      if(id !== undefined){
+      if (id !== undefined) {
         await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setPatientData(data);
-            }).catch((error) => {
-              console.error('Error fetching article data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setPatientData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching article data:", error);
+              });
           } else {
-            console.error('Error fetching article data:', response.error);
+            console.error("Error fetching article data:", response.error);
           }
         });
-      }else{
-        history()
+      } else {
+        history();
       }
     };
 
@@ -62,365 +65,113 @@ export default function MySwiper() {
   const [DossObsData, setDossObsData] = useState(null);
   useEffect(() => {
     const fetchDossObsData = async () => {
-      if(PatientData.idDossObs !== undefined){
-        await fetch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`).then((response) => {
+      if (PatientData.idDossObs !== undefined) {
+        await fetch(
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`
+        ).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setDossObsData(data);
-            }).catch((error) => {
-              console.error('Error fetching article data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setDossObsData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching article data:", error);
+              });
           } else {
-            console.error('Error fetching article data:', response.status);
+            console.error("Error fetching article data:", response.status);
           }
         });
-      }else{
-        history()
+      } else {
+        history();
       }
     };
 
     fetchDossObsData();
   }, [history, PatientData?.idDossObs]);
 
-//User data
+  //User data
   const [UserData, setUserData] = useState(null);
-  
+
   useEffect(() => {
     const fetchUsertData = async () => {
-      if(PatientData.idAccoucheur !== undefined){
-        await fetch(`http://localhost:8000/user/${PatientData?.idAccoucheur}`,{
+      if (PatientData.idAccoucheur !== undefined) {
+        await fetch(`http://localhost:8000/user/${PatientData?.idAccoucheur}`, {
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.token}`
-          }
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
         }).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setUserData(data);
-            }).catch((error) => {
-              console.error('Error fetching article data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setUserData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching article data:", error);
+              });
           } else {
-            console.error('Error fetching article data:', response.status);
+            console.error("Error fetching article data:", response.status);
           }
         });
-      }else{
-        history('/login')
+      } else {
+        history("/login");
       }
     };
-  
-    fetchUsertData();
-  }, [UserData,PatientData?.idAccoucheur]);
 
-//Update Dossier Obstetricaux
+    fetchUsertData();
+  }, [UserData, PatientData?.idAccoucheur]);
+
+  //Update Dossier Obstetricaux
   const [errorPart_1, setErrorPart_1] = useState(null);
   const handleDossObsSubmit = async (event) => {
     event.preventDefault();
 
-    if(PatientData?.idDossObs !== undefined){
-       try {
-        const response = await axios.patch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`, { 
-          Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-          ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
-        });
+    if (PatientData?.idDossObs !== undefined) {
+      try {
+        const response = await axios.patch(
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,
+          {
+            Poids,
+            Aspect,
+            Anomalies,
+            Placenta,
+            Membranes,
+            Cordon,
+            Sexe,
+            Taille,
+            Pc,
+            Malformation,
+            Remarque,
+            Empreintes_digitales,
+          }
+        );
         // Handle response as needed
         if (!response.status === 200) {
-            window.alert("Add patient failed", response.data.message);
-            setErrorPart_1(errorPart_1);
-        }else if (response.status === 200) {
-            window.alert("Add patient success", response.data.message);
-        } 
+          window.alert("Add patient failed", response.data.message);
+          setErrorPart_1(errorPart_1);
+        } else if (response.status === 200) {
+          window.alert("Add patient success", response.data.message);
+        }
       } catch (error) {
         console.log(error);
-      } 
-    }else{
-      history()
+      }
+    } else {
+      history();
     }
-    
   };
 
+  // if (!PatientData) {
+  //   return <CircularProgress />;
+  // }
 
-  if (!PatientData) {
-    return <CircularProgress />;
-  }
-  
   return (
     <Swiper
       className="swiper-formulaire"
       onSlideChange={() => console.log("slide change")}
       onSwiper={(swiper) => console.log(swiper)}
     >
-      <SwiperSlide className="Swipe">
-        <div className="formulaire-dossier-obster">
-          <div className="formulaire-header-obster">
-            <div className="formulaire-dossier-obstetrique">
-              <h2>Dossier obstetrique</h2>
-            </div>
-          </div>
-          <div className="line-hl">
-            <div className="hl"></div>
-          </div>
-          <form action="" onSubmit={handleDossObsSubmit}>
-            <div className="pro-acc">
-              <h2>Protocole d’accouchement</h2>
-              <div className="date-heure-acc">
-                <div className="date-acc">
-                  <div className="span-item span-long1">
-                    <span>Date d’accouchement :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Date_daccouchement"
-                    defaultValue={DossObsData?.Date_daccouchement}
-                    readOnly
-                  />
-                </div>
-                <div className="heure-acc">
-                  <div className="span-item">
-                    <span>Heure :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Heure_daccouchement"
-                    defaultValue={DossObsData?.Heure_daccouchement}
-                    readOnly
-                  />
-                </div>
-              </div>
-              <div className="accoucheur">
-                <div className="span-text">
-                  <span>Accoucheur :</span>
-                </div>
-                <div className="textarea">
-                  <textarea
-                    name="accoucheur"
-                    id="accoucheur"
-                    defaultValue={UserData?.Fname}
-                    readOnly
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-            <div className="examen-annexes">
-              <h2>Examen des annexes :</h2>
-              <div className="annexes">
-                <div className="annexe">
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Poids :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={Poids}
-                      name="Poids"
-                      onChange={(e) => {
-                        setPoids(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Aspect :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={Aspect}
-                      name="Aspect"
-                      onChange={(e) => {
-                        setAspect(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Anomalies :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={Anomalies}
-                      name="Anomalies"
-                      onChange={(e) => {
-                        setAnomalies(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-                <div className="annexe annexe-two">
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Placenta :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={Placenta}
-                      name="Placenta"
-                      onChange={(e) => {
-                        setPlacenta(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Membranes :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={Membranes}
-                      name="Membranes"
-                      onChange={(e) => {
-                        setMembranes(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Cordon :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={Cordon}
-                      name="Cordon"
-                      onChange={(e) => {
-                        setCordon(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="examen-annexes">
-              <h2>Examen des annexes :</h2>
-              <div className="sexe-poids-taille-pc">
-                <div className="date-annexe">
-                  <div className="span-item petit-span">
-                    <span>Sexe :</span>
-                  </div>
-                  <input
-                    type="date-annexe"
-                    name="Sexe"
-                    id="date-annexe"
-                    value={Sexe}
-                    onChange={(e) => {
-                      setSexe(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="poids-annexe">
-                  <div className="span-item petit-span">
-                    <span>Poids :</span>
-                  </div>
-                  <input type="text" />
-                </div>
-                <div className="taille-annexe">
-                  <div className="span-item petit-span">
-                    <span>Taille :</span>
-                  </div>
-
-                  <input
-                    type="text"
-                    value={Taille}
-                    name="Taille"
-                    onChange={(e) => {
-                      setTaille(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="pc-annexe">
-                  <div className="span-item petit-span">
-                    <span>PC :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={Pc}
-                    name="Pc"
-                    onChange={(e) => {
-                      setPc(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="score-dapgar">
-                <div className="score">
-                  <span>Score d'Apgar :</span>
-                </div>
-                <div className="minute-1">
-                  <span>1 minute</span>
-                  <input
-                    type="checkbox"
-                    name="une_min"
-                    onChange={(e) => {
-                      setUne_min(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="minute-5">
-                  <span>5 minute</span>
-                  <input
-                    type="checkbox"
-                    name="cinq_min"
-                    onChange={(e) => {
-                      setCinq_min(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-              <div className="malforamtion-annexe">
-                <div className="span-item">
-                  <span>Malformation :</span>
-                </div>
-                <input
-                  type="text"
-                  value={Malformation}
-                  name="Malformation"
-                  onChange={(e) => {
-                    setMalformation(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="remarque-annexe">
-                <div className="span-item">
-                  <span>Remarque :</span>
-                </div>
-                <input
-                  type="text"
-                  name="Remarque"
-                  value={Remarque}
-                  onChange={(e) => {
-                    setRemarque(e.target.value);
-                  }}
-                />
-              </div>
-              <div className="re-annexe-textarea">
-                <div className="textarea">
-                  <textarea name="rem-annexe" id="rem-annexe"></textarea>
-                </div>
-              </div>
-              <div className="empre-digi">
-                <div className="span-text">
-                  <span>Empreintes digitales :</span>
-                </div>
-                <div className="textarea">
-                  <textarea
-                    name="empre-digi"
-                    id="empre-digi"
-                    value={Empreintes_digitales}
-                    onChange={(e) => {
-                      setEmpreintes_digitales(e.target.value);
-                    }}
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-            <div className="next-first">
-              <SwiperButtonNext>
-                <div className="flex items-center justify-items-center gap-2">
-                  Suivant <BsChevronRight />
-                </div>
-              </SwiperButtonNext>
-            </div>
-          </form>
-        </div>
-      </SwiperSlide>
       <SwiperSlide className="Swipe">
         <div className="formulaire-dossier-obster">
           <div className="formulaire-header-obster">
@@ -526,21 +277,12 @@ export default function MySwiper() {
               <textarea name="resume-obser" id="resume-obser"></textarea>
             </div>
           </div>
-          <div className="back-next-buttons back-next-dossier">
-            <div className="back">
-              <SwiperButtonBack>
-                <div className="flex items-center justify-items-center gap-2">
-                  <BsChevronLeft /> Back
-                </div>
-              </SwiperButtonBack>
-            </div>
-            <div className="next">
-              <SwiperButtonNext>
-                <div className="flex items-center justify-items-center gap-2">
-                  Suivant <BsChevronRight />
-                </div>
-              </SwiperButtonNext>
-            </div>
+          <div className="next-first">
+            <SwiperButtonNext>
+              <div className="flex items-center justify-items-center gap-2">
+                Suivant <BsChevronRight />
+              </div>
+            </SwiperButtonNext>
           </div>
         </div>
       </SwiperSlide>
