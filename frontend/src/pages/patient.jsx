@@ -11,7 +11,7 @@ import PatientDetailsReducation from "../components/patientDetailsReducation";
 import MySwiper from "../components/swiperDossier";
 import AddCahierSante from "../components/addCahierButton";
 import MyCahierSwiper from "../components/swipeCahier";
-import { CircularProgress } from "@mui/material";
+//import { CircularProgress } from "@mui/material";
 
 
 export default function Patient() {
@@ -148,7 +148,7 @@ export default function Patient() {
       </div>
       <div className="patient-details">
         {loading ? (
-          <CircularProgress />
+          <p>loading</p>
         ) : (
           <div>
             <div className="patient-details-header">

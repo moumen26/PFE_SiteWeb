@@ -60,7 +60,7 @@ const router = createBrowserRouter([
     element: <Rendezvous />,
   },
   {
-    path: "antecedent",
+    path: "antecedent/:id",
     element: <Antecedent />,
   },
   {

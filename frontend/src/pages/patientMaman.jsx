@@ -32,8 +32,6 @@ export default function PatientDetails() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          Date_daccouchement: date,
-          Heure_daccouchement: time,
           idAccoucheur: user?.id,
         }),
       });
@@ -43,7 +41,7 @@ export default function PatientDetails() {
         window.alert("Add patient failed", data.error);
       }
       if (response.ok) {
-        history(`/patients/${await data.id}`);
+        history(`/antecedent/${await data.id}`);
       }
     } catch (error) {
       console.error("Error adding article:", error);

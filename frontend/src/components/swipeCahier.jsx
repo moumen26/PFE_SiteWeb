@@ -10,7 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useParams } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
+//import { CircularProgress } from "@mui/material";
 
 export default function MyCahierSwiper({ add, setAdd }) {
   const [Duree, setDuree] = useState("");
@@ -41,7 +41,8 @@ export default function MyCahierSwiper({ add, setAdd }) {
   useEffect(() => {
     const fetchPatientData = async () => {
       if (id !== undefined) {
-        await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
+        try{
+          await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
           if (response.ok) {
             response
               .json()
@@ -49,14 +50,18 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 setPatientData(data);
               })
               .catch((error) => {
-                console.error("Error fetching article data:", error);
+                console.error("Error fetching Patient data:", error);
               });
           } else {
-            console.error("Error fetching article data:", response.status);
+            //if there is no patient with this id
+            history("/patients");
           }
         });
+        }catch (error) {
+          window.alert("Error fetching Patient data:", error);
+        }
       } else {
-        history();
+        history("/patients");
       }
     };
 
@@ -84,7 +89,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
           }
         });
       } else {
-        history();
+        history("/patients");
       }
     };
 
@@ -112,7 +117,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
           }
         });
       } else {
-        history();
+        history("/patients");
       }
     };
     fetchCarnetSanteData();
@@ -157,7 +162,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
         console.log(error);
       }
     } else {
-      history();
+      history("/patients");
     }
   };
 

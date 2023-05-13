@@ -139,7 +139,7 @@ const GetPatient = async (req, res) => {
         })
         .catch((error) => {
             console.error('Error retrieving patient:', error);
-            res.status(500).json({ message: 'Error retrieving patient' });
+            return res.status(500).json({ message: 'Error retrieving patient' });
         });
 }
 
