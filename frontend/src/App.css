@@ -4451,11 +4451,96 @@ form.sign-in-form {
   margin-top: 10px;
 }
 
+/* notification style */
+.nav-notification{
+  display: none;
+}
+
+.add-notification{
+  display: block;
+}
+
+.Notification{
+  position: absolute;
+  top: 85px;
+  right: 75px;
+  margin-left: 10rem;
+  width: 400px;
+  height: 80vh;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 99;
+  background-color: white;
+  box-shadow: 0 0 10px #060e30;
+}
+
+.notification-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 5%;
+  padding-right: 5%;
+  height: 74px;
+  border-bottom: rgba(0, 0, 0, 0.15) solid 1px;
+}
+
+.notification-header h2{
+  font-weight: 500;
+  margin-top: 8px;
+  font-size: 22px;
+  color: rgba(6, 14, 48);
+}
+
+.notification-container{
+  overflow-y: scroll;
+  margin-top: 2Px;
+}
+
+
+.Notification-item{
+  width: 100%;
+  height: 100px;
+  border-bottom: rgba(0, 0, 0, 0.15) solid 1px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-left: 4%;
+  padding-right: 4%;
+}
+
+.notification-pic{
+  width: 75px;
+  height: 75px;
+  background-color: rgb(195, 195, 199);
+  border-radius: 50%;
+}
+
+
+.notification-item-description h3{
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.notification-item-description h3 span{
+  font-weight: 500;
+  font-size: 16px;
+  color: rgb(195, 195, 199);
+}
+
+.notification-item-description span{
+  font-size: 12px;
+  color: rgb(195, 195, 199);
+}
+
+
+
 
 
 .dashboard-table-container::-webkit-scrollbar,
 .patient-details-examen::-webkit-scrollbar,
-.table-patients::-webkit-scrollbar {
+.table-patients::-webkit-scrollbar,
+.notification-container::-webkit-scrollbar {
   background-color: rgba(79, 129, 255, 0.25);
   border-radius: 2px;
   width: 5px;
@@ -4463,7 +4548,8 @@ form.sign-in-form {
 
 .dashboard-table-container::-webkit-scrollbar-thumb,
 .patient-details-examen::-webkit-slider-thumb,
-.table-patients::-webkit-slider-thumb {
+.table-patients::-webkit-slider-thumb,
+.notification-container::-webkit-scrollbar-thumb{
   background-color: rgba(79, 129, 255, 1);
   width: 5px;
   border-radius: 2px;

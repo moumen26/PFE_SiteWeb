@@ -281,7 +281,7 @@ export default function FichierPatient() {
                   <span>Sexe :</span>
                 </div>
                 <input
-                  type="date-annexe"
+                  type="text"
                   name="Sexe"
                   id="date-annexe"
                   value={Sexe}

@@ -18,20 +18,14 @@ export default function AddPatient() {
   const [addVaccin2, setAddVaccin2] = useState(false);
   const [addVisite, setAddvisite] = useState(false);
   const [addVisite2, setAddvisite2] = useState(false);
-  const [addVaccinTable, setaddVaccinTable] = useState(false);
-  const [addVaccinTable2, setaddVaccinTable2] = useState(false);
+
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
   let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
   let toggleClassAddVaccin2 = addVaccin2 ? " add-vaccin-active2" : "";
   let toggleClassAddVisite = addVisite ? " add-visite-active" : "";
   let toggleClassAddVisite2 = addVisite2 ? " add-visite-active2" : "";
-  let toggleClassAddVaccinTable = addVaccinTable
-    ? " add-Vaccin-Table-active"
-    : "";
-  let toggleClassAddVaccinTable2 = addVaccinTable2
-    ? " add-Vaccin-Table-active2"
-    : "";
+
 
   return (
     <div className="AddPatient">

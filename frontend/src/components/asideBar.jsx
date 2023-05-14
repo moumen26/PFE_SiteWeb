@@ -1,12 +1,10 @@
 import { MdDashboard } from "react-icons/md";
-import { HiUserAdd } from "react-icons/hi";
-import { BsFilePersonFill } from "react-icons/bs";
+import { BsFilePersonFill, BsFilePerson } from "react-icons/bs";
 import { BsFillCalendarFill } from "react-icons/bs";
 import { RiCoupon2Fill } from "react-icons/ri";
 import { MdAnalytics } from "react-icons/md";
 import { IoIosSettings } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
-import { IconContext } from "react-icons";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 
@@ -50,7 +48,7 @@ export default function MyAsideBar() {
           <li className="list">
             <a href="/Nouveaune" className="mb-2 h-10 pt-1">
               <div className="flex items-center justify-items-center">
-                <BsFilePersonFill className="w-6 h-6 ml-2 " />
+                <BsFilePerson className="w-6 h-6 ml-2 " />
                 <span className="title">Nouveau-ne</span>
               </div>
             </a>
