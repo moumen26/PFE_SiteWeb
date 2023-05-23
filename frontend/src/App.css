@@ -974,7 +974,8 @@ nav {
 }
 
 .next-first,
-.back-first {
+.back-first,
+.Enregistre-class {
   margin-top: 20px;
   height: 80px;
   width: 100%;
@@ -991,6 +992,7 @@ nav {
 .formulaire-dossier-obster .next-first{
   padding-right: 50px;
 }
+
 
 .next button,
 .back button,
@@ -3847,7 +3849,6 @@ form.sign-in-form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding-bottom: 20px;
 }
 
@@ -3874,7 +3875,8 @@ form.sign-in-form {
 
 .antecedent-hedear input,
 .addpatient-hedear input,
-.ajout-bebe input {
+.ajout-bebe input,
+.enregistre-btn {
   padding: 0;
   height: 39px;
   background-color: rgba(79, 129, 255, 1);
@@ -3885,12 +3887,13 @@ form.sign-in-form {
 }
 
 .antecedent-hedear input:last-child,
-.addpatient-hedear input:last-child {
+.addpatient-hedear input:last-child,
+.enregistre-btn  {
   width: 195px;
 }
 
 .antecedent-hedear input:first-child,
-.addpatient-hedear input:first-child {
+.addpatient-hedear input:first-child{
   width: 114px;
 }
 
@@ -4533,6 +4536,9 @@ form.sign-in-form {
   color: rgb(195, 195, 199);
 }
 
+/* .Antecedent .Navbar nav{
+  width: 1535px;
+} */
 
 
 

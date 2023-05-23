@@ -18,7 +18,7 @@ export default function MyNavBar({ act, setAct }) {
   };
 
   return (
-    <div>
+    <div className="Navbar">
       <nav>
         <div className="left-nav">
           <div act={act} setAct={setAct} className="menu" onClick={classToggle}>

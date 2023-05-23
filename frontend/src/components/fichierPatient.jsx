@@ -396,8 +396,12 @@ export default function FichierPatient() {
               </div>
             </div>
           </div>
-          <div className="next-first">
-            <input type="Submit" value="Enregistre"/>
+          <div className="Enregistre-class">
+            <input
+              type="Submit"
+              value="Enregistre"
+              className="enregistre-btn"
+            />
           </div>
         </form>
       </div>
