@@ -17,7 +17,7 @@ export default function Calendrier() {
     <div className="Calendrier">
       <MyNavBar act={act} setAct={setAct}></MyNavBar>
       <div className="lh"></div>
-      <MyAsideBar></MyAsideBar>
+      
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="calendar-container">
         <FullCalendar

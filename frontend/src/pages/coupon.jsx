@@ -10,7 +10,7 @@ export default function Coupon() {
     <div className="Coupon">
       <MyNavBar act={act} setAct={setAct}></MyNavBar>
       <div className="lh"></div>
-      <MyAsideBar></MyAsideBar>
+      
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <h2 className="titre">coupon</h2>
     </div>

@@ -1,33 +1,38 @@
-import { useState } from "react";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/dashboard";
+import PatientDetails from "./pages/patientMaman";
+import NouveauNe from "./pages/nouveaune";
+import AddPatient from "./pages/addPatient";
+import Calendrier from "./pages/calendrier";
+import Coupon from "./pages/coupon";
+import Analytics from "./pages/analytics";
+import Login from "./pages/loginPage";
+import DoctorProfile from "./pages/doctorProfile";
+import Rendezvous from "./pages/rendezvous";
+import Antecedent from "./pages/antecedent";
 import MyAsideBar from "./components/asideBar";
-import MyAsideBarActive from "./components/asideBarActive";
-import MyDashboradCalendar from "./components/dashboardCalendar";
-import MyChart from "./components/dashboardChart";
-import MyDashboradTop from "./components/dashboradItems";
-import MyNavBar from "./components/navBar";
-import TableTraitement from "./components/dashboardTableTraitement";
-import SexeChart from "./components/dashboardChart2";
+
 
 function App() {
-  const [act, setAct] = useState(false);
-
+ 
   return (
-    <div className="Dashboard">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
-      <MyAsideBar></MyAsideBar>
-      <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
-      <div className="dashboard-container">
-        <MyDashboradTop></MyDashboradTop>
-        <div className="dashboard-charts-calnedar">
-          <MyChart></MyChart>
-          <MyDashboradCalendar></MyDashboradCalendar>
-        </div>
-        <TableTraitement></TableTraitement>
-        <SexeChart></SexeChart>
-      </div>
-    </div>
+    <BrowserRouter>
+      <main>
+        <MyAsideBar />
+        <Routes>
+          <Route index element={<Dashboard />} />
+          <Route path="patients" element={<PatientDetails />} />
+          <Route path="Nouveaune" element={<NouveauNe />} />
+          <Route path="/patients/:id" element={<AddPatient />} />
+          <Route path="calendrier" element={<Calendrier />} />
+          <Route path="coupon" element={<Coupon />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="login" element={<Login />} />
+          <Route path="profile" element={<DoctorProfile />} />
+          <Route path="antecedent/:id" element={<Antecedent />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
   );
 }
 

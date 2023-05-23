@@ -17,64 +17,64 @@ import Antecedent from "./pages/antecedent";
 import NouveauNe from "./pages/nouveaune";
 import Rendezvous from "./pages/rendezvous";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <App />,
-  },
-  {
-    path: "dashboard",
-    element: <App />,
-  },
-  {
-    path: "patients",
-    element: <PatientDetails />,
-  },
-  {
-    path: "Nouveaune",
-    element: <NouveauNe/>,
-  },
-  {
-    path: "/patients/:id",
-    element: <AddPatient />,
-  },
-  {
-    path: "calendrier",
-    element: <Calendrier />,
-  },
-  {
-    path: "coupon",
-    element: <Coupon />,
-  },
-  {
-    path: "analytics",
-    element: <Analytics />,
-  },
-  {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "profile",
-    element: <DoctorProfile />,
-  },
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//   },
+//   {
+//     path: "dashboard",
+//     element: <App />,
+//   },
+//   {
+//     path: "patients",
+//     element: <PatientDetails />,
+//   },
+//   {
+//     path: "Nouveaune",
+//     element: <NouveauNe/>,
+//   },
+//   {
+//     path: "/patients/:id",
+//     element: <AddPatient />,
+//   },
+//   {
+//     path: "calendrier",
+//     element: <Calendrier />,
+//   },
+//   {
+//     path: "coupon",
+//     element: <Coupon />,
+//   },
+//   {
+//     path: "analytics",
+//     element: <Analytics />,
+//   },
+//   {
+//     path: "login",
+//     element: <Login />,
+//   },
+//   {
+//     path: "profile",
+//     element: <DoctorProfile />,
+//   },
 
-  {
-    path: "seetings",
-    element: <Rendezvous />,
-  },
-  {
-    path: "antecedent/:id",
-    element: <Antecedent />,
-  },
+//   {
+//     path: "seetings",
+//     element: <Rendezvous />,
+//   },
+//   {
+//     path: "antecedent/:id",
+//     element: <Antecedent />,
+//   },
   
-]);
+// ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <AuthContextProvider>
-      <RouterProvider router={router} />
+      <App />
     </AuthContextProvider>
   </React.StrictMode>
 );

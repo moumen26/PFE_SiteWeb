@@ -249,6 +249,7 @@ nav {
 }
 
 .aside ul {
+  height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -256,22 +257,14 @@ nav {
   list-style: none;
 }
 
-.aside ul li a {
+.aside ul li .link {
   position: relative;
   color: black;
   font-size: 14px;
-  display: table;
   width: 232px;
   text-transform: capitalize;
 }
 
-.aside ul li a .icon {
-  position: relative;
-  font-size: 24px;
-  text-align: center;
-  padding-left: 10px;
-  top: 5px;
-}
 
 .aside ul li:last-child {
   position: absolute;
@@ -280,10 +273,10 @@ nav {
 
 .title {
   position: relative;
-  margin-left: 30px;
+  margin-left: 50px;
 }
 
-.aside ul li a:hover {
+.aside ul li:hover {
   line-height: 50px;
   background-color: #71c5ee;
   border-radius: 20px 0 0 20px;
@@ -4566,4 +4559,8 @@ form.sign-in-form {
 .patient-details-center::-webkit-scrollbar,
 .AddPatient::-webkit-scrollbar {
   width: 0;
+}
+
+.Antecedent .asidebar{
+  display: none;
 }

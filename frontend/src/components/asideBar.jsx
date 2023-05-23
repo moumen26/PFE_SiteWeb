@@ -7,96 +7,84 @@ import { IoIosSettings } from "react-icons/io";
 import { FiLogOut } from "react-icons/fi";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { Link, NavLink } from "react-router-dom";
 
 export default function MyAsideBar() {
-  // let list = document.querySelectorAll(".list");
-  // for (let i = 0; i < list.length; i++) {
-  //   list[i].onclick = function () {
-  //     let j = 0;
-  //     while (j < list.length) {
-  //       list[j++].className = "list";
-  //     }
-  //     list[i].className = "list-active";
-  //   };
-  // }
   const { logout } = useLogout();
   const { user } = useAuthContext();
-  
+
   const SubmitLogout = () => {
     logout();
-  }
+  };
   return (
     <div className="asidebar">
       <aside className="aside">
-        <ul className="flex flex-col gap-20">
-          <li className="list">
-            <a href="/dashboard" className="mb-2 h-10 pt-1">
-              <div className="flex items-center justify-items-center">
+        <ul>
+          <li className="mb-6">
+            <NavLink to="/">
+              <div className="link flex items-center justify-items-center">
                 <MdDashboard className="w-6 h-6 ml-2" />
                 <span className="title">Dashboard</span>
               </div>
-            </a>
+            </NavLink>
           </li>
-          <li className="list">
-            <a href="/patients" className="mb-2 h-10 pt-1">
-              <div className="flex items-center justify-items-center">
+          <li className="mb-6">
+            <NavLink to="patients">
+              <div className="link flex items-center ">
                 <BsFilePersonFill className="w-6 h-6 ml-2 " />
                 <span className="title">Patients</span>
               </div>
-            </a>
+            </NavLink>
           </li>
-          <li className="list">
-            <a href="/Nouveaune" className="mb-2 h-10 pt-1">
-              <div className="flex items-center justify-items-center">
+          <li className="mb-6">
+            <NavLink to="Nouveaune">
+              <div className="link flex items-center ">
                 <BsFilePerson className="w-6 h-6 ml-2 " />
                 <span className="title">Nouveau-ne</span>
               </div>
-            </a>
+            </NavLink>
           </li>
-          <li className="list">
-            <a href="/calendrier" className="mb-2 h-10 pt-1">
-              <div className="flex items-center justify-items-center">
+          <li className="mb-6">
+            <NavLink to="calendrier">
+              <div className="link flex items-center ">
                 <BsFillCalendarFill className="w-6 h-6 ml-2 " />
                 <span className="title">Calendar</span>
               </div>
-            </a>
+            </NavLink>
           </li>
-          <li className="list">
-            <a href="/coupon" className="mb-2 h-10 pt-1">
-              <div className="flex items-center justify-items-center">
+          <li className="mb-6">
+            <NavLink to="coupon">
+              <div className="link flex items-center ">
                 <RiCoupon2Fill className="w-6 h-6 ml-2 " />
                 <span className="title">Coupon</span>
               </div>
-            </a>
+            </NavLink>
           </li>
-          <li className="list">
-            <a href="/analytics" className="mb-2 h-10 pt-1">
-              <div className="flex items-center justify-items-center">
+          <li className="mb-6">
+            <NavLink to="analytics">
+              <div className="link flex items-center ">
                 <MdAnalytics className="w-6 h-6 ml-2 " />
                 <span className="title">Analytics</span>
               </div>
-            </a>
+            </NavLink>
           </li>
-          <li className="list">
-            <a href="/seetings" className="h-10 pt-1">
-              <div className="flex items-center justify-items-center">
+          <li>
+            <NavLink to="settings">
+              <div className="link flex items-center ">
                 <IoIosSettings className="w-6 h-6 ml-2" />
                 <span className="title">Seetings</span>
               </div>
-            </a>
+            </NavLink>
           </li>
-          <li className="list">
-            <a href="/login" className="h-10 pt-1">
+          <li>
+            <NavLink to="login">
               {user && (
-                <div
-                  className="flex items-center justify-items-center"
-                  onClick={SubmitLogout}
-                >
+                <div className="link flex items-center " onClick={SubmitLogout}>
                   <FiLogOut className="w-6 h-6 ml-2" />
                   <span className="title">Log Out</span>
                 </div>
               )}
-            </a>
+            </NavLink>
           </li>
         </ul>
       </aside>

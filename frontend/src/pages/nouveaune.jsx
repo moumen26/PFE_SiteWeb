@@ -29,7 +29,6 @@ export default function NouveauNe() {
       <div className="patient-table">
         <MyNavBar act={act} setAct={setAct}></MyNavBar>
         <div className="lh"></div>
-        <MyAsideBar></MyAsideBar>
         <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
         <div className="patient-table-container">
           <div className="patient-table-header">
