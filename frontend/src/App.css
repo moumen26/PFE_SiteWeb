@@ -4529,13 +4529,6 @@ form.sign-in-form {
   color: rgb(195, 195, 199);
 }
 
-/* .Antecedent .Navbar nav{
-  width: 1535px;
-} */
-
-
-
-
 .dashboard-table-container::-webkit-scrollbar,
 .patient-details-examen::-webkit-scrollbar,
 .table-patients::-webkit-scrollbar,
@@ -4561,6 +4554,13 @@ form.sign-in-form {
   width: 0;
 }
 
-.Antecedent .asidebar{
-  display: none;
+.antecedent-container,
+.AddPatient{
+  z-index: 100;
+  background-color: white;
 }
+
+.Login{
+  z-index: 100;
+}
+

@@ -34,7 +34,7 @@ export default function Login() {
   }
 
   return (
-    <div className={`container${toggleClassCheck}`}>
+    <div className={`Login container${toggleClassCheck}`}>
       <div className="forms-container">
         <div className="login-signin">
           <form
