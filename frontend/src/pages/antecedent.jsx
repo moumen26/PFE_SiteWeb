@@ -5,7 +5,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Antecedent() {
-  const [act, setAct] = useState(false);
   const history = useNavigate();
   const {id} = useParams();
   const { user } = useAuthContext();
@@ -61,8 +60,6 @@ export default function Antecedent() {
   };
   return (
     <div className="Antecedent">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
       <div className="antecedent-container">
         <div className="antecedent-hedear">
           <input type="submit" value="Annuler" />

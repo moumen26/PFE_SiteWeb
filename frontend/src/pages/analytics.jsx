@@ -8,9 +8,6 @@ export default function Analytics() {
 
   return (
     <div className="Analytics">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
-      
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="home-container">
         <h2 className="titre">Analytics</h2>

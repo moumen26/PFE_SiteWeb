@@ -7,17 +7,11 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
 
-
 export default function Calendrier() {
   const [act, setAct] = useState(false);
 
-  
-
   return (
     <div className="Calendrier">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
-      
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="calendar-container">
         <FullCalendar
@@ -29,7 +23,6 @@ export default function Calendrier() {
             end: "today prev,next",
           }}
           height={"88vh"}
-         
         />
       </div>
     </div>

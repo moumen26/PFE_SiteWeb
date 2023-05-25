@@ -48,7 +48,7 @@ export default function MyAsideBar() {
             <NavLink to="calendrier">
               <div className="link flex items-center ">
                 <BsFillCalendarFill className="w-6 h-6 ml-2 " />
-                <span className="title">Calendar</span>
+                <span className="title">Calendrier</span>
               </div>
             </NavLink>
           </li>
@@ -64,15 +64,15 @@ export default function MyAsideBar() {
             <NavLink to="analytics">
               <div className="link flex items-center ">
                 <MdAnalytics className="w-6 h-6 ml-2 " />
-                <span className="title">Analytics</span>
+                <span className="title">Analytique</span>
               </div>
             </NavLink>
           </li>
           <li>
-            <NavLink to="settings">
+            <NavLink to="conculter">
               <div className="link flex items-center ">
                 <IoIosSettings className="w-6 h-6 ml-2" />
-                <span className="title">Seetings</span>
+                <span className="title">Paramètres</span>
               </div>
             </NavLink>
           </li>

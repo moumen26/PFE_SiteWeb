@@ -70,8 +70,7 @@ export default function DoctorProfile() {
 
   return (
     <div className="Doctor-profile">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
+      
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="doctor-profile-container">
         <div className="doctor-profile-title">

@@ -35,10 +35,6 @@ const options = {
     legend: {
       position: "top",
     },
-    title: {
-      display: true,
-      text: "Chart.js Bar Chart",
-    },
   },
 };
 
@@ -62,7 +58,7 @@ export default function MyChart() {
   return (
     <div className="dashboard-chart-container">
       <div className="chart-header">
-        <a href="#">New-born</a>
+        <a href="#">Nouveau-ne</a>
         <div className="select-chart">
           <select
             className="nouveau-ne-chart"
@@ -86,9 +82,9 @@ export default function MyChart() {
       </div>
       <div className="chart-nombre-nouveau-ne">
         <h2>
-          120 <span>/week</span>
+          120 <span>/semaine</span>
         </h2>
-        <span className="title-chart">Number of newborns</span>
+        <span className="title-chart">Nombre des nouveau-ne</span>
       </div>
       <Bar className="chart-dashboard1" options={options} data={data} />
     </div>

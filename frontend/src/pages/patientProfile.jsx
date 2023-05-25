@@ -9,9 +9,6 @@ export default function PatientProfile() {
 
   return (
     <div className="Patients">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
-      
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <h2 className="titre">patient</h2>
     </div>

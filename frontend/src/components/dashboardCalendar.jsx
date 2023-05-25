@@ -7,7 +7,7 @@ import { GrFormNext, GrFormPrevious } from "react-icons/gr";
 
 export default function MyDashboradCalendar() {
   console.log(generateDate());
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const days = ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"];
   const currentDate = dayjs();
   const [today, setToday] = useState(currentDate);
   const [selectDate, setSelectdate] = useState(currentDate);
@@ -15,7 +15,7 @@ export default function MyDashboradCalendar() {
   return (
     <div className="dashboard-calendar-container">
       <div className="calendar-dashboard-header">
-        <h2>Calendar</h2>
+        <h2>Calendrier</h2>
       </div>
       <div className="w-96 h-96">
         <div className="flex justify-between">

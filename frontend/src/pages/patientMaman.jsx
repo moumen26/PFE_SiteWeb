@@ -4,7 +4,7 @@ import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-
+import SearchButton from "../components/searchButton";
 
 export default function PatientDetails() {
   const current = new Date();
@@ -48,13 +48,9 @@ export default function PatientDetails() {
     }
   };
 
-
   return (
     <div className="Patients-Details">
       <div className="patient-table">
-        <MyNavBar act={act} setAct={setAct}></MyNavBar>
-        <div className="lh"></div>
-        
         <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
         <div className="patient-table-container">
           <div className="patient-table-header">
@@ -90,7 +86,7 @@ export default function PatientDetails() {
               placeholder="Search.."
             />
             <div className="search-item">
-              <input type="submit" value="Search" />
+              <SearchButton />
             </div>
 
             <div className="ajoute-nouveau-ne-item">
@@ -179,7 +175,6 @@ export default function PatientDetails() {
           </div>
         </div>
       </div>
-      
     </div>
   );
 }

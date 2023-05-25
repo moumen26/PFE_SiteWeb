@@ -12,13 +12,11 @@ import AddVaccinButtonTable from "../components/addVaccinButton2";
 import VaccinTable from "../components/addPatientVaccinTable";
 
 export default function AddPatient() {
-  const [act, setAct] = useState(false);
   const [add, setAdd] = useState(false);
   const [addVaccin, setAddvacin] = useState(false);
   const [addVaccin2, setAddVaccin2] = useState(false);
   const [addVisite, setAddvisite] = useState(false);
   const [addVisite2, setAddvisite2] = useState(false);
-
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
   let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
@@ -26,11 +24,8 @@ export default function AddPatient() {
   let toggleClassAddVisite = addVisite ? " add-visite-active" : "";
   let toggleClassAddVisite2 = addVisite2 ? " add-visite-active2" : "";
 
-
   return (
     <div className="AddPatient">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
       <div className="addpatient-container">
         <div className="addpatient-hedear">
           <input type="submit" value="Annuler" />

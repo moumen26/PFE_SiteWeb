@@ -11,24 +11,22 @@ import PatientDetailsReducation from "../components/patientDetailsReducation";
 import MySwiper from "../components/swiperDossier";
 import AddCahierSante from "../components/addCahierButton";
 import MyCahierSwiper from "../components/swipeCahier";
+import ConculterButton from "../components/conculterButton";
+import VoirButton from "../components/voirButton";
+import SearchButton from "../components/searchButton";
 //import { CircularProgress } from "@mui/material";
 
-
 export default function NouveauNe() {
-   const [add, setAdd] = useState(false);
-   const [act, setAct] = useState(false);
+  const [add, setAdd] = useState(false);
+  const [act, setAct] = useState(false);
 
   const [loading, setLoading] = useState();
 
-
   let toggleClassAdd = add ? " add-cahier-active" : "";
-
 
   return (
     <div>
       <div className="patient-table">
-        <MyNavBar act={act} setAct={setAct}></MyNavBar>
-        <div className="lh"></div>
         <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
         <div className="patient-table-container">
           <div className="patient-table-header">
@@ -64,7 +62,7 @@ export default function NouveauNe() {
               placeholder="Search.."
             />
             <div className="search-item">
-              <input type="submit" value="Search" />
+              <SearchButton />
             </div>
           </div>
           <div className="table-patients">
@@ -74,79 +72,124 @@ export default function NouveauNe() {
                 <td className="table-patients-header-annee">Annee</td>
                 <td className="table-patients-header-willaya">Willaya</td>
                 <td className="table-patients-header-region">Region</td>
+                <td className="table-patients-header-button"></td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
               <tr>
                 <td className="table-patients-td">Nom complet</td>
                 <td className="table-patients-td">Annee</td>
                 <td className="table-patients-td">Willaya</td>
                 <td className="table-patients-td">Region</td>
+                <td className="table-patients-td table-patient-td-button">
+                  <ConculterButton />
+                  <VoirButton />
+                </td>
               </tr>
             </table>
           </div>
         </div>
       </div>
-      <div className="patient-details">
-        {/*loading ? (
+      {/* <div className="patient-details">
+        loading ? (
           <p>loading</p>
         ) : (
           <div>
@@ -180,8 +223,8 @@ export default function NouveauNe() {
               </div>
             </div>
           </div>
-        )*/}
-      </div>
+        )
+      </div> */}
     </div>
   );
 }

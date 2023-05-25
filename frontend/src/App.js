@@ -11,13 +11,19 @@ import DoctorProfile from "./pages/doctorProfile";
 import Rendezvous from "./pages/rendezvous";
 import Antecedent from "./pages/antecedent";
 import MyAsideBar from "./components/asideBar";
+import Conculter from "./pages/conculter";
+import MyNavBar from "./components/navBar";
+import { useState } from "react";
 
 
 function App() {
+  const [act, setAct] = useState(false);
+
  
   return (
     <BrowserRouter>
       <main>
+        <MyNavBar act={act} setAct={setAct} />
         <MyAsideBar />
         <Routes>
           <Route index element={<Dashboard />} />
@@ -30,6 +36,7 @@ function App() {
           <Route path="login" element={<Login />} />
           <Route path="profile" element={<DoctorProfile />} />
           <Route path="antecedent/:id" element={<Antecedent />} />
+          <Route path="conculter" element={<Conculter />} />
         </Routes>
       </main>
     </BrowserRouter>

@@ -7,8 +7,6 @@ export default function Rendezvous() {
   const [act, setAct] = useState(false);
   return (
     <div className="Rendezvous">
-      <MyNavBar act={act} setAct={setAct}></MyNavBar>
-      <div className="lh"></div>
       <div className="rendezvous-container">
         <div className="rendezvous-profile-title">
           <h2>Rendez-vous</h2>
