@@ -17,6 +17,7 @@ export default function Antecedent() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization : `Bearer ${user?.token}`
         },
         body: JSON.stringify({
           idAccoucheur: user?.id,
@@ -35,6 +36,7 @@ export default function Antecedent() {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
+              Authorization : `Bearer ${user?.token}`
             },
             body: JSON.stringify({
               idNouveauNe: data._id

@@ -99,6 +99,7 @@ export default function VaccinTable() {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              Authorization: `Bearer ${user.token}`,
             },
             body: JSON.stringify({
               ID_vaccinateur: user?.id,
@@ -130,7 +131,12 @@ export default function VaccinTable() {
   useEffect(() => {
     const fetchVaccinData = async () => {
       if(id !== undefined){
-        await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`).then((response) => {
+        await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`,{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }).then((response) => {
           if (response.ok) {
             response.json().then((data) => {
               setVaccinDB(data);
@@ -153,14 +159,18 @@ export default function VaccinTable() {
 
     if(editVaccinId !== undefined){
        try {
-        const response = await axios.patch(`http://localhost:8000/patients/Vaccin/${editVaccinId}`, { 
+        const response = await axios.patch(`http://localhost:8000/patients/Vaccin/${editVaccinId}`,{ 
           Nom_vaccin: editFormData.vaccinationVaccin,
           Date_vaccination: editFormData.vaccinationDate,
           Age_vaccination: editFormData.vaccinationAge,
           Contre_vaccin: editFormData.vaccinationContre,
           Technique_vaccinale: editFormData.vaccinationTechnique,
           Numero_lot: editFormData.vaccinationNumero,
-        });
+        },{
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          }
+        },);
         // Handle response as needed
         if (!response.status === 200) {
             window.alert("Update vaccin failed", response.error);
@@ -181,7 +191,11 @@ export default function VaccinTable() {
 
     if(VaccinData !== undefined){
       try {
-        const response = await axios.delete(`http://localhost:8000/patients/Vaccin/${VaccinData}`);
+        const response = await axios.delete(`http://localhost:8000/patients/Vaccin/${VaccinData}`,{
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          }
+        },);
         // Handle response as needed
         if (!response.status === 200) {
             window.alert("Deleting vaccin failed", response.error);

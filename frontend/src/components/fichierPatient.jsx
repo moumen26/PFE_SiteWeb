@@ -20,7 +20,6 @@ export default function FichierPatient() {
   const [Malformation, setMalformation] = useState('');
   const [Remarque, setRemarque] = useState('');
   const [Empreintes_digitales, setEmpreintes_digitales] = useState('');
-
   const { user } = useAuthContext();
   const { id } = useParams();
   const [PatientData, setPatientData] = useState(null);
@@ -33,7 +32,12 @@ export default function FichierPatient() {
   useEffect(() => {
     const fetchPatientData = async () => {
       if (id !== undefined) {
-        await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
+        await fetch(`http://localhost:8000/patients/${id}`,{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization : `Bearer ${user?.token}`
+          },
+        }).then((response) => {
           if (response.ok) {
             response
               .json()
@@ -41,10 +45,10 @@ export default function FichierPatient() {
                 setPatientData(data);
               })
               .catch((error) => {
-                console.error("Error fetching article data:", error);
+                console.error("Error fetching nouveau-ne data:", error);
               });
           } else {
-            console.error("Error fetching article data:", response.status);
+            console.error("Error fetching nouveau-ne data:", response.status);
           }
         });
       } else {
@@ -61,7 +65,12 @@ export default function FichierPatient() {
     const fetchDossObsData = async () => {
       if (PatientData.idDossObs !== undefined) {
         await fetch(
-          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{
+            headers: {
+              "Content-Type": "application/json",
+              Authorization : `Bearer ${user?.token}`
+            },
+          }
         ).then((response) => {
           if (response.ok) {
             response
@@ -90,9 +99,9 @@ export default function FichierPatient() {
       if(DossObsData.AccoucheurID !== undefined){
         await fetch(`http://localhost:8000/user/${DossObsData?.AccoucheurID}`,{
           headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${user.token}`
-          }
+            "Content-Type": "application/json",
+            Authorization : `Bearer ${user?.token}`
+          },
         }).then((response) => {
           if (response.ok) {
             response.json().then((data) => {
@@ -116,10 +125,14 @@ export default function FichierPatient() {
     event.preventDefault();
     if(PatientData?.idDossObs !== undefined){
       try {
-       const response = await axios.patch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`, { 
+       const response = await axios.patch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{ 
         Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
           ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
-       });
+        },{
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          }
+        },);
         // Handle response as needed
         if (!response.status === 200) {
           window.alert("Add patient failed", response.data.message);

@@ -40,7 +40,12 @@ export default function MySwiper() {
   useEffect(() => {
     const fetchPatientData = async () => {
       if (id !== undefined) {
-        await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
+        await fetch(`http://localhost:8000/patients/${id}`,{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization : `Bearer ${user?.token}`
+          },
+        }).then((response) => {
           if (response.ok) {
             response
               .json()
@@ -67,7 +72,12 @@ export default function MySwiper() {
     const fetchDossObsData = async () => {
       if (PatientData.idDossObs !== undefined) {
         await fetch(
-          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{
+            headers: {
+              "Content-Type": "application/json",
+              Authorization : `Bearer ${user?.token}`
+            },
+          }
         ).then((response) => {
           if (response.ok) {
             response
@@ -99,7 +109,7 @@ export default function MySwiper() {
         await fetch(`http://localhost:8000/user/${PatientData?.idAccoucheur}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
+            Authorization : `Bearer ${user?.token}`
           },
         }).then((response) => {
           if (response.ok) {
@@ -131,8 +141,7 @@ export default function MySwiper() {
     if (PatientData?.idDossObs !== undefined) {
       try {
         const response = await axios.patch(
-          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,
-          {
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{
             Poids,
             Aspect,
             Anomalies,
@@ -145,8 +154,11 @@ export default function MySwiper() {
             Malformation,
             Remarque,
             Empreintes_digitales,
-          }
-        );
+          },{
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            }
+          },);
         // Handle response as needed
         if (!response.status === 200) {
           window.alert("Add patient failed", response.data.message);
