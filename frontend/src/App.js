@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import PatientDetails from "./pages/patientMaman";
 import NouveauNe from "./pages/nouveaune";
@@ -14,11 +14,11 @@ import MyAsideBar from "./components/asideBar";
 import Conculter from "./pages/conculter";
 import MyNavBar from "./components/navBar";
 import { useState } from "react";
-
+import { useAuthContext } from "./hooks/useAuthContext";
 
 function App() {
   const [act, setAct] = useState(false);
-
+  const { user } = useAuthContext();
  
   return (
     <BrowserRouter>
@@ -26,17 +26,17 @@ function App() {
         <MyNavBar act={act} setAct={setAct} />
         <MyAsideBar />
         <Routes>
-          <Route index element={<Dashboard />} />
-          <Route path="patients" element={<PatientDetails />} />
-          <Route path="Nouveaune" element={<NouveauNe />} />
-          <Route path="/patients/:id" element={<AddPatient />} />
-          <Route path="calendrier" element={<Calendrier />} />
-          <Route path="coupon" element={<Coupon />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="login" element={<Login />} />
-          <Route path="profile" element={<DoctorProfile />} />
-          <Route path="antecedent/:id" element={<Antecedent />} />
-          <Route path="conculter" element={<Conculter />} />
+          <Route index element={user ? <Dashboard /> : <Navigate to="/login"/>} />
+          <Route path="patients" element={user ?<PatientDetails /> : <Navigate to="/login"/>} />
+          <Route path="Nouveaune" element={user ? <NouveauNe /> : <Navigate to="/login"/>} />
+          <Route path="/patients/:id" element={user ? <AddPatient /> : <Navigate to="/login"/>} />
+          <Route path="calendrier" element={user ? <Calendrier /> : <Navigate to="/login"/>} />
+          <Route path="coupon" element={user ? <Coupon /> : <Navigate to="/login"/>} />
+          <Route path="analytics" element={ user ? <Analytics /> : <Navigate to="/login"/>} />
+          <Route path="login" element={!user ? <Login /> : <Navigate to="/"/>} />
+          <Route path="profile" element={user ? <DoctorProfile /> : <Navigate to="/login"/>} />
+          <Route path="antecedent/:id" element={user ? <Antecedent /> : <Navigate to="/login"/>} />
+          <Route path="conculter" element={user ? <Conculter /> : <Navigate to="/login"/>} />
         </Routes>
       </main>
     </BrowserRouter>
