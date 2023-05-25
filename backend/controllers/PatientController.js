@@ -40,11 +40,23 @@ const CreateNewNouveaune = async (req, res) => {
                 console.error('Error creating patient:', error);
                 res.status(500).json({ message: 'Failed to create patient' });
             });
-        
+            
+            // Save to maman the patientID
+            const maman = await Patient.findOne({_id :id}).then((maman) => {
+                if (!maman) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                maman.idNouveauNe.push(patientID);
+                maman.save();
+            }).catch((error) => {
+                console.error('Error creating patient:', error);
+                res.status(500).json({ message: 'Failed to create patient' });
+            });
+            
             // Protocole daccouchement
             try{
                 //check if id is valid
-                if(!mongoose.Types.ObjectId.isValid(id)){
+                if(!mongoose.Types.ObjectId.isValid(Maman.idDossObs)){
                     return res.status(400).json({err: 'DossierObstetrique Maman not found'});
                 }
                 //find id in db and update
@@ -58,6 +70,7 @@ const CreateNewNouveaune = async (req, res) => {
             }catch(err){
                 res.status(400).json({err: err.message});
             }
+            
             // Create new Carnet de santé
             const newCarnetSante = new CarnetSante({
                 patientID,
@@ -168,8 +181,7 @@ const CreateNewPatient = async (req, res) => {
                 console.error('Error creating patient:', error);
                 res.status(500).json({ message: 'Failed to create patient' });
             });
-            // Send patientID to patientDetails
-            await res.status(201).json({id: patientID});
+            
             
             // Create new Dossier Obstitrique
             const newDossObs = new DossObs({
@@ -190,7 +202,9 @@ const CreateNewPatient = async (req, res) => {
                 console.error('Error Dossier obstitrique:', error);
                 res.status(500).json({ message: 'Error saving Dossier obstitrique' });
             }); 
-            
+
+            // Send patientID to patientDetails
+            await res.status(201).json({id: patientID});
         }).catch((error) => {
             console.error('Error creating patient:', error);
             res.status(500).json({ message: 'Failed to create patient' });

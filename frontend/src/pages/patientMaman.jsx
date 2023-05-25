@@ -18,6 +18,7 @@ export default function PatientDetails() {
     hour12: false,
   });
   const { user } = useAuthContext();
+  
 
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
@@ -30,6 +31,7 @@ export default function PatientDetails() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization : `Bearer ${user?.token}`
         },
         body: JSON.stringify({
           idAccoucheur: user?.id,

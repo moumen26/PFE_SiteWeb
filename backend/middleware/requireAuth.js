@@ -14,14 +14,14 @@ const requireAuth = async (req, res, next) => {
 
     try{
         // Verify token
-        const {_id} = jwt.verify(token, process.env.SECRET_KEY);
+        const {id} = jwt.verify(token, process.env.SECRET_KEY);
         // Add user to request
-        req.user = await User.findOne({_id}).select('_id');
+        req.user = await User.findOne({_id: id}).select('_id');
         // Continue to next middleware
         next();
     }catch(error){
         console.log(error);
-        res.status(401).json({error: 'Requet is not authorized'})
+        res.status(401).json({error: error.message})
     }
 }
 module.exports = requireAuth;

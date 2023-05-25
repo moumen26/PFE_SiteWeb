@@ -42,7 +42,12 @@ export default function MyCahierSwiper({ add, setAdd }) {
     const fetchPatientData = async () => {
       if (id !== undefined) {
         try{
-          await fetch(`http://localhost:8000/patients/${id}`).then((response) => {
+          await fetch(`http://localhost:8000/patients/${id}`,{
+            headers: {
+              "Content-Type": "application/json",
+              Authorization : `Bearer ${user?.token}`
+            },
+          }).then((response) => {
           if (response.ok) {
             response
               .json()
@@ -73,7 +78,12 @@ export default function MyCahierSwiper({ add, setAdd }) {
     const fetchDossObsData = async () => {
       if (PatientData.idDossObs !== undefined) {
         await fetch(
-          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{
+            headers: {
+              "Content-Type": "application/json",
+              Authorization : `Bearer ${user?.token}`
+            },
+          }
         ).then((response) => {
           if (response.ok) {
             response
@@ -101,7 +111,12 @@ export default function MyCahierSwiper({ add, setAdd }) {
     const fetchCarnetSanteData = async () => {
       if (PatientData.idCarnetSante !== undefined) {
         await fetch(
-          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`
+          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`,{
+            headers: {
+              "Content-Type": "application/json",
+              Authorization : `Bearer ${user?.token}`
+            },
+          }
         ).then((response) => {
           if (response.ok) {
             response
@@ -132,8 +147,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
     if (PatientData?.idCarnetSante !== undefined) {
       try {
         const response = await axios.patch(
-          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`,
-          {
+          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`,{
             Date_daccouchement,
             Heure_daccouchement,
             Sexe,
@@ -150,8 +164,11 @@ export default function MyCahierSwiper({ add, setAdd }) {
             OrganesGenitauxExternes,
             VitamineK1,
             Collyre,
-          }
-        );
+          },{
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            }
+          },);
         // Handle response as needed
         if (!response.status === 200) {
           window.alert("Add Carnet de Sante failed", response.data.message);

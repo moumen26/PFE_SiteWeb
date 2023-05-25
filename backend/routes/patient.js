@@ -22,8 +22,10 @@ const {
     CreateNewVaccin,
 } = require('../controllers/VaccinController');
 const router = express.Router();
+const requireAuth = require('../middleware/requireAuth');
 
-
+// requireAuth middleware is used to check if the user is logged in
+router.use(requireAuth);
 
 //get all patients
 router.get('/', GetAllPatient);
