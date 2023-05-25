@@ -282,7 +282,13 @@ const GetDossObs = async (req, res) => {
 const UpdateDossObs = async (req, res) => {
     const {id} = req.params;
     const { Date_daccouchement,Heure_daccouchement, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-        ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales} = req.body;
+        ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales,
+        MamanNom,MamanEpouse,DateNaissance,AdresseActuelle,Profession,Salle,NumLit,DateEntrer,
+        DateSortie,Admise,SageFemme,DiagnosticSortie,ResumerObservation,MotifHospitalisation,
+        DRR,TermeCalc,Menarchie,CarcterCycle,AgeMariage,Contraception,GroupSanguin,FNS,
+        Glycemle,UreeSanguine,Albuminurie,BW,Serodiagnostic,Toxoplasmose,Rubeole,MamanPoids,
+        MamanTaille,MamanPoule,TA,HU,ConstractionUterines,Presentation,BCF,Uterus,Speculum,
+        ToucherVaginal} = req.body;
     try{
         //check if id is valid
         if(!mongoose.Types.ObjectId.isValid(id)){
@@ -291,7 +297,13 @@ const UpdateDossObs = async (req, res) => {
         //find id in db and update
         const DossierObstetrique = await DossObs.findOneAndUpdate({_id: id},
             {Date_daccouchement,Heure_daccouchement, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-                ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales}
+            ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales
+            ,MamanNom,MamanEpouse,DateNaissance,AdresseActuelle,Profession,Salle,NumLit,DateEntrer,
+            DateSortie,Admise,SageFemme,DiagnosticSortie,ResumerObservation,MotifHospitalisation,
+            DRR,TermeCalc,Menarchie,CarcterCycle,AgeMariage,Contraception,GroupSanguin,FNS,
+            Glycemle,UreeSanguine,Albuminurie,BW,Serodiagnostic,Toxoplasmose,Rubeole,MamanPoids,
+            MamanTaille,MamanPoule,TA,HU,ConstractionUterines,Presentation,BCF,Uterus,Speculum,
+            ToucherVaginal}
         );
         //if not found return error
         if(!DossierObstetrique){

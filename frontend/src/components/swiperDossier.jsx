@@ -15,28 +15,66 @@ import { useAuthContext } from "../hooks/useAuthContext";
 //import { CircularProgress } from "@mui/material";
 
 export default function MySwiper() {
-  const [Poids, setPoids] = useState("");
-  const [Aspect, setAspect] = useState("");
-  const [Anomalies, setAnomalies] = useState("");
-  const [Placenta, setPlacenta] = useState("");
-  const [Membranes, setMembranes] = useState("");
-  const [Cordon, setCordon] = useState("");
-  const [Sexe, setSexe] = useState("");
-  const [Taille, setTaille] = useState("");
-  const [Pc, setPc] = useState("");
-  const [une_min, setUne_min] = useState("");
-  const [cinq_min, setCinq_min] = useState("");
-  const [Malformation, setMalformation] = useState("");
-  const [Remarque, setRemarque] = useState("");
-  const [Empreintes_digitales, setEmpreintes_digitales] = useState("");
-
-  const { user } = useAuthContext();
-
-  const { id } = useParams();
+  
+  //initialisation of the states
+  const [MamanNom, setMamanNom] = useState("");
+  const [MamanEpouse,setMamanEpouse ] = useState("");
+  const [DateNaissance, setDateNaissance] = useState("");
+  const [AdresseActuelle, setAdresseActuelle] = useState("");
+  const [Profession, setProfession] = useState("");
+  const [Salle, setSalle] = useState("");
+  const [NumLit, setNumLit] = useState("");
+  const [DateEntrer, setDateEntrer] = useState("");
+  const [DateSortie, setDateSortie] = useState("");
+  const [Admise, setAdmise] = useState("");
+  const [SageFemme, setSageFemme] = useState("");
+  const [DiagnosticSortie, setDiagnosticSortie] = useState("");
+  const [ResumerObservation, setResumerObservation] = useState("");
+  const [MotifHospitalisation, setMotifHospitalisation] = useState("");
+  const [DRR, setDRR] = useState("");
+  const [TermeCalc, setTermeCalc] = useState("");
+  const [Menarchie, setMenarchie] = useState("");
+  const [CarcterCycle, setCarcterCycle] = useState("");
+  const [AgeMariage, setAgeMariage] = useState("");
+  const [Contraception, setContraception] = useState("");
+  const [GroupSanguin, setGroupSanguin] = useState("");
+  const [FNS, setFNS] = useState("");
+  const [Glycemle, setGlycemle] = useState("");
+  const [UreeSanguine, setUreeSanguine] = useState("");
+  const [Albuminurie, setAlbuminurie] = useState("");
+  const [BW, setBW] = useState("");
+  const [Serodiagnostic, setSerodiagnostic] = useState("");
+  const [Toxoplasmose, setToxoplasmose] = useState("");
+  const [Rubeole, setRubeole] = useState("");
+  const [MamanPoids, setMamanPoids] = useState("");
+  const [MamanTaille, setMamanTaille] = useState("");
+  const [MamanPoule, setMamanPoule] = useState("");
+  const [TA, setTA] = useState("");
+  const [HU, setHU] = useState("");
+  const [ConstractionUterines, setConstractionUterines] = useState("");
+  const [Presentation, setPresentation] = useState("");
+  const [BCF, setBCF] = useState("");
+  const [Uterus, setUterus] = useState("");
+  const [Speculum, setSpeculum] = useState("");
+  const [ToucherVaginal, setToucherVaginal] = useState("");
   const [PatientData, setPatientData] = useState(null);
+  const [errorPart_1, setErrorPart_1] = useState(null);
+  const [DossObsData, setDossObsData] = useState(null);
+  const [UserData, setUserData] = useState(null);
 
+  //get current date
+  const current = new Date();
+  const CurrentDate = `${current.getDate()}-${current.getMonth() + 1}-${current.getFullYear()}`;
+  
+  
+  //get current user
+  const { user } = useAuthContext();
+  //get the id of the patient
+  const { id } = useParams();
+  // initialisation of the navigate function
   const history = useNavigate();
 
+  //Patient data
   useEffect(() => {
     const fetchPatientData = async () => {
       if (id !== undefined) {
@@ -53,10 +91,10 @@ export default function MySwiper() {
                 setPatientData(data);
               })
               .catch((error) => {
-                console.error("Error fetching article data:", error);
+                console.error("Error fetching patient data:", error);
               });
           } else {
-            console.error("Error fetching article data:", response.error);
+            console.error("Error fetching patient data:", response.error);
           }
         });
       } else {
@@ -65,9 +103,9 @@ export default function MySwiper() {
     };
 
     fetchPatientData();
-  }, [history, id]);
+  }, [history, id, user?.token]);
 
-  const [DossObsData, setDossObsData] = useState(null);
+  //Dossier obstetricaux data
   useEffect(() => {
     const fetchDossObsData = async () => {
       if (PatientData.idDossObs !== undefined) {
@@ -98,11 +136,9 @@ export default function MySwiper() {
     };
 
     fetchDossObsData();
-  }, [history, PatientData?.idDossObs]);
+  }, [history, PatientData?.idDossObs, user?.token]);
 
   //User data
-  const [UserData, setUserData] = useState(null);
-
   useEffect(() => {
     const fetchUsertData = async () => {
       if (PatientData.idAccoucheur !== undefined) {
@@ -119,10 +155,10 @@ export default function MySwiper() {
                 setUserData(data);
               })
               .catch((error) => {
-                console.error("Error fetching article data:", error);
+                console.error("Error fetching user data:", error);
               });
           } else {
-            console.error("Error fetching article data:", response.status);
+            console.error("Error fetching user data:", response.status);
           }
         });
       } else {
@@ -131,10 +167,9 @@ export default function MySwiper() {
     };
 
     fetchUsertData();
-  }, [UserData, PatientData?.idAccoucheur]);
+  }, [UserData, PatientData?.idAccoucheur, user?.token, history]);
 
   //Update Dossier Obstetricaux
-  const [errorPart_1, setErrorPart_1] = useState(null);
   const handleDossObsSubmit = async (event) => {
     event.preventDefault();
 
@@ -142,29 +177,22 @@ export default function MySwiper() {
       try {
         const response = await axios.patch(
           `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{
-            Poids,
-            Aspect,
-            Anomalies,
-            Placenta,
-            Membranes,
-            Cordon,
-            Sexe,
-            Taille,
-            Pc,
-            Malformation,
-            Remarque,
-            Empreintes_digitales,
+            MamanNom,MamanEpouse,DateNaissance,AdresseActuelle,Profession,Salle,NumLit,DateEntrer,
+            DateSortie,Admise,SageFemme : user?.id,DiagnosticSortie,ResumerObservation,MotifHospitalisation,
+            DRR,TermeCalc,Menarchie,CarcterCycle,AgeMariage,Contraception,GroupSanguin,FNS,
+            Glycemle,UreeSanguine,Albuminurie,BW,Serodiagnostic,Toxoplasmose,Rubeole,MamanPoids,
+            MamanTaille,MamanPoule,TA,HU,ConstractionUterines,Presentation,BCF,Uterus,Speculum,
+            ToucherVaginal,
           },{
             headers: {
               Authorization: `Bearer ${user.token}`,
             }
           },);
-        // Handle response as needed
         if (!response.status === 200) {
-          window.alert("Add patient failed", response.data.message);
+          window.alert("Add Dossier obstetrique failed", response.data.message);
           setErrorPart_1(errorPart_1);
         } else if (response.status === 200) {
-          window.alert("Add patient success", response.data.message);
+          window.alert("Add Dossier obstetrique success", response.data.message);
         }
       } catch (error) {
         console.log(error);
@@ -200,19 +228,35 @@ export default function MySwiper() {
                 <div className="span-item">
                   <span>Nom :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={MamanNom}
+                  name="MamanNom"
+                  onChange={(e) => {if (e.target.value !== MamanNom) {
+                    setMamanNom(e.target.value);
+                  }
+                  }}/>
               </div>
               <div className="left-item">
                 <div className="span-item">
                   <span>Epouse :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={MamanEpouse}
+                  name="MamanEpouse"
+                  onChange={(e) => {if (e.target.value !== MamanEpouse)
+                    setMamanEpouse(e.target.value);
+                  }}/>
               </div>
               <div className="left-item">
                 <div className="span-item">
                   <span>Date de naissance :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={DateNaissance}
+                  name="DateNaissance"
+                  onChange={(e) => {if (e.target.value !== DateNaissance)
+                    setDateNaissance(e.target.value);
+                  }}/>
               </div>
               <div className="left-item">
                 <div className="span-item">
@@ -221,13 +265,23 @@ export default function MySwiper() {
                     actuelle :
                   </span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={AdresseActuelle}
+                  name="AdresseActuelle"
+                  onChange={(e) => { if (e.target.value !== AdresseActuelle)
+                    setAdresseActuelle(e.target.value);
+                  }}/>
               </div>
               <div className="left-item">
                 <div className="span-item">
                   <span>Profession :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={Profession}
+                  name="Profession"
+                  onChange={(e) => {if (e.target.value !== Profession)
+                    setProfession(e.target.value);
+                  }}/>
               </div>
             </div>
             <div className="obster-right-class">
@@ -235,25 +289,45 @@ export default function MySwiper() {
                 <div className="span-item">
                   <span>Salle :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={Salle}
+                  name="Salle"
+                  onChange={(e) => { if (e.target.value !== Salle)
+                    setSalle(e.target.value);
+                  }}/>
               </div>
               <div className="right-item">
                 <div className="span-item">
                   <span>N de lit :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={NumLit}
+                  name="NumLit"
+                  onChange={(e) => { if (e.target.value !== NumLit)
+                    setNumLit(e.target.value);
+                  }}/>
               </div>
               <div className="right-item">
                 <div className="span-item">
                   <span>Entre le :</span>
                 </div>
-                <input type="date" name="date" id="date" />
+                <input type="date" id="date" 
+                  value={DateEntrer}
+                  name="DateEntrer"
+                  onChange={(e) => { if (e.target.value !== DateEntrer)
+                    setDateEntrer(e.target.value);
+                  }}/>
               </div>
               <div className="right-item">
                 <div className="span-item">
                   <span>Sortie le :</span>
                 </div>
-                <input type="date" name="date" id="date" />
+                <input type="date" id="date" 
+                  value={DateSortie}
+                  name="DateSortie"
+                  onChange={(e) => { if (e.target.value !== DateSortie)
+                    setDateSortie(e.target.value);
+                  }}/>
               </div>
             </div>
           </div>
@@ -268,25 +342,43 @@ export default function MySwiper() {
               <div className="span-item">
                 <span>Admise :</span>
               </div>
-              <input type="text" />
+              <input type="text" 
+                value={Admise}
+                name="Admise"
+                onChange={(e) => { if (e.target.value !== Admise)
+                  setAdmise(e.target.value);
+                }}/>
             </div>
             <div className="add-adm-vit-item">
               <div className="span-item">
-                <span>Vitamine K1 :</span>
+                <span>SageFemme :</span>
               </div>
-              <input type="text" />
+              <input type="text" 
+                value={SageFemme}
+                name="SageFemme"
+                />
             </div>
           </div>
           <div className="diag-sor">
             <h2>Diagnostic de sortie</h2>
             <div className="textarea">
-              <textarea name="diag-sortie" id="diag-sortie"></textarea>
+              <textarea id="diag-sortie"
+                value={DiagnosticSortie}
+                name="DiagnosticSortie"
+                onChange={(e) => { if (e.target.value !== DiagnosticSortie)
+                  setDiagnosticSortie(e.target.value);
+                }}></textarea>
             </div>
           </div>
           <div className="resume-obser">
             <h2>Resume de l’observation</h2>
             <div className="textarea">
-              <textarea name="resume-obser" id="resume-obser"></textarea>
+              <textarea id="resume-obser"
+                value={ResumerObservation}
+                name="ResumerObservation"
+                onChange={(e) => { if (e.target.value !== ResumerObservation)
+                  setResumerObservation(e.target.value);
+                }}></textarea>
             </div>
           </div>
           <div className="next-first">
@@ -315,20 +407,35 @@ export default function MySwiper() {
                 <span>Motif d’hospitalization :</span>
               </div>
               <div className="textarea">
-                <textarea name="motif-hosp" id="motif-hosp"></textarea>
+                <textarea id="motif-hosp"
+                  value={MotifHospitalisation}
+                  name="MotifHospitalisation"
+                  onChange={(e) => { if (e.target.value !== MotifHospitalisation)
+                    setMotifHospitalisation(e.target.value);
+                  }}></textarea>
               </div>
               <div className="ddr-terme">
                 <div className="ddr-terme-item">
                   <div className="span-item petit-span">
                     <span>DDR :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={DRR}
+                    name="DRR"
+                    onChange={(e) => { if (e.target.value !== DRR)
+                      setDRR(e.target.value);
+                    }}/>
                 </div>
                 <div className="ddr-terme-item">
                   <div className="span-item">
                     <span>Terme calcule :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={TermeCalc}
+                    name="TermeCalc"
+                    onChange={(e) => { if (e.target.value !== TermeCalc)
+                      setTermeCalc(e.target.value);
+                    }}/>
                 </div>
               </div>
             </div>
@@ -345,13 +452,23 @@ export default function MySwiper() {
                   <div className="span-item span-long">
                     <span>Menarchie :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={Menarchie}
+                    name="Menarchie"
+                    onChange={(e) => { if (e.target.value !== Menarchie)
+                      setMenarchie(e.target.value);
+                    }}/>
                 </div>
                 <div className="pyscho-item">
                   <div className="span-item span-long">
                     <span>Caractere de cycle :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={CarcterCycle}
+                    name="CarcterCycle"
+                    onChange={(e) => { if (e.target.value !== CarcterCycle)
+                      setCarcterCycle(e.target.value);
+                    }}/>
                 </div>
                 <div className="textarea">
                   <textarea name="psycho" id="psycho"></textarea>
@@ -360,13 +477,23 @@ export default function MySwiper() {
                   <div className="span-item span-long">
                     <span>Age de mariage :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={AgeMariage}
+                    name="AgeMariage"
+                    onChange={(e) => { if (e.target.value !== AgeMariage)
+                      setAgeMariage(e.target.value);
+                    }}/>
                 </div>
                 <div className="pyscho-item">
                   <div className="span-item span-long">
                     <span>Contraception :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={Contraception}
+                    name="Contraception"
+                    onChange={(e) => { if (e.target.value !== Contraception)
+                      setContraception(e.target.value);
+                    }}/>
                 </div>
               </div>
             </div>
@@ -380,7 +507,12 @@ export default function MySwiper() {
                   <div className="span-item span-long">
                     <span>Group SANGUIN :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={GroupSanguin}
+                    name="GroupSanguin"
+                    onChange={(e) => { if (e.target.value !== GroupSanguin)
+                      setGroupSanguin(e.target.value);
+                    }}/>
                 </div>
                 <div className="textarea">
                   <textarea name="examen-bio" id="examen-bio"></textarea>
@@ -389,7 +521,12 @@ export default function MySwiper() {
                   <div className="span-item span-long">
                     <span>FNS :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={FNS}
+                    name="FNS"
+                    onChange={(e) => { if (e.target.value !== FNS)
+                      setFNS(e.target.value);
+                    }}/>
                 </div>
                 <div className="pyscho-item">
                   <div className="psycho-class">
@@ -397,13 +534,23 @@ export default function MySwiper() {
                       <div className="span-item">
                         <span>Glycemie :</span>
                       </div>
-                      <input type="text" />
+                      <input type="text" 
+                        value={Glycemle}
+                        name="Glycemle"
+                        onChange={(e) => { if (e.target.value !== Glycemle)
+                          setGlycemle(e.target.value);
+                        }}/>
                     </div>
                     <div className="pyscho-right">
                       <div className="span-item">
                         <span>Uree sanguine :</span>
                       </div>
-                      <input type="text" />
+                      <input type="text" 
+                        value={UreeSanguine}
+                        name="UreeSanguine"
+                        onChange={(e) => { if (e.target.value !== UreeSanguine)
+                          setUreeSanguine(e.target.value);
+                        }}/>
                     </div>
                   </div>
                 </div>
@@ -413,13 +560,23 @@ export default function MySwiper() {
                       <div className="span-item">
                         <span>Albuminurie :</span>
                       </div>
-                      <input type="text" />
+                      <input type="text" 
+                        value={Albuminurie}
+                        name="Albuminurie"
+                        onChange={(e) => { if (e.target.value !== Albuminurie)
+                          setAlbuminurie(e.target.value);
+                        }}/>
                     </div>
                     <div className="pyscho-right">
                       <div className="span-item">
                         <span>B.W :</span>
                       </div>
-                      <input type="text" />
+                      <input type="text" 
+                        value={BW}
+                        name="BW"
+                        onChange={(e) => { if (e.target.value !== BW)
+                          setBW(e.target.value);
+                        }}/>
                     </div>
                   </div>
                 </div>
@@ -427,19 +584,34 @@ export default function MySwiper() {
                   <div className="span-item span-long">
                     <span>Serodiagnostic de :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={Serodiagnostic}
+                    name="Serodiagnostic"
+                    onChange={(e) => { if (e.target.value !== Serodiagnostic)
+                      setSerodiagnostic(e.target.value);
+                    }}/>
                 </div>
                 <div className="pyscho-item">
                   <div className="span-item span-long">
                     <span>Toxoplasmose :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={Toxoplasmose}
+                    name="Toxoplasmose"
+                    onChange={(e) => { if (e.target.value !== Toxoplasmose)
+                      setToxoplasmose(e.target.value);
+                    }}/>
                 </div>
                 <div className="pyscho-item">
                   <div className="span-item span-long">
                     <span>Rubeole :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={Rubeole}
+                    name="Rubeole"
+                    onChange={(e) => { if (e.target.value !== Rubeole)
+                      setRubeole(e.target.value);
+                    }}/>
                 </div>
               </div>
             </div>
@@ -462,58 +634,7 @@ export default function MySwiper() {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="Swipe">
-        <div className="formulaire-dossier-obster">
-          <div className="formulaire-header-obster">
-            <div className="formulaire-dossier-obstetrique">
-              <h2>Dossier obstetrique</h2>
-            </div>
-          </div>
-          <div className="line-hl">
-            <div className="hl"></div>
-          </div>
-          <div className="obstetricaux-dossier">
-            <div className="span-text">
-              <span>Obstetricaux :</span>
-            </div>
-            <div className="obs-table">
-              <ObstetricauxTable></ObstetricauxTable>
-            </div>
-          </div>
-          <div className="pathologique">
-            <div className="span-text">
-              <span>Pathologiques :</span>
-            </div>
-            <div className="textarea">
-              <textarea name="pathologiques" id="Pathologiques"></textarea>
-            </div>
-          </div>
-          <div className="familiaux">
-            <div className="span-text">
-              <span>3- Familiaux :</span>
-            </div>
-            <div className="textarea">
-              <textarea name="familiaux" id="familiaux"></textarea>
-            </div>
-          </div>
-          <div className="back-next-buttons back-next-dossier">
-            <div className="back">
-              <SwiperButtonBack>
-                <div className="flex items-center justify-items-center gap-2">
-                  <BsChevronLeft /> Back
-                </div>
-              </SwiperButtonBack>
-            </div>
-            <div className="next">
-              <SwiperButtonNext>
-                <div className="flex items-center justify-items-center gap-2">
-                  Suivant <BsChevronRight />
-                </div>
-              </SwiperButtonNext>
-            </div>
-          </div>
-        </div>
-      </SwiperSlide>
+
       <SwiperSlide className="Swipe">
         <div className="formulaire-dossier-obster">
           <div className="formulaire-header-obster">
@@ -535,25 +656,45 @@ export default function MySwiper() {
                   <div className="span-item petit-span">
                     <span>Poids :</span>
                   </div>
-                  <input type="text" value="kg" />
+                  <input type="text" 
+                    value={MamanPoids}
+                    name="MamanPoids"
+                    onChange={(e) => { if (e.target.value !== MamanPoids)
+                      setMamanPoids(e.target.value);
+                    }}/>
                 </div>
                 <div className="taille-examen-general">
                   <div className="span-item petit-span">
                     <span>Taille :</span>
                   </div>
-                  <input type="text" value="cm" />
+                  <input type="text" 
+                    value={MamanTaille}
+                    name="MamanTaille"
+                    onChange={(e) => { if (e.target.value !== MamanTaille)
+                      setMamanTaille(e.target.value);
+                    }}/>
                 </div>
                 <div className="poule-examen-general">
                   <div className="span-item petit-span">
                     <span>Poule :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={MamanPoule}
+                    name="MamanPoule"
+                    onChange={(e) => { if (e.target.value !== MamanPoule)
+                      setMamanPoule(e.target.value);
+                    }}/>
                 </div>
                 <div className="ta-examen-general">
                   <div className="span-item petit-span">
                     <span>TA :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={TA}
+                    name="TA"
+                    onChange={(e) => { if (e.target.value !== TA)
+                      setTA(e.target.value);
+                    }}/>
                 </div>
               </div>
               <div className="examen-entree-item">
@@ -561,20 +702,27 @@ export default function MySwiper() {
                   <div className="span-item">
                     <span>Glycemie :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={Glycemle}
+                    name="Glycemle"/>
                 </div>
                 <div className="uree">
                   <div className="span-item">
                     <span>Uree sanguine :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={UreeSanguine}
+                    name="UreeSanguine"
+                    />
                 </div>
               </div>
               <div className="examen-entree-item2">
                 <div className="span-item span-long">
                   <span>Caractere de cycle :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={CarcterCycle}
+                  name="CarcterCycle"/>
               </div>
               <div className="textarea">
                 <textarea name="exa-gene" id="exa-gene"></textarea>
@@ -590,13 +738,23 @@ export default function MySwiper() {
                   <div className="span-item petit-span">
                     <span>Hu :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={HU}
+                    name="HU"
+                    onChange={(e) => { if (e.target.value !== HU)
+                      setHU(e.target.value);
+                    }}/>
                 </div>
                 <div className="constraction">
                   <div className="span-item span-long1">
                     <span>Constraction uterines :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={ConstractionUterines}
+                    name="ConstractionUterines"
+                    onChange={(e) => { if (e.target.value !== ConstractionUterines)
+                      setConstractionUterines(e.target.value);
+                    }}/>
                 </div>
               </div>
               <div className="pres-bfc">
@@ -604,26 +762,46 @@ export default function MySwiper() {
                   <div className="span-item">
                     <span>Presentation :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={Presentation}
+                    name="Presentation"
+                    onChange={(e) => { if (e.target.value !== Presentation)
+                      setPresentation(e.target.value);
+                    }}/>
                 </div>
                 <div className="hu">
                   <div className="span-item petit-span">
-                    <span>BFC :</span>
+                    <span>BCF :</span>
                   </div>
-                  <input type="text" />
+                  <input type="text" 
+                    value={BCF}
+                    name="BCF"
+                    onChange={(e) => { if (e.target.value !== BCF)
+                      setBCF(e.target.value);
+                    }}/>
                 </div>
               </div>
               <div className="examen-entree-item2">
                 <div className="span-item">
                   <span>Uterus :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={Uterus}
+                  name="Uterus"
+                  onChange={(e) => { if (e.target.value !== Uterus)
+                    setUterus(e.target.value);
+                  }}/>
               </div>
               <div className="examen-entree-item2">
                 <div className="span-item">
                   <span>Speculum :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={Speculum}
+                  name="Speculum"
+                  onChange={(e) => { if (e.target.value !== Speculum)
+                    setSpeculum(e.target.value);
+                  }}/>
               </div>
               <div className="textarea">
                 <textarea name="exa-obs1" id="exa-obs1"></textarea>
@@ -632,7 +810,12 @@ export default function MySwiper() {
                 <div className="span-item">
                   <span>Toucher vaginal :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={ToucherVaginal}
+                  name="ToucherVaginal"
+                  onChange={(e) => { if (e.target.value !== ToucherVaginal)
+                    setToucherVaginal(e.target.value);
+                  }}/>
               </div>
               <div className="textarea">
                 <textarea name="exa-obs2" id="exa-obs2"></textarea>
@@ -648,8 +831,8 @@ export default function MySwiper() {
               </SwiperButtonBack>
             </div>
             <div className="next">
-              <SwiperButtonNext>
-                <div className="flex items-center justify-items-center gap-2">
+              <SwiperButtonNext >
+                <div className="flex items-center justify-items-center gap-2"  onClick={handleDossObsSubmit}>
                   Suivant <BsChevronRight />
                 </div>
               </SwiperButtonNext>

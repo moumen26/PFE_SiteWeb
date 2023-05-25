@@ -11,6 +11,8 @@ export default function Antecedent() {
   const current = new Date();
   const Date_daccouchement = `${current.getDate()}-${current.getMonth() + 1}-${current.getFullYear()}`;
   const Heure_daccouchement = current.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", second: "2-digit", hour12: false, });
+
+ // Add NouveauNe
   const handleAddNouveauNe = async () => {
     try {
       const response = await fetch(`http://localhost:8000/patients/Nouveau-ne/${id}`, {
@@ -42,22 +44,21 @@ export default function Antecedent() {
               idNouveauNe: data._id
             }),
           });
-          // get the patientID via response from the server patientRouter.post
+          // get the MamanID via response from the server
           const data = await response.json();
           if (!response.ok) {
             window.alert("Add idNouveauNe failed", data.error);
           }
           if (response.ok) {
-            
             history(`/patients/${await data.id}`);
           }
         } catch (error) {
-          console.error("Error adding article:", error);
+          console.error("Error adding idNouveauNe:", error);
         }
         history(`/patients/${await data.id}`);
       }
     } catch (error) {
-      console.error("Error adding article:", error);
+      console.error("Error adding Nouveau-ne:", error);
     }
   };
   return (
