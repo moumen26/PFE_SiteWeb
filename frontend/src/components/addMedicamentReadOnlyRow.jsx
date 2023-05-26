@@ -1,6 +1,5 @@
 import React from "react";
 import { MdDelete } from "react-icons/md";
-import { RiEdit2Fill } from "react-icons/ri";
 
 export default function AddMedicamentReadOnlyRow({
   Medicament,
@@ -9,10 +8,10 @@ export default function AddMedicamentReadOnlyRow({
   return (
     <div className="ordononce-medicament">
       <div className="medicament-description">
-        <h2>{Medicament.Nom_med}</h2>
-        <h2>{Medicament.Quantite_med}</h2>
-        <h2>{Medicament.Dose_med}</h2>
-        <h2>{Medicament.Duree_med}</h2>
+        <h2>{Medicament.medicament}</h2>
+        <h2>{Medicament.quantite} boite</h2>
+        <h2>{Medicament.dose}</h2>
+        <h2>{Medicament.duree}</h2>
       </div>
       <div className="action-table-med">
         <MdDelete

@@ -20,23 +20,33 @@ export default function Conculter() {
     duree: "",
   });
 
-  
+  const handleAddMedFormChange = (event) => {
+    event.preventDefault();
+
+    const fieldName = event.target.getAttribute("name");
+    const fieldValue = event.target.value;
+
+    const newMedicamentDB = { ...medAddFormData };
+    newMedicamentDB[fieldName] = fieldValue;
+
+    setMedAddFormData(newMedicamentDB);
+  };
+
   const handleMedAddFormSubmit = (event) => {
     event.preventDefault();
 
     const newMedicament = {
       id: nanoid(),
-      Nom_med: medAddFormData.medicament,
-      Quantite_med: medAddFormData.quantite,
-      Dose_med: medAddFormData.dose,
-      Duree_med: medAddFormData.duree,
+      medicament: medAddFormData.medicament,
+      quantite: medAddFormData.quantite,
+      dose: medAddFormData.dose,
+      duree: medAddFormData.duree,
     };
 
     const newMedicamentDB = [...MedicamentDB, newMedicament];
     setMedicamentDB(newMedicamentDB);
   };
 
-  
   const handleMedDeleteClick = (MedicamentId) => {
     const newMedicament = [...MedicamentDB];
 
@@ -147,12 +157,13 @@ export default function Conculter() {
                     className={`consultation-table-item-context${toggleClassMedicament}`}
                   >
                     <div className="consultation-table-item-context-header">
-                      <form>
+                      <form onSubmit={handleMedAddFormSubmit}>
                         <div className="ordonance-item medicament-item">
                           <h3>Medicament :</h3>
                           <select
                             name="medicament"
-                            onChange={handleMedAddFormSubmit}
+                            required="required"
+                            onChange={handleAddMedFormChange}
                           >
                             <option selected disabled>
                               sélectionnez un medicament
@@ -168,7 +179,7 @@ export default function Conculter() {
                           <input
                             type="number"
                             name="quantite"
-                            onChange={handleMedAddFormSubmit}
+                            onChange={handleAddMedFormChange}
                           />
                         </div>
                         <div className="ordonance-item dose-item">
@@ -176,7 +187,8 @@ export default function Conculter() {
                           <input
                             type="text"
                             name="dose"
-                            onChange={handleMedAddFormSubmit}
+                            required="required"
+                            onChange={handleAddMedFormChange}
                           />
                         </div>
                         <div className="ordonance-item duree-item">
@@ -184,7 +196,8 @@ export default function Conculter() {
                           <input
                             type="text"
                             name="duree"
-                            onChange={handleMedAddFormSubmit}
+                            required="required"
+                            onChange={handleAddMedFormChange}
                           />
                         </div>
                         <input
@@ -225,9 +238,7 @@ export default function Conculter() {
                   <div
                     className={`consultation-table-item-context${toggleClassExamen}`}
                   >
-                    <div className="consultation-table-item-context-container consultation-examen">
-         
-                    </div>
+                    <div className="consultation-table-item-context-container consultation-examen"></div>
                   </div>
                 </div>
               </div>
