@@ -4547,16 +4547,16 @@ form.sign-in-form {
 }
 
 /* conculter style */
-.Conculter {
+.Conculter,
+.Affichage-concultation {
   width: 100%;
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
 }
 
-.conculter-container {
+.conculter-container,
+.affichage-concultation-container {
   width: 100%;
-  height: 200vh;
   display: flex;
   flex-direction: column;
   margin-top: 1px;
@@ -4564,14 +4564,15 @@ form.sign-in-form {
 
 .contenu-consultation {
   width: 100%;
-  height: 100%;
+  min-height: calc(100vh - 178px);
   display: flex;
   flex-direction: column;
   padding-top: 32px;
+  padding-bottom: 32px;
   background-color: rgba(79, 129, 255, 0.1);
 }
 
-.conculter-container h2 {
+.conculter-container h2{
   font-weight: 600;
   font-size: 24px;
   line-height: 28.8px;
@@ -4589,7 +4590,8 @@ form.sign-in-form {
   justify-content: space-between;
 }
 
-.info-personal-concultation h3 {
+.info-personal-concultation h3,
+.affichage-concultation-header h3 {
   font-size: 18px;
   font-weight: 600;
   line-height: 21.6px;
@@ -4603,7 +4605,6 @@ form.sign-in-form {
 
 .consultation-table {
   width: 100%;
-  height: 20vh;
   padding-left: 78px;
   padding-right: 78px;
   margin-top: 32px;
@@ -4611,7 +4612,6 @@ form.sign-in-form {
 
 .consultation-table-container {
   width: 100%;
-  height: 10vh;
 }
 
 .consultation-table-item{
@@ -4690,6 +4690,11 @@ form.sign-in-form {
   flex-direction: column;
   padding-top: 10px;
   padding-bottom: 20px;
+
+}
+
+.consultation-table-item-context-container:nth-child(2n){
+  background-color: rgb(243, 243, 243, 0.6);
 }
 
 
@@ -4748,6 +4753,7 @@ form.sign-in-form {
 
 .ordononce-medicament{
   width: 100%;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -4759,7 +4765,7 @@ form.sign-in-form {
 }
 
 .medicament-description h2:nth-child(1){
-  padding-left: 21px;
+  padding-left: 63px;
 }
 
 .medicament-description h2:nth-child(2){
@@ -4776,7 +4782,7 @@ form.sign-in-form {
   display: flex;
   align-items: center;
   gap: 20px;
-  margin-right: 21px;
+  margin-right: 8px;
 }
 
 .edit-btn-icon,
@@ -4788,41 +4794,79 @@ form.sign-in-form {
 .ord-med{
   height: 50px;
   padding: 0;
+  padding-right: 22px;
+
 }
-
-
-
-
-
-
-
-
-
 
 .consultation-table-item-context{
   display: none;
 }
 
 .diagnostic,
-.medicament{
+.medicament,
+.examen-ordononce{
   display: block;
 }
 
 .diagnostic .down-icon,
-.medicament .down-icon{
+.medicament .down-icon,
+.examen-ordononce .down-icon{
   opacity: 0;
 }
 
 .diagnostic .up-icon,
-.medicament .up-icon{
+.medicament .up-icon,
+.examen-ordononce .up-icon{
   opacity: 1;
   top: 5px;
 }
 
 .diagnostic h2,
-.medicament h2{
+.medicament h2,
+.examen-ordononce h2{
   margin-top: 15px;
 }
+
+.consultation-examen{
+  height: 425px;
+  background-color: rgb(243, 243, 243, 0.6);
+}
+
+/* affichage consultation style */
+.affichage-concultation-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 53px;
+}
+
+.affichage-concultation-header{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 53px;
+  padding-left: 99px;
+  padding-right: 121px;
+}
+
+.affichage-concultation-container .consultation-table-item-context{
+  display: flex;
+  flex-direction: column;
+}
+
+.affichage-concultation-container .delete-btn-icon{
+  display: none;
+}
+
+
+
+
+
+
+
+
+
 
 
 .dashboard-table-container::-webkit-scrollbar,
@@ -4852,7 +4896,8 @@ form.sign-in-form {
 
 .antecedent-container,
 .AddPatient,
-.conculter-container {
+.conculter-container,
+.affichage-concultation-container{
   z-index: 100;
   background-color: white;
 }

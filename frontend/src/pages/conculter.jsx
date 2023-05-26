@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
 import { nanoid } from "nanoid";
@@ -9,6 +9,7 @@ import AddMedicamentReadOnlyRow from "../components/addMedicamentReadOnlyRow";
 export default function Conculter() {
   const [diagnostic, setDiagnostic] = useState("");
   const [medicament, setMedicament] = useState("");
+  const [examenOrdononce, setExamenOrdononce] = useState("");
 
   const [MedicamentDB, setMedicamentDB] = useState(data);
 
@@ -19,39 +20,7 @@ export default function Conculter() {
     duree: "",
   });
 
-  const [editMedFormData, setEditMedFormData] = useState({
-    medicament: "",
-    quantite: "",
-    dose: "",
-    duree: "",
-  });
-
-  const [editMedId, setEditMedId] = useState(null);
-
-  const handleAddMedFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newMedFormData = { ...medAddFormData };
-    newMedFormData[fieldName] = fieldValue;
-
-    setMedAddFormData(newMedFormData);
-  };
-
-  const handleEditMedFormChange = (event) => {
-    event.preventDefault();
-
-    const fieldName = event.target.getAttribute("name");
-    const fieldValue = event.target.value;
-
-    const newMedFormData = { ...editMedFormData };
-    newMedFormData[fieldName] = fieldValue;
-
-    setEditMedFormData(newMedFormData);
-  };
-
+  
   const handleMedAddFormSubmit = (event) => {
     event.preventDefault();
 
@@ -67,47 +36,7 @@ export default function Conculter() {
     setMedicamentDB(newMedicamentDB);
   };
 
-  const handleMedEditFormSubmit = (event) => {
-    event.preventDefault();
-
-    const editMedicament = {
-      id: editMedId,
-      Nom_med: editMedFormData.medicament,
-      Quantite_med: editMedFormData.quantite,
-      Dose_med: editMedFormData.dose,
-      Duree_med: editMedFormData.duree,
-    };
-
-    const newMedicament = [...MedicamentDB];
-
-    const index = MedicamentDB.findIndex(
-      (Medicament) => Medicament.id === editMedId
-    );
-
-    newMedicament[index] = editMedicament;
-
-    setMedicamentDB(newMedicament);
-    setEditMedId(null);
-  };
-
-  const handleMedEditRowClick = (event, Medicament) => {
-    event.preventDefault();
-    setEditMedId(Medicament.id);
-
-    const medFormValues = {
-      Nom_med: Medicament.medicament,
-      Quantite_med: Medicament.quantite,
-      Dose_med: Medicament.dose,
-      Duree_med: Medicament.duree,
-    };
-
-    setEditMedFormData(medFormValues);
-  };
-
-  const handleCancelMedClick = () => {
-    setEditMedId(null);
-  };
-
+  
   const handleMedDeleteClick = (MedicamentId) => {
     const newMedicament = [...MedicamentDB];
 
@@ -128,8 +57,14 @@ export default function Conculter() {
     setMedicament(!medicament);
   };
 
+   const handleClickExamen = () => {
+     setExamenOrdononce(!examenOrdononce);
+   };
+
   let toggleClassDiagnostic = diagnostic ? " diagnostic" : "";
   let toggleClassMedicament = medicament ? " medicament" : "";
+  let toggleClassExamen = examenOrdononce ? " examen-ordononce" : "";
+
 
   return (
     <div className="Conculter">
@@ -212,7 +147,7 @@ export default function Conculter() {
                     className={`consultation-table-item-context${toggleClassMedicament}`}
                   >
                     <div className="consultation-table-item-context-header">
-                      <form onSubmit={handleMedAddFormSubmit}>
+                      <form>
                         <div className="ordonance-item medicament-item">
                           <h3>Medicament :</h3>
                           <select
@@ -259,32 +194,40 @@ export default function Conculter() {
                         />
                       </form>
                     </div>
-                    {MedicamentDB?.map(
-                      (Medicament) => (
-                        console.log(MedicamentDB),
-                        (
-                          <div className="consultation-table-item-context-container">
-                            <Fragment>
-                              {editMedId === Medicament.id ? (
-                                <addMedicamentEditRow
-                                  editMedFormData={editMedFormData}
-                                  handleEditMedFormChange={
-                                    handleEditMedFormChange
-                                  }
-                                  handleCancelMedClick={handleCancelMedClick}
-                                />
-                              ) : (
-                                <AddMedicamentReadOnlyRow
-                                  Medicament={Medicament}
-                                  handleMedEditRowClick={handleMedEditRowClick}
-                                  handleMedDeleteClick={handleMedDeleteClick}
-                                />
-                              )}
-                            </Fragment>
-                          </div>
-                        )
-                      )
-                    )}
+                    {MedicamentDB?.map((Medicament) => (
+                      <div className="consultation-table-item-context-container ord-med">
+                        <AddMedicamentReadOnlyRow
+                          Medicament={Medicament}
+                          handleMedDeleteClick={handleMedDeleteClick}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="consultation-table-item">
+                <div
+                  className={`consultation-table-item-header consul-ligne2${toggleClassExamen}`}
+                  onClick={handleClickExamen}
+                  examenOrdononce={examenOrdononce}
+                  setExamenOrdononce={setExamenOrdononce}
+                >
+                  <h2>Examen</h2>
+                  <BiChevronUp className="up-icon" />
+                  <BiChevronDown
+                    className="down-icon"
+                    onClick={handleClickExamen}
+                    examenOrdononce={examenOrdononce}
+                    setExamenOrdononce={setExamenOrdononce}
+                  />
+                </div>
+                <div className="consultation-table-item-contenu">
+                  <div
+                    className={`consultation-table-item-context${toggleClassExamen}`}
+                  >
+                    <div className="consultation-table-item-context-container consultation-examen">
+         
+                    </div>
                   </div>
                 </div>
               </div>

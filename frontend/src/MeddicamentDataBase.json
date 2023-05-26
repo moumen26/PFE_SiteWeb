@@ -7,7 +7,14 @@
     "Duree_med": "2 mois"
   },
   {
-    "id": 1,
+    "id": 2,
+    "Nom_med": "Diagnostic",
+    "Quantite_med": "3 boite",
+    "Dose_med": "2 fois par jour, 6h entre eux",
+    "Duree_med": "2 mois"
+  },
+  {
+    "id": 3,
     "Nom_med": "Diagnostic",
     "Quantite_med": "3 boite",
     "Dose_med": "2 fois par jour, 6h entre eux",

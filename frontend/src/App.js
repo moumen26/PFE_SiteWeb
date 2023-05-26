@@ -15,6 +15,7 @@ import Conculter from "./pages/conculter";
 import MyNavBar from "./components/navBar";
 import { useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
+import AffichageConcultation from "./pages/affichageConcultation";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -26,17 +27,52 @@ function App() {
         <MyNavBar act={act} setAct={setAct} />
         <MyAsideBar />
         <Routes>
-          <Route index element={user ? <Dashboard /> : <Navigate to="/login"/>} />
-          <Route path="patients" element={user ?<PatientDetails /> : <Navigate to="/login"/>} />
-          <Route path="Nouveaune" element={user ? <NouveauNe /> : <Navigate to="/login"/>} />
-          <Route path="/patients/:id" element={user ? <AddPatient /> : <Navigate to="/login"/>} />
-          <Route path="calendrier" element={user ? <Calendrier /> : <Navigate to="/login"/>} />
-          <Route path="coupon" element={user ? <Coupon /> : <Navigate to="/login"/>} />
-          <Route path="analytics" element={ user ? <Analytics /> : <Navigate to="/login"/>} />
-          <Route path="login" element={!user ? <Login /> : <Navigate to="/"/>} />
-          <Route path="profile" element={user ? <DoctorProfile /> : <Navigate to="/login"/>} />
-          <Route path="antecedent/:id" element={user ? <Antecedent /> : <Navigate to="/login"/>} />
-          <Route path="conculter" element={user ? <Conculter /> : <Navigate to="/login"/>} />
+          <Route
+            index
+            element={user ? <Dashboard /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="patients"
+            element={user ? <PatientDetails /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="Nouveaune"
+            element={user ? <NouveauNe /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/patients/:id"
+            element={user ? <AddPatient /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="calendrier"
+            element={user ? <Calendrier /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="affichage"
+            element={
+              user ? <AffichageConcultation /> : <Navigate to="/login" />
+            }
+          />
+          <Route
+            path="analytics"
+            element={user ? <Analytics /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="login"
+            element={!user ? <Login /> : <Navigate to="/" />}
+          />
+          <Route
+            path="profile"
+            element={user ? <DoctorProfile /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="antecedent/:id"
+            element={user ? <Antecedent /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="conculter"
+            element={user ? <Conculter /> : <Navigate to="/login" />}
+          />
         </Routes>
       </main>
     </BrowserRouter>

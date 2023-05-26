@@ -53,7 +53,7 @@ export default function MyAsideBar() {
             </NavLink>
           </li>
           <li className="mb-6">
-            <NavLink to="coupon">
+            <NavLink to="affichage">
               <div className="link flex items-center ">
                 <RiCoupon2Fill className="w-6 h-6 ml-2 " />
                 <span className="title">Coupon</span>
