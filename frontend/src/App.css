@@ -4485,7 +4485,7 @@ form.sign-in-form {
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  z-index: 99;
+  z-index: 999;
   background-color: white;
   box-shadow: 0 0 10px #060e30;
 }
@@ -4633,6 +4633,16 @@ form.sign-in-form {
   border: 1px solid rgba(79, 129, 255, 1);
 }
 
+.consultation-table-item-context-header form{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+}
+
+
 .consultation-table-item-context-header,
 .consultation-table-item-context-container,
 .consul-ligne2{
@@ -4644,6 +4654,7 @@ form.sign-in-form {
   align-items: flex-start;
   height: fit-content;
 }
+
 
 .consultation-table-item-header h2,
 .consultation-table-item-context h2 {
@@ -4698,8 +4709,6 @@ form.sign-in-form {
   height: 56px;
 }
 
-
-
 .ordonance-item{
   display: flex;
   align-items: center;
@@ -4736,6 +4745,51 @@ form.sign-in-form {
   width: 251px;
   text-align: center;
 }
+
+.ordononce-medicament{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.medicament-description{
+  display: flex;
+  
+}
+
+.medicament-description h2:nth-child(1){
+  padding-left: 21px;
+}
+
+.medicament-description h2:nth-child(2){
+  margin-right: 125px;
+  margin-left: 66px;
+
+}
+
+.medicament-description h2:nth-child(3){
+  margin-right: 78px;
+}
+
+.action-table-med{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-right: 21px;
+}
+
+.edit-btn-icon,
+.delete-btn-icon{
+  cursor: pointer;
+  font-size: 25px;
+}
+
+.ord-med{
+  height: 50px;
+  padding: 0;
+}
+
 
 
 

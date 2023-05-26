@@ -4,9 +4,9 @@ import CloseButton from "./closeButtonTableVaccin";
 import VaccinationAddButton from "./vaccinationAddButton";
 import ReadOnlyRow from "./addPatientVaccinTableReadOnlyRow";
 import EditRow from "./addPatientVaccinTableEditRow";
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 export default function VaccinTable() {
@@ -81,14 +81,14 @@ export default function VaccinTable() {
     setEditVaccinId(null);
   };
 
-//Get patient id from url
+  //Get patient id from url
   const { id } = useParams();
-//Get user id
+  //Get user id
   const { user } = useAuthContext();
 
   const history = useNavigate("/patients");
-  
-//Create new Vaccin
+
+  //Create new Vaccin
   const handleNewVaccinSubmit = async (event) => {
     event.preventDefault();
     if (id !== undefined) {
@@ -127,85 +127,94 @@ export default function VaccinTable() {
       history();
     }
   };
-// Fetch Vaccins
+  // Fetch Vaccins
   useEffect(() => {
     const fetchVaccinData = async () => {
-      if(id !== undefined){
-        await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`,{
+      if (id !== undefined) {
+        await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user.token}`,
           },
         }).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setVaccinDB(data);
-            }).catch((error) => {
-              console.error("Error fetching Vaccin data:", error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setVaccinDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Vaccin data:", error);
+              });
           } else {
             console.error("Error resieving vaccin date", response.error);
           }
         });
-      }else{
-        history()
+      } else {
+        history();
       }
     };
     fetchVaccinData();
   }, [history, id]);
-// Edit Vaccin
+  // Edit Vaccin
   const handleEditRowSubmitt = async (event) => {
     event.preventDefault();
 
-    if(editVaccinId !== undefined){
-       try {
-        const response = await axios.patch(`http://localhost:8000/patients/Vaccin/${editVaccinId}`,{ 
-          Nom_vaccin: editFormData.vaccinationVaccin,
-          Date_vaccination: editFormData.vaccinationDate,
-          Age_vaccination: editFormData.vaccinationAge,
-          Contre_vaccin: editFormData.vaccinationContre,
-          Technique_vaccinale: editFormData.vaccinationTechnique,
-          Numero_lot: editFormData.vaccinationNumero,
-        },{
-          headers: {
-            Authorization: `Bearer ${user.token}`,
+    if (editVaccinId !== undefined) {
+      try {
+        const response = await axios.patch(
+          `http://localhost:8000/patients/Vaccin/${editVaccinId}`,
+          {
+            Nom_vaccin: editFormData.vaccinationVaccin,
+            Date_vaccination: editFormData.vaccinationDate,
+            Age_vaccination: editFormData.vaccinationAge,
+            Contre_vaccin: editFormData.vaccinationContre,
+            Technique_vaccinale: editFormData.vaccinationTechnique,
+            Numero_lot: editFormData.vaccinationNumero,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
           }
-        },);
+        );
         // Handle response as needed
         if (!response.status === 200) {
-            window.alert("Update vaccin failed", response.error);
-        }else if (response.status === 200) {
-            window.alert("Update vaccin success", response.error);
-        } 
+          window.alert("Update vaccin failed", response.error);
+        } else if (response.status === 200) {
+          window.alert("Update vaccin success", response.error);
+        }
       } catch (error) {
         window.alert(error);
-      } 
-    }else{
+      }
+    } else {
       window.alert("editVaccinId undefined");
     }
-    
   };
-// Delete Vaccin
+  // Delete Vaccin
   const handleDeleteClick = async (event, VaccinData) => {
     event.preventDefault();
 
-    if(VaccinData !== undefined){
+    if (VaccinData !== undefined) {
       try {
-        const response = await axios.delete(`http://localhost:8000/patients/Vaccin/${VaccinData}`,{
-          headers: {
-            Authorization: `Bearer ${user.token}`,
+        const response = await axios.delete(
+          `http://localhost:8000/patients/Vaccin/${VaccinData}`,
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
           }
-        },);
+        );
         // Handle response as needed
         if (!response.status === 200) {
-            window.alert("Deleting vaccin failed", response.error);
-        }else if (response.status === 200) {
-            window.alert("Deleting vaccin success", response.error);
-        } 
+          window.alert("Deleting vaccin failed", response.error);
+        } else if (response.status === 200) {
+          window.alert("Deleting vaccin success", response.error);
+        }
       } catch (error) {
         window.alert(error);
-      } 
-    }else{
+      }
+    } else {
       window.alert("VaccinData undefined");
     }
   };
