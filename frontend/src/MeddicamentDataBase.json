@@ -1,23 +1,16 @@
 [
   {
     "id": 1,
-    "Nom_med": "Diagnostic",
-    "Quantite_med": "3 boite",
-    "Dose_med": "2 fois par jour, 6h entre eux",
-    "Duree_med": "2 mois"
+    "medicament": "Parecetamol",
+    "quantite": "3",
+    "dose": "2 fois par jour, 6h entre eux",
+    "duree": "2 mois"
   },
   {
     "id": 2,
-    "Nom_med": "Diagnostic",
-    "Quantite_med": "3 boite",
-    "Dose_med": "2 fois par jour, 6h entre eux",
-    "Duree_med": "2 mois"
-  },
-  {
-    "id": 3,
-    "Nom_med": "Diagnostic",
-    "Quantite_med": "3 boite",
-    "Dose_med": "2 fois par jour, 6h entre eux",
-    "Duree_med": "2 mois"
+    "medicament": "Augmentin",
+    "quantite": "3",
+    "dose": "2 fois par jour, 6h entre eux",
+    "duree": "2 mois"
   }
 ]

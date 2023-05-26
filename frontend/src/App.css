@@ -4774,18 +4774,22 @@ form.sign-in-form {
   
 }
 
-.medicament-description h2:nth-child(1){
-  padding-left: 63px;
+.medicament-description h2:nth-child(1) {
+  padding-left: 21px;
 }
 
-.medicament-description h2:nth-child(2){
-  margin-right: 125px;
-  margin-left: 66px;
-
+.medicament-description h2:nth-child(2) {
+  position: absolute;
+  left: 180px;
 }
 
-.medicament-description h2:nth-child(3){
-  margin-right: 78px;
+.medicament-description h2:nth-child(3) {
+  position: absolute;
+  left: 300px;
+}
+.medicament-description h2:nth-child(4) {
+  position: absolute;
+  left: 580px;
 }
 
 .action-table-med{
