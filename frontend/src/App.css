@@ -267,16 +267,24 @@ nav {
 
 .title {
   position: relative;
-  margin-left: 50px;
+  margin-left: 30px;
 }
 
 .aside ul li:hover {
   line-height: 50px;
+  margin-left: 5px;
   background-color: #71c5ee;
-  border-radius: 20px 0 0 20px;
-  margin-left: 10px;
+  border-radius: 10px 0 0 10px;
   transition: all 1s ease;
-  padding-left: 10px;
+  padding-left: 20px;
+}
+
+.aside-item-active{
+  height: 50px;
+  width: 20px;
+  padding-left: 5px;
+  border-radius: 5px;
+  background-color: #71c5ee;
 }
 
 /*
@@ -4775,7 +4783,7 @@ form.sign-in-form {
 }
 
 .medicament-description h2:nth-child(1) {
-  padding-left: 21px;
+  margin-left: 21px;
 }
 
 .medicament-description h2:nth-child(2) {
@@ -4918,4 +4926,9 @@ form.sign-in-form {
 
 .Login {
   z-index: 100;
+  position: absolute;
+  top: 0;
 }
+
+
+
