@@ -13,20 +13,6 @@ const {
     UpdateCarnetSante,
     GetCarnetSante,
     DeleteCarnetSante,
-    GetConsultation,
-    GetConsultationById,
-    CreateNewConsultation,
-    UpdateConsultation,
-    DeleteConsultation,
-    GetDiagnostic,
-    CreateNewDiagnostic,
-    GetOrdonance,
-    CreateNewOrdonance,
-    DeleteOrdonance,
-    GetAllMedicament,
-    GetMedicamentById,
-    DeleteMedicament,
-    CreateNewMedicament
 } = require('../controllers/PatientController');
 const {
     GetAllVaccins,
@@ -35,6 +21,31 @@ const {
     DeleteVaccin,
     CreateNewVaccin,
 } = require('../controllers/VaccinController');
+const {
+    GetConsultation,
+    CreateNewConsultation,
+    GetConsultationById,
+    UpdateConsultation,
+    DeleteConsultation,
+} = require('../controllers/ConsultationController');
+const {
+    GetOrdonance,
+    CreateNewOrdonance,
+    DeleteOrdonance,
+} = require('../controllers/OrdonanceController');
+const {
+    GetDiagnostic,
+    CreateNewDiagnostic,
+    UpdateDiagnostic,
+    DeleteDiagnostic,
+} = require('../controllers/DiagnosticController');
+const {} = require('../controllers/ExamenTestController');
+const {
+    GetAllMedicament,
+    GetMedicamentById,
+    CreateNewMedicament,
+    DeleteMedicament
+} = require('../controllers/MedicamentController');
 const router = express.Router();
 const requireAuth = require('../middleware/requireAuth');
 
@@ -126,23 +137,35 @@ router.get("/Diagnostic/:id", GetDiagnostic);
 //post a new diagnostic
 router.post('/AddDiagnostic/:id',CreateNewDiagnostic);
 
+//delete a diagnostic
+router.delete('/Diagnostic/:id', DeleteDiagnostic);
+
+//update a diagnostic
+router.patch('/Diagnostic/:id', UpdateDiagnostic);
+
 // ORDONANCE
 
 //get ordonances
 router.get("/Ordonance/:id", GetOrdonance);
+
 //post a new ordonance
 router.post('/AddOrdonance/:id',CreateNewOrdonance);
+
 //delete a ordonance
 router.delete('/Ordonance/:id', DeleteOrdonance);
 
 // MEDECAMENTS
 
 //get all medecaments
-router.get("/Medicament/all", GetAllMedicament);
+router.get("/Medicament/all/:id", GetAllMedicament);
+
 //post a new medecament
-router.post('/AddMedicament',CreateNewMedicament);
+router.post('/AddMedicament/:id',CreateNewMedicament);
+
 //get a specific medecament
 router.get('/Medicament/:id', GetMedicamentById);
+
 //delete a medecament
 router.delete('/Medicament/:id', DeleteMedicament);
+
 module.exports = router;

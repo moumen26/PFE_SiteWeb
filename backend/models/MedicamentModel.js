@@ -5,15 +5,19 @@ const MedicamentSchema = new mongoose.Schema({
     OrdonanceID: {
         type: mongoose.Schema.Types.ObjectId, ref: "ordonances"
     },
-    Nom_medicament: {
+    NomMedicament: {
         type: String,
         required: false,
     },
-    Dose: {
+    DoseMedicament: {
         type: String,
         required: false,
     },
-    Duree: {
+    DureeMedicament: {
+        type: String,
+        required: false,
+    },
+    QuantiteMedicament: {
         type: String,
         required: false,
     },
