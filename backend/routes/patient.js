@@ -22,7 +22,11 @@ const {
     CreateNewDiagnostic,
     GetOrdonance,
     CreateNewOrdonance,
-    DeleteOrdonance
+    DeleteOrdonance,
+    GetAllMedicament,
+    GetMedicamentById,
+    DeleteMedicament,
+    CreateNewMedicament
 } = require('../controllers/PatientController');
 const {
     GetAllVaccins,
@@ -134,11 +138,11 @@ router.delete('/Ordonance/:id', DeleteOrdonance);
 // MEDECAMENTS
 
 //get all medecaments
-
+router.get("/Medicament/all", GetAllMedicament);
 //post a new medecament
-
+router.post('/AddMedicament',CreateNewMedicament);
 //get a specific medecament
-
+router.get('/Medicament/:id', GetMedicamentById);
 //delete a medecament
-
+router.delete('/Medicament/:id', DeleteMedicament);
 module.exports = router;

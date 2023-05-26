@@ -5,6 +5,7 @@ const User = require('../models/UserModel');
 const Consultation = require('../models/ConsultationModel');
 const Ordonance = require('../models/OrdonanceModel');
 const ExamenTest = require('../models/ExamenModel');
+const Medicament = require('../models/MedicamentModel');
 const Diagnostic = require('../models/DiagnosticModel');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
@@ -753,6 +754,74 @@ const DeleteOrdonance = async (req, res) => {
         res.status(400).json({err: err.message});
     }
 }
+
+//MEDICAMENT
+
+// Get All Medicament
+const GetAllMedicament = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Specified id is not valid" });
+    }
+    await Ordonance.findById({_id: id}).then(async (ordonance)=>{
+        // Find the Vaccin by ID in the database
+        await Medicament.find({OrdonanceID : ordonance._id})
+        .then((medicament) => {
+            if (!medicament) {
+            return res.status(404).json({ message: "medicament not found" });
+            }
+            res.status(200).json(medicament);
+        })
+        .catch((error) => {
+            console.error("Error retrieving medicament:", error);
+            res.status(500).json({ message: "Error retrieving medicament" });
+      });
+      
+    }).catch((error)=>{
+        console.error("Error retrieving Ordonance :", error);
+        res.status(500).json({ message: "Error retrieving Ordonance" });
+    });
+}
+// Get Medicament
+const GetMedicamentById = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: 'Specified id is not valid' });
+    }
+    // Find the medicament by ID in the database
+    await Medicament.findById({_id: id})
+      .then((medicament) => {
+        if (!medicament) {
+          return res.status(404).json({ message: "Medicament not found" });
+        }
+        res.status(200).json(medicament);
+      })
+      .catch((error) => {
+        console.error("Error retrieving Medicament:", error);
+        res.status(500).json({ message: "Error retrieving Medicament" });
+      });
+}
+// Create Medicament
+const CreateNewMedicament = async (req, res) => {
+
+}
+// Delete Medicament
+const DeleteMedicament = async (req, res) => {
+    const {id} = req.params;
+    //check if id is valid
+    if(!mongoose.Types.ObjectId.isValid(id)){
+        return res.status(400).json({err: 'Vaccin not found'});
+    }
+    //find id in db and delete
+    const medicament = await Medicament.findByIdAndDelete({_id: id});
+    //if not found return error
+    if(!medicament){
+        return res.status(404).json({err: 'medicament not found'});
+    }
+    //return user
+    res.status(200).json(medicament);
+}
+
 module.exports = {
     CreateNewNouveaune,
     UpdateDossObsNouveaune,
@@ -776,5 +845,9 @@ module.exports = {
     CreateNewDiagnostic,
     GetOrdonance,
     CreateNewOrdonance,
-    DeleteOrdonance
+    DeleteOrdonance,
+    GetAllMedicament,
+    GetMedicamentById,
+    DeleteMedicament,
+    CreateNewMedicament
 }
