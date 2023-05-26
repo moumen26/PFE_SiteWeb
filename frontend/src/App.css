@@ -3287,13 +3287,16 @@ form.sign-in-form {
   width: 100%;
 }
 
+
 .table-patients table tr {
   height: 50px;
+  width: 100%;
   border-bottom: 1px solid rgba(79, 129, 255, 1);
 }
 
-.table-patients table tr:nth-child(2n) {
+.table-nouveau-ne-ligne:nth-child(2n) {
   background-color: rgba(218, 218, 218, 1);
+  width: 100vw;
 }
 
 .table-patients td {
@@ -3316,15 +3319,22 @@ form.sign-in-form {
   color: rgba(6, 14, 48, 1);
 }
 
-.table-patients-header-nom {
+.table-nouveau-ne-ligne{
+  width: 100vw;
+}
+
+.table-patients-header-nom,
+.table-nouveau-ne-ligne .table-patients-td-nom {
   width: 25%;
 }
 
-.table-patients-header-annee {
+.table-patients-header-annee,
+.table-nouveau-ne-ligne .table-patients-td-annee {
   width: 15%;
 }
 
-.table-patients-header-willaya {
+.table-patients-header-willaya,
+.table-nouveau-ne-ligne .table-patients-td-willaya {
   width: 20%;
 }
 

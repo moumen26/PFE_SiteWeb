@@ -14,11 +14,23 @@ import MyCahierSwiper from "../components/swipeCahier";
 import ConculterButton from "../components/conculterButton";
 import VoirButton from "../components/voirButton";
 import SearchButton from "../components/searchButton";
+import TableNouveauNe from "../components/tableNouveauNe";
+import dataNouveau from "../NouveauNeDataBase.json";
+
 //import { CircularProgress } from "@mui/material";
 
 export default function NouveauNe() {
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
+
+  const [NouveauneDB, setNouveauneDB] = useState(dataNouveau);
+
+  const [medAddFormData, setMedAddFormData] = useState({
+    Nom_Nouveaune: "",
+    Annee_Nouveaune: "",
+    Willaya_Nouveaun: "",
+    Region_Nouveaune: "",
+  });
 
   const [loading, setLoading] = useState();
 
@@ -74,116 +86,9 @@ export default function NouveauNe() {
                 <td className="table-patients-header-region">Region</td>
                 <td className="table-patients-header-button"></td>
               </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-                <td className="table-patients-td table-patient-td-button">
-                  <ConculterButton />
-                  <VoirButton />
-                </td>
-              </tr>
+              {NouveauneDB?.map((NouveauNe) => (
+                <TableNouveauNe NouveauNe={NouveauNe} />
+              ))}
             </table>
           </div>
         </div>
