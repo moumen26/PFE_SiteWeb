@@ -20,6 +20,9 @@ const PatientSchema = new mongoose.Schema({
     idVaccin: [{
         type: mongoose.Schema.Types.ObjectId, ref: "vaccins"
     }],
+    ConsultationID: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "consultations"
+    }],
 });
 
 

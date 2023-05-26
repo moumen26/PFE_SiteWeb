@@ -13,6 +13,16 @@ const {
     UpdateCarnetSante,
     GetCarnetSante,
     DeleteCarnetSante,
+    GetConsultation,
+    GetConsultationById,
+    CreateNewConsultation,
+    UpdateConsultation,
+    DeleteConsultation,
+    GetDiagnostic,
+    CreateNewDiagnostic,
+    GetOrdonance,
+    CreateNewOrdonance,
+    DeleteOrdonance
 } = require('../controllers/PatientController');
 const {
     GetAllVaccins,
@@ -86,5 +96,49 @@ router.patch('/Vaccin/:id', UpdateVaccin);
 
 //delete a vaccin
 router.delete('/Vaccin/:id', DeleteVaccin);
+
+// CONSULTATION
+
+//get all consultations
+router.get("/Consultation/all/:id", GetConsultation);
+
+//post a new consultation
+router.post('/AddConsultation/:id',CreateNewConsultation);
+
+//get a specific consultation
+router.get('/Consultation/:id', GetConsultationById);
+
+//update a consultation
+router.patch('/Consultation/:id', UpdateConsultation);
+
+//delete a consultation
+router.delete('/Consultation/:id', DeleteConsultation);
+
+// DIAGNOSTIC
+
+//get diagnostics
+router.get("/Diagnostic/:id", GetDiagnostic);
+
+//post a new diagnostic
+router.post('/AddDiagnostic/:id',CreateNewDiagnostic);
+
+// ORDONANCE
+
+//get ordonances
+router.get("/Ordonance/:id", GetOrdonance);
+//post a new ordonance
+router.post('/AddOrdonance/:id',CreateNewOrdonance);
+//delete a ordonance
+router.delete('/Ordonance/:id', DeleteOrdonance);
+
+// MEDECAMENTS
+
+//get all medecaments
+
+//post a new medecament
+
+//get a specific medecament
+
+//delete a medecament
 
 module.exports = router;
