@@ -86,7 +86,7 @@ const DeleteOrdonance = async (req, res) => {
                 return res.status(404).json({ message: 'Ordonance not found' });
             }
             // Delete Ordonance from consultation
-            Consultation.updateMany({_id: ordonance.ConsultationID}, {
+            const consultationresponce = Consultation.updateMany({_id: ordonance.ConsultationID}, {
                 $unset: {OrdonanceID: ordonance}}).then((ordonance) => {
                     if (!ordonance) {
                         return res.status(404).json({ message: 'ordonance not found' });
@@ -96,9 +96,23 @@ const DeleteOrdonance = async (req, res) => {
                     console.error('Error deleting ordonance from consultation:', error);
                     res.status(500).json({ message: 'Failed to delete ordonance from consultation' });
                 });
-            res.status(200).json({ message: 'ordonanceID deleted successfully from consultation' });
-            //return ordonance
-            console.log('Ordonance deleted');
+            // Delete Medicament from ordonance
+            for (let i = 0; i < ordonance.Medicaments.length; i++) {
+                medicamentresponce = Medicament.findOneAndDelete({OrdonanceID: ordonance._id}).then((medicament) => {
+                    if (!medicament) {
+                        return res.status(404).json({ message: 'Medicament not found' });
+                    }
+                    console.log('Medicament deleted from ordonance');
+                }).catch((error) => {
+                    console.error('Error deleting medicament from ordonance:', error);
+                    res.status(500).json({ message: 'Failed to delete medicament from ordonance' });
+                });
+            }
+            //return success message
+            if (consultationresponce) {
+                res.status(200).json({ message: 'Ordonance deleted successfully' });
+            }
+            
         }).catch((error) => {
             res.status(500).json({ message: 'Failed to delete Ordonance' });
         });
