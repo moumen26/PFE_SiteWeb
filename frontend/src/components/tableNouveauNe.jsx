@@ -12,7 +12,7 @@ export default function TableNouveauNe({ NouveauNe }) {
   const time = `${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
   const history = useNavigate();
   const { user } = useAuthContext();
-
+// Add Consultation
   const handleAddConsultation = async () => {
     try {
       const response = await fetch(`http://localhost:8000/patients/AddConsultation/${NouveauNe._id}`, {
@@ -39,15 +39,19 @@ export default function TableNouveauNe({ NouveauNe }) {
       console.error("Error adding Consultation:", error);
     }
   };
+//Voir patient details
+  const handleVoirPatient = async () => {
+    history(`/patients/details/${await NouveauNe._id}`);
+  };
   return (
     <tr className="table-nouveau-ne-ligne">
-      <td className="table-patients-td-nom">{NouveauNe._id}</td>
+      <td className="table-patients-td-nom">{NouveauNe.NomPatint}</td>
       <td className="table-patients-td-annee">{NouveauNe._id}</td>
       <td className="table-patients-td-willaya">{NouveauNe._id}</td>
       <td className="table-patients-td-region">{NouveauNe._id}</td>
       <td className="table-patients-td table-patient-td-button">
         <ConculterButton AddConsultation={handleAddConsultation}/>
-        <VoirButton />
+        <VoirButton VoirPatient={handleVoirPatient}/>
       </td>
     </tr>
   );

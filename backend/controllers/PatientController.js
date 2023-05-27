@@ -20,6 +20,7 @@ const CreateNewNouveaune = async (req, res) => {
         const Date_daccouchement = req.body.Date_daccouchement;
         const Heure_daccouchement = req.body.Heure_daccouchement;
         const idAccoucheur = req.body.idAccoucheur;
+        const  maturity = "Nouveau-ne";
         if (!idAccoucheur || !Date_daccouchement || !Heure_daccouchement) {
             return res.status(400).json({ error: 'You must provide all fields' });
         }
@@ -29,6 +30,7 @@ const CreateNewNouveaune = async (req, res) => {
             idAccoucheur,
             idMaman: id,
             idDossObs : Maman.idDossObs,
+            maturity,
         });
         newPatient.save().then(async (savedPatient) => {
             const patientID = savedPatient._id;
@@ -132,11 +134,17 @@ const UpdateDossObsNouveaune = async (req, res) => {
     }
 }
 
+//get all Nouveau-ne
+const GetAllNouveaune = async (req, res) => {
+    const patients = await Patient.find({maturity: {$ne: "Adulte"}});
+    res.status(200).json(patients);
+}
+
 // PATIENTS
 
 //get all Patients
 const GetAllPatient = async (req, res) => {
-    const patients = await Patient.find({});
+    const patients = await Patient.find({maturity: {$ne: "Nouveau-ne"}});
     res.status(200).json(patients);
 }
 
@@ -165,11 +173,13 @@ const CreateNewPatient = async (req, res) => {
     try {
         const Date_Entree = req.body.Date_daccouchement;
         const idAccoucheur = req.body.idAccoucheur;
+        const  maturity = "Adulte";
         if (!idAccoucheur) {
             return res.status(400).json({ error: 'You must provide all fields' });
         }
         const newPatient = new Patient({
             idAccoucheur,
+            maturity,
         });
         newPatient.save().then(async (savedPatient) => {
             const patientID = savedPatient._id;
@@ -426,6 +436,7 @@ module.exports = {
     UpdateDossObsNouveaune,
     CreateNewPatient,
     GetAllPatient,
+    GetAllNouveaune,
     GetPatient,
     DeletePatient,
     UpdatePatient,

@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import SearchButton from "../components/searchButton";
-
+import TableNouveauNe from "../components/tableNouveauNe";
+import data from "../MeddicamentDataBase.json"
 export default function PatientDetails() {
   const current = new Date();
   const date = `${current.getDate()}-${
@@ -17,13 +18,47 @@ export default function PatientDetails() {
     second: "2-digit",
     hour12: false,
   });
+  const [search, setSearch] = useState("");
+  const [wilaya, setWilaya] = useState("All");
+  const [region, setRegion] = useState("All");
+  const [naissance, setNaissance] = useState("All");
   const { user } = useAuthContext();
-  
+  const history = useNavigate();
+
+  const [NouveauneDB, setNouveauneDB] = useState();
+  // Fetch Patient Data
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      if (user?.token !== undefined) {
+        await fetch(`http://localhost:8000/patients/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setNouveauneDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Patient data:", error);
+              });
+          } else {
+            console.error("Error resieving Patient date", response.error);
+          }
+        });
+      } else {
+        history(`/patients`);
+      }
+    };
+    fetchPatientData();
+  }, [history, user?.token]);
 
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
 
-  const history = useNavigate();
 
   const handleAddPatient = async () => {
     try {
@@ -58,8 +93,13 @@ export default function PatientDetails() {
           <div className="patient-table-header">
             <div className="table-header-item">
               <label>Annee</label>
-              <select className="Annee-select" name="Annee-age" id="Annee-age">
-                <option value="">All</option>
+              <select className="Annee-select" name="Annee-age" id="Annee-age"
+                onChange={(e) => setNaissance(e.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
               </select>
             </div>
             <div className="table-header-item">
@@ -68,8 +108,12 @@ export default function PatientDetails() {
                 className="Wilaya-select"
                 name="Wilaya-age"
                 id="Wilaya-age"
+                onChange={(e) => setWilaya(e.target.value)}
               >
-                <option value="">All</option>
+                <option value="All">All</option>
+                <option value="Medea">Medea</option>
+                <option value="Blida">Blida</option>
+                <option value="Alger">Alger</option>
               </select>
             </div>
             <div className="table-header-item">
@@ -78,14 +122,19 @@ export default function PatientDetails() {
                 className="Region-select"
                 name="Region-age"
                 id="Region-age"
+                onChange={(e) => setRegion(e.target.value)}
               >
-                <option value="">All</option>
+                <option value="All">All</option>
+                <option value="Medea Centre">Medea Centre</option>
+                <option value="Blida Centre">Blida Centre</option>
+                <option value="Alger Centre">Alger Centre</option>
               </select>
             </div>
             <input
               type="search"
               className="class-search"
               placeholder="Search.."
+              onChange={(e) => setSearch(e.target.value)}
             />
             <div className="search-item">
               <SearchButton />
@@ -101,78 +150,87 @@ export default function PatientDetails() {
           </div>
           <div className="table-patients">
             <table>
-              <tr className="table-patients-header">
-                <td className="table-patients-header-nom">Nom complet</td>
-                <td className="table-patients-header-annee">Annee</td>
-                <td className="table-patients-header-willaya">Willaya</td>
-                <td className="table-patients-header-region">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
-              <tr>
-                <td className="table-patients-td">Nom complet</td>
-                <td className="table-patients-td">Annee</td>
-                <td className="table-patients-td">Willaya</td>
-                <td className="table-patients-td">Region</td>
-              </tr>
+                <tr className="table-patients-header">
+                  <td className="table-patients-header-nom">Nom complet</td>
+                  <td className="table-patients-header-annee">Annee</td>
+                  <td className="table-patients-header-willaya">Willaya</td>
+                  <td className="table-patients-header-region">Region</td>
+                  <td className="table-patients-header-button"></td>
+                </tr>
+                {NouveauneDB?.filter((item)=>{
+                  if(item.Naissance && item.Wilaya && item.Region){
+                    if (search.toLowerCase() === '') {
+                      if (naissance === "All") {
+                        if (wilaya === "All") {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }else if (item.Wilaya.includes(wilaya)) {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }
+                      }else if (item.Naissance.includes(naissance)) {
+                        if (wilaya === "All") {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }else if (item.Wilaya.includes(wilaya)) {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }
+                      }
+                    }else if (item._id.includes(search.toLowerCase()) || item.NomPatint.toLowerCase().includes(search.toLowerCase())) {
+                      if (naissance === "All") {
+                        if (wilaya === "All") {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }else if (item.Wilaya.includes(wilaya)) {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }
+                      }else if (item.Naissance.includes(naissance)) {
+                        if (wilaya === "All") {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }else if (item.Wilaya.includes(wilaya)) {
+                          if (region === "All") {
+                            return item;
+                          }else if (item.Region.includes(region)) {
+                            return item;
+                          }
+                        }
+                      }
+                    }
+                  }else{
+                    if (search.toLowerCase() === '') {
+                      return item;
+                    }else if (item._id.includes(search.toLowerCase()) || item.NomPatint.toLowerCase().includes(search.toLowerCase())) {
+                      return item;
+                    }
+                  }
+                
+              }).map((NouveauNe) => (
+                  <TableNouveauNe NouveauNe={NouveauNe} />
+                ))}
             </table>
           </div>
         </div>

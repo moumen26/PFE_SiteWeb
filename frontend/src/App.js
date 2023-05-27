@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import PatientDetails from "./pages/patientMaman";
+import patientProfile from "./pages/patientProfile";
 import NouveauNe from "./pages/nouveaune";
 import AddPatient from "./pages/addPatient";
 import Calendrier from "./pages/calendrier";
@@ -42,6 +43,10 @@ function App() {
           <Route
             path="/patients/:id"
             element={user ? <AddPatient /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/patients/details/:id"
+            element={user ? <patientProfile /> : <Navigate to="/login" />}
           />
           <Route
             path="calendrier"

@@ -2,6 +2,7 @@ const express = require('express');
 const {
     CreateNewNouveaune,
     UpdateDossObsNouveaune,
+    GetAllNouveaune,
     CreateNewPatient,
     GetAllPatient,
     GetPatient,
@@ -54,6 +55,9 @@ router.use(requireAuth);
 
 //get all patients
 router.get('/', GetAllPatient);
+
+//get all nouveau ne
+router.get('/Nouveau-ne/', GetAllNouveaune);
 
 //get a specific patient
 router.get('/:id', GetPatient);

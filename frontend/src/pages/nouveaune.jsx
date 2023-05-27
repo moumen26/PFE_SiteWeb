@@ -24,8 +24,10 @@ export default function NouveauNe() {
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
   const history = useNavigate("/patients");
-
-
+  const [search, setSearch] = useState("");
+  const [wilaya, setWilaya] = useState("All");
+  const [region, setRegion] = useState("All");
+  const [naissance, setNaissance] = useState("All");
   const [medAddFormData, setMedAddFormData] = useState({
     Nom_Nouveaune: "",
     Annee_Nouveaune: "",
@@ -43,7 +45,7 @@ export default function NouveauNe() {
   useEffect(() => {
     const fetchPatientData = async () => {
       if (user?.token !== undefined) {
-        await fetch(`http://localhost:8000/patients/`, {
+        await fetch(`http://localhost:8000/patients/Nouveau-ne/`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -76,8 +78,13 @@ export default function NouveauNe() {
           <div className="patient-table-header">
             <div className="table-header-item">
               <label>Annee</label>
-              <select className="Annee-select" name="Annee-age" id="Annee-age">
-                <option value="">All</option>
+              <select className="Annee-select" name="Annee-age" id="Annee-age"
+              onChange={(e) => setNaissance(e.target.value)}
+              >
+                <option value="All">All</option>
+                <option value="2002">2002</option>
+                <option value="2003">2003</option>
+                <option value="2004">2004</option>
               </select>
             </div>
             <div className="table-header-item">
@@ -86,8 +93,12 @@ export default function NouveauNe() {
                 className="Wilaya-select"
                 name="Wilaya-age"
                 id="Wilaya-age"
-              >
-                <option value="">All</option>
+                onChange={(e) => setWilaya(e.target.value)}
+                >
+                  <option value="All">All</option>
+                  <option value="Medea">Medea</option>
+                  <option value="Blida">Blida</option>
+                  <option value="Alger">Alger</option>
               </select>
             </div>
             <div className="table-header-item">
@@ -96,14 +107,19 @@ export default function NouveauNe() {
                 className="Region-select"
                 name="Region-age"
                 id="Region-age"
-              >
-                <option value="">All</option>
+                onChange={(e) => setRegion(e.target.value)}
+                >
+                  <option value="All">All</option>
+                  <option value="Medea Centre">Medea Centre</option>
+                  <option value="Blida Centre">Blida Centre</option>
+                  <option value="Alger Centre">Alger Centre</option>
               </select>
             </div>
             <input
               type="search"
               className="class-search"
               placeholder="Search.."
+              onChange={(e) => {setSearch(e.target.value)}}
             />
             <div className="search-item">
               <SearchButton />
@@ -118,7 +134,77 @@ export default function NouveauNe() {
                 <td className="table-patients-header-region">Region</td>
                 <td className="table-patients-header-button"></td>
               </tr>
-              {NouveauneDB?.map((NouveauNe) => (
+              {NouveauneDB?.filter((item)=>{
+                if(item.Naissance && item.Wilaya && item.Region){
+                  if (search.toLowerCase() === '') {
+                    if (naissance === "All") {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }
+                    }else if (item.Naissance.includes(naissance)) {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }
+                    }
+                  }else if (item._id.includes(search.toLowerCase()) || item.NomPatint.toLowerCase().includes(search.toLowerCase())) {
+                    if (naissance === "All") {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }
+                    }else if (item.Naissance.includes(naissance)) {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        }else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }
+                    }
+                  }
+                }else{
+                  if (search.toLowerCase() === '') {
+                    return item;
+                  }else if (item._id.includes(search.toLowerCase()) || item.NomPatint.toLowerCase().includes(search.toLowerCase())) {
+                    return item;
+                  }
+                }
+              }).map((NouveauNe) => (
                 <TableNouveauNe NouveauNe={NouveauNe} />
               ))}
             </table>

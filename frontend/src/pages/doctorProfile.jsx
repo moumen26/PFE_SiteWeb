@@ -37,7 +37,7 @@ export default function DoctorProfile() {
           }
         });
       }else{
-        history.push('/login');
+        history(`/login`);
       }
     };
 
