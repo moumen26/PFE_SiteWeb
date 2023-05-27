@@ -7,7 +7,7 @@ const DiagnosticSchema = new mongoose.Schema({
     },
     Context: {
         type: String,
-        required: true,
+        required: false,
     },
     Symptomes: {
         type: String,

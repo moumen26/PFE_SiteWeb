@@ -138,27 +138,30 @@ const DeleteConsultation = async (req, res) => {
                 }
                 console.log('Consultation deleted from patient');
             }).catch((error) => {
-                console.error('Error updating patient:', error);
-                res.status(500).json({ message: 'Failed to update patient' });
+                return res.status(500).json({ message: 'Failed to update patient' });
             });
         // Delete Diagnostic from db
-        Diagnostic.findByIdAndDelete({_id: DiagnosticID}).then((diagnostic) => {
-            if (!diagnostic) {
-                return res.status(404).json({ message: 'Diagnostic not found' });
-            }
-            console.log('Diagnostic deleted');
-        }).catch((error) => {
-            res.status(500).json({ message: 'Failed to delete Diagnostic' });
-        });
+        if(DiagnosticID != null){
+            Diagnostic.findByIdAndDelete({_id: DiagnosticID}).then((diagnostic) => {
+                if (!diagnostic) {
+                    return res.status(404).json({ message: 'Diagnostic not found' });
+                }
+            }).catch((error) => {
+                return res.status(500).json({ message: 'Failed to delete Diagnostic' });
+            });
+        }
+        
         // Delete Ordonance from db
-        Ordonance.findByIdAndDelete({_id: OrdonanceID}).then((ordonance) => {
-            if (!ordonance) {
-                return res.status(404).json({ message: 'Ordonance not found' });
-            }
-            console.log('Ordonance deleted');
-        }).catch((error) => {
-            res.status(500).json({ message: 'Failed to delete Ordonance' });
-        });
+        if (OrdonanceID != null){
+            Ordonance.findByIdAndDelete({_id: OrdonanceID}).then((ordonance) => {
+                if (!ordonance) {
+                    return res.status(404).json({ message: 'Ordonance not found' });
+                }
+            }).catch((error) => {
+                return res.status(500).json({ message: 'Failed to delete Ordonance' });
+            });
+        }
+        
         // Delete Examen from db
         /*ExamenTest.findByIdAndDelete({_id: ExamenID}).then((examen) => {
             if (!examen) {
@@ -173,11 +176,10 @@ const DeleteConsultation = async (req, res) => {
             if (!consultation) {
                 return res.status(404).json({ message: 'Consultation not found' });
             }
-            console.log('Consultation deleted');
+            res.status(200).json({ message: 'Consultation successfully deleted' });
         }).catch((error) => {
             res.status(500).json({ message: 'Failed to delete Consultation' });
         });
-        res.status(200).json({ message: 'Consultation successfully deleted' });
     });
 }
 

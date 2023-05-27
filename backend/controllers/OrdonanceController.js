@@ -62,7 +62,7 @@ const CreateNewOrdonance = async (req, res) => {
                 });
     
                 // return ordonance
-                res.status(201).json(ordonance);
+                res.status(201).json({ message: 'You can now Add Ordonance content'});
             }).catch((error) => {
                 console.error('Error creating Ordonance:', error);
                 res.status(500).json({ error: 'Failed to create Ordonance' });

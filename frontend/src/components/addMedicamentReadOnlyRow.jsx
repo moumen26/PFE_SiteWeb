@@ -8,15 +8,15 @@ export default function AddMedicamentReadOnlyRow({
   return (
     <div className="ordononce-medicament">
       <div className="medicament-description">
-        <h2>{Medicament.medicament}</h2>
-        <h2>{Medicament.quantite} boite</h2>
-        <h2>{Medicament.dose}</h2>
-        <h2>{Medicament.duree}</h2>
+        <h2>{Medicament?.NomMedicament}</h2>
+        <h2>{Medicament?.QuantiteMedicament} boite</h2>
+        <h2>{Medicament?.DoseMedicament}</h2>
+        <h2>{Medicament?.DureeMedicament}</h2>
       </div>
       <div className="action-table-med">
         <MdDelete
           className="delete-btn-icon"
-          onClick={() => handleMedDeleteClick(Medicament.id)}
+          onClick={() => handleMedDeleteClick(Medicament?._id)}
         />
       </div>
     </div>

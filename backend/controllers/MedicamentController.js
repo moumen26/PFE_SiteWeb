@@ -82,7 +82,7 @@ const CreateNewMedicament = async (req, res) => {
         console.error("Error retrieving Ordonance :", error);
         res.status(500).json({ message: "Error retrieving Ordonance" });
       });
-      res.status(200).json(medicament);
+      res.status(200).json({ message: 'medicament created successfully'});
     }).catch((error)=>{
         console.error("Error creating new Medicament:", error);
         res.status(500).json({ message: "Error creating new Medicament" });

@@ -136,7 +136,7 @@ const UpdateDossObsNouveaune = async (req, res) => {
 
 //get all Patients
 const GetAllPatient = async (req, res) => {
-    const patients = await DossObs.find({}).sort({createdAt: -1});
+    const patients = await Patient.find({});
     res.status(200).json(patients);
 }
 

@@ -222,7 +222,7 @@ export default function VaccinTable() {
     <div className="vaccin-container">
       <div className="vaccin-table-container">
         <h2>Vaccination :</h2>
-        <form onSubmit={handleEditRowSubmitt}>
+        <form onSubmit={handleEditRowSubmitt} >
           <table className="vaccination-table">
             <tr>
               <th>
@@ -257,7 +257,6 @@ export default function VaccinTable() {
             </tr>
             {VaccinDB?.map(
               (VaccinData) => (
-                console.log(VaccinData),
                 (
                   <Fragment>
                     {editVaccinId === VaccinData?._id ? (

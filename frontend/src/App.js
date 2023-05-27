@@ -70,7 +70,7 @@ function App() {
             element={user ? <Antecedent /> : <Navigate to="/login" />}
           />
           <Route
-            path="conculter"
+            path="conculter/:id"
             element={user ? <Conculter /> : <Navigate to="/login" />}
           />
         </Routes>

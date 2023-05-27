@@ -30,10 +30,10 @@ const GetDiagnostic = async (req, res) => {
 const CreateNewDiagnostic = async (req, res) => {
     try {
         const { id } = req.params;
-        const { Context, Symptomes} = req.body;
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: 'Specified id is not valid' });
         }
+    
         await Consultation.findById({_id: id}).then(async (consultation) => {
             if (!consultation) {
                 return res.status(404).json({ message: 'Consultation not found' });
@@ -45,8 +45,6 @@ const CreateNewDiagnostic = async (req, res) => {
             // Creating new diagnostic
             const newDiagnostic = new Diagnostic({
                 ConsultationID: id,
-                Context, 
-                Symptomes
             });
             await newDiagnostic.save().then(async (diagnostic) => {
                 if (!diagnostic) {
@@ -64,7 +62,7 @@ const CreateNewDiagnostic = async (req, res) => {
                 });
     
                 // Adding diagnostic
-                res.status(201).json(diagnostic);
+                res.status(201).json({id: diagnostic._id, message: 'You can now Add Diagnostic content'});
             }).catch((error) => {
                 console.error('Error creating Diagnostic:', error);
                 res.status(500).json({ error: 'Failed to create Diagnostic' });
@@ -93,8 +91,7 @@ const UpdateDiagnostic = async (req, res) => {
             if (!diagnostic) {
                 return res.status(404).json({ message: 'Diagnostic not found' });
             }
-            console.log('Diagnostic updated');
-            res.status(200).json(diagnostic);
+            res.status(200).json({ message: 'Diagnostic Added successfully' });
         }).catch((error) => {
             console.error('Error finding diagnostic:', error);
             res.status(500).json({ message: 'Failed to find diagnostic' });
@@ -123,9 +120,7 @@ const DeleteDiagnostic = async (req, res) => {
                     console.error('Error deleting Diagnostic from consultation:', error);
                     res.status(500).json({ message: 'Failed to delete Diagnostic from consultation' });
                 });
-            res.status(200).json({ message: 'DiagnosticID deleted successfully from consultation' });
-            //return Diagnostic
-            console.log('Diagnostic deleted');
+            res.status(200).json({ message: 'Diagnostic deleted successfully from consultation' });
         }).catch((error) => {
             res.status(500).json({ message: 'Failed to delete Diagnostic' });
         });

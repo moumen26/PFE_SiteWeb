@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
@@ -16,14 +16,15 @@ import VoirButton from "../components/voirButton";
 import SearchButton from "../components/searchButton";
 import TableNouveauNe from "../components/tableNouveauNe";
 import dataNouveau from "../NouveauNeDataBase.json";
-
+import { useAuthContext } from "../hooks/useAuthContext";
+import { useNavigate, useParams } from "react-router-dom";
 //import { CircularProgress } from "@mui/material";
 
 export default function NouveauNe() {
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
+  const history = useNavigate("/patients");
 
-  const [NouveauneDB, setNouveauneDB] = useState(dataNouveau);
 
   const [medAddFormData, setMedAddFormData] = useState({
     Nom_Nouveaune: "",
@@ -36,6 +37,37 @@ export default function NouveauNe() {
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
+  const [NouveauneDB, setNouveauneDB] = useState();
+  const {user} = useAuthContext();
+  // Fetch Patient Data
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      if (user?.token !== undefined) {
+        await fetch(`http://localhost:8000/patients/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setNouveauneDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Patient data:", error);
+              });
+          } else {
+            console.error("Error resieving Patient date", response.error);
+          }
+        });
+      } else {
+        history("/login");
+      }
+    };
+    fetchPatientData();
+  }, [history, user?.token]);
   return (
     <div>
       <div className="patient-table">
