@@ -189,7 +189,7 @@ export default function PatientDetails() {
                           }
                         }
                       }
-                    }else if (item._id.includes(search.toLowerCase()) || item.NomPatint.toLowerCase().includes(search.toLowerCase())) {
+                    }else if (item._id.includes(search.toLowerCase()) || item.idAccoucheur.includes(search.toLowerCase())) {
                       if (naissance === "All") {
                         if (wilaya === "All") {
                           if (region === "All") {
@@ -223,7 +223,7 @@ export default function PatientDetails() {
                   }else{
                     if (search.toLowerCase() === '') {
                       return item;
-                    }else if (item._id.includes(search.toLowerCase()) || item.NomPatint.toLowerCase().includes(search.toLowerCase())) {
+                    }else if (item._id.includes(search.toLowerCase()) || item.idAccoucheur.includes(search.toLowerCase())) {
                       return item;
                     }
                   }
