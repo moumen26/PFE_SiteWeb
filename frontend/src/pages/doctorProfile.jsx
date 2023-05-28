@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from "react";
 import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
-import DoctorProfileEnregistrerButton from "../components/doctorProfileEnregistrerButton";
+import DoctorProfileEnregistrerButton from "../components/buttons/buttonDoctorProfileEnregistrer";
 import { useUserProfile } from "../hooks/useUserProfile";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";

@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import MyNavBar from "../components/navBar";
-import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
-import SearchButton from "../components/searchButton";
-import TableNouveauNe from "../components/tableNouveauNe";
-import data from "../MeddicamentDataBase.json"
+import SearchButton from "../components/buttons/buttonSearch";
+import TableNouveauNe from "../components/tables/tableNouveauNeReadOnlyRow";
 export default function PatientDetails() {
   const current = new Date();
   const date = `${current.getDate()}-${
@@ -59,14 +56,13 @@ export default function PatientDetails() {
   const [add, setAdd] = useState(false);
   const [act, setAct] = useState(false);
 
-
   const handleAddPatient = async () => {
     try {
       const response = await fetch("http://localhost:8000/patients/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization : `Bearer ${user?.token}`
+          Authorization: `Bearer ${user?.token}`,
         },
         body: JSON.stringify({
           idAccoucheur: user?.id,
@@ -93,7 +89,10 @@ export default function PatientDetails() {
           <div className="patient-table-header">
             <div className="table-header-item">
               <label>Annee</label>
-              <select className="Annee-select" name="Annee-age" id="Annee-age"
+              <select
+                className="Annee-select"
+                name="Annee-age"
+                id="Annee-age"
                 onChange={(e) => setNaissance(e.target.value)}
               >
                 <option value="All">All</option>
@@ -150,87 +149,92 @@ export default function PatientDetails() {
           </div>
           <div className="table-patients">
             <table>
-                <tr className="table-patients-header">
-                  <td className="table-patients-header-nom">Nom complet</td>
-                  <td className="table-patients-header-annee">Annee</td>
-                  <td className="table-patients-header-willaya">Willaya</td>
-                  <td className="table-patients-header-region">Region</td>
-                  <td className="table-patients-header-button"></td>
-                </tr>
-                {NouveauneDB?.filter((item)=>{
-                  if(item.Naissance && item.Wilaya && item.Region){
-                    if (search.toLowerCase() === '') {
-                      if (naissance === "All") {
-                        if (wilaya === "All") {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
-                        }else if (item.Wilaya.includes(wilaya)) {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
+              <tr className="table-patients-header">
+                <td className="table-patients-header-nom">Nom complet</td>
+                <td className="table-patients-header-annee">Annee</td>
+                <td className="table-patients-header-willaya">Willaya</td>
+                <td className="table-patients-header-region">Region</td>
+                <td className="table-patients-header-button"></td>
+              </tr>
+              {NouveauneDB?.filter((item) => {
+                if (item.Naissance && item.Wilaya && item.Region) {
+                  if (search.toLowerCase() === "") {
+                    if (naissance === "All") {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
                         }
-                      }else if (item.Naissance.includes(naissance)) {
-                        if (wilaya === "All") {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
-                        }else if (item.Wilaya.includes(wilaya)) {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
+                      } else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
                         }
                       }
-                    }else if (item._id.includes(search.toLowerCase()) || item.idAccoucheur.includes(search.toLowerCase())) {
-                      if (naissance === "All") {
-                        if (wilaya === "All") {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
-                        }else if (item.Wilaya.includes(wilaya)) {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
+                    } else if (item.Naissance.includes(naissance)) {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
                         }
-                      }else if (item.Naissance.includes(naissance)) {
-                        if (wilaya === "All") {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
-                        }else if (item.Wilaya.includes(wilaya)) {
-                          if (region === "All") {
-                            return item;
-                          }else if (item.Region.includes(region)) {
-                            return item;
-                          }
+                      } else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
                         }
                       }
                     }
-                  }else{
-                    if (search.toLowerCase() === '') {
-                      return item;
-                    }else if (item._id.includes(search.toLowerCase()) || item.idAccoucheur.includes(search.toLowerCase())) {
-                      return item;
+                  } else if (
+                    item._id.includes(search.toLowerCase()) ||
+                    item.idAccoucheur.includes(search.toLowerCase())
+                  ) {
+                    if (naissance === "All") {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      } else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }
+                    } else if (item.Naissance.includes(naissance)) {
+                      if (wilaya === "All") {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      } else if (item.Wilaya.includes(wilaya)) {
+                        if (region === "All") {
+                          return item;
+                        } else if (item.Region.includes(region)) {
+                          return item;
+                        }
+                      }
                     }
                   }
-                
+                } else {
+                  if (search.toLowerCase() === "") {
+                    return item;
+                  } else if (
+                    item._id.includes(search.toLowerCase()) ||
+                    item.idAccoucheur.includes(search.toLowerCase())
+                  ) {
+                    return item;
+                  }
+                }
               }).map((NouveauNe) => (
-                  <TableNouveauNe NouveauNe={NouveauNe} />
-                ))}
+                <TableNouveauNe NouveauNe={NouveauNe} />
+              ))}
             </table>
           </div>
         </div>

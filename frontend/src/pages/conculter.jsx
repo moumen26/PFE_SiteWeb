@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { BiChevronDown, BiChevronUp } from "react-icons/bi";
 import { IoIosClose } from "react-icons/io";
-import { nanoid } from "nanoid";
-import data from "../MeddicamentDataBase.json";
 import axios from "axios";
-import AddMedicamentReadOnlyRow from "../components/addMedicamentReadOnlyRow";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
+import AddMedicamentReadOnlyRow from "../components/tables/tableAddMedicamentReadOnlyRow";
 
 export default function Conculter() {
   

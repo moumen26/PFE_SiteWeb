@@ -1,11 +1,11 @@
 import { useState, Fragment, useEffect } from "react";
-import AjouteVaccinButton from "./ajouteVaccinButton";
-import CloseButton from "./closeButtonTableVaccin";
-import VaccinationAddButton from "./vaccinationAddButton";
-import ReadOnlyRow from "./addPatientVaccinTableReadOnlyRow";
-import EditRow from "./addPatientVaccinTableEditRow";
+import AjouteVaccinButton from "../buttons/buttonAjouteVaccin";
+import CloseButton from "../buttons/buttonCloseTableVaccin";
+import VaccinationAddButton from "../buttons/buttonAddVaccination";
+import ReadOnlyRow from "../tables/tableAddPatientVaccinReadOnlyRow";
+import EditRow from "../tables/tableAddPatientVaccinTableEditRow";
 import { useNavigate } from "react-router-dom";
-import { useAuthContext } from "../hooks/useAuthContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
@@ -222,7 +222,7 @@ export default function VaccinTable() {
     <div className="vaccin-container">
       <div className="vaccin-table-container">
         <h2>Vaccination :</h2>
-        <form onSubmit={handleEditRowSubmitt} >
+        <form onSubmit={handleEditRowSubmitt}>
           <table className="vaccination-table">
             <tr>
               <th>
@@ -255,27 +255,23 @@ export default function VaccinTable() {
                 <span>Actions</span>
               </th>
             </tr>
-            {VaccinDB?.map(
-              (VaccinData) => (
-                (
-                  <Fragment>
-                    {editVaccinId === VaccinData?._id ? (
-                      <EditRow
-                        editFromData={editFormData}
-                        handleEditFromChange={handleEditFormChange}
-                        handleCancelClick={handleCancelClick}
-                      />
-                    ) : (
-                      <ReadOnlyRow
-                        VaccinData={VaccinData}
-                        handleEditRowClick={handleEditRowClick}
-                        handleDeleteClick={handleDeleteClick}
-                      />
-                    )}
-                  </Fragment>
-                )
-              )
-            )}
+            {VaccinDB?.map((VaccinData) => (
+              <Fragment>
+                {editVaccinId === VaccinData?._id ? (
+                  <EditRow
+                    editFromData={editFormData}
+                    handleEditFromChange={handleEditFormChange}
+                    handleCancelClick={handleCancelClick}
+                  />
+                ) : (
+                  <ReadOnlyRow
+                    VaccinData={VaccinData}
+                    handleEditRowClick={handleEditRowClick}
+                    handleDeleteClick={handleDeleteClick}
+                  />
+                )}
+              </Fragment>
+            ))}
           </table>
         </form>
         <div className="vaccination-add-button-class">

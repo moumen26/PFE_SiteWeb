@@ -1,15 +1,14 @@
 import React, { useState } from "react";
-import AddCahierSante from "../components/addCahierButton";
-import MyNavBar from "../components/navBar";
-import MyCahierSwiper from "../components/swipeCahier";
+import AddCahierSante from "../components/buttons/buttonAddCahier";
+import MyCahierSwiper from "../components/swipers/swiperCahier";
 import FichierPatient from "../components/fichierPatient";
-import AddVaccinButton from "../components/addVaccinButton";
-import AddVisiteButton from "../components/addVisiteButton";
-import MyVisteTable from "../components/visiteTable";
-import VisiteAddButton from "../components/visiteAddButton";
-import AddVisiteButton2 from "../components/addVisiteButton2";
-import AddVaccinButtonTable from "../components/addVaccinButton2";
-import VaccinTable from "../components/addPatientVaccinTable";
+import AddVaccinButton from "../components/buttons/buttonAddVaccin";
+import AddVisiteButton from "../components/buttons/buttonAddVisite";
+import MyVisteTable from "../components/tables/tableVisite";
+import VisiteAddButton from "../components/buttons/buttonVisiteAdd";
+import AddVisiteButton2 from "../components/buttons/buttonAddVisite2";
+import AddVaccinButtonTable from "../components/buttons/buttonAddVaccin2";
+import VaccinTable from "../components/tables/tableAddPatientVaccin";
 
 export default function AddPatient() {
   const [add, setAdd] = useState(false);

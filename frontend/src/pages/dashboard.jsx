@@ -2,10 +2,10 @@ import { useState } from "react";
 import "../App.css";
 import MyAsideBarActive from "../components/asideBarActive";
 import MyDashboradCalendar from "../components/dashboardCalendar";
-import MyChart from "../components/dashboardChart";
+import MyChart from "../components/charts/dashboardChart";
 import MyDashboradTop from "../components/dashboradItems";
-import TableTraitement from "../components/dashboardTableTraitement";
-import SexeChart from "../components/dashboardChart2";
+import TableTraitement from "../components/tables/tableDashboardTraitement";
+import SexeChart from "../components/charts/dashboardChart2";
 
 function Dashboard() {
   const [act, setAct] = useState(false);
