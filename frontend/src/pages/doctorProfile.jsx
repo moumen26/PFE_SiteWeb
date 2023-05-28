@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import MyAsideBarActive from "../components/asideBarActive";
 import MyNavBar from "../components/navBar";
 import DoctorProfileEnregistrerButton from "../components/buttons/buttonDoctorProfileEnregistrer";
@@ -6,7 +6,6 @@ import { useUserProfile } from "../hooks/useUserProfile";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 
 export default function DoctorProfile() {
   const [act, setAct] = useState(false);
@@ -17,24 +16,27 @@ export default function DoctorProfile() {
   const [sexe, setsexe] = useState("");
   const [AddressActuel, setAddressActuel] = useState("");
   const [Biographie, setBiographie] = useState("");
-  const progress = "Completed"
+  const progress = "Completed";
   const { UserProfile, error } = useUserProfile();
   const { user } = useAuthContext();
-  const [ProfileIMG, setProfileIMG] = useState( { myFile : ""});
-  
-//upload image
+  const [ProfileIMG, setProfileIMG] = useState({ myFile: "" });
+
+  //upload image
   const createPostIMG = async (ProfileIMG) => {
-    try{
-      const response = await fetch(`http://localhost:8000/user/uploadIMG/${user.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
-        body: JSON.stringify({
-          ProfileIMG : ProfileIMG.myFile
-        }),
-      });
+    try {
+      const response = await fetch(
+        `http://localhost:8000/user/uploadIMG/${user.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+          body: JSON.stringify({
+            ProfileIMG: ProfileIMG.myFile,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (!response.ok) {
@@ -43,74 +45,86 @@ export default function DoctorProfile() {
       if (response.ok) {
         window.alert("Image added successfully", data.message);
       }
-    }catch(error){
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  };
   const handleSubmitIMG = (e) => {
     e.preventDefault();
-    createPostIMG(ProfileIMG)
-    console.log("Uploaded")
-  }
+    createPostIMG(ProfileIMG);
+    console.log("Uploaded");
+  };
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];
     const base64 = await convertToBase64(file);
-    setProfileIMG({ ...ProfileIMG, myFile : base64 })
-  }
-//get user data
+    setProfileIMG({ ...ProfileIMG, myFile: base64 });
+  };
+  //get user data
   useEffect(() => {
     const fetchUserData = async () => {
-      if(user?.id !== undefined){
-        await fetch(`http://localhost:8000/user/${user?.id}`,{headers:{
-          'Authorization': `Bearer ${user?.token}`
-        }}).then((response) => {
+      if (user?.id !== undefined) {
+        await fetch(`http://localhost:8000/user/${user?.id}`, {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setUserData(data);
-            }).catch((error) => {
-              console.error('Error fetching user data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setUserData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching user data:", error);
+              });
           } else {
-            console.error('Error fetching user data:', response.status);
+            console.error("Error fetching user data:", response.status);
           }
         });
-      }else{
+      } else {
         history(`/login`);
       }
     };
 
     fetchUserData();
-  }, [userData,user?.id]);
-//update profile
+  }, [userData, user?.id]);
+  //update profile
   async function submitProfile(e) {
     e.preventDefault();
     try {
       //send request to backend
-      const response = await axios.patch(`http://localhost:8000/user/${user.id}`,{ 
-        DateDeNaissance, sexe, LieuDeNaissance, AddressActuel, Biographie, progress
-      },{
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
+      const response = await axios.patch(
+        `http://localhost:8000/user/${user.id}`,
+        {
+          DateDeNaissance,
+          sexe,
+          LieuDeNaissance,
+          AddressActuel,
+          Biographie,
+          progress,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
         }
-      });
+      );
       // Handle response as needed
       const data = await response.data;
       if (!response.status === 200) {
-          window.alert("profile not updated", data.message);
-      }else if (response.status === 200) {
-          window.alert("profile updated successfully", data.message);
-          handleSubmitIMG(e);
-          history(`/`);
-      } 
+        window.alert("profile not updated", data.message);
+      } else if (response.status === 200) {
+        window.alert("profile updated successfully", data.message);
+        handleSubmitIMG(e);
+        history(`/`);
+      }
     } catch (err) {
-        console.log(err.message);
+      console.log(err.message);
     }
-
   }
 
   return (
     <div className="Doctor-profile">
-      
       <MyAsideBarActive act={act} setAct={setAct}></MyAsideBarActive>
       <div className="doctor-profile-container">
         <div className="doctor-profile-title">
@@ -124,7 +138,7 @@ export default function DoctorProfile() {
               <img src={ProfileIMG.myFile} alt="" />
             </div>
             <div className="doctor-profile-changer-btn">
-              <label for="file" class="changer-image-btn" >
+              <label for="file" class="changer-image-btn">
                 Choisir la photo
               </label>
               <input
@@ -133,7 +147,7 @@ export default function DoctorProfile() {
                 type="file"
                 lable="Image"
                 name="myFile"
-                accept='.jpeg, .png, .jpg'
+                accept=".jpeg, .png, .jpg"
                 onChange={(e) => handleFileUpload(e)}
               ></input>
               <button>Supprimer</button>
@@ -155,25 +169,40 @@ export default function DoctorProfile() {
             )}
             <div className="doctor-profile-form-item">
               <label htmlFor="">Prénom</label>
-              <input type="text" placeholder="Entez votre Prenom.." defaultValue={userData?.Fname} />
+              <input
+                type="text"
+                placeholder="Entez votre Prenom.."
+                defaultValue={userData?.Fname}
+              />
             </div>
             <div className="doctor-profile-form-item">
               <label htmlFor="">Nom</label>
-              <input type="text" placeholder="Entez votre Nom.." defaultValue={userData?.Lname}/>
+              <input
+                type="text"
+                placeholder="Entez votre Nom.."
+                defaultValue={userData?.Lname}
+              />
             </div>
           </div>
           <div className="doctor-profile-form-class">
             <div className="doctor-profile-form-item">
               <label htmlFor="">Specialite</label>
-              <input type="text" placeholder="Entez votre Specialite.." defaultValue={userData?.speciality}/>
+              <input
+                type="text"
+                placeholder="Entez votre Specialite.."
+                defaultValue={userData?.speciality}
+              />
             </div>
             <div className="doctor-profile-form-item">
               <label htmlFor="">Date de naissance</label>
-              <input type="date" 
+              <input
+                type="date"
                 defaultValue={userData?.DateDeNaissance}
                 name="DateDeNaissance"
                 onChange={(e) => {
-                setDateDeNaissance(e.target.value);}} />
+                  setDateDeNaissance(e.target.value);
+                }}
+              />
             </div>
           </div>
           <div className="doctor-profile-form-class">
@@ -185,15 +214,17 @@ export default function DoctorProfile() {
                 defaultValue={userData?.LieuDeNaissance}
                 name="LieuDeNaissance"
                 onChange={(e) => {
-                setLieuDeNaissance(e.target.value);}}
+                  setLieuDeNaissance(e.target.value);
+                }}
               />
             </div>
             <div className="doctor-profile-form-item">
               <label htmlFor="">Sexe</label>
-              <select 
+              <select
                 name="sexe"
                 onChange={(e) => {
-                setsexe(e.target.value);}} 
+                  setsexe(e.target.value);
+                }}
               >
                 <option value={userData?.sexe}>{userData?.sexe}</option>
                 <option value="Homme">Homme</option>
@@ -204,7 +235,11 @@ export default function DoctorProfile() {
           <div className="doctor-profile-form-class">
             <div className="doctor-profile-form-item">
               <label htmlFor="">Email</label>
-              <input type="email" placeholder="Entez votre Email.." defaultValue={userData?.email}/>
+              <input
+                type="email"
+                placeholder="Entez votre Email.."
+                defaultValue={userData?.email}
+              />
             </div>
             <div className="doctor-profile-form-item">
               <label htmlFor="">Tel</label>
@@ -222,11 +257,14 @@ export default function DoctorProfile() {
             <div className="doctor-profile-forme-left-item">
               <div className="doctor-profile-form-item">
                 <label htmlFor="">Address actuel</label>
-                <input type="text" placeholder="Entez votre Address actuel.." 
-                defaultValue={userData?.AddressActuel}
-                name="AddressActuel"
-                onChange={(e) => {
-                setAddressActuel(e.target.value);}}
+                <input
+                  type="text"
+                  placeholder="Entez votre Address actuel.."
+                  defaultValue={userData?.AddressActuel}
+                  name="AddressActuel"
+                  onChange={(e) => {
+                    setAddressActuel(e.target.value);
+                  }}
                 />
               </div>
               <div className="doctor-profile-form-item">
@@ -240,49 +278,50 @@ export default function DoctorProfile() {
             <div className="doctor-profile-forme-right-item">
               <div className="doctor-profile-form-item">
                 <label htmlFor="">Biographie</label>
-                <textarea placeholder="Votre Biographie"
+                <textarea
+                  placeholder="Votre Biographie"
                   defaultValue={userData?.Biographie}
                   name="Biographie"
                   onChange={(e) => {
-                  setBiographie(e.target.value);}}
+                    setBiographie(e.target.value);
+                  }}
                 ></textarea>
               </div>
             </div>
           </div>
           <div className="form-span">
-          <div className="form-span-item">
-            <div className="form-div-carre"></div>
-            <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
-              molestiae?
-            </span>
+            <div className="form-span-item">
+              <div className="form-div-carre"></div>
+              <span>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
+                molestiae?
+              </span>
+            </div>
+            <div className="form-span-item">
+              <div className="form-div-carre"></div>
+              <span>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
+                molestiae?
+              </span>
+            </div>
+            <div className="doctor-profile-enregistrer-class">
+              <DoctorProfileEnregistrerButton />
+            </div>
           </div>
-          <div className="form-span-item">
-            <div className="form-div-carre"></div>
-            <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel,
-              molestiae?
-            </span>
-          </div>
-        </div>
-        <div className="doctor-profile-enregistrer-class">
-          <DoctorProfileEnregistrerButton />
-        </div>
         </form>
-        
       </div>
     </div>
   );
 }
-function convertToBase64(file){
+function convertToBase64(file) {
   return new Promise((resolve, reject) => {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(file);
     fileReader.onload = () => {
-      resolve(fileReader.result)
+      resolve(fileReader.result);
     };
     fileReader.onerror = (error) => {
-      reject(error)
-    }
-  })
+      reject(error);
+    };
+  });
 }
