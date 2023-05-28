@@ -4040,6 +4040,12 @@ form.sign-in-form {
   border-radius: 50%;
   background-color: #d9d9d9;
 }
+.doctor-profile-photo img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Set the border radius to 50% to create a circle */
+  object-fit: cover; /* Maintain the image aspect ratio */
+}
 
 .doctor-profile-changer-btn {
   display: flex;
@@ -4938,4 +4944,8 @@ form.sign-in-form {
   z-index: 100;
   position: absolute;
   top: 0;
+}
+.doctor-profile-photo img{
+  border-radius: 50%; /* Set the border radius to 50% to create a circle */
+  object-fit: cover; /* Maintain the image aspect ratio */
 }

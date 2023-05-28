@@ -7,7 +7,8 @@ const {
     GetUser, 
     CreateNewUser,
     DeleteUser,
-    UpdateUser
+    UpdateUser,
+    uploadImage
 } = require('../controllers/UserController');
 const router = express.Router();
 
@@ -34,5 +35,8 @@ router.delete('/:id', DeleteUser);
 
 //update a user
 router.patch('/:id', UpdateUser);
+
+//upload a profile picture
+router.post('/uploadIMG/:id', uploadImage);
 
 module.exports = router;

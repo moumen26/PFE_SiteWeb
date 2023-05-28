@@ -53,13 +53,10 @@ const userSchema = new mongoose.Schema({
     PatientID: [{
         type: mongoose.Schema.Types.ObjectId, ref: "patients"
     }],
-    progress: {
-        type: String,
-        required: false,
-    },
     validation: {
         type: Boolean,
-    }
+    },
+    ProfileIMG: String,
 },{timestamps: true});
 
 // static method to signup user

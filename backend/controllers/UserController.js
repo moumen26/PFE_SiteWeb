@@ -129,6 +129,28 @@ const UpdateUser = async (req, res) => {
     }
 }
 
+// upload image to db
+const uploadImage = async (req, res) => {
+    const {id} = req.params;
+    const {ProfileIMG} = req.body;
+    try{
+        //check if id is valid
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(400).json({err: 'user not found'});
+        }
+        User.updateMany({_id: id}, {
+            $push: {ProfileIMG : ProfileIMG}}).then((image) => {
+                if (!image) {
+                    return res.status(404).json({ message: 'User not found' });
+                }
+                res.status(200).json({ message: 'Image uploaded successfully' });
+            }).catch((error) => {
+                return res.status(500).json({ message: 'Failed to update patient' });
+            });
+    }catch(err){
+        res.status(400).json({err: err.message});
+    }
+}
 module.exports = {
     Login,
     Signup,
@@ -136,5 +158,6 @@ module.exports = {
     GetUser,
     CreateNewUser,
     DeleteUser,
-    UpdateUser
+    UpdateUser,
+    uploadImage
 }

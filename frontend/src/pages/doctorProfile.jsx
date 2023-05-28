@@ -20,6 +20,44 @@ export default function DoctorProfile() {
   const progress = "Completed"
   const { UserProfile, error } = useUserProfile();
   const { user } = useAuthContext();
+  const [ProfileIMG, setProfileIMG] = useState( { myFile : ""});
+  
+//upload image
+  const createPostIMG = async (ProfileIMG) => {
+    try{
+      const response = await fetch(`http://localhost:8000/user/uploadIMG/${user.id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+        body: JSON.stringify({
+          ProfileIMG : ProfileIMG.myFile
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        window.alert("Add Image failed", data.message);
+      }
+      if (response.ok) {
+        window.alert("Image added successfully", data.message);
+      }
+    }catch(error){
+      console.log(error)
+    }
+  }
+  const handleSubmitIMG = (e) => {
+    e.preventDefault();
+    createPostIMG(ProfileIMG)
+    console.log("Uploaded")
+  }
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    const base64 = await convertToBase64(file);
+    setProfileIMG({ ...ProfileIMG, myFile : base64 })
+  }
+//get user data
   useEffect(() => {
     const fetchUserData = async () => {
       if(user?.id !== undefined){
@@ -43,16 +81,17 @@ export default function DoctorProfile() {
 
     fetchUserData();
   }, [userData,user?.id]);
-
+//update profile
   async function submitProfile(e) {
     e.preventDefault();
     try {
-      //send token with axios to headers
-      axios.defaults.headers.common['Authorization'] = `Bearer ${user.token}`;
       //send request to backend
-      const response = await axios.patch(`http://localhost:8000/user/${user.id}`,
-      { 
+      const response = await axios.patch(`http://localhost:8000/user/${user.id}`,{ 
         DateDeNaissance, sexe, LieuDeNaissance, AddressActuel, Biographie, progress
+      },{
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+        }
       });
       // Handle response as needed
       const data = await response.data;
@@ -60,6 +99,7 @@ export default function DoctorProfile() {
           window.alert("profile not updated", data.message);
       }else if (response.status === 200) {
           window.alert("profile updated successfully", data.message);
+          handleSubmitIMG(e);
           history(`/`);
       } 
     } catch (err) {
@@ -80,15 +120,21 @@ export default function DoctorProfile() {
         <div className="doctor-profile-votre-photo">
           <h3>Votre photo de profile</h3>
           <div className="doctor-profile-photo-changer-btn">
-            <div className="doctor-profile-photo"></div>
+            <div className="doctor-profile-photo">
+              <img src={ProfileIMG.myFile} alt="" />
+            </div>
             <div className="doctor-profile-changer-btn">
-              <label for="file" class="changer-image-btn">
+              <label for="file" class="changer-image-btn" >
                 Choisir la photo
               </label>
               <input
                 id="file"
                 class="input-file"
                 type="file"
+                lable="Image"
+                name="myFile"
+                accept='.jpeg, .png, .jpg'
+                onChange={(e) => handleFileUpload(e)}
               ></input>
               <button>Supprimer</button>
             </div>
@@ -227,4 +273,16 @@ export default function DoctorProfile() {
       </div>
     </div>
   );
+}
+function convertToBase64(file){
+  return new Promise((resolve, reject) => {
+    const fileReader = new FileReader();
+    fileReader.readAsDataURL(file);
+    fileReader.onload = () => {
+      resolve(fileReader.result)
+    };
+    fileReader.onerror = (error) => {
+      reject(error)
+    }
+  })
 }
