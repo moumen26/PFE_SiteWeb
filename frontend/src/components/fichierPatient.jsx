@@ -3,23 +3,23 @@ import { useNavigate, useParams } from "react-router";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 import { BsChevronRight } from "react-icons/bs";
-import SwiperButtonNext from "./nextButton";
+import SwiperButtonNext from "./buttons/buttonNext";
 
 export default function FichierPatient() {
-  const [Poids, setPoids] = useState('');
-  const [Aspect, setAspect] = useState('');
-  const [Anomalies, setAnomalies] = useState('');
-  const [Placenta, setPlacenta] = useState('');
-  const [Membranes, setMembranes] = useState('');
-  const [Cordon, setCordon] = useState('');
-  const [Sexe, setSexe] = useState('');
-  const [Taille, setTaille] = useState('');
-  const [Pc, setPc] = useState('');
-  const [une_min, setUne_min] = useState('');
-  const [cinq_min, setCinq_min] = useState('');
-  const [Malformation, setMalformation] = useState('');
-  const [Remarque, setRemarque] = useState('');
-  const [Empreintes_digitales, setEmpreintes_digitales] = useState('');
+  const [Poids, setPoids] = useState("");
+  const [Aspect, setAspect] = useState("");
+  const [Anomalies, setAnomalies] = useState("");
+  const [Placenta, setPlacenta] = useState("");
+  const [Membranes, setMembranes] = useState("");
+  const [Cordon, setCordon] = useState("");
+  const [Sexe, setSexe] = useState("");
+  const [Taille, setTaille] = useState("");
+  const [Pc, setPc] = useState("");
+  const [une_min, setUne_min] = useState("");
+  const [cinq_min, setCinq_min] = useState("");
+  const [Malformation, setMalformation] = useState("");
+  const [Remarque, setRemarque] = useState("");
+  const [Empreintes_digitales, setEmpreintes_digitales] = useState("");
   const { user } = useAuthContext();
   const { id } = useParams();
   const [PatientData, setPatientData] = useState(null);
@@ -27,15 +27,14 @@ export default function FichierPatient() {
   const history = useNavigate("/patients");
   const [UserData, setUserData] = useState(null);
 
-  
   //Get Patient Data
   useEffect(() => {
     const fetchPatientData = async () => {
       if (id !== undefined) {
-        await fetch(`http://localhost:8000/patients/${id}`,{
+        await fetch(`http://localhost:8000/patients/${id}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization : `Bearer ${user?.token}`
+            Authorization: `Bearer ${user?.token}`,
           },
         }).then((response) => {
           if (response.ok) {
@@ -65,10 +64,11 @@ export default function FichierPatient() {
     const fetchDossObsData = async () => {
       if (PatientData.idDossObs !== undefined) {
         await fetch(
-          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,
+          {
             headers: {
               "Content-Type": "application/json",
-              Authorization : `Bearer ${user?.token}`
+              Authorization: `Bearer ${user?.token}`,
             },
           }
         ).then((response) => {
@@ -93,57 +93,74 @@ export default function FichierPatient() {
     fetchDossObsData();
   }, [history, PatientData?.idDossObs]);
 
-//Get User Data
+  //Get User Data
   useEffect(() => {
     const fetchUsertData = async () => {
-      if(DossObsData.AccoucheurID !== undefined){
-        await fetch(`http://localhost:8000/user/${DossObsData?.AccoucheurID}`,{
+      if (DossObsData.AccoucheurID !== undefined) {
+        await fetch(`http://localhost:8000/user/${DossObsData?.AccoucheurID}`, {
           headers: {
             "Content-Type": "application/json",
-            Authorization : `Bearer ${user?.token}`
+            Authorization: `Bearer ${user?.token}`,
           },
         }).then((response) => {
           if (response.ok) {
-            response.json().then((data) => {
-              setUserData(data);
-            }).catch((error) => {
-              console.error('Error fetching article data:', error);
-            });
+            response
+              .json()
+              .then((data) => {
+                setUserData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching article data:", error);
+              });
           } else {
-            console.error('Error fetching article data:', response.status);
+            console.error("Error fetching article data:", response.status);
           }
         });
-      }else{
-        history('/login')
+      } else {
+        history("/login");
       }
     };
-  
+
     fetchUsertData();
-  }, [UserData,DossObsData?.AccoucheurID]);
+  }, [UserData, DossObsData?.AccoucheurID]);
 
   const handleDossObsSubmit = async (event) => {
     event.preventDefault();
-    if(PatientData?.idDossObs !== undefined){
+    if (PatientData?.idDossObs !== undefined) {
       try {
-       const response = await axios.patch(`http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,{ 
-        Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-          ,Sexe, Taille, Pc, Malformation, Remarque, Empreintes_digitales,
-        },{
-          headers: {
-            Authorization: `Bearer ${user.token}`,
+        const response = await axios.patch(
+          `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,
+          {
+            Poids,
+            Aspect,
+            Anomalies,
+            Placenta,
+            Membranes,
+            Cordon,
+            Sexe,
+            Taille,
+            Pc,
+            Malformation,
+            Remarque,
+            Empreintes_digitales,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
           }
-        },);
+        );
         // Handle response as needed
         if (!response.status === 200) {
           window.alert("Add patient failed", response.data.message);
-        }else if (response.status === 200) {
-            window.alert("Add patient success", response.data.message);
-        } 
-      }catch (error) {
+        } else if (response.status === 200) {
+          window.alert("Add patient success", response.data.message);
+        }
+      } catch (error) {
         console.error(error);
       }
-    }else{
-      history()
+    } else {
+      history();
     }
   };
 

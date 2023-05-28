@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import MyNavBar from "../components/navBar";
-import DoctorProfileEnregistrerButton from "../components/doctorProfileEnregistrerButton";
-import RendezvousProfileEnregistrerButton from "../components/rendezvousEnregistrerButton";
+import DoctorProfileEnregistrerButton from "../components/buttons/buttonDoctorProfileEnregistrer";
+import RendezvousProfileEnregistrerButton from "../components/buttons/buttonRendezvousEnregistrer";
 
 export default function Rendezvous() {
   const [act, setAct] = useState(false);

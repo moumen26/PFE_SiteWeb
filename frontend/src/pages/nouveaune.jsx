@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import MyNavBar from "../components/navBar";
 import MyAsideBar from "../components/asideBar";
 import MyAsideBarActive from "../components/asideBarActive";
@@ -8,14 +8,13 @@ import AboutPatient from "../components/aboutPatient";
 import PatientDetailsCenter from "../components/patientDetails";
 import PatientDetailsExamen from "../components/patientDetailsExamen";
 import PatientDetailsReducation from "../components/patientDetailsReducation";
-import MySwiper from "../components/swiperDossier";
-import AddCahierSante from "../components/addCahierButton";
-import MyCahierSwiper from "../components/swipeCahier";
-import ConculterButton from "../components/conculterButton";
-import VoirButton from "../components/voirButton";
-import SearchButton from "../components/searchButton";
-import TableNouveauNe from "../components/tableNouveauNe";
-import dataNouveau from "../NouveauNeDataBase.json";
+import MySwiper from "../components/swipers/swiperDossier";
+import AddCahierSante from "../components/buttons/buttonAddCahier";
+import MyCahierSwiper from "../components/swipers/swiperCahier";
+import ConculterButton from "../components/buttons/buttonConculter";
+import VoirButton from "../components/buttons/buttonVoir";
+import SearchButton from "../components/buttons/buttonSearch";
+import TableNouveauNe from "../components/tables/tableNouveauNeReadOnlyRow";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 //import { CircularProgress } from "@mui/material";
@@ -40,7 +39,7 @@ export default function NouveauNe() {
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
   const [NouveauneDB, setNouveauneDB] = useState();
-  const {user} = useAuthContext();
+  const { user } = useAuthContext();
   // Fetch Patient Data
   useEffect(() => {
     const fetchPatientData = async () => {
@@ -78,8 +77,11 @@ export default function NouveauNe() {
           <div className="patient-table-header">
             <div className="table-header-item">
               <label>Annee</label>
-              <select className="Annee-select" name="Annee-age" id="Annee-age"
-              onChange={(e) => setNaissance(e.target.value)}
+              <select
+                className="Annee-select"
+                name="Annee-age"
+                id="Annee-age"
+                onChange={(e) => setNaissance(e.target.value)}
               >
                 <option value="All">All</option>
                 <option value="2002">2002</option>
@@ -94,11 +96,11 @@ export default function NouveauNe() {
                 name="Wilaya-age"
                 id="Wilaya-age"
                 onChange={(e) => setWilaya(e.target.value)}
-                >
-                  <option value="All">All</option>
-                  <option value="Medea">Medea</option>
-                  <option value="Blida">Blida</option>
-                  <option value="Alger">Alger</option>
+              >
+                <option value="All">All</option>
+                <option value="Medea">Medea</option>
+                <option value="Blida">Blida</option>
+                <option value="Alger">Alger</option>
               </select>
             </div>
             <div className="table-header-item">
@@ -108,18 +110,20 @@ export default function NouveauNe() {
                 name="Region-age"
                 id="Region-age"
                 onChange={(e) => setRegion(e.target.value)}
-                >
-                  <option value="All">All</option>
-                  <option value="Medea Centre">Medea Centre</option>
-                  <option value="Blida Centre">Blida Centre</option>
-                  <option value="Alger Centre">Alger Centre</option>
+              >
+                <option value="All">All</option>
+                <option value="Medea Centre">Medea Centre</option>
+                <option value="Blida Centre">Blida Centre</option>
+                <option value="Alger Centre">Alger Centre</option>
               </select>
             </div>
             <input
               type="search"
               className="class-search"
               placeholder="Search.."
-              onChange={(e) => {setSearch(e.target.value)}}
+              onChange={(e) => {
+                setSearch(e.target.value);
+              }}
             />
             <div className="search-item">
               <SearchButton />
@@ -134,73 +138,79 @@ export default function NouveauNe() {
                 <td className="table-patients-header-region">Region</td>
                 <td className="table-patients-header-button"></td>
               </tr>
-              {NouveauneDB?.filter((item)=>{
-                if(item.Naissance && item.Wilaya && item.Region){
-                  if (search.toLowerCase() === '') {
+              {NouveauneDB?.filter((item) => {
+                if (item.Naissance && item.Wilaya && item.Region) {
+                  if (search.toLowerCase() === "") {
                     if (naissance === "All") {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
-                      }else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.Wilaya.includes(wilaya)) {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
                       }
-                    }else if (item.Naissance.includes(naissance)) {
+                    } else if (item.Naissance.includes(naissance)) {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
-                      }else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.Wilaya.includes(wilaya)) {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
                       }
                     }
-                  }else if (item._id.includes(search.toLowerCase()) || item.idAccoucheur.includes(search.toLowerCase())) {
+                  } else if (
+                    item._id.includes(search.toLowerCase()) ||
+                    item.idAccoucheur.includes(search.toLowerCase())
+                  ) {
                     if (naissance === "All") {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
-                      }else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.Wilaya.includes(wilaya)) {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
                       }
-                    }else if (item.Naissance.includes(naissance)) {
+                    } else if (item.Naissance.includes(naissance)) {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
-                      }else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.Wilaya.includes(wilaya)) {
                         if (region === "All") {
                           return item;
-                        }else if (item.Region.includes(region)) {
+                        } else if (item.Region.includes(region)) {
                           return item;
                         }
                       }
                     }
                   }
-                }else{
-                  if (search.toLowerCase() === '') {
+                } else {
+                  if (search.toLowerCase() === "") {
                     return item;
-                  }else if (item._id.includes(search.toLowerCase()) || item.idAccoucheur.includes(search.toLowerCase())) {
+                  } else if (
+                    item._id.includes(search.toLowerCase()) ||
+                    item.idAccoucheur.includes(search.toLowerCase())
+                  ) {
                     return item;
                   }
                 }

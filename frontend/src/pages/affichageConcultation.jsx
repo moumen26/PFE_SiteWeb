@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import data from "../MeddicamentDataBase.json";
 import { nanoid } from "nanoid";
-import AddMedicamentReadOnlyRow from "../components/addMedicamentReadOnlyRow";
+import AddMedicamentReadOnlyRow from "../components/tables/tableAddMedicamentReadOnlyRow";
 
 export default function AffichageConcultation() {
   const [MedicamentDB, setMedicamentDB] = useState(data);

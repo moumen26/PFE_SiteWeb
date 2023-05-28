@@ -1,8 +1,8 @@
 import { FaUserMd } from "react-icons/fa";
 import img from "../images/login-bg.png";
 import React, { useState, useEffect } from "react";
-import AcceeButton from "../components/acceeButton";
-import BackButton from "../components/backLoginbutton";
+import AcceeButton from "../components/buttons/buttonAccee";
+import BackButton from "../components/buttons/buttonBackLogin";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
