@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
+import { useNavigate } from "react-router-dom";
 
 export const useSignup = () => {
     const [isloading, setIsLoading] = useState(null);
     const [error, setError] = useState(null);
     const { dispatch } = useAuthContext();
-
+    const navigate = useNavigate();
     const sign_up = async (email, password, lname, fname, speciality, phone) => {
         setIsLoading(true);
         setError(null);
@@ -25,13 +26,8 @@ export const useSignup = () => {
                 setError(json.error);
             }
             if (reponse.ok) {
-                window.alert("signup success");
-                //save the user in local storage
-                localStorage.setItem('user', JSON.stringify(json));
-                //apdate the auth context
-                dispatch({type: 'LOGIN', payload: json});
-    
-                setIsLoading(false);
+                window.alert("signup success now wait for your validation");
+                navigate('/login').reload();
             }
         
 

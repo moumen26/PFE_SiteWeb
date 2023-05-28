@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 const userSchema = new mongoose.Schema({
+    progress: {
+        type: String,
+        required: false,
+    },
     email: {
         type: String,
         required: true,
@@ -59,7 +63,7 @@ const userSchema = new mongoose.Schema({
 },{timestamps: true});
 
 // static method to signup user
-userSchema.statics.signup = async function(email, password, Lname, Fname, speciality, phone, validation){
+userSchema.statics.signup = async function(email, password, Lname, Fname, speciality, phone){
     
     // validation
     if(!email || !password || !Lname || !Fname || !speciality || !phone){
@@ -83,6 +87,9 @@ userSchema.statics.signup = async function(email, password, Lname, Fname, specia
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
 
+    // set validation to false
+    const validation = false;
+    
     // create user
     const user = await this.create({email, password: hash, Lname, Fname, speciality, phone, validation});
     

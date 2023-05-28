@@ -17,9 +17,9 @@ export default function DoctorProfile() {
   const [sexe, setsexe] = useState("");
   const [AddressActuel, setAddressActuel] = useState("");
   const [Biographie, setBiographie] = useState("");
+  const progress = "Completed"
   const { UserProfile, error } = useUserProfile();
   const { user } = useAuthContext();
-
   useEffect(() => {
     const fetchUserData = async () => {
       if(user?.id !== undefined){
@@ -52,18 +52,18 @@ export default function DoctorProfile() {
       //send request to backend
       const response = await axios.patch(`http://localhost:8000/user/${user.id}`,
       { 
-        DateDeNaissance, sexe, LieuDeNaissance, AddressActuel, Biographie
+        DateDeNaissance, sexe, LieuDeNaissance, AddressActuel, Biographie, progress
       });
       // Handle response as needed
+      const data = await response.data;
       if (!response.status === 200) {
-          window.alert("profile not updated", response.data.message);
-          console.log("profile not updated", response.data.message);
+          window.alert("profile not updated", data.message);
       }else if (response.status === 200) {
-          window.alert("profile updated successfully", response.data.message);
+          window.alert("profile updated successfully", data.message);
+          history(`/`);
       } 
     } catch (err) {
-        window.alert("profile not updated", err.message);
-        console.log(err);
+        console.log(err.message);
     }
 
   }

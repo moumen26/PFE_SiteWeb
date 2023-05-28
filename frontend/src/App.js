@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import PatientDetails from "./pages/patientMaman";
 import patientProfile from "./pages/patientProfile";
@@ -14,14 +14,14 @@ import Antecedent from "./pages/antecedent";
 import MyAsideBar from "./components/asideBar";
 import Conculter from "./pages/conculter";
 import MyNavBar from "./components/navBar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 import AffichageConcultation from "./pages/affichageConcultation";
 
 function App() {
   const [act, setAct] = useState(false);
   const { user } = useAuthContext();
- 
+
   return (
     <BrowserRouter>
       <main>
@@ -64,7 +64,7 @@ function App() {
           />
           <Route
             path="login"
-            element={!user ? <Login /> : <Navigate to="/" />}
+            element={!user ? <Login /> : (!user.progress ? <Navigate to="/profile" /> : <Navigate to="/" />)}
           />
           <Route
             path="profile"

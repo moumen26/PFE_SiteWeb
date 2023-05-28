@@ -10,12 +10,24 @@ const createToken = (id) => {
 const Login = async (req, res) => {
     const {email, password} = req.body;
     try{
-        const user = await User.login(email, password);
-        const token = createToken(user._id);
-        var Fname = user.Fname;
-        var speciality = user.speciality;
-        var id = user._id;
-        res.status(200).json({id, Fname, speciality, token});
+        await User.findOne({email: email}).then(async (userexist) => {
+            if(!userexist){
+                return res.status(400).json({message: 'email not found'});
+            }
+            if(userexist.validation == false){
+                return res.status(400).json({message: 'you are not validated yet'});
+            }
+            const user = await User.login(email, password);
+            const token = createToken(user._id);
+            var Fname = user.Fname;
+            var speciality = user.speciality;
+            var id = user._id;
+            var progress = user.progress;
+            res.status(200).json({id, Fname, speciality, progress, token});
+        }).catch((err) => {
+            console.log(err)
+        });
+        
     }catch(err){
         res.status(400).json({err: err.message});
     }
@@ -23,11 +35,14 @@ const Login = async (req, res) => {
 
 //signup
 const Signup = async (req, res) => {
-    const { email, password, Lname, Fname, speciality, phone, validation} = req.body;
+    const { email, password, Lname, Fname, speciality, phone} = req.body;
     try{
-        const user = await User.signup(email, password, Lname, Fname, speciality, phone, validation);
+        const user = await User.signup(email, password, Lname, Fname, speciality, phone);
         const token = createToken(user._id);
-        res.status(200).json({email,token});
+        var userFname = user.Fname;
+        var userspeciality = user.speciality;
+        var id = user._id;
+        res.status(200).json({id, Fname :userFname, speciality: userspeciality, token});
         
     }catch(err){
         res.status(400).json({err: err.message});
@@ -93,7 +108,7 @@ const DeleteUser = async (req, res) => {
 //update a user
 const UpdateUser = async (req, res) => {
     const {id} = req.params;
-    const {DateDeNaissance,LieuDeNaissance, sexe, AddressActuel, Biographie} = req.body;
+    const {DateDeNaissance,LieuDeNaissance, sexe, AddressActuel, Biographie, progress} = req.body;
     try{
         //check if id is valid
         if(!mongoose.Types.ObjectId.isValid(id)){
@@ -101,7 +116,7 @@ const UpdateUser = async (req, res) => {
         }
         //find id in db and update
         const user = await User.findOneAndUpdate({_id: id},
-            {DateDeNaissance, sexe, LieuDeNaissance, AddressActuel, Biographie}
+            {DateDeNaissance, sexe, LieuDeNaissance, AddressActuel, Biographie, progress}
         );
         //if not found return error
         if(!user){
