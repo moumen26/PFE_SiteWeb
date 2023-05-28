@@ -139,7 +139,39 @@ const GetAllNouveaune = async (req, res) => {
     const patients = await Patient.find({maturity: {$ne: "Adulte"}});
     res.status(200).json(patients);
 }
+//get all Nouveau-ne by idMaman
+const GetAllNouveauneById = async (req, res) => {
+    try{
+        const {id} = req.params;
+        const maturity = "Adulte";
+        const patients = await Patient.find({_id: id}).where({maturity: maturity});
+        if(!patients){
+            return res.status(404).json({err: 'Patient Nouveau-ne not found'});
+        }
+        const ListNouveauNeID = patients.map((patient) => patient.idNouveauNe);
+        res.status(200).json(ListNouveauNeID[0]);
+    }catch(err){
+        res.status(400).json({err: err.message});
+    }
+}
 
+//get a specific Nouveau-ne by list of ID
+const GetNouveauneByListOfID = async (req, res) => {
+    try{
+        const ListNouveaune = req.body.ListNouveaune;
+        const Nouveaune = await Patient.find({_id: {$in: ListNouveaune}}).then((Nouveaune) => {
+            if (!Nouveaune) {
+                return res.status(404).json({ message: 'Nouveaune not found' });
+            }
+            res.status(200).json(Nouveaune);
+        }).catch((error) => {
+            console.error('Error creating patient:', error);
+            res.status(500).json({ message: 'Failed to create patient' });
+        });
+    }catch(err){
+        res.status(400).json({err: err.message});
+    }
+}
 // PATIENTS
 
 //get all Patients
@@ -435,8 +467,10 @@ module.exports = {
     CreateNewNouveaune,
     UpdateDossObsNouveaune,
     CreateNewPatient,
+    GetNouveauneByListOfID,
     GetAllPatient,
     GetAllNouveaune,
+    GetAllNouveauneById,
     GetPatient,
     DeletePatient,
     UpdatePatient,

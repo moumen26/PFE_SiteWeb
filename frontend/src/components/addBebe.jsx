@@ -23,14 +23,11 @@ export default function AddBebe() {
   const history = useNavigate();
   const [enfantDB, setEnfantDB] = useState(dataEnfant);
   const [patientData, setPatientData] = useState();
-  console.log(id);
-
-  //fetch nouveau-ne data
   //Patient data
   useEffect(() => {
     const fetchPatientData = async () => {
       if (id !== undefined) {
-        await fetch(`http://localhost:8000/patients/${id}`, {
+        await fetch(`http://localhost:8000/patients/Nouveau-ne/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -56,7 +53,6 @@ export default function AddBebe() {
 
     fetchPatientData();
   }, [history, id, user?.token]);
-  console.log(patientData);
   // Add NouveauNe
   const handleAddNouveauNe = async () => {
     try {
@@ -109,8 +105,39 @@ export default function AddBebe() {
       console.error("Error adding Nouveau-ne:", error);
     }
   };
-
-
+  console.log(patientData);
+  const [NouveauNeData, setNouveauNeData] = useState();
+//Nouveau-ne data
+useEffect(() => {
+  const fetchNouveauNeData = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/patients/Nouveau-ne/list/all`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+          body: JSON.stringify({
+            ListNouveaune: patientData,
+          }),
+        }
+      );
+      // get the patientID via response from the server patientRouter.post
+      const data = await response.json();
+      if (!response.ok) {
+        window.alert(data.message);
+      }
+      if (response.ok) {
+        setNouveauNeData(data);
+      }
+  }catch (error) {
+    console.error("Error adding Nouveau-ne:", error);
+  }
+  };
+  fetchNouveauNeData();
+}, [NouveauNeData,history, id, user?.token]);
 
   const [enfantAddFormData, setenfantAddFormData] = useState({
     Nom_Nouveaune: "",
@@ -118,6 +145,7 @@ export default function AddBebe() {
     Willaya_Nouveaun: "",
     Region_Nouveaune: "",
   });
+  
   return (
     <div className="add-bebe">
       <div className="ajout-bebe">
@@ -138,7 +166,7 @@ export default function AddBebe() {
               <td className="table-patients-header-region">Region</td>
               <td className="table-patients-header-button"></td>
             </tr>
-            {enfantDB.map((Enfant) => (
+            {NouveauNeData?.map((Enfant) => (
               <TableSesEnfant Enfant={Enfant} />
             ))}
           </table>

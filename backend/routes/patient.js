@@ -3,6 +3,8 @@ const {
     CreateNewNouveaune,
     UpdateDossObsNouveaune,
     GetAllNouveaune,
+    GetAllNouveauneById,
+    GetNouveauneByListOfID,
     CreateNewPatient,
     GetAllPatient,
     GetPatient,
@@ -58,6 +60,12 @@ router.get('/', GetAllPatient);
 
 //get all nouveau ne
 router.get('/Nouveau-ne/', GetAllNouveaune);
+
+//get all nouveau ne by idmaman
+router.get('/Nouveau-ne/:id', GetAllNouveauneById);
+
+//get all nouveau ne by list of id
+router.post('/Nouveau-ne/list/all', GetNouveauneByListOfID);
 
 //get a specific patient
 router.get('/:id', GetPatient);

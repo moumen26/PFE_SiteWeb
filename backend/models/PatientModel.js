@@ -3,25 +3,32 @@ const validator = require('validator');
 
 const PatientSchema = new mongoose.Schema({
     idMaman: {
-        type: mongoose.Schema.Types.ObjectId, ref: "patients"
+        type: mongoose.Schema.Types.ObjectId, ref: "patients",
+        required: false,
     },
     idNouveauNe: [{
-        type: mongoose.Schema.Types.ObjectId, ref: "patients"
+        type: mongoose.Schema.Types.ObjectId, ref: "patients",
+        required: false,
     }],
     idDossObs: {
-        type: mongoose.Schema.Types.ObjectId, ref: "dossierObstetrique"
+        type: mongoose.Schema.Types.ObjectId, ref: "dossierObstetrique",
+        required: false,
     },
     idCarnetSante: {
-        type: mongoose.Schema.Types.ObjectId, ref: "carnetSante"
+        type: mongoose.Schema.Types.ObjectId, ref: "carnetSante",
+        required: false,
     },
     idAccoucheur: {
-        type: mongoose.Schema.Types.ObjectId, ref: "users"
+        type: mongoose.Schema.Types.ObjectId, ref: "users",
+        required: false,
     },
     idVaccin: [{
-        type: mongoose.Schema.Types.ObjectId, ref: "vaccins"
+        type: mongoose.Schema.Types.ObjectId, ref: "vaccins",
+        required: false,
     }],
     ConsultationID: [{
-        type: mongoose.Schema.Types.ObjectId, ref: "consultations"
+        type: mongoose.Schema.Types.ObjectId, ref: "consultations",
+        required: false,
     }],
     Nom: {
         type: String,
