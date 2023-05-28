@@ -83,7 +83,7 @@ export default function MyAsideBar() {
             </NavLink>
           </li>
           <li className="mb-6">
-            <NavLink to="analytics">
+            <NavLink to="patientProfile">
               <div
                 className={`link flex items-center ${
                   location.pathname === "/analytics" ? "aside-item-active" : ""
@@ -109,10 +109,7 @@ export default function MyAsideBar() {
           <li>
             <NavLink to="login">
               {user && (
-                <div
-                  className="link flex items-center"
-                  onClick={SubmitLogout}
-                >
+                <div className="link flex items-center" onClick={SubmitLogout}>
                   <FiLogOut className="w-6 h-6 ml-2" />
                   <span className="title">Log Out</span>
                 </div>

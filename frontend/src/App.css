@@ -3464,16 +3464,6 @@ form.sign-in-form {
   margin-top: 25px;
   margin-bottom: 25px;
 }
-
-.about-patient-description h2 {
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  color: rgba(6, 14, 48, 1);
-  text-align: start;
-  margin-left: 15px;
-}
-
 .about-patient-cart {
   width: 100%;
   margin-top: 15px;
@@ -3503,8 +3493,7 @@ form.sign-in-form {
   color: rgba(6, 14, 48, 1);
 }
 
-.patient-details-examen h2,
-.patient-details-reducation h2 {
+.patient-details-examen h2 {
   font-weight: 400;
   font-size: 14px;
   line-height: 16.8px;
@@ -4040,7 +4029,7 @@ form.sign-in-form {
   border-radius: 50%;
   background-color: #d9d9d9;
 }
-.doctor-profile-photo img{
+.doctor-profile-photo img {
   width: 100%;
   height: 100%;
   border-radius: 50%; /* Set the border radius to 50% to create a circle */
@@ -4105,7 +4094,7 @@ form.sign-in-form {
   background-color: rgba(79, 129, 255, 1);
 }
 
-.doctor-profile-changer-btn .changer-image-btn{
+.doctor-profile-changer-btn .changer-image-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -4600,14 +4589,16 @@ form.sign-in-form {
 
 /* conculter style */
 .Conculter,
-.Affichage-concultation {
+.Affichage-concultation,
+.Patients-profile {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
 .conculter-container,
-.affichage-concultation-container {
+.affichage-concultation-container,
+.patient-profile-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -4900,6 +4891,86 @@ form.sign-in-form {
   padding-right: 121px;
 }
 
+/* patient profile */
+.patient-profile-icon {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 55px;
+  margin-top: 29px;
+}
+
+.left-icon {
+  display: flex;
+  gap: 21px;
+}
+
+.patient-profile-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.patient-profile-details h4 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 28.8px;
+  color: rgba(6, 14, 48);
+}
+
+.patient-profile-details-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+.patient-profile-details-container .about-patient {
+  width: 75%;
+  height: 287px;
+  padding-top: 30px;
+  padding-left: 20px;
+  display: flex;
+}
+
+.patient-profile-details-container .about-patient-description h2 {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgba(6, 14, 48, 1);
+}
+
+.patient-profile-container .about-patient-cart {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 160px;
+  margin-top: 40px;
+}
+
+.patient-profile-details-container .patient-details-reducation{
+  height: 287px;
+  width: 20%;
+}
+
+.patient-profile-details-container .patient-details-reducation h2 {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+  color: rgba(6, 14, 48, 1);
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+
+
+
 .affichage-concultation-container .consultation-table-item-context {
   display: flex;
   flex-direction: column;
@@ -4907,7 +4978,6 @@ form.sign-in-form {
 
 .affichage-concultation-container .delete-btn-icon {
   display: none;
-  overflow-y: scroll;
 }
 
 .dashboard-table-container::-webkit-scrollbar,
@@ -4941,19 +5011,20 @@ form.sign-in-form {
 .AddPatient,
 .conculter-container,
 .affichage-concultation-container,
-.Doctor-profile {
-  z-index: 100;
+.Doctor-profile,
+.patient-profile-container {
+  z-index: 990;
   background-color: white;
 }
 
-.Login {
+.Login,
+.patient-profile-container {
   z-index: 100;
   position: absolute;
   top: 0;
 }
 
-
-.doctor-profile-photo img{
+.doctor-profile-photo img {
   border-radius: 50%; /* Set the border radius to 50% to create a circle */
   object-fit: cover; /* Maintain the image aspect ratio */
 }

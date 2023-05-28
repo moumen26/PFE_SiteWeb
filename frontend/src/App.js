@@ -17,6 +17,7 @@ import MyNavBar from "./components/navBar";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 import AffichageConcultation from "./pages/affichageConcultation";
+import PatientProfile from "./pages/patientProfile";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -59,12 +60,20 @@ function App() {
             }
           />
           <Route
-            path="analytics"
-            element={user ? <Analytics /> : <Navigate to="/login" />}
+            path="patientProfile"
+            element={user ? <PatientProfile /> : <Navigate to="/login" />}
           />
           <Route
             path="login"
-            element={!user ? <Login /> : (!user.progress ? <Navigate to="/profile" /> : <Navigate to="/" />)}
+            element={
+              !user ? (
+                <Login />
+              ) : !user.progress ? (
+                <Navigate to="/profile" />
+              ) : (
+                <Navigate to="/" />
+              )
+            }
           />
           <Route
             path="profile"
