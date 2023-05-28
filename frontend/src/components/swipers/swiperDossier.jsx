@@ -752,7 +752,6 @@ export default function MySwiper() {
           </div>
         </div>
       </SwiperSlide>
-
       <SwiperSlide className="Swipe">
         <div className="formulaire-dossier-obster">
           <div className="formulaire-header-obster">

@@ -42,9 +42,6 @@ export default function DoctorProfile() {
       if (!response.ok) {
         window.alert("Add Image failed", data.message);
       }
-      if (response.ok) {
-        window.alert("Image added successfully", data.message);
-      }
     } catch (error) {
       console.log(error);
     }
@@ -52,7 +49,6 @@ export default function DoctorProfile() {
   const handleSubmitIMG = (e) => {
     e.preventDefault();
     createPostIMG(ProfileIMG);
-    console.log("Uploaded");
   };
   const handleFileUpload = async (e) => {
     const file = e.target.files[0];

@@ -56,7 +56,9 @@ const userSchema = new mongoose.Schema({
     validation: {
         type: Boolean,
     },
-    ProfileIMG: String,
+    ProfileIMG: [{
+        type: String,
+    }],
 },{timestamps: true});
 
 // static method to signup user

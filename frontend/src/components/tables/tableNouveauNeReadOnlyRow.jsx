@@ -44,7 +44,7 @@ export default function TableNouveauNe({ NouveauNe }) {
   };
   //Voir patient details
   const handleVoirPatient = async () => {
-    history(`/patients/details/${await NouveauNe._id}`);
+    history(`/antecedent/${await NouveauNe._id}`);
   };
   return (
     <tr className="table-nouveau-ne-ligne">
