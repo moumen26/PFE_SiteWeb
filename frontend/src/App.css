@@ -5160,6 +5160,10 @@ font-weight: 700;
   border-bottom: 1px solid rgba(79, 129, 255, 1)
 }
 
+.patient-profile-details .table-concultation{
+  width: 90%;
+}
+
 /* maman profile style */
 .maman-profile-container {
   padding-bottom: 10rem;
