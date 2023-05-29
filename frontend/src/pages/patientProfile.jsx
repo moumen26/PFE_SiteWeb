@@ -52,7 +52,7 @@ export default function PatientProfile() {
           <div className="home-formulaire-swiper">
             <MySwiper />
           </div>
-          <div className="addpatient-add-cahier">
+          <div className="addpatient-add-cahier add-vaccin">
             <AddCahierSante add={add} setAdd={setAdd} />
           </div>
           <div className={`cahier-vaccin${toggleClassAdd}`}>
@@ -94,6 +94,9 @@ export default function PatientProfile() {
                       addConsultation={addConsultation}
                       setAddConsultation={setAddConsultation}
                     />
+                  </div>
+                  <div className={`concultation-table${toggleClassAddConcultation}`}>
+                    
                   </div>
                 </div>
               </div>
