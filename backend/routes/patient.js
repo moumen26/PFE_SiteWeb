@@ -59,7 +59,7 @@ router.use(requireAuth);
 router.get('/', GetAllPatient);
 
 //get all nouveau ne
-router.get('/Nouveau-ne/:Hopital', GetAllNouveaune);
+router.get('/Nouveau-ne/', GetAllNouveaune);
 
 //get all nouveau ne by idmaman
 router.get('/Nouveau-ne/:id', GetAllNouveauneById);

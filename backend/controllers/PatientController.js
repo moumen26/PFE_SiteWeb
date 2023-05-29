@@ -30,6 +30,7 @@ const CreateNewNouveaune = async (req, res) => {
             idAccoucheur,
             idMaman: id,
             idDossObs : Maman.idDossObs,
+            Hopital: Maman.Hopital,
             maturity,
         });
         newPatient.save().then(async (savedPatient) => {
@@ -137,24 +138,14 @@ const UpdateDossObsNouveaune = async (req, res) => {
 //get all Nouveau-ne
 const GetAllNouveaune = async (req, res) => {
     try{
-        const {Hopital} = req.params;
-        if(!Hopital){
-            return res.status(401).json({message: "Hopital is required"});
+        const maturity = "Nouveau-ne";
+        const patients = await Patient.find({}).where({maturity: maturity});
+        if(!patients){
+            return res.status(404).json({err: 'Patient Nouveau-ne not found'});
         }
-
-        await Patient.find({maturity: "Nouveau-ne"},{Hopital: Hopital})
-        .then((patients) => {
-            if (!patients) {
-                return res.status(404).json({ message: 'Patient Nouveau-ne not found' });
-            }
-            res.status(200).json(patients);
-        }).catch((error) => {
-            console.error('Error creating patient:', error);
-            res.status(500).json({ message: 'Failed to create patient' });
-        });
-        
+        res.status(200).json(patients);
     }catch(err){
-        res.status(400).json({message: err.message});
+        res.status(400).json({err: err.message});
     }
     
 }
@@ -228,25 +219,22 @@ const CreateNewPatient = async (req, res) => {
         if (!idAccoucheur) {
             return res.status(400).json({ error: 'You must provide all fields' });
         }
+        const user = await User.findOne({_id :idAccoucheur});
+        if (!user) {
+            return res.status(400).json({ error: 'User not found' });
+        }
+        // Create new patient
         const newPatient = new Patient({
             idAccoucheur,
             maturity,
+            Hopital: user.Hopital,
         });
         newPatient.save().then(async (savedPatient) => {
             const patientID = savedPatient._id;
 
             // Save to user the patientID
-            const user = await User.findOne({_id :idAccoucheur}).then((user) => {
-                if (!user) {
-                    return res.status(404).json({ message: 'User not found' });
-                }
-                user.PatientID.push(patientID);
-                user.save();
-            }).catch((error) => {
-                console.error('Error creating patient:', error);
-                res.status(500).json({ message: 'Failed to create patient' });
-            });
-            
+            user.PatientID.push(patientID);
+            user.save();
             
             // Create new Dossier Obstitrique
             const newDossObs = new DossObs({
@@ -289,13 +277,31 @@ const DeletePatient = async (req, res) => {
         return res.status(400).json({err: 'patient not found'});
     }
     //find id in db and delete
-    const patient = await Patient.findByIdAndDelete({_id: id});
-    //if not found return error
-    if(!patient){
-        return res.status(404).json({err: 'patient not found'});
-    }
-    //return user
-    res.status(200).json(patient);
+    const patient = await Patient.findByIdAndDelete({_id: id}).then(async (patientAdult) => {
+        if (!patientAdult) {
+            return res.status(404).json({ message: 'Patient not found' });
+        }
+        if(patientAdult.idNouveauNe[0] == null){
+            return res.status(200).json({ message: 'Patient deleted successfully' });
+        }
+        const IDMaman = patientAdult._id;
+        await Patient.deleteMany({idMaman: IDMaman}).then((patientNouveauNe) => {
+            if (!patientNouveauNe) {
+                return res.status(404).json({ message: 'child not found' });
+            }
+            //return patient with childs
+            res.status(200).json({ message: 'Patient and his child deleted successfully' });
+        }).catch((error) => {
+            console.error('Error deleting patient:', error);
+            res.status(500).json({ message: 'Failed to delete patient' });
+        });
+
+        
+    }).catch((error) => {
+        console.error('Error deleting patient:', error);
+        res.status(500).json({ message: 'Failed to delete patient' });
+    });
+    
 }
 // update a Patient by ID
 const UpdatePatient = async (req, res) => {

@@ -82,6 +82,10 @@ const PatientSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    Hopital: {
+        type: String,
+        required: false,
+    },
 });
 
 

@@ -39,42 +39,38 @@ export default function NouveauNe() {
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
   const [NouveauneDB, setNouveauneDB] = useState();
+  const [UserData , setUserData] = useState();
   const { user } = useAuthContext();
-  const Hopital = user.Hopital.toString();
-  console.log(Hopital);
-  const queryParams = new URLSearchParams(
-    {Hopital : user.Hopital}
-  ).toString();
   // Fetch Patient Data
-  useEffect(() => {
-    const fetchPatientData = async () => {
-      if (user?.token !== undefined) {
-        await fetch(`http://localhost:8000/patients/Nouveau-ne/${Hopital}`,{
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
-          },
-        }).then((response) => {
-          if (response.ok) {
-            response
-              .json()
-              .then((data) => {
-                setNouveauneDB(data);
-              })
-              .catch((error) => {
-                console.error("Error fetching Patient data:", error);
-              });
-          } else {
-            console.error("Error resieving Patient date", response.error);
-          }
-        });
-      } else {
-        history("/login");
-      }
-    };
-    fetchPatientData();
-  }, [Hopital, history, NouveauneDB, user?.token]);
-  console.log(NouveauneDB);
+ // Fetch Patient Data
+ useEffect(() => {
+  const fetchPatientData = async () => {
+    if (user?.token !== undefined) {
+      await fetch(`http://localhost:8000/patients/Nouveau-ne/`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          response
+            .json()
+            .then((data) => {
+              setNouveauneDB(data);
+            })
+            .catch((error) => {
+              console.error("Error fetching Patient data:", error);
+            });
+        } else {
+          console.error("Error resieving Patient date", response.error);
+        }
+      });
+    } else {
+      history("/login");
+    }
+  };
+  fetchPatientData();
+}, [history, user?.token]);
   return (
     <div>
       <div className="patient-table">
