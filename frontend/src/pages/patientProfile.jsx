@@ -15,6 +15,7 @@ import AddVaccinButton from "../components/buttons/buttonAddVaccin";
 import MyCahierSwiper from "../components/swipers/swiperCahier";
 import AddCahierSante from "../components/buttons/buttonAddCahier";
 import AddConcultation from "../components/buttons/buttonAddConcultation";
+import TableConcultation from "../components/tables/tableConcultation";
 
 export default function PatientProfile() {
     const [add, setAdd] = useState(false);
@@ -95,9 +96,11 @@ export default function PatientProfile() {
                       setAddConsultation={setAddConsultation}
                     />
                   </div>
-                  <div className={`concultation-table${toggleClassAddConcultation}`}>
-                    
-                  </div>
+                </div>
+                <div
+                  className={`concultation-table${toggleClassAddConcultation}`}
+                >
+                  <TableConcultation />
                 </div>
               </div>
             </div>
@@ -118,6 +121,17 @@ export default function PatientProfile() {
               </div>
               <div className={`visite-table2${toggleClassAddVaccin2}`}>
                 <VaccinTable />
+                <div className="addpatient-add-consultation">
+                  <AddConcultation
+                    addConsultation={addConsultation}
+                    setAddConsultation={setAddConsultation}
+                  />
+                </div>
+                <div
+                  className={`concultation-table${toggleClassAddConcultation}`}
+                >
+                  <TableConcultation />
+                </div>
               </div>
             </div>
           </div>

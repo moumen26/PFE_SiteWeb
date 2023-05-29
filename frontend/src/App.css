@@ -1514,12 +1514,30 @@ nav {
   opacity: 0;
 }
 
+
+
 .cahier-sante-title {
   width: 100%;
   display: flex;
   align-items: center;
   padding-left: 5%;
   margin-top: 5rem;
+}
+
+
+.AddPatient .addpatient-add-cahier{
+  height: 40vh;
+}
+
+
+.AddPatient .cahier-vaccin{
+  margin-top: 0.2rem;
+  padding-top: 0;
+}
+
+
+.AddPatient .cahier-sante-title{
+  margin-top: 0;
 }
 
 .cahier-sante-title h2 {
@@ -1620,6 +1638,10 @@ nav {
 
 .add-vaccin-active2 .vaccin-container{
   margin-top: 5vh;
+}
+
+.concultation-table{
+  display: none;
 }
 
 .add-vaccin-active,
@@ -3118,7 +3140,7 @@ form.sign-in-form {
 }
 
 .dashboard-table-container,
-.table-patients {
+.table-patients{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3383,7 +3405,7 @@ form.sign-in-form {
   color: rgba(6, 14, 48, 1);
 }
 
-.table-nouveau-ne-ligne {
+.table-nouveau-ne-ligne{
   width: 100vw;
 }
 
@@ -5029,11 +5051,123 @@ form.sign-in-form {
   display: none;
 }
 
+
+/* concultation table style */
+
+.concultation-table{
+  width: 100%;
+  margin-top: 50vh;
+  justify-content: center;
+}
+
+.visite-table2 .concultation-table{
+  margin-top: 0;
+}
+
+.table-concultation{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.table-concultation-center{
+  max-height: 646px;
+  margin-top: 2px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
+
+.table-conclutation-container{
+  width: 100%;
+  height: 53px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 24px;
+  align-items: center;
+  border-bottom: 1px solid rgba(79, 129, 255, 1);
+}
+
+.table-conclutation-container h2{
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+  color: rgb(6, 14, 48);
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.table-conclutation-search {
+  width: 217px;
+  background: rgba(218, 218, 218, 1);
+  display: flex;
+  align-items: center;
+  border-radius: 20px;
+  justify-content: space-between;
+}
+
+.table-conclutation-search input{
+  height: 33Px;
+  margin-left: 10px;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 14.4px;
+  color: rgba(106, 110, 131, 1);
+}
+
+.search-icon{
+  font-size: 18px;
+  margin-right: 10px;
+  fill: rgba(106, 110, 131, 1);
+}
+
+.table-concultation-center{
+  width: 100%;
+  display: flex;
+}
+
+.table-concultation-center table{
+  width: 100%;
+}
+
+.table-concultation-center table td{
+  border: none;
+}
+
+.table-concultation-center table tr{
+  height: 50px;  
+}
+
+.table-concultation-ligne .table-concultation-td-nom{
+  text-align: start;
+  padding-left: 42px;
+}
+
+.table-concultation-ligne .table-concultation-td-date{
+  text-align: start;
+}
+
+.table-concultation-ligne .table-concultation-td-time{
+  text-align: start;
+  
+}
+
+
+.table-concultation-ligne{
+  width: 100%;
+}
+
+
+
 .dashboard-table-container::-webkit-scrollbar,
 .patient-details-examen::-webkit-scrollbar,
 .table-patients::-webkit-scrollbar,
 .notification-container::-webkit-scrollbar,
-.table-enfant::-webkit-scrollbar {
+.table-enfant::-webkit-scrollbar,
+.table-concultation-center::-webkit-scrollbar {
   background-color: rgba(79, 129, 255, 0.25);
   border-radius: 2px;
   width: 5px;
@@ -5043,7 +5177,8 @@ form.sign-in-form {
 .patient-details-examen::-webkit-slider-thumb,
 .table-patients::-webkit-slider-thumb,
 .notification-container::-webkit-scrollbar-thumb,
-.table-enfant::-webkit-scrollbar-thumb {
+.table-enfant::-webkit-scrollbar-thumb,
+.table-concultation-center::-webkit-scrollbar-thumb {
   background-color: rgba(79, 129, 255, 1);
   width: 5px;
   border-radius: 2px;

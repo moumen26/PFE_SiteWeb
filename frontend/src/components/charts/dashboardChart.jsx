@@ -43,7 +43,7 @@ const data = {
   labels,
   datasets: [
     {
-      label: "Numbre des nouveau-ne",
+      label: "Nombre des Nouveau-né",
       data: [10, 15, 28, 12, 38, 34, 8],
       backgroundColor: "rgb(79, 129, 255, 0.69)",
       hoverBackgroundColor: "rgb(79, 129, 255, 0.8)",

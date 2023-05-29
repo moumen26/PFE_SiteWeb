@@ -95,10 +95,10 @@ export default function MyAsideBar() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="conculter">
+            <NavLink to="paramètres">
               <div
                 className={`link flex items-center ${
-                  location.pathname === "/conculter" ? "aside-item-active" : ""
+                  location.pathname === "/paramètres" ? "aside-item-active" : ""
                 }`}
               >
                 <IoIosSettings className="w-6 h-6 ml-2" />

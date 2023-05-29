@@ -9,6 +9,8 @@ import VisiteAddButton from "../components/buttons/buttonVisiteAdd";
 import AddVisiteButton2 from "../components/buttons/buttonAddVisite2";
 import AddVaccinButtonTable from "../components/buttons/buttonAddVaccin2";
 import VaccinTable from "../components/tables/tableAddPatientVaccin";
+import AddConcultation from "../components/buttons/buttonAddConcultation";
+import TableConcultation from "../components/tables/tableConcultation";
 
 export default function AddPatient() {
   const [add, setAdd] = useState(false);
@@ -16,12 +18,16 @@ export default function AddPatient() {
   const [addVaccin2, setAddVaccin2] = useState(false);
   const [addVisite, setAddvisite] = useState(false);
   const [addVisite2, setAddvisite2] = useState(false);
+  const [addConsultation, setAddConsultation] = useState(false);
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
   let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
   let toggleClassAddVaccin2 = addVaccin2 ? " add-vaccin-active2" : "";
   let toggleClassAddVisite = addVisite ? " add-visite-active" : "";
   let toggleClassAddVisite2 = addVisite2 ? " add-visite-active2" : "";
+  let toggleClassAddConcultation = addConsultation
+    ? " add-concultation-active"
+    : "";
 
   return (
     <div className="AddPatient">
@@ -83,6 +89,15 @@ export default function AddPatient() {
               <div className="visite-add-button-class">
                 <VisiteAddButton />
               </div>
+              <div className="addpatient-add-consultation">
+                <AddConcultation
+                  addConsultation={addConsultation}
+                  setAddConsultation={setAddConsultation}
+                />
+              </div>
+            </div>
+            <div className={`concultation-table${toggleClassAddConcultation}`}>
+              <TableConcultation />
             </div>
           </div>
         </div>
@@ -103,6 +118,15 @@ export default function AddPatient() {
           </div>
           <div className={`visite-table2${toggleClassAddVaccin2}`}>
             <VaccinTable />
+            <div className="addpatient-add-consultation">
+              <AddConcultation
+                addConsultation={addConsultation}
+                setAddConsultation={setAddConsultation}
+              />
+            </div>
+            <div className={`concultation-table${toggleClassAddConcultation}`}>
+              <TableConcultation />
+            </div>
           </div>
         </div>
       </div>

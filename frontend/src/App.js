@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 import AffichageConcultation from "./pages/affichageConcultation";
 import PatientProfile from "./pages/patientProfile";
+import TableConcultation from "./components/tables/tableConcultation";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -58,6 +59,10 @@ function App() {
             element={
               user ? <AffichageConcultation /> : <Navigate to="/login" />
             }
+          />
+          <Route
+            path="paramètres"
+            element={user ? <TableConcultation /> : <Navigate to="/login" />}
           />
           <Route
             path="patientProfile"
