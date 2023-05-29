@@ -40,11 +40,16 @@ export default function NouveauNe() {
 
   const [NouveauneDB, setNouveauneDB] = useState();
   const { user } = useAuthContext();
+  const Hopital = user.Hopital.toString();
+  console.log(Hopital);
+  const queryParams = new URLSearchParams(
+    {Hopital : user.Hopital}
+  ).toString();
   // Fetch Patient Data
   useEffect(() => {
     const fetchPatientData = async () => {
       if (user?.token !== undefined) {
-        await fetch(`http://localhost:8000/patients/Nouveau-ne/`, {
+        await fetch(`http://localhost:8000/patients/Nouveau-ne/${Hopital}`,{
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
@@ -68,7 +73,8 @@ export default function NouveauNe() {
       }
     };
     fetchPatientData();
-  }, [history, user?.token]);
+  }, [Hopital, history, NouveauneDB, user?.token]);
+  console.log(NouveauneDB);
   return (
     <div>
       <div className="patient-table">

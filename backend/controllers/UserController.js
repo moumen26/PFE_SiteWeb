@@ -24,13 +24,14 @@ const Login = async (req, res) => {
             var speciality = user.speciality;
             var id = user._id;
             var progress = user.progress;
-            res.status(200).json({id, Fname, speciality, progress, token});
+            var Hopital = user.Hopital;
+            res.status(200).json({id, Fname, speciality, progress, Hopital, token});
         }).catch((err) => {
-            console.log(err)
+            return res.status(400).json({message: err.message});
         });
         
     }catch(err){
-        res.status(400).json({err: err.message});
+        res.status(400).json({message: err.message});
     }
 }   
 
@@ -72,7 +73,8 @@ const Signup = async (req, res) => {
             var userFname = user.Fname;
             var userspeciality = user.speciality;
             var id = user._id;
-            res.status(200).json({id, Fname :userFname, speciality: userspeciality, token});
+            var Hopital = user.Hopital;
+            res.status(200).json({id, Fname :userFname, speciality: userspeciality, Hopital: Hopital, token});
         }).catch((err) => {
             return res.status(400).json({message: err.message});
         });

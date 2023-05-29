@@ -136,8 +136,27 @@ const UpdateDossObsNouveaune = async (req, res) => {
 
 //get all Nouveau-ne
 const GetAllNouveaune = async (req, res) => {
-    const patients = await Patient.find({maturity: {$ne: "Adulte"}});
-    res.status(200).json(patients);
+    try{
+        const {Hopital} = req.params;
+        if(!Hopital){
+            return res.status(401).json({message: "Hopital is required"});
+        }
+
+        await Patient.find({maturity: "Nouveau-ne"},{Hopital: Hopital})
+        .then((patients) => {
+            if (!patients) {
+                return res.status(404).json({ message: 'Patient Nouveau-ne not found' });
+            }
+            res.status(200).json(patients);
+        }).catch((error) => {
+            console.error('Error creating patient:', error);
+            res.status(500).json({ message: 'Failed to create patient' });
+        });
+        
+    }catch(err){
+        res.status(400).json({message: err.message});
+    }
+    
 }
 //get all Nouveau-ne by idMaman
 const GetAllNouveauneById = async (req, res) => {
