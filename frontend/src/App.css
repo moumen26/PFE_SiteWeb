@@ -1465,7 +1465,8 @@ nav {
 }
 
 .addpatient-add-cahier,
-.cahier-vaccin {
+.cahier-vaccin,
+.addpatient-add-consultation {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1474,8 +1475,13 @@ nav {
   margin-bottom: 54px;
 }
 
-.addpatient-add-cahier {
+.addpatient-add-cahier,
+.addpatient-add-consultation {
   margin-top: 50px;
+}
+
+.addpatient-add-consultation{
+  margin-top: 10rem;
 }
 
 .cahier-vaccin {
@@ -1812,7 +1818,8 @@ nav {
 .add-cahier-sante h2,
 .add-vaccin-button h2,
 .add-visite-button h2,
-.profile-details-add-cahier .add-cahier-sante h2 {
+.profile-details-add-cahier .add-cahier-sante h2,
+.add-concultation-button h2 {
   line-height: 38.4px;
   font-size: 32px;
   font-weight: 700;
@@ -1825,14 +1832,16 @@ nav {
 
 .add-cahier-sante h2:hover,
 .add-vaccin-button h2:hover,
-.add-visite-button h2:hover {
+.add-visite-button h2:hover,
+.add-concultation-button h2:hover {
   text-shadow: 0 -38.4px #fff, 0 0 #4f81ff;
   opacity: 1;
 }
 
 .add-cahier-sante,
 .add-vaccin-button,
-.add-visite-button {
+.add-visite-button,
+.add-concultation-button {
   width: 969px;
   height: 182px;
   display: flex;
@@ -4927,7 +4936,10 @@ form.sign-in-form {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 30px;
+  padding-left: 4.75rem;
+  padding-right: 4.75rem;
+  margin-bottom: 50px;
+  margin-top: 32px;
 }
 
 .patient-profile-details-container .about-patient {
@@ -4953,7 +4965,7 @@ form.sign-in-form {
   margin-top: 40px;
 }
 
-.patient-profile-details-container .patient-details-reducation{
+.patient-profile-details-container .patient-details-reducation {
   height: 287px;
   width: 20%;
 }
@@ -4966,10 +4978,6 @@ form.sign-in-form {
   text-align: center;
   margin-top: 20px;
 }
-
-
-
-
 
 .affichage-concultation-container .consultation-table-item-context {
   display: flex;

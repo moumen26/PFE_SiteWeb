@@ -14,6 +14,7 @@ import AddVisiteButton2 from "../components/buttons/buttonAddVisite2";
 import AddVaccinButton from "../components/buttons/buttonAddVaccin";
 import MyCahierSwiper from "../components/swipers/swiperCahier";
 import AddCahierSante from "../components/buttons/buttonAddCahier";
+import AddConcultation from "../components/buttons/buttonAddConcultation";
 
 export default function PatientProfile() {
     const [add, setAdd] = useState(false);
@@ -21,12 +22,17 @@ export default function PatientProfile() {
     const [addVaccin2, setAddVaccin2] = useState(false);
     const [addVisite, setAddvisite] = useState(false);
     const [addVisite2, setAddvisite2] = useState(false);
+    const [addConsultation, setAddConsultation] = useState(false);
+
 
     let toggleClassAdd = add ? " add-cahier-active" : "";
     let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
     let toggleClassAddVaccin2 = addVaccin2 ? " add-vaccin-active2" : "";
     let toggleClassAddVisite = addVisite ? " add-visite-active" : "";
     let toggleClassAddVisite2 = addVisite2 ? " add-visite-active2" : "";
+    let toggleClassAddConcultation = addConsultation
+      ? " add-concultation-active"
+      : "";
   return (
     <div className="Patients-profile">
       <div className="patient-profile-container">
@@ -82,6 +88,12 @@ export default function PatientProfile() {
                   <MyVisteTable />
                   <div className="visite-add-button-class">
                     <VisiteAddButton />
+                  </div>
+                  <div className="addpatient-add-consultation">
+                    <AddConcultation
+                      addConsultation={addConsultation}
+                      setAddConsultation={setAddConsultation}
+                    />
                   </div>
                 </div>
               </div>
