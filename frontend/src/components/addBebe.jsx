@@ -21,7 +21,6 @@ export default function AddBebe() {
   const { id } = useParams();
   // initialisation of the navigate function
   const history = useNavigate();
-  const [enfantDB, setEnfantDB] = useState(dataEnfant);
   const [patientData, setPatientData] = useState();
   //Patient data
   useEffect(() => {
@@ -105,7 +104,6 @@ export default function AddBebe() {
       console.error("Error adding Nouveau-ne:", error);
     }
   };
-  console.log(patientData);
   const [NouveauNeData, setNouveauNeData] = useState();
 //Nouveau-ne data
 useEffect(() => {
@@ -145,7 +143,7 @@ useEffect(() => {
     Willaya_Nouveaun: "",
     Region_Nouveaune: "",
   });
-  
+
   return (
     <div className="add-bebe">
       <div className="ajout-bebe">

@@ -1,7 +1,8 @@
 const User = require('../models/UserModel');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-
+const bcrypt = require('bcrypt');
+const validator = require('validator');
 //jwt secret
 const createToken = (id) => {
     return jwt.sign({_id: id}, process.env.SECRET_KEY, {expiresIn: '7d'});
@@ -35,17 +36,48 @@ const Login = async (req, res) => {
 
 //signup
 const Signup = async (req, res) => {
-    const { email, password, Lname, Fname, speciality, phone} = req.body;
+    const { email, password, Lname, Fname, speciality, phone, Hopital} = req.body;
     try{
-        const user = await User.signup(email, password, Lname, Fname, speciality, phone);
-        const token = createToken(user._id);
-        var userFname = user.Fname;
-        var userspeciality = user.speciality;
-        var id = user._id;
-        res.status(200).json({id, Fname :userFname, speciality: userspeciality, token});
-        
+        // hash password
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(password, salt);
+
+        // validation
+        if(!email || !password || !Lname || !Fname || !speciality || !phone || !Hopital ){
+            return res.status(400).json({message: 'All fields mast be filled'});
+        }
+        if(!validator.isEmail(email)){
+            return res.status(400).json({message: 'Email is not valid'});
+        }
+        if(!validator.isStrongPassword(password)){
+            return res.status(400).json({message: 'Password not strong enough'});
+        }
+        await User.findOne({email: email}).then((userexist) => {
+            if(userexist){
+                return res.status(400).json({message: 'Email already in use'});
+            }
+        });
+        const newUser = new User({
+            email: email,
+            password: hash,
+            Lname: Lname,
+            Fname: Fname,
+            speciality: speciality,
+            phone: phone,
+            Hopital: Hopital,
+            validation: false
+        });
+        await newUser.save().then((user) => {
+            const token = createToken(user._id);
+            var userFname = user.Fname;
+            var userspeciality = user.speciality;
+            var id = user._id;
+            res.status(200).json({id, Fname :userFname, speciality: userspeciality, token});
+        }).catch((err) => {
+            return res.status(400).json({message: err.message});
+        });
     }catch(err){
-        res.status(400).json({err: err.message});
+        res.status(400).json({message: err.message});
     }
 }
 

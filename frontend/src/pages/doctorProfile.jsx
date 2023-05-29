@@ -153,7 +153,7 @@ export default function DoctorProfile() {
         </div>
         <div className="doctor-profile-nom-hopital">
           <div className="doctor-profile-logo-hopital"></div>
-          <h2>Nom de l'hopital</h2>
+          <h2>{userData?.Hopital}</h2>
         </div>
         <form action="" onSubmit={submitProfile}>
           <div className="doctor-profile-form-class">
