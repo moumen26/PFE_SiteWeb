@@ -8,17 +8,21 @@ export default function TableConcultation() {
 
   return (
     <div className="table-concultation">
-      <div className="table-conclutation-container">
-        <h2>Conclutation</h2>
-        <div className="table-conclutation-search">
-          <input type="search" placeholder="Search.." />
-          <AiOutlineSearch className="search-icon" />
-        </div>
-      </div>
       <div className="table-concultation-center">
         <table>
+          <tr className="table-concultation-ligne">
+            <td className="table-concultation-td-nom table-concultation-tr">
+              Medcin
+            </td>
+            <td className="table-concultation-td-date table-concultation-tr">
+              Date
+            </td>
+            <td className="table-concultation-td-time table-concultation-tr">
+              Heure
+            </td>
+          </tr>
           {ConcultationDB.map((Concultation) => (
-          <TableConcultationReadOnlyRow Concultation={Concultation} />
+            <TableConcultationReadOnlyRow Concultation={Concultation} />
           ))}
         </table>
       </div>

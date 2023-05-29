@@ -19,6 +19,7 @@ import { useAuthContext } from "./hooks/useAuthContext";
 import AffichageConcultation from "./pages/affichageConcultation";
 import PatientProfile from "./pages/patientProfile";
 import TableConcultation from "./components/tables/tableConcultation";
+import MamanProfile from "./pages/mamanProfile";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -62,7 +63,7 @@ function App() {
           />
           <Route
             path="paramètres"
-            element={user ? <TableConcultation /> : <Navigate to="/login" />}
+            element={user ? <MamanProfile /> : <Navigate to="/login" />}
           />
           <Route
             path="patientProfile"

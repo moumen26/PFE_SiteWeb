@@ -11,6 +11,7 @@ import AddVaccinButtonTable from "../components/buttons/buttonAddVaccin2";
 import VaccinTable from "../components/tables/tableAddPatientVaccin";
 import AddConcultation from "../components/buttons/buttonAddConcultation";
 import TableConcultation from "../components/tables/tableConcultation";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function AddPatient() {
   const [add, setAdd] = useState(false);
@@ -97,6 +98,13 @@ export default function AddPatient() {
               </div>
             </div>
             <div className={`concultation-table${toggleClassAddConcultation}`}>
+              <div className="table-conclutation-container">
+                <h2>Conclutation</h2>
+                <div className="table-conclutation-search">
+                  <input type="search" placeholder="Search.." />
+                  <AiOutlineSearch className="search-icon" />
+                </div>
+              </div>
               <TableConcultation />
             </div>
           </div>
@@ -125,6 +133,13 @@ export default function AddPatient() {
               />
             </div>
             <div className={`concultation-table${toggleClassAddConcultation}`}>
+              <div className="table-conclutation-container">
+                <h2>Conclutation</h2>
+                <div className="table-conclutation-search">
+                  <input type="search" placeholder="Search.." />
+                  <AiOutlineSearch className="search-icon" />
+                </div>
+              </div>
               <TableConcultation />
             </div>
           </div>

@@ -1478,7 +1478,6 @@ nav {
   margin-top: 50px;
 }
 
-
 .add-vaccin {
   height: 40vh;
 }
@@ -1490,7 +1489,7 @@ nav {
 
 .cahier-vaccin {
   margin-top: -10vh;
-} 
+}
 
 .add-cahier-active .visite-table2 {
   margin-bottom: -5rem;
@@ -1514,8 +1513,6 @@ nav {
   opacity: 0;
 }
 
-
-
 .cahier-sante-title {
   width: 100%;
   display: flex;
@@ -1524,19 +1521,16 @@ nav {
   margin-top: 5rem;
 }
 
-
-.AddPatient .addpatient-add-cahier{
+.AddPatient .addpatient-add-cahier {
   height: 40vh;
 }
 
-
-.AddPatient .cahier-vaccin{
+.AddPatient .cahier-vaccin {
   margin-top: 0.2rem;
   padding-top: 0;
 }
 
-
-.AddPatient .cahier-sante-title{
+.AddPatient .cahier-sante-title {
   margin-top: 0;
 }
 
@@ -1586,10 +1580,9 @@ nav {
   padding-bottom: 5vh;
 }
 
-.addpatient-add-visite{
+.addpatient-add-visite {
   padding-bottom: 0;
 }
-
 
 .addpatient-add-visite .add-visite-button,
 .addpatient-add-vaccin .add-vaccin-button {
@@ -1627,20 +1620,20 @@ nav {
 
 .add-visite-active,
 .add-concultation-active,
-.add-vaccin-active2{
+.add-vaccin-active2 {
   -webkit-transform: translateY(-5vh);
   transform: translateY(-5vh);
 }
 
-.add-visite-active .visite-table-container{
+.add-visite-active .visite-table-container {
   margin-top: 12vh;
 }
 
-.add-vaccin-active2 .vaccin-container{
+.add-vaccin-active2 .vaccin-container {
   margin-top: 5vh;
 }
 
-.concultation-table{
+.concultation-table {
   display: none;
 }
 
@@ -1710,8 +1703,6 @@ nav {
   opacity: 0;
 }
 
-
-
 .vaccin-container {
   width: 100%;
   display: flex;
@@ -1736,7 +1727,7 @@ nav {
   transition: all 1s ease;
 }
 
-.visite-table2 .addpatient-add-vaccin{
+.visite-table2 .addpatient-add-vaccin {
   width: 100%;
   padding-bottom: 0;
 }
@@ -3140,7 +3131,7 @@ form.sign-in-form {
 }
 
 .dashboard-table-container,
-.table-patients{
+.table-patients {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3380,7 +3371,8 @@ form.sign-in-form {
   border-bottom: 1px solid rgba(79, 129, 255, 1);
 }
 
-.table-nouveau-ne-ligne:nth-child(2n) {
+.table-nouveau-ne-ligne:nth-child(2n),
+.Maman-profile .table-concultation-ligne:nth-child(2n)  {
   background-color: rgba(218, 218, 218, 1);
   width: 100vw;
 }
@@ -3405,7 +3397,7 @@ form.sign-in-form {
   color: rgba(6, 14, 48, 1);
 }
 
-.table-nouveau-ne-ligne{
+.table-nouveau-ne-ligne {
   width: 100vw;
 }
 
@@ -3499,7 +3491,8 @@ form.sign-in-form {
 .about-patient,
 .patient-details-center,
 .patient-details-examen,
-.patient-details-reducation {
+.patient-details-reducation,
+.about-maman {
   width: 299px;
   height: 797px;
   border-radius: 10px;
@@ -3989,7 +3982,8 @@ form.sign-in-form {
   padding-right: 112px;
 }
 
-.ajout-bebe h2 {
+.ajout-bebe h2,
+.Maman-profile-title h2 {
   font-size: 28px;
   font-weight: 600;
   color: rgba(6, 14, 48);
@@ -4662,7 +4656,8 @@ form.sign-in-form {
 /* conculter style */
 .Conculter,
 .Affichage-concultation,
-.Patients-profile {
+.Patients-profile,
+.Maman-profile {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -4670,7 +4665,8 @@ form.sign-in-form {
 
 .conculter-container,
 .affichage-concultation-container,
-.patient-profile-container {
+.patient-profile-container,
+.maman-profile-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -5051,27 +5047,27 @@ form.sign-in-form {
   display: none;
 }
 
-
 /* concultation table style */
 
-.concultation-table{
-  width: 100%;
+.concultation-table {
+  width: 90%;
   margin-top: 50vh;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
-.visite-table2 .concultation-table{
+.visite-table2 .concultation-table {
   margin-top: 0;
 }
 
-.table-concultation{
-  width: 90%;
+.table-concultation {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.table-concultation-center{
+.table-concultation-center {
   max-height: 646px;
   margin-top: 2px;
   width: 100%;
@@ -5081,7 +5077,8 @@ form.sign-in-form {
   overflow-y: scroll;
 }
 
-.table-conclutation-container{
+.table-conclutation-container,
+.Maman-profile-title {
   width: 100%;
   height: 53px;
   display: flex;
@@ -5091,7 +5088,7 @@ form.sign-in-form {
   border-bottom: 1px solid rgba(79, 129, 255, 1);
 }
 
-.table-conclutation-container h2{
+.table-conclutation-container h2 {
   font-weight: 600;
   font-size: 20px;
   line-height: 24px;
@@ -5109,8 +5106,8 @@ form.sign-in-form {
   justify-content: space-between;
 }
 
-.table-conclutation-search input{
-  height: 33Px;
+.table-conclutation-search input {
+  height: 33px;
   margin-left: 10px;
   font-weight: 700;
   font-size: 12px;
@@ -5118,47 +5115,119 @@ form.sign-in-form {
   color: rgba(106, 110, 131, 1);
 }
 
-.search-icon{
+.search-icon {
   font-size: 18px;
   margin-right: 10px;
   fill: rgba(106, 110, 131, 1);
 }
 
-.table-concultation-center{
+.table-concultation-center {
   width: 100%;
   display: flex;
 }
 
-.table-concultation-center table{
+.table-concultation-center table {
   width: 100%;
 }
 
-.table-concultation-center table td{
+.table-concultation-center table td {
   border: none;
 }
 
-.table-concultation-center table tr{
-  height: 50px;  
+.table-concultation-center table tr {
+  height: 50px;
 }
 
-.table-concultation-ligne .table-concultation-td-nom{
+.table-concultation-ligne .table-concultation-td-nom {
   text-align: start;
   padding-left: 42px;
 }
 
-.table-concultation-ligne .table-concultation-td-date{
+.table-concultation-ligne .table-concultation-td-date,
+.table-concultation-ligne .table-concultation-td-time {
   text-align: start;
 }
 
-.table-concultation-ligne .table-concultation-td-time{
-  text-align: start;
-  
+.table-concultation-tr{
+font-weight: 700;
+  font-size: 15px;
+  line-height: 18px;
+  color: rgba(6, 14, 48);
 }
 
-
-.table-concultation-ligne{
+.table-concultation-ligne {
   width: 100%;
+  border-bottom: 1px solid rgba(79, 129, 255, 1)
 }
+
+/* maman profile style */
+.maman-profile-container {
+  padding-bottom: 10rem;
+}
+
+.about-maman {
+  width: 75%;
+  height: 356px;
+}
+
+.about-maman-description h2 {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 24px;
+  margin-left: 36px;
+  margin-top: 34px;
+  color: rgba(6, 14, 48);
+}
+
+.about-maman-cart {
+  width: 100%;
+  display: flex;
+  gap: 160px;
+  padding-left: 48px;
+  margin-top: 26px;
+}
+
+.maman-cart-item span {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16.8px;
+  color: rgba(106, 110, 131, 1);
+}
+
+.maman-cart-item h3 {
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: rgba(6, 14, 48, 1);
+}
+
+.Maman-profile .patient-details-reducation{
+  height: 356px;
+}
+
+.Maman-profile .table-concultation-ligne {
+  border-bottom: 1px solid rgba(79, 129, 255, 1)
+}
+
+.Maman-profile .add-bebe .ajout-bebe input{
+  width: fit-content;
+  display: flex;
+  font-size: 16px;
+  padding-top: 0px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 0px;
+  height: fit-content;
+}
+
+
+.Maman-profile-title{
+  border-bottom: none;
+  padding-left: 112px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
 
 
 
@@ -5183,7 +5252,7 @@ form.sign-in-form {
   width: 5px;
   border-radius: 2px;
 }
-
+.about-maman::-webkit-scrollbar,
 .about-patient::-webkit-scrollbar,
 .patient-details-reducation::-webkit-scrollbar,
 .patient-details-center::-webkit-scrollbar,
@@ -5196,13 +5265,15 @@ form.sign-in-form {
 .conculter-container,
 .affichage-concultation-container,
 .Doctor-profile,
-.patient-profile-container {
+.patient-profile-container,
+.maman-profile-container {
   z-index: 990;
   background-color: white;
 }
 
 .Login,
-.patient-profile-container {
+.patient-profile-container,
+.maman-profile-container {
   z-index: 100;
   position: absolute;
   top: 0;

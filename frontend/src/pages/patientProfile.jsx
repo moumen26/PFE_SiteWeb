@@ -16,24 +16,24 @@ import MyCahierSwiper from "../components/swipers/swiperCahier";
 import AddCahierSante from "../components/buttons/buttonAddCahier";
 import AddConcultation from "../components/buttons/buttonAddConcultation";
 import TableConcultation from "../components/tables/tableConcultation";
+import { AiOutlineSearch } from "react-icons/ai";
 
 export default function PatientProfile() {
-    const [add, setAdd] = useState(false);
-    const [addVaccin, setAddvacin] = useState(false);
-    const [addVaccin2, setAddVaccin2] = useState(false);
-    const [addVisite, setAddvisite] = useState(false);
-    const [addVisite2, setAddvisite2] = useState(false);
-    const [addConsultation, setAddConsultation] = useState(false);
+  const [add, setAdd] = useState(false);
+  const [addVaccin, setAddvacin] = useState(false);
+  const [addVaccin2, setAddVaccin2] = useState(false);
+  const [addVisite, setAddvisite] = useState(false);
+  const [addVisite2, setAddvisite2] = useState(false);
+  const [addConsultation, setAddConsultation] = useState(false);
 
-
-    let toggleClassAdd = add ? " add-cahier-active" : "";
-    let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
-    let toggleClassAddVaccin2 = addVaccin2 ? " add-vaccin-active2" : "";
-    let toggleClassAddVisite = addVisite ? " add-visite-active" : "";
-    let toggleClassAddVisite2 = addVisite2 ? " add-visite-active2" : "";
-    let toggleClassAddConcultation = addConsultation
-      ? " add-concultation-active"
-      : "";
+  let toggleClassAdd = add ? " add-cahier-active" : "";
+  let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
+  let toggleClassAddVaccin2 = addVaccin2 ? " add-vaccin-active2" : "";
+  let toggleClassAddVisite = addVisite ? " add-visite-active" : "";
+  let toggleClassAddVisite2 = addVisite2 ? " add-visite-active2" : "";
+  let toggleClassAddConcultation = addConsultation
+    ? " add-concultation-active"
+    : "";
   return (
     <div className="Patients-profile">
       <div className="patient-profile-container">
@@ -100,6 +100,13 @@ export default function PatientProfile() {
                 <div
                   className={`concultation-table${toggleClassAddConcultation}`}
                 >
+                  <div className="table-conclutation-container">
+                    <h2>Conclutation</h2>
+                    <div className="table-conclutation-search">
+                      <input type="search" placeholder="Search.." />
+                      <AiOutlineSearch className="search-icon" />
+                    </div>
+                  </div>
                   <TableConcultation />
                 </div>
               </div>
@@ -130,6 +137,13 @@ export default function PatientProfile() {
                 <div
                   className={`concultation-table${toggleClassAddConcultation}`}
                 >
+                  <div className="table-conclutation-container">
+                    <h2>Conclutation</h2>
+                    <div className="table-conclutation-search">
+                      <input type="search" placeholder="Search.." />
+                      <AiOutlineSearch className="search-icon" />
+                    </div>
+                  </div>
                   <TableConcultation />
                 </div>
               </div>
