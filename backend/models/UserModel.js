@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    Hopital : {
+        type: String,
+        required: false,
+    },
     DateDeNaissance: {
         type: String,
         required: false,
@@ -62,10 +66,10 @@ const userSchema = new mongoose.Schema({
 },{timestamps: true});
 
 // static method to signup user
-userSchema.statics.signup = async function(email, password, Lname, Fname, speciality, phone){
+userSchema.statics.signup = async function(email, password, Lname, Fname, speciality, phone, Hopital){
     
     // validation
-    if(!email || !password || !Lname || !Fname || !speciality || !phone){
+    if(!email || !password || !Lname || !Fname || !speciality || !phone ){
         throw Error('All fields mast be filled');
     }
     if(!validator.isEmail(email)){
@@ -90,7 +94,7 @@ userSchema.statics.signup = async function(email, password, Lname, Fname, specia
     const validation = false;
     
     // create user
-    const user = await this.create({email, password: hash, Lname, Fname, speciality, phone, validation});
+    const user = await this.create({email, password: hash, Lname, Fname, speciality, phone, validation, Hopital});
     
     return user;
 }

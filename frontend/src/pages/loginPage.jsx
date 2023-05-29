@@ -26,11 +26,12 @@ export default function Login() {
   const [fname, setFname] = useState("");
   const [speciality, setSpeciality] = useState("");
   const [phone, setPhone] = useState("");
+  const [Hopital, setHopital] = useState("");
   const { sign_up, isloading, error } = useSignup();
 
   async function submitSignup(e) {
     e.preventDefault();
-    await sign_up(signinemail, signinpassword, lname, fname, speciality, phone);
+    await sign_up(signinemail, signinpassword, lname, fname, speciality, phone, Hopital);
   }
 
   return (
@@ -155,14 +156,16 @@ export default function Login() {
                 class="nouveau-ne-chart"
                 name="nouveau-ne-chart"
                 id="nouveau-ne-chart"
+                value={Hopital}
+                onChange={(e) => setHopital(e.target.value)}
               >
                 <option selected disabled>
                   Enter your hospital..
                 </option>
-                <option value="h1">Hospital 1</option>
-                <option value="h2">Hospital 2</option>
-                <option value="h3">Hospital 3</option>
-                <option value="h4">Hospital 4</option>
+                <option value="Hospital 1">Hospital 1</option>
+                <option value="Hospital 2">Hospital 2</option>
+                <option value="Hospital 3">Hospital 3</option>
+                <option value="Hospital 4">Hospital 4</option>
               </select>
             </div>
             <div className="input-field">
@@ -187,7 +190,7 @@ export default function Login() {
       <div className="panels-container">
         <div className="panel left-panel">
           <div className="content">
-            <a href="#">
+            <a href="">
               <div className="logo flex items-center justify-items-center">
                 H
                 <FaUserMd size="37px" fill="#3889c1" className="pb-2" />

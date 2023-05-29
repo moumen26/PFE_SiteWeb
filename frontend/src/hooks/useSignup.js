@@ -7,7 +7,7 @@ export const useSignup = () => {
     const [error, setError] = useState(null);
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
-    const sign_up = async (email, password, lname, fname, speciality, phone) => {
+    const sign_up = async (email, password, lname, fname, speciality, phone, Hopital) => {
         setIsLoading(true);
         setError(null);
         
@@ -15,19 +15,18 @@ export const useSignup = () => {
                 method: "POST",
                 headers: {'content-type': 'application/json',
                 'Accept': 'application/json'},
-                body: JSON.stringify({email: email, password: password, Lname: lname, Fname: fname, speciality: speciality, phone: phone})
+                body: JSON.stringify({email: email, password: password, Lname: lname, Fname: fname, speciality: speciality, phone: phone, Hopital: Hopital})
             });
     
             const json = await reponse.json();
             if (!reponse.ok) {
-                window.alert("signup failed");
                 setError(true);
                 setIsLoading(false);
                 setError(json.error);
+                window.alert(json.message);
             }
             if (reponse.ok) {
                 window.alert("signup success now wait for your validation");
-                navigate('/login').reload();
             }
         
 
