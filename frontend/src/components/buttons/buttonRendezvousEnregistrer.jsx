@@ -1,5 +1,5 @@
-export default function RendezvousProfileEnregistrerButton() {
+export default function RendezvousProfileEnregistrerButton({handlePatient}) {
   return (
-    <button className="rendezvous-enregistrer-button">Enregistrer</button>
+    <input type="submit" value="Enregistrer" className='rendezvous-enregistrer-button' onClick={handlePatient}/>
   );
 }

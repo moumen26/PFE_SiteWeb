@@ -57,28 +57,7 @@ export default function PatientDetails() {
   const [act, setAct] = useState(false);
 
   const handleAddPatient = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/patients/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
-        body: JSON.stringify({
-          idAccoucheur: user?.id,
-        }),
-      });
-      // get the patientID via response from the server patientRouter.post
-      const data = await response.json();
-      if (!response.ok) {
-        window.alert("Add patient failed", data.error);
-      }
-      if (response.ok) {
-        history(`/antecedent/${await data.id}`);
-      }
-    } catch (error) {
-      console.error("Error adding article:", error);
-    }
+    history(`/rendezvous`);
   };
 
   return (

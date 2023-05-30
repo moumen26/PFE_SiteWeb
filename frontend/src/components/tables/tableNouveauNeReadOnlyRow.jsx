@@ -48,10 +48,10 @@ export default function TableNouveauNe({ NouveauNe }) {
   };
   return (
     <tr className="table-nouveau-ne-ligne">
-      <td className="table-patients-td-nom">{NouveauNe.NomPatint}</td>
-      <td className="table-patients-td-annee">{NouveauNe._id}</td>
-      <td className="table-patients-td-willaya">{NouveauNe._id}</td>
-      <td className="table-patients-td-region">{NouveauNe._id}</td>
+      <td className="table-patients-td-nom">{NouveauNe.Nom + " " + NouveauNe.Prenom}</td>
+      <td className="table-patients-td-annee">{NouveauNe.DateDeNaissance}</td>
+      <td className="table-patients-td-willaya">{NouveauNe.LieuDeNaissance}</td>
+      <td className="table-patients-td-region">{NouveauNe.Adresse}</td>
       <td className="table-patients-td table-patient-td-button">
         <ConculterButton AddConsultation={handleAddConsultation} />
         <VoirButton VoirPatient={handleVoirPatient} />

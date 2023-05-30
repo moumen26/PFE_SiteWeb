@@ -93,6 +93,10 @@ function App() {
             path="conculter/:id"
             element={user ? <Conculter /> : <Navigate to="/login" />}
           />
+          <Route
+            path="rendezvous"
+            element={user ? <Rendezvous /> : <Navigate to="/login" />}
+          />
         </Routes>
       </main>
     </BrowserRouter>

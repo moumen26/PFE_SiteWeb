@@ -27,11 +27,15 @@ const CreateNewNouveaune = async (req, res) => {
         //find patient by id 
         const Maman = await Patient.findById({_id: id});
         const newPatient = new Patient({
+            DateDeNaissance: Date_daccouchement,
+            HeureDeNaissance: Heure_daccouchement,
+            LieuDeNaissance: Maman.LieuDeNaissance,
             idAccoucheur,
             idMaman: id,
             idDossObs : Maman.idDossObs,
             Hopital: Maman.Hopital,
             maturity,
+            Adresse: Maman.Adresse,
         });
         newPatient.save().then(async (savedPatient) => {
             const patientID = savedPatient._id;
@@ -213,8 +217,8 @@ const GetPatient = async (req, res) => {
 // Create a new patient
 const CreateNewPatient = async (req, res) => {
     try {
-        const Date_Entree = req.body.Date_daccouchement;
-        const idAccoucheur = req.body.idAccoucheur;
+        const { Date_Entree, idAccoucheur, identificationMaman, Prenom, Nom, DateDeNaissance, Sexe, Phone, LieuDeNaissance, 
+            AddressActuel, NombreEnfant } = req.body;
         const  maturity = "Adulte";
         if (!idAccoucheur) {
             return res.status(400).json({ error: 'You must provide all fields' });
@@ -225,9 +229,10 @@ const CreateNewPatient = async (req, res) => {
         }
         // Create new patient
         const newPatient = new Patient({
-            idAccoucheur,
-            maturity,
-            Hopital: user.Hopital,
+            idAccoucheur, Hopital: user.Hopital,
+            maturity, Identification: identificationMaman, Prenom, Nom, 
+            DateDeNaissance, Sexe: Sexe, Telephone: Phone, LieuDeNaissance, 
+            Adresse: AddressActuel, NbrEnfant: NombreEnfant
         });
         newPatient.save().then(async (savedPatient) => {
             const patientID = savedPatient._id;
@@ -306,7 +311,8 @@ const DeletePatient = async (req, res) => {
 // update a Patient by ID
 const UpdatePatient = async (req, res) => {
     const {id} = req.params;
-    const { idNouveauNe } = req.body;
+    const { identificationMaman, Prenom, Nom, DateDeNaissance, Sexe, Phone, LieuDeNaissance, 
+        AddressActuel, NombreEnfant } = req.body;
     try{
         //check if id is valid
         if(!mongoose.Types.ObjectId.isValid(id)){
@@ -314,14 +320,15 @@ const UpdatePatient = async (req, res) => {
         }
         //find id in db and update
         const patient = await Patient.findOneAndUpdate({_id: id},
-            {idNouveauNe}
+            {Identification: identificationMaman, Prenom, Nom, DateDeNaissance, Sexe: Sexe, Telephone: Phone, LieuDeNaissance, 
+                Adresse: AddressActuel, NbrEnfant: NombreEnfant}
         );
         //if not found return error
         if(!patient){
             return res.status(404).json({err: 'patient not found'});
         }
         //return user
-        res.status(200).json(patient);
+        res.status(200).json({message: 'patient updated successfully'});
     }catch(err){
         res.status(400).json({err: err.message});
     }

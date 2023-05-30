@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 
 const PatientSchema = new mongoose.Schema({
+    Identification:{
+        type: String,
+        required: false,
+    },
     idMaman: {
         type: mongoose.Schema.Types.ObjectId, ref: "patients",
         required: false,
@@ -38,7 +42,15 @@ const PatientSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    DateNaissance: {
+    DateDeNaissance: {
+        type: String,
+        required: false,
+    },
+    HeureDeNaissance: {
+        type: String,
+        required: false,
+    },
+    LieuDeNaissance: {
         type: String,
         required: false,
     },
