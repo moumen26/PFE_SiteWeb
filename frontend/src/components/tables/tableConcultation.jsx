@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import TableConcultationReadOnlyRow from "./tableConcultationReadOnlyRow";
 import dataConcultation from "../../ConcultationDataBase.json";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { useNavigate, useParams } from "react-router-dom";
 
-export default function TableConcultation() {
-   const [ConcultationDB, setConcultationDB] = useState(dataConcultation);
+export default function TableConcultation({ConcultationDB}) {
 
   return (
     <div className="table-concultation">
@@ -21,7 +22,7 @@ export default function TableConcultation() {
               Heure
             </td>
           </tr>
-          {ConcultationDB.map((Concultation) => (
+          {ConcultationDB?.map((Concultation) => (
             <TableConcultationReadOnlyRow Concultation={Concultation} />
           ))}
         </table>

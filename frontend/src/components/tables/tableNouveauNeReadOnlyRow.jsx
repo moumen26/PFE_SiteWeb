@@ -43,8 +43,13 @@ export default function TableNouveauNe({ NouveauNe }) {
     }
   };
   //Voir patient details
-  const handleVoirPatient = async () => {
-    history(`/antecedent/${await NouveauNe._id}`);
+  const handleVoirDossierPatient = async () => {
+    if (NouveauNe.maturity === "Adulte"){
+      history(`/Dossier-Patient/${await NouveauNe._id}`);
+    }else{
+      history(`/Dossier-Nouveau-ne/${await NouveauNe._id}`);
+    }
+    
   };
   return (
     <tr className="table-nouveau-ne-ligne">
@@ -54,7 +59,7 @@ export default function TableNouveauNe({ NouveauNe }) {
       <td className="table-patients-td-region">{NouveauNe.Adresse}</td>
       <td className="table-patients-td table-patient-td-button">
         <ConculterButton AddConsultation={handleAddConsultation} />
-        <VoirButton VoirPatient={handleVoirPatient} />
+        <VoirButton VoirPatient={handleVoirDossierPatient} />
       </td>
     </tr>
   );

@@ -114,9 +114,9 @@ export default function NouveauNe() {
                 onChange={(e) => setRegion(e.target.value)}
               >
                 <option value="All">All</option>
-                <option value="Medea Centre">Medea Centre</option>
-                <option value="Blida Centre">Blida Centre</option>
-                <option value="Alger Centre">Alger Centre</option>
+                <option value="Medea">Medea</option>
+                <option value="Blida">Blida</option>
+                <option value="Alger">Alger</option>
               </select>
             </div>
             <input
@@ -141,66 +141,67 @@ export default function NouveauNe() {
                 <td className="table-patients-header-button"></td>
               </tr>
               {NouveauneDB?.filter((item) => {
-                if (item.Naissance && item.Wilaya && item.Region) {
+                if (item.DateDeNaissance && item.LieuDeNaissance && item.Adresse) {
                   if (search.toLowerCase() === "") {
                     if (naissance === "All") {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
-                      } else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
                       }
-                    } else if (item.Naissance.includes(naissance)) {
+                    } else if (item.DateDeNaissance.includes(naissance)) {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
-                      } else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
                       }
                     }
                   } else if (
                     item._id.includes(search.toLowerCase()) ||
-                    item.idAccoucheur.includes(search.toLowerCase())
+                    item.Nom.toLowerCase().includes(search.toLowerCase()) ||
+                    item.Prenom.toLowerCase().includes(search.toLowerCase())
                   ) {
                     if (naissance === "All") {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
-                      } else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
                       }
-                    } else if (item.Naissance.includes(naissance)) {
+                    } else if (item.DateDeNaissance.includes(naissance)) {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
-                      } else if (item.Wilaya.includes(wilaya)) {
+                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Region.includes(region)) {
+                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
                           return item;
                         }
                       }
@@ -211,7 +212,8 @@ export default function NouveauNe() {
                     return item;
                   } else if (
                     item._id.includes(search.toLowerCase()) ||
-                    item.idAccoucheur.includes(search.toLowerCase())
+                    item.Nom.toLowerCase().includes(search.toLowerCase()) ||
+                    item.Prenom.toLowerCase().includes(search.toLowerCase())
                   ) {
                     return item;
                   }

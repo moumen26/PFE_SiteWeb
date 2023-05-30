@@ -5,12 +5,12 @@ import VoirButton from "../buttons/buttonVoir";
 export default function TableConcultationReadOnlyRow({ Concultation }) {
   return (
     <tr className="table-concultation-ligne">
-      <td className="table-concultation-td-nom">{Concultation.Nom_Medcine}</td>
+      <td className="table-concultation-td-nom">{Concultation.MedecinID}</td>
       <td className="table-concultation-td-date">
-        {Concultation.Date}
+        {Concultation.DateConcultation}
       </td>
       <td className="table-concultation-td-time">
-        {Concultation.Time}
+        {Concultation.HeureConsultation}
       </td>
       <td className="table-concultation-td-button">
         <VoirButton />

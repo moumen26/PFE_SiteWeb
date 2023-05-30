@@ -63,11 +63,7 @@ function App() {
           />
           <Route
             path="paramètres"
-            element={user ? <MamanProfile /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="patientProfile"
-            element={user ? <PatientProfile /> : <Navigate to="/login" />}
+            element={user ? <Coupon /> : <Navigate to="/login" />}
           />
           <Route
             path="login"
@@ -88,6 +84,14 @@ function App() {
           <Route
             path="antecedent/:id"
             element={user ? <Antecedent /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="Dossier-Patient/:id"
+            element={user ? <MamanProfile /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="Dossier-Nouveau-ne/:id"
+            element={user ? <PatientProfile /> : <Navigate to="/login" />}
           />
           <Route
             path="conculter/:id"

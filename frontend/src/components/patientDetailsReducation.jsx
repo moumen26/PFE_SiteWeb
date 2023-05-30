@@ -1,4 +1,4 @@
-export default function PatientDetailsReducation() {
+export default function PatientDetailsReducation({ConcultationDB}) {
   return (
     <div className="patient-details-reducation">
       <h2>Réducation médicale</h2>
