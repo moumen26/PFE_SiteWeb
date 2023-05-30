@@ -24,6 +24,7 @@ export default function Conculter() {
   const [DureeMedicament, setDureeMedicament] = useState("");
   const [DoseMedicament, setDoseMedicament] = useState("");
   const [QuantiteMedicament, setQuantiteMedicament] = useState("");
+  const [PatientData , setPatientData] = useState("");
   const [medAddFormData, setMedAddFormData] = useState({
     medicament: "",
     quantite: "",
@@ -63,6 +64,33 @@ export default function Conculter() {
     };
     fetchConsultationData();
   }, [history, id, user?.token,ConsultationData]);
+  // fetch Patient Data
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      if (ConsultationData?.patientID !== undefined) {
+        await fetch(`http://localhost:8000/patients/${ConsultationData?.patientID}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setPatientData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Patient data:", error);
+              });
+          } else {
+            console.error("Error resieving Patient date", response.error);
+          }
+        });
+      }
+    };
+    fetchPatientData();
+  }, [history, ConsultationData?.patientID, user?.token,PatientData]);
   //fetch Diagnostic data
   useEffect(() => {
     const fetchDiagnosticData = async () => {
@@ -178,7 +206,7 @@ export default function Conculter() {
     // Delete the Diagnostic in the database
     try {
         const response = await axios.delete(
-          `http://localhost:8000/patients/Diagnostic/${DiagnosticData[0]._id}`,
+          `http://localhost:8000/patients/Diagnostic/${DiagnosticData._id}`,
           {
             headers: {
               Authorization: `Bearer ${user?.token}`,
@@ -275,7 +303,7 @@ export default function Conculter() {
   const handleUpdateDiagnostic = async () => {
     try {
       const response = await axios.patch(
-        `http://localhost:8000/patients/Diagnostic/${DiagnosticData[0]._id}`,
+        `http://localhost:8000/patients/Diagnostic/${DiagnosticData._id}`,
         {
           Context, Symptomes
         },
@@ -374,7 +402,6 @@ export default function Conculter() {
     const newMedicamentDB = [...MedicamentDB, newMedicament];
     setMedicamentDB(newMedicamentDB);
   };
-
   return (
     <div className="Conculter">
       <div className="conculter-container">
@@ -387,14 +414,14 @@ export default function Conculter() {
           <h2>contenu de la consultation :</h2>
           <div className="info-personal-concultation">
             <h3>
-              Numéro : <span>19203204585</span>
+              Numéro : <span>{PatientData?.Identification}</span>
             </h3>
             <h3>
-              Nom et Prénom : <span>Boumrar Zine eddine</span>
+              Nom et Prénom : <span>{PatientData?.Nom}{PatientData?.Prenom}</span>
             </h3>
             <div className="time-date-concultation">
-              <h3>02 : 11 : 57</h3>
-              <h3>2023-05-26</h3>
+              <h3>Heure :{ConsultationData?.HeureConsultation}</h3>
+              <h3>Date :{ConsultationData?.DateConcultation}</h3>
             </div>
           </div>
           <div className="consultation-table">
@@ -432,7 +459,7 @@ export default function Conculter() {
                         value={Context}
                         onChange={(e) => setContext(e.target.value)}
                       ></textarea>
-                      <h2>Symbtome :</h2>
+                      <h2>Maladie :</h2>
                       <input type="text" placeholder="fiévre, faiblesse..." 
                         name="Symptomes"
                         value={Symptomes}

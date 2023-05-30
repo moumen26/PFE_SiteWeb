@@ -57,6 +57,10 @@ function App() {
           />
           <Route
             path="affichage"
+
+          />
+          <Route
+            path="Concultation/:id"
             element={
               user ? <AffichageConcultation /> : <Navigate to="/login" />
             }

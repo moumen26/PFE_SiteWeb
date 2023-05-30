@@ -16,11 +16,16 @@ const GetDiagnostic = async (req, res) => {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: 'Specified id is not valid' });
         }
-        const diagnostic = await Diagnostic.find({_id: id});
-        if (!diagnostic) {
-            return res.status(404).json({ message: 'Diagnostic not found' });
-        }
-        res.status(200).json(diagnostic);
+        await Diagnostic.findOne({_id: id}).then((diagnostic) => {
+            if (!diagnostic) {
+                return res.status(404).json({ message: 'Diagnostic not found' });
+            }
+            res.status(200).json(diagnostic);
+
+        }).catch((error) => {
+            console.error('Error fetching diagnostic:', error);
+            res.status(500).json({ message: 'Failed to fetch diagnostic' });
+        });
     }catch(err){
         res.status(400).json({err: err.message});
     }

@@ -9,7 +9,10 @@ const ExamenTest = require('../models/ExamenModel');
 const Diagnostic = require('../models/DiagnosticModel');
 const Ordonance = require('../models/OrdonanceModel');
 const jwt = require('jsonwebtoken');
-
+const {
+    generateEncodedID,
+    generateEncodedIDAdult
+} = require('./CodificationController');
 
 //NOUVEAU-NE
 
@@ -25,8 +28,25 @@ const CreateNewNouveaune = async (req, res) => {
             return res.status(400).json({ error: 'You must provide all fields' });
         }
         //find patient by id 
+        const sexe = "0";
         const Maman = await Patient.findById({_id: id});
+        if(Maman.Sexe.toLowerCase() === "femme" || Maman.Sexe.toLowerCase() === "female"){
+            const sexe = "1";
+        }else{
+            const sexe = "0";
+        }
+        const Lieu = "31000"
+        if(Maman.LieuDeNaissance.toLowerCase() === "medea" || Maman.LieuDeNaissance.toLowerCase() === "médéa"){
+            const Lieu = "26000"
+        }else if(Maman.LieuDeNaissance.toLowerCase() === "blida"){
+            const Lieu = "09000"
+        }else if(Maman.LieuDeNaissance.toLowerCase() === "alger"){
+            const Lieu = "16000"
+        }
+        // Generate encoded ID
+        const ID = generateEncodedID(Date_daccouchement, Lieu, sexe, Heure_daccouchement)
         const newPatient = new Patient({
+            Identification: ID,
             DateDeNaissance: Date_daccouchement,
             HeureDeNaissance: Heure_daccouchement,
             LieuDeNaissance: Maman.LieuDeNaissance,
@@ -217,7 +237,7 @@ const GetPatient = async (req, res) => {
 // Create a new patient
 const CreateNewPatient = async (req, res) => {
     try {
-        const { Date_Entree, idAccoucheur, identificationMaman, Prenom, Nom, DateDeNaissance, Sexe, Phone, LieuDeNaissance, 
+        var { Date_Entree, idAccoucheur, identificationMaman, Prenom, Nom, DateDeNaissance, Sexe, Phone, LieuDeNaissance, 
             AddressActuel, NombreEnfant } = req.body;
         const  maturity = "Adulte";
         if (!idAccoucheur) {
@@ -227,8 +247,21 @@ const CreateNewPatient = async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: 'User not found' });
         }
+        const sexe = "0";
+        if (!identificationMaman || identificationMaman === "") {
+            if(Sexe.toLowerCase() === "femme" || Sexe.toLowerCase() === "female"){
+                const sexe = "1";
+            }else{
+                const sexe = "0";
+            }
+            // Generate ID
+            const ID = generateEncodedIDAdult(DateDeNaissance, LieuDeNaissance, sexe);
+            identificationMaman = ID;
+        }
+        
         // Create new patient
         const newPatient = new Patient({
+            Identification : identificationMaman,
             idAccoucheur, Hopital: user.Hopital,
             maturity, Identification: identificationMaman, Prenom, Nom, 
             DateDeNaissance, Sexe: Sexe, Telephone: Phone, LieuDeNaissance, 
