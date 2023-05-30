@@ -47,7 +47,6 @@ Navigate(`/patients`);
             <MySwiper></MySwiper>
           </div>
         </div>
-        <AddBebe />
       </div>
     </div>
   );

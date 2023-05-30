@@ -1,4 +1,4 @@
-export default function AboutPatient() {
+export default function AboutPatient({PatientData}) {
   return (
     <div className="about-patient">
       <div className="about-patient-description">
@@ -7,43 +7,43 @@ export default function AboutPatient() {
           <div className="patient-cart-class">
             <div className="patient-cart-item">
               <span>Name :</span>
-              <h3>BOUMRAR</h3>
+              <h3>{PatientData?.Nom}</h3>
             </div>
             <div className="patient-cart-item">
               <span>Prénom :</span>
-              <h3>ZINE EDDINE</h3>
+              <h3>{PatientData?.Prenom}</h3>
             </div>
             <div className="patient-cart-item">
               <span>SEXE :</span>
-              <h3>Male</h3>
+              <h3>{PatientData?.Sexe}</h3>
             </div>
           </div>
           <div className="patient-cart-class">
             <div className="patient-cart-item">
               <span>Ne (e) le :</span>
-              <h3>06-04-2002</h3>
+              <h3>{PatientData?.DateDeNaissance}</h3>
             </div>
             <div className="patient-cart-item">
               <span>Address :</span>
-              <h3>Quartier takbou sd msallah N31</h3>
+              <h3>{PatientData?.Adresse}</h3>
             </div>
             <div className="patient-cart-item">
               <span>Commune :</span>
-              <h3>Medea</h3>
+              <h3>{PatientData?.Adresse}</h3>
             </div>
           </div>
           <div className="patient-cart-class">
             <div className="patient-cart-item">
               <span>Wilaya :</span>
-              <h3>Medea</h3>
+              <h3>{PatientData?.Adresse}</h3>
             </div>
             <div className="patient-cart-item">
-              <span>Email :</span>
-              <h3>zineeddine.boumrar@gmail.com</h3>
+              <span>Age :</span>
+              <h3>{PatientData?.Age}</h3>
             </div>
             <div className="patient-cart-item">
-              <span>Telephone :</span>
-              <h3>0778295266</h3>
+              <span>Ne (e) en :</span>
+              <h3>{PatientData?.LieuDeNaissance}</h3>
             </div>
           </div>
         </div>

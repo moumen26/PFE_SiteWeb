@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AboutPatient from "../components/aboutPatient";
 import { BsCloudDownloadFill } from "react-icons/bs";
 import { FaShareSquare } from "react-icons/fa";
@@ -17,6 +17,8 @@ import AddCahierSante from "../components/buttons/buttonAddCahier";
 import AddConcultation from "../components/buttons/buttonAddConcultation";
 import TableConcultation from "../components/tables/tableConcultation";
 import { AiOutlineSearch } from "react-icons/ai";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function PatientProfile() {
   const [add, setAdd] = useState(false);
@@ -34,6 +36,99 @@ export default function PatientProfile() {
   let toggleClassAddConcultation = addConsultation
     ? " add-concultation-active"
     : "";
+  //get current user
+  const { user } = useAuthContext();
+  //get the id of the patient
+  const { id } = useParams();
+  // initialisation of the navigate function
+  const history = useNavigate();
+  // initialisation of the state of the data
+  const [PatientData, setPatientData] = useState();
+  const [ConcultationDB, setConcultationDB] = useState();
+  const [Search, setSearch] = useState("");
+
+    // Fetch Nouveau-ne Data
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      if (user?.token !== undefined) {
+        await fetch(`http://localhost:8000/patients/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setPatientData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Patient data:", error);
+              });
+          } else {
+            console.error("Error resieving Patient date", response.error);
+          }
+        });
+      } else {
+        history(`/patients`);
+      }
+    };
+    fetchPatientData();
+  }, [history, id, user?.token, PatientData]);
+
+  //Concultation data
+  useEffect(() => {
+  const fetchPatientData = async () => {
+    if (id !== undefined) {
+      await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          response
+            .json()
+            .then((data) => {
+             setConcultationDB(data);
+            })
+            .catch((error) => {
+              console.error("Error fetching Concultation data:", error);
+            });
+        } else {
+          console.error("Error resieving Concultation date", response.error);
+        }
+      });
+    }
+  };
+  fetchPatientData();
+  }, [history, id, user?.token, ConcultationDB]);
+
+  //user have access to Pediatre
+  const giveAccessToPediatre = (speciality) => {
+      if(speciality.toLowerCase() === "pediatre"){
+        return true;
+      }else{
+        return false;
+      }
+  }
+  //user have access to Sage Femme
+  const giveAccessToSageFemme = (speciality) => {
+    if(speciality.toLowerCase() === "sage femme"){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  //user have access to Medecin
+  const giveAccessToMedecin = (speciality) => {
+    if(speciality.toLowerCase() === "medecin"){
+      return true;
+    }else{
+      return false;
+    }
+  }
   return (
     <div className="Patients-profile">
       <div className="patient-profile-container">
@@ -45,16 +140,19 @@ export default function PatientProfile() {
           </div>
         </div>
         <div className="patient-profile-details">
+          {/* Patient details */}
           <h4>Patient details</h4>
           <div className="patient-profile-details-container">
-            <AboutPatient />
+            <AboutPatient PatientData={PatientData}/>
             <PatientDetailsReducation />
           </div>
           <div className="home-formulaire-swiper">
-            <MySwiper />
+            {/* Patient details */}
+            <MySwiper/>
           </div>
           <div className="addpatient-add-cahier add-vaccin">
-            <AddCahierSante add={add} setAdd={setAdd} />
+            {/* Cahier de sante */}
+            <AddCahierSante add={add} setAdd={setAdd} open={giveAccessToPediatre(user.speciality)}/>
           </div>
           <div className={`cahier-vaccin${toggleClassAdd}`}>
             <div className="cahier-sante-title">
@@ -66,6 +164,7 @@ export default function PatientProfile() {
             <div
               className={`vaccin-visite-class${toggleClassAddVaccin} vaccin-visite-class${toggleClassAddVisite2}`}
             >
+              {/* Vaccin */}
               <AddVaccinButton
                 addVaccin={addVaccin}
                 setAddvacin={setAddvacin}
@@ -76,6 +175,7 @@ export default function PatientProfile() {
               />
             </div>
             <div className={`vaccin-table${toggleClassAddVaccin}`}>
+              
               <VaccinTable />
               <div className="addpatient-add-visite">
                 <AddVisiteButton
@@ -91,6 +191,7 @@ export default function PatientProfile() {
                     <VisiteAddButton />
                   </div>
                   <div className="addpatient-add-consultation">
+                    {/* Concultation */}
                     <AddConcultation
                       addConsultation={addConsultation}
                       setAddConsultation={setAddConsultation}
@@ -103,11 +204,18 @@ export default function PatientProfile() {
                   <div className="table-conclutation-container">
                     <h2>Conclutation</h2>
                     <div className="table-conclutation-search">
-                      <input type="search" placeholder="Search.." />
+                      <input
+                        type="search"
+                        className="class-search"
+                        placeholder="Search.."
+                        onChange={(e) => {
+                          setSearch(e.target.value);
+                        }}
+                      />
                       <AiOutlineSearch className="search-icon" />
                     </div>
                   </div>
-                  <TableConcultation />
+                  <TableConcultation ConcultationDB={ConcultationDB} Search={Search}/>
                 </div>
               </div>
             </div>
@@ -140,11 +248,18 @@ export default function PatientProfile() {
                   <div className="table-conclutation-container">
                     <h2>Conclutation</h2>
                     <div className="table-conclutation-search">
-                      <input type="search" placeholder="Search.." />
+                      <input
+                        type="search"
+                        className="class-search"
+                        placeholder="Search.."
+                        onChange={(e) => {
+                          setSearch(e.target.value);
+                        }}
+                      />
                       <AiOutlineSearch className="search-icon" />
                     </div>
                   </div>
-                  <TableConcultation />
+                  <TableConcultation ConcultationDB={ConcultationDB} Search={Search}/>
                 </div>
               </div>
             </div>

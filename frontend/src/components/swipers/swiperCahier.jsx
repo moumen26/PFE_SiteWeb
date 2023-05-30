@@ -20,8 +20,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
   const [EmissionUrine, setEmissionUrine] = useState("");
   const [EmissionMeconium, setEmissionMeconium] = useState("");
   const [Sexe, setSexe] = useState("");
-  const [RechercheAtresieLoesophage, setRechercheAtresieLoesophage] =
-    useState("");
+  const [RechercheAtresieLoesophage, setRechercheAtresieLoesophage] =useState("");
   const [OrganesGenitauxExternes, setOrganesGenitauxExternes] = useState("");
   const [une_min, setUne_min] = useState("");
   const [cinq_min, setCinq_min] = useState("");
@@ -65,13 +64,11 @@ export default function MyCahierSwiper({ add, setAdd }) {
         } catch (error) {
           window.alert("Error fetching Patient data:", error);
         }
-      } else {
-        history("/patients");
       }
     };
 
     fetchPatientData();
-  }, [history, id]);
+  }, [history, id, user?.token]);
   //Get Dossier Obstetricale Data
   const [DossObsData, setDossObsData] = useState(null);
   useEffect(() => {
@@ -105,7 +102,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
     };
 
     fetchDossObsData();
-  }, [history, PatientData?.idDossObs]);
+  }, [history, PatientData?.idDossObs, user?.token]);
   //Get Carnet de Sante Data
   const [CarnetSanteData, setCarnetSante] = useState(null);
   useEffect(() => {
@@ -138,7 +135,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
       }
     };
     fetchCarnetSanteData();
-  }, [history, PatientData?.idCarnetSante]);
+  }, [history, CarnetSanteData, user?.token, PatientData?.idCarnetSante]);
 
   //Update Carnet de Sante
   const handleCarnetSanteSubmit = async (event) => {
@@ -187,7 +184,6 @@ export default function MyCahierSwiper({ add, setAdd }) {
       history("/patients");
     }
   };
-
   // if (!PatientData) {
   //   return <CircularProgress />;
   // }
@@ -274,7 +270,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <span>Duree :</span>
                 <input
                   type="text"
-                  value={Duree}
+                  value={CarnetSanteData?.Duree}
                   name="Duree"
                   onChange={(e) => {
                     setDuree(e.target.value);
@@ -285,7 +281,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <span>Malformation :</span>
                 <input
                   type="text"
-                  value={Malformation}
+                  value={CarnetSanteData?.Malformation}
                   name="Malformation"
                   onChange={(e) => {
                     setMalformation(e.target.value);
@@ -299,7 +295,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <span>Transfert:</span>
                 <input
                   type="checkbox"
-                  value={Transfert}
+                  value={CarnetSanteData?.Transfert}
                   name="Transfert"
                   onChange={(e) => {
                     setTransfert(e.target.value);
@@ -310,7 +306,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <span className="long-span">Motif du transfert :</span>
                 <input
                   type="text"
-                  value={MotifTransfert}
+                  value={CarnetSanteData?.MotifTransfert}
                   name="MotifTransfert"
                   onChange={(e) => {
                     setMotifTransfert(e.target.value);
@@ -327,7 +323,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
 
                 <input
                   type="text"
-                  value={ExamenCordon}
+                  value={CarnetSanteData?.ExamenCordon}
                   name="ExamenCordon"
                   onChange={(e) => {
                     setExamenCordon(e.target.value);
@@ -341,7 +337,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <span>Emission d’urine :</span>
                 <input
                   type="checkbox"
-                  value={EmissionUrine}
+                  value={CarnetSanteData?.EmissionUrine}
                   name="EmissionUrine"
                   onChange={(e) => {
                     setEmissionUrine(e.target.value);
@@ -352,7 +348,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 <span>Emission du meconium :</span>
                 <input
                   type="checkbox"
-                  value={EmissionMeconium}
+                  value={CarnetSanteData?.EmissionMeconium}
                   name="EmissionMeconium"
                   onChange={(e) => {
                     setEmissionMeconium(e.target.value);
@@ -368,7 +364,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 </div>
                 <input
                   type="text"
-                  value={CatheterismeChoanes}
+                  value={CarnetSanteData?.CatheterismeChoanes}
                   name="CatheterismeChoanes"
                   onChange={(e) => {
                     setCatheterismeChoanes(e.target.value);
@@ -384,7 +380,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 </div>
                 <input
                   type="text"
-                  value={RechercheAtresieLoesophage}
+                  value={CarnetSanteData?.RechercheAtresieLoesophage}
                   name="RechercheAtresieLoesophage"
                   onChange={(e) => {
                     setRechercheAtresieLoesophage(e.target.value);
@@ -400,7 +396,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 </div>
                 <input
                   type="text"
-                  value={OrganesGenitauxExternes}
+                  value={CarnetSanteData?.OrganesGenitauxExternes}
                   name="OrganesGenitauxExternes"
                   onChange={(e) => {
                     setOrganesGenitauxExternes(e.target.value);
@@ -416,7 +412,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 </div>
                 <input
                   type="text"
-                  value={VitamineK1}
+                  value={CarnetSanteData?.VitamineK1}
                   name="VitamineK1"
                   onChange={(e) => {
                     setVitamineK1(e.target.value);
@@ -432,7 +428,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
                 </div>
                 <input
                   type="text"
-                  value={Collyre}
+                  value={CarnetSanteData?.Collyre}
                   name="Collyre"
                   onChange={(e) => {
                     setCollyre(e.target.value);
@@ -450,7 +446,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
           </form>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="Swipe">
+      {/*<SwiperSlide className="Swipe">
         <div className="formulaire-premier-jour">
           <div className="formulaire-header">
             <div className="formulaire-left">
@@ -807,7 +803,7 @@ export default function MyCahierSwiper({ add, setAdd }) {
             </div>
           </div>
         </div>
-      </SwiperSlide>
+      </SwiperSlide>*/}
     </Swiper>
   );
 }

@@ -137,7 +137,7 @@ export default function MySwiper() {
     };
 
     fetchDossObsData();
-  }, [history, PatientData?.idDossObs, user?.token]);
+  }, [history, PatientData?.idDossObs, user?.token, DossObsData]);
 
   //User data
   useEffect(() => {
@@ -179,10 +179,10 @@ export default function MySwiper() {
         const response = await axios.patch(
           `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,
           {
-            MamanNom,
+            MamanNom: PatientData.Nom,
             MamanEpouse,
-            DateNaissance,
-            AdresseActuelle,
+            DateNaissance: PatientData.DateDeNaissance,
+            AdresseActuelle: PatientData.Adresse,
             Profession,
             Salle,
             NumLit,
@@ -271,7 +271,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={MamanNom}
+                  value={PatientData?.Nom || DossObsData?.MamanNom}
                   name="MamanNom"
                   onChange={(e) => {
                     if (e.target.value !== MamanNom) {
@@ -286,7 +286,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={MamanEpouse}
+                  value={DossObsData?.MamanEpouse}
                   name="MamanEpouse"
                   onChange={(e) => {
                     if (e.target.value !== MamanEpouse)
@@ -300,7 +300,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DateNaissance}
+                  value={PatientData?.DateDeNaissance}
                   name="DateNaissance"
                   onChange={(e) => {
                     if (e.target.value !== DateNaissance)
@@ -317,7 +317,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={AdresseActuelle}
+                  value={PatientData?.Adresse}
                   name="AdresseActuelle"
                   onChange={(e) => {
                     if (e.target.value !== AdresseActuelle)
@@ -331,7 +331,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={Profession}
+                  value={DossObsData?.Profession}
                   name="Profession"
                   onChange={(e) => {
                     if (e.target.value !== Profession)
@@ -347,7 +347,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={Salle}
+                  value={DossObsData?.Salle}
                   name="Salle"
                   onChange={(e) => {
                     if (e.target.value !== Salle) setSalle(e.target.value);
@@ -360,7 +360,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={NumLit}
+                  value={DossObsData?.NumLit}
                   name="NumLit"
                   onChange={(e) => {
                     if (e.target.value !== NumLit) setNumLit(e.target.value);
@@ -374,7 +374,7 @@ export default function MySwiper() {
                 <input
                   type="date"
                   id="date"
-                  value={DateEntrer}
+                  value={DossObsData?.DateEntrer}
                   name="DateEntrer"
                   onChange={(e) => {
                     if (e.target.value !== DateEntrer)
@@ -389,7 +389,7 @@ export default function MySwiper() {
                 <input
                   type="date"
                   id="date"
-                  value={DateSortie}
+                  value={DossObsData?.DateSortie}
                   name="DateSortie"
                   onChange={(e) => {
                     if (e.target.value !== DateSortie)
@@ -412,7 +412,7 @@ export default function MySwiper() {
               </div>
               <input
                 type="text"
-                value={Admise}
+                value={DossObsData?.Admise}
                 name="Admise"
                 onChange={(e) => {
                   if (e.target.value !== Admise) setAdmise(e.target.value);
@@ -431,7 +431,7 @@ export default function MySwiper() {
             <div className="textarea">
               <textarea
                 id="diag-sortie"
-                value={DiagnosticSortie}
+                value={DossObsData?.DiagnosticSortie}
                 name="DiagnosticSortie"
                 onChange={(e) => {
                   if (e.target.value !== DiagnosticSortie)
@@ -445,7 +445,7 @@ export default function MySwiper() {
             <div className="textarea">
               <textarea
                 id="resume-obser"
-                value={ResumerObservation}
+                value={DossObsData?.ResumerObservation}
                 name="ResumerObservation"
                 onChange={(e) => {
                   if (e.target.value !== ResumerObservation)
@@ -482,7 +482,7 @@ export default function MySwiper() {
               <div className="textarea">
                 <textarea
                   id="motif-hosp"
-                  value={MotifHospitalisation}
+                  value={DossObsData?.MotifHospitalisation}
                   name="MotifHospitalisation"
                   onChange={(e) => {
                     if (e.target.value !== MotifHospitalisation)
@@ -497,7 +497,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DRR}
+                    value={DossObsData?.DRR}
                     name="DRR"
                     onChange={(e) => {
                       if (e.target.value !== DRR) setDRR(e.target.value);
@@ -510,7 +510,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={TermeCalc}
+                    value={DossObsData?.TermeCalc}
                     name="TermeCalc"
                     onChange={(e) => {
                       if (e.target.value !== TermeCalc)
@@ -535,7 +535,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={Menarchie}
+                    value={DossObsData?.Menarchie}
                     name="Menarchie"
                     onChange={(e) => {
                       if (e.target.value !== Menarchie)
@@ -549,7 +549,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={CarcterCycle}
+                    value={DossObsData?.CarcterCycle}
                     name="CarcterCycle"
                     onChange={(e) => {
                       if (e.target.value !== CarcterCycle)
@@ -566,7 +566,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={AgeMariage}
+                    value={DossObsData?.AgeMariage}
                     name="AgeMariage"
                     onChange={(e) => {
                       if (e.target.value !== AgeMariage)
@@ -580,7 +580,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={Contraception}
+                    value={DossObsData?.Contraception}
                     name="Contraception"
                     onChange={(e) => {
                       if (e.target.value !== Contraception)
@@ -602,7 +602,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={GroupSanguin}
+                    value={DossObsData?.GroupSanguin}
                     name="GroupSanguin"
                     onChange={(e) => {
                       if (e.target.value !== GroupSanguin)
@@ -619,7 +619,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={FNS}
+                    value={DossObsData?.FNS}
                     name="FNS"
                     onChange={(e) => {
                       if (e.target.value !== FNS) setFNS(e.target.value);
@@ -634,7 +634,7 @@ export default function MySwiper() {
                       </div>
                       <input
                         type="text"
-                        value={Glycemle}
+                        value={DossObsData?.Glycemle}
                         name="Glycemle"
                         onChange={(e) => {
                           if (e.target.value !== Glycemle)
@@ -648,7 +648,7 @@ export default function MySwiper() {
                       </div>
                       <input
                         type="text"
-                        value={UreeSanguine}
+                        value={DossObsData?.UreeSanguine}
                         name="UreeSanguine"
                         onChange={(e) => {
                           if (e.target.value !== UreeSanguine)
@@ -666,7 +666,7 @@ export default function MySwiper() {
                       </div>
                       <input
                         type="text"
-                        value={Albuminurie}
+                        value={DossObsData?.Albuminurie}
                         name="Albuminurie"
                         onChange={(e) => {
                           if (e.target.value !== Albuminurie)
@@ -680,7 +680,7 @@ export default function MySwiper() {
                       </div>
                       <input
                         type="text"
-                        value={BW}
+                        value={DossObsData?.BW}
                         name="BW"
                         onChange={(e) => {
                           if (e.target.value !== BW) setBW(e.target.value);
@@ -695,7 +695,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={Serodiagnostic}
+                    value={DossObsData?.Serodiagnostic}
                     name="Serodiagnostic"
                     onChange={(e) => {
                       if (e.target.value !== Serodiagnostic)
@@ -709,7 +709,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={Toxoplasmose}
+                    value={DossObsData?.Toxoplasmose}
                     name="Toxoplasmose"
                     onChange={(e) => {
                       if (e.target.value !== Toxoplasmose)
@@ -723,7 +723,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={Rubeole}
+                    value={DossObsData?.Rubeole}
                     name="Rubeole"
                     onChange={(e) => {
                       if (e.target.value !== Rubeole)
@@ -734,289 +734,6 @@ export default function MySwiper() {
               </div>
             </div>
           </div>
-          <div className="back-next-buttons back-next-dossier">
-            <div className="back">
-              <SwiperButtonBack>
-                <div className="flex items-center justify-items-center gap-2">
-                  <BsChevronLeft /> Back
-                </div>
-              </SwiperButtonBack>
-            </div>
-            <div className="next">
-              <SwiperButtonNext>
-                <div className="flex items-center justify-items-center gap-2">
-                  Suivant <BsChevronRight />
-                </div>
-              </SwiperButtonNext>
-            </div>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className="Swipe">
-        <div className="formulaire-dossier-obster">
-          <div className="formulaire-header-obster">
-            <div className="formulaire-dossier-obstetrique">
-              <h2>Dossier obstetrique</h2>
-            </div>
-          </div>
-          <div className="line-hl">
-            <div className="hl"></div>
-          </div>
-          {/* <form
-            action=""
-            onSubmit={handleDossObsSubmit}
-          > */}
-            <div className="pro-acc">
-              <h2>Protocole d’accouchement</h2>
-              <div className="date-heure-acc">
-                <div className="date-acc">
-                  <div className="span-item span-long1">
-                    <span>Date d’accouchement :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Date_daccouchement"
-                    // defaultValue={DossObsData?.Date_daccouchement}
-                    // readOnly
-                  />
-                </div>
-                <div className="heure-acc">
-                  <div className="span-item">
-                    <span>Heure :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Heure_daccouchement"
-                    // defaultValue={DossObsData?.Heure_daccouchement}
-                    // readOnly
-                  />
-                </div>
-              </div>
-              <div className="accoucheur">
-                <div className="span-text">
-                  <span>Accoucheur :</span>
-                </div>
-                <div className="textarea">
-                  <textarea
-                    name="accoucheur"
-                    id="accoucheur"
-                    // defaultValue={UserData?.Fname}
-                    // readOnly
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-            <div className="examen-annexes">
-              <h2>Examen des annexes :</h2>
-              <div className="annexes">
-                <div className="annexe">
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Poids :</span>
-                    </div>
-                    <input
-                      type="text"
-                      // value={Poids}
-                      name="Poids"
-                      // onChange={(e) => {
-                      //   setPoids(e.target.value);
-                      // }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Aspect :</span>
-                    </div>
-                    <input
-                      type="text"
-                      // value={Aspect}
-                      // name="Aspect"
-                      // onChange={(e) => {
-                      //   setAspect(e.target.value);
-                      // }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Anomalies :</span>
-                    </div>
-                    <input
-                      type="text"
-                      // value={Anomalies}
-                      // name="Anomalies"
-                      // onChange={(e) => {
-                      //   setAnomalies(e.target.value);
-                      // }}
-                    />
-                  </div>
-                </div>
-                <div className="annexe annexe-two">
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Placenta :</span>
-                    </div>
-                    <input
-                      type="text"
-                      // value={Placenta}
-                      // name="Placenta"
-                      // onChange={(e) => {
-                      //   setPlacenta(e.target.value);
-                      // }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Membranes :</span>
-                    </div>
-                    <input
-                      type="text"
-                      // value={Membranes}
-                      // name="Membranes"
-                      // onChange={(e) => {
-                      //   setMembranes(e.target.value);
-                      // }}
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Cordon :</span>
-                    </div>
-                    <input
-                      type="text"
-                      // value={Cordon}
-                      // name="Cordon"
-                      // onChange={(e) => {
-                      //   setCordon(e.target.value);
-                      // }}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="examen-annexes">
-              <h2>Examen des annexes :</h2>
-              <div className="sexe-poids-taille-pc">
-                <div className="date-annexe">
-                  <div className="span-item petit-span">
-                    <span>Sexe :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Sexe"
-                    id="date-annexe"
-                    // value={Sexe}
-                    // onChange={(e) => {
-                    //   setSexe(e.target.value);
-                    // }}
-                  />
-                </div>
-                <div className="poids-annexe">
-                  <div className="span-item petit-span">
-                    <span>Poids :</span>
-                  </div>
-                  <input type="text" />
-                </div>
-                <div className="taille-annexe">
-                  <div className="span-item petit-span">
-                    <span>Taille :</span>
-                  </div>
-
-                  <input
-                    type="text"
-                    // value={Taille}
-                    // name="Taille"
-                    // onChange={(e) => {
-                    //   setTaille(e.target.value);
-                    // }}
-                  />
-                </div>
-                <div className="pc-annexe">
-                  <div className="span-item petit-span">
-                    <span>PC :</span>
-                  </div>
-                  <input
-                    type="text"
-                    // value={Pc}
-                    // name="Pc"
-                    // onChange={(e) => {
-                    //   setPc(e.target.value);
-                    // }}
-                  />
-                </div>
-              </div>
-              <div className="score-dapgar">
-                <div className="score">
-                  <span>Score d'Apgar :</span>
-                </div>
-                <div className="minute-1">
-                  <span>1 minute</span>
-                  <input
-                    type="checkbox"
-                    // name="une_min"
-                    // onChange={(e) => {
-                    //   setUne_min(e.target.value);
-                    // }}
-                  />
-                </div>
-                <div className="minute-5">
-                  <span>5 minute</span>
-                  <input
-                    type="checkbox"
-                    // name="cinq_min"
-                    // onChange={(e) => {
-                    //   setCinq_min(e.target.value);
-                    // }}
-                  />
-                </div>
-              </div>
-              <div className="malforamtion-annexe">
-                <div className="span-item">
-                  <span>Malformation :</span>
-                </div>
-                <input
-                  type="text"
-                  // value={Malformation}
-                  // name="Malformation"
-                  // onChange={(e) => {
-                  //   setMalformation(e.target.value);
-                  // }}
-                />
-              </div>
-              <div className="remarque-annexe">
-                <div className="span-item">
-                  <span>Remarque :</span>
-                </div>
-                <input
-                  type="text"
-                  // name="Remarque"
-                  // value={Remarque}
-                  // onChange={(e) => {
-                  //   setRemarque(e.target.value);
-                  // }}
-                />
-              </div>
-              <div className="re-annexe-textarea">
-                <div className="textarea">
-                  <textarea name="rem-annexe" id="rem-annexe"></textarea>
-                </div>
-              </div>
-              <div className="empre-digi">
-                <div className="span-text">
-                  <span>Empreintes digitales :</span>
-                </div>
-                <div className="textarea">
-                  <textarea
-                    name="empre-digi"
-                    // id="empre-digi"
-                    // value={Empreintes_digitales}
-                    // onChange={(e) => {
-                    //   setEmpreintes_digitales(e.target.value);
-                    // }}
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          {/* </form> */}
           <div className="back-next-buttons back-next-dossier">
             <div className="back">
               <SwiperButtonBack>
@@ -1058,7 +775,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={MamanPoids}
+                    value={DossObsData?.MamanPoids}
                     name="MamanPoids"
                     onChange={(e) => {
                       if (e.target.value !== MamanPoids)
@@ -1072,7 +789,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={MamanTaille}
+                    value={DossObsData?.MamanTaille}
                     name="MamanTaille"
                     onChange={(e) => {
                       if (e.target.value !== MamanTaille)
@@ -1086,7 +803,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={MamanPoule}
+                    value={DossObsData?.MamanPoule}
                     name="MamanPoule"
                     onChange={(e) => {
                       if (e.target.value !== MamanPoule)
@@ -1100,7 +817,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={TA}
+                    value={DossObsData?.TA}
                     name="TA"
                     onChange={(e) => {
                       if (e.target.value !== TA) setTA(e.target.value);
@@ -1113,20 +830,20 @@ export default function MySwiper() {
                   <div className="span-item">
                     <span>Glycemie :</span>
                   </div>
-                  <input type="text" value={Glycemle} name="Glycemle" />
+                  <input type="text" value={DossObsData?.Glycemle} name="Glycemle" />
                 </div>
                 <div className="uree">
                   <div className="span-item">
                     <span>Uree sanguine :</span>
                   </div>
-                  <input type="text" value={UreeSanguine} name="UreeSanguine" />
+                  <input type="text" value={DossObsData?.UreeSanguine} name="UreeSanguine" />
                 </div>
               </div>
               <div className="examen-entree-item2">
                 <div className="span-item span-long">
                   <span>Caractere de cycle :</span>
                 </div>
-                <input type="text" value={CarcterCycle} name="CarcterCycle" />
+                <input type="text" value={DossObsData?.CarcterCycle} name="CarcterCycle" />
               </div>
               <div className="textarea">
                 <textarea name="exa-gene" id="exa-gene"></textarea>
@@ -1144,7 +861,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={HU}
+                    value={DossObsData?.HU}
                     name="HU"
                     onChange={(e) => {
                       if (e.target.value !== HU) setHU(e.target.value);
@@ -1157,7 +874,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={ConstractionUterines}
+                    value={DossObsData?.ConstractionUterines}
                     name="ConstractionUterines"
                     onChange={(e) => {
                       if (e.target.value !== ConstractionUterines)
@@ -1173,7 +890,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={Presentation}
+                    value={DossObsData?.Presentation}
                     name="Presentation"
                     onChange={(e) => {
                       if (e.target.value !== Presentation)
@@ -1187,7 +904,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={BCF}
+                    value={DossObsData?.BCF}
                     name="BCF"
                     onChange={(e) => {
                       if (e.target.value !== BCF) setBCF(e.target.value);
@@ -1201,7 +918,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={Uterus}
+                  value={DossObsData?.Uterus}
                   name="Uterus"
                   onChange={(e) => {
                     if (e.target.value !== Uterus) setUterus(e.target.value);
@@ -1214,7 +931,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={Speculum}
+                  value={DossObsData?.Speculum}
                   name="Speculum"
                   onChange={(e) => {
                     if (e.target.value !== Speculum)
@@ -1231,7 +948,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={ToucherVaginal}
+                  value={DossObsData?.ToucherVaginal}
                   name="ToucherVaginal"
                   onChange={(e) => {
                     if (e.target.value !== ToucherVaginal)
@@ -1256,8 +973,262 @@ export default function MySwiper() {
               <SwiperButtonNext>
                 <div
                   className="flex items-center justify-items-center gap-2"
-                  onClick={handleDossObsSubmit}
+                  onClick={!DossObsData?.MamanNom || DossObsData?.MamanNom === "" ? handleDossObsSubmit : null} 
                 >
+                  Suivant <BsChevronRight />
+                </div>
+              </SwiperButtonNext>
+            </div>
+          </div>
+        </div>
+      </SwiperSlide>
+      <SwiperSlide className="Swipe">
+        <div className="formulaire-dossier-obster">
+          <div className="formulaire-header-obster">
+            <div className="formulaire-dossier-obstetrique">
+              <h2>Dossier obstetrique</h2>
+            </div>
+          </div>
+          <div className="line-hl">
+            <div className="hl"></div>
+          </div>
+            <div className="pro-acc">
+              <h2>Protocole d’accouchement</h2>
+              <div className="date-heure-acc">
+                <div className="date-acc">
+                  <div className="span-item span-long1">
+                    <span>Date d’accouchement :</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="Date_daccouchement"
+                    defaultValue={DossObsData?.Date_daccouchement}
+                    readOnly
+                  />
+                </div>
+                <div className="heure-acc">
+                  <div className="span-item">
+                    <span>Heure :</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="Heure_daccouchement"
+                    defaultValue={DossObsData?.Heure_daccouchement}
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="accoucheur">
+                <div className="span-text">
+                  <span>Accoucheur :</span>
+                </div>
+                <div className="textarea">
+                  <textarea
+                    name="accoucheur"
+                    id="accoucheur"
+                    value={UserData?.Fname}
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+            <div className="examen-annexes">
+              <h2>Examen des annexes :</h2>
+              <div className="annexes">
+                <div className="annexe">
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Poids :</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={DossObsData?.Poids}
+                      name="Poids"
+                      readOnly
+                    />
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Aspect :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.Aspect}
+                      name="Aspect"
+                      readOnly
+                    />
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Anomalies :</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={DossObsData?.Anomalies}
+                      name="Anomalies"
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="annexe annexe-two">
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Placenta :</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={DossObsData?.Placenta}
+                      name="Placenta"
+                      readOnly
+                    />
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Membranes :</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={DossObsData?.Membranes}
+                      name="Membranes"
+                      readOnly
+                    />
+                  </div>
+                  <div className="annexe-item">
+                    <div className="span-item">
+                      <span>Cordon :</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={DossObsData?.Cordon}
+                      name="Cordon"
+                      readOnly
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="examen-annexes">
+              <h2>Examen des annexes :</h2>
+              <div className="sexe-poids-taille-pc">
+                <div className="date-annexe">
+                  <div className="span-item petit-span">
+                    <span>Sexe :</span>
+                  </div>
+                  <input
+                    type="text"
+                    name="Sexe"
+                    id="date-annexe"
+                    value={DossObsData?.Sexe}
+                    readOnly
+                  />
+                </div>
+                <div className="poids-annexe">
+                  <div className="span-item petit-span">
+                    <span>Poids :</span>
+                  </div>
+                  <input type="text" 
+                    value={DossObsData?.Poids}
+                    readOnly
+                  />
+                </div>
+                <div className="taille-annexe">
+                  <div className="span-item petit-span">
+                    <span>Taille :</span>
+                  </div>
+
+                  <input
+                    type="text"
+                    value={DossObsData?.Taille}
+                    name="Taille"
+                    readOnly
+                  />
+                </div>
+                <div className="pc-annexe">
+                  <div className="span-item petit-span">
+                    <span>PC :</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={DossObsData?.Pc}
+                    name="Pc"
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="score-dapgar">
+                <div className="score">
+                  <span>Score d'Apgar :</span>
+                </div>
+                <div className="minute-1">
+                  <span>1 minute</span>
+                  <input
+                    type="checkbox"
+                    name="une_min"
+                    value={DossObsData?.une_min}
+                    readOnly
+                  />
+                </div>
+                <div className="minute-5">
+                  <span>5 minute</span>
+                  <input
+                    type="checkbox"
+                    name="cinq_min"
+                    value={DossObsData?.cinq_min}
+                    readOnly
+                  />
+                </div>
+              </div>
+              <div className="malforamtion-annexe">
+                <div className="span-item">
+                  <span>Malformation :</span>
+                </div>
+                <input
+                  type="text"
+                  value={DossObsData?.Malformation}
+                  name="Malformation"
+                  readOnly
+                />
+              </div>
+              <div className="remarque-annexe">
+                <div className="span-item">
+                  <span>Remarque :</span>
+                </div>
+                <input
+                  type="text"
+                  name="Remarque"
+                  value={DossObsData?.Remarque}
+                  readOnly
+                />
+              </div>
+              <div className="re-annexe-textarea">
+                <div className="textarea">
+                  <textarea name="rem-annexe" id="rem-annexe"></textarea>
+                </div>
+              </div>
+              <div className="empre-digi">
+                <div className="span-text">
+                  <span>Empreintes digitales :</span>
+                </div>
+                <div className="textarea">
+                  <textarea
+                    name="empre-digi"
+                    // id="empre-digi"
+                    // value={Empreintes_digitales}
+                    readOnly
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+          <div className="back-next-buttons back-next-dossier">
+            <div className="back">
+              <SwiperButtonBack>
+                <div className="flex items-center justify-items-center gap-2">
+                  <BsChevronLeft /> Back
+                </div>
+              </SwiperButtonBack>
+            </div>
+            <div className="next">
+              <SwiperButtonNext>
+                <div className="flex items-center justify-items-center gap-2">
                   Suivant <BsChevronRight />
                 </div>
               </SwiperButtonNext>

@@ -5,8 +5,7 @@ import dataConcultation from "../../ConcultationDataBase.json";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function TableConcultation({ConcultationDB}) {
-
+export default function TableConcultation({ConcultationDB,Search}) {
   return (
     <div className="table-concultation">
       <div className="table-concultation-center">
@@ -22,7 +21,15 @@ export default function TableConcultation({ConcultationDB}) {
               Heure
             </td>
           </tr>
-          {ConcultationDB?.map((Concultation) => (
+          {ConcultationDB?.filter((item) => {
+            if (Search === "" || !Search) {
+              return item;
+            } else if ((item.DateConcultation.toLowerCase().includes(Search.toLowerCase())) ||
+            (item.HeureConsultation.toLowerCase().includes(Search.toLowerCase())) || 
+            (item.MedecinNom.toLowerCase().includes(Search.toLowerCase()))) {
+              return item;
+            }
+          }).map((Concultation) => (
             <TableConcultationReadOnlyRow Concultation={Concultation} />
           ))}
         </table>

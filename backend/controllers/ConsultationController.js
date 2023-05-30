@@ -55,9 +55,11 @@ const CreateNewConsultation = async (req, res) => {
         if (!idMedecin) {
             return res.status(400).json({ error: 'You must provide all fields' });
         }
+        const medecin = await User.findOne({_id :idMedecin});
         const newConsultation = new Consultation({
             patientID: id,
             MedecinID: idMedecin,
+            MedecinNom: medecin.Fname,
             DateConcultation: Date,
             HeureConsultation: Heure,
         });

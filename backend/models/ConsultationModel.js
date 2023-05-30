@@ -17,6 +17,10 @@ const ConsultationSchema = new mongoose.Schema({
     ExamenID: {
         type: mongoose.Schema.Types.ObjectId, ref: "examens"
     },
+    MedecinNom: {
+        type: String,
+        required: false,
+    },
     DateConcultation:{
         type: String,
         required: false,

@@ -1,12 +1,15 @@
 import { CiLock, CiUnlock } from "react-icons/ci";
 import { useState } from "react";
-export default function AddCahierSante({ add, setAdd }) {
+export default function AddCahierSante({ add, setAdd, open }) {
   const handleClickAddCahier = () => {
-    setAdd(!add);
+    if(open){
+      setAdd(!add);
+    }
   };
-
-  let toggleClassAdd = add ? " add-cahier-active" : "";
-
+  var toggleClassAdd = "";
+  if(open){
+    var toggleClassAdd = add ? " add-cahier-active" : "";
+  }
   return (
     <button
       className={`add-cahier-sante${toggleClassAdd}`}

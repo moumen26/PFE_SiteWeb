@@ -41,7 +41,6 @@ export default function NouveauNe() {
   const [NouveauneDB, setNouveauneDB] = useState();
   const [UserData , setUserData] = useState();
   const { user } = useAuthContext();
-  // Fetch Patient Data
  // Fetch Patient Data
  useEffect(() => {
   const fetchPatientData = async () => {

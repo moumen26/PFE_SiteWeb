@@ -5,7 +5,7 @@ import VoirButton from "../buttons/buttonVoir";
 export default function TableConcultationReadOnlyRow({ Concultation }) {
   return (
     <tr className="table-concultation-ligne">
-      <td className="table-concultation-td-nom">{Concultation.MedecinID}</td>
+      <td className="table-concultation-td-nom">Dr {Concultation.MedecinNom}</td>
       <td className="table-concultation-td-date">
         {Concultation.DateConcultation}
       </td>
