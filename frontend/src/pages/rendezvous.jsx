@@ -10,24 +10,31 @@ export default function Rendezvous() {
   const [act, setAct] = useState(false);
   const { user } = useAuthContext();
   const history = useNavigate();
-  const {id} = useParams();
-  const [identificationMaman, setIdentificationMaman] = useState('');
-  const [Prenom, setPrenom] = useState('');
-  const [Nom, setNom] = useState('');
-  const [DateDeNaissance, setDateDeNaissance] = useState('');
-  const [Sexe, setSexe] = useState('');
-  const [Phone, setPhone] = useState('');
-  const [LieuDeNaissance, setLieuDeNaissance] = useState('');
-  const [AddressActuel, setAddressActuel] = useState('');
-  const [NombreEnfant, setNombreEnfant] = useState('');
+  const { id } = useParams();
+  const [identificationMaman, setIdentificationMaman] = useState("");
+  const [Prenom, setPrenom] = useState("");
+  const [Nom, setNom] = useState("");
+  const [DateDeNaissance, setDateDeNaissance] = useState("");
+  const [Sexe, setSexe] = useState("");
+  const [Phone, setPhone] = useState("");
+  const [LieuDeNaissance, setLieuDeNaissance] = useState("");
+  const [AddressActuel, setAddressActuel] = useState("");
+  const [NombreEnfant, setNombreEnfant] = useState("");
   const handleUpdatePatient = async () => {
     if (id !== undefined) {
       try {
         const response = await axios.patch(
           `http://localhost:8000/patients/${id}`,
           {
-            identificationMaman, Prenom, Nom, DateDeNaissance, Sexe, Phone, LieuDeNaissance, 
-            AddressActuel, NombreEnfant
+            identificationMaman,
+            Prenom,
+            Nom,
+            DateDeNaissance,
+            Sexe,
+            Phone,
+            LieuDeNaissance,
+            AddressActuel,
+            NombreEnfant,
           },
           {
             headers: {
@@ -58,9 +65,16 @@ export default function Rendezvous() {
           Authorization: `Bearer ${user?.token}`,
         },
         body: JSON.stringify({
-          idAccoucheur: user?.id, identificationMaman, Prenom, Nom, 
-          DateDeNaissance, Sexe, Phone, LieuDeNaissance, 
-          AddressActuel, NombreEnfant
+          idAccoucheur: user?.id,
+          identificationMaman,
+          Prenom,
+          Nom,
+          DateDeNaissance,
+          Sexe,
+          Phone,
+          LieuDeNaissance,
+          AddressActuel,
+          NombreEnfant,
         }),
       });
       // get the patientID via response from the server patientRouter.post
@@ -86,10 +100,13 @@ export default function Rendezvous() {
           <div className="rendezvous-logo-hopital"></div>
           <h2>Nom de l'hopital</h2>
         </div>
+        <div className="Rendezvous-form">
           <div className="rendezvous-form-class">
             <div className="rendezvous-form-item">
               <label htmlFor="">ID</label>
-              <input type="text" placeholder="Identifiant unique.." 
+              <input
+                type="text"
+                placeholder="Identifiant unique.."
                 name="identificationMaman"
                 defaultValue={identificationMaman}
                 onChange={(event) => setIdentificationMaman(event.target.value)}
@@ -99,7 +116,9 @@ export default function Rendezvous() {
           <div className="rendezvous-form-class">
             <div className="rendezvous-form-item">
               <label htmlFor="">Prénom</label>
-              <input type="text" placeholder="Entez votre Prenom.." 
+              <input
+                type="text"
+                placeholder="Entez votre Prenom.."
                 name="prenom"
                 defaultValue={Prenom}
                 onChange={(event) => setPrenom(event.target.value)}
@@ -107,7 +126,9 @@ export default function Rendezvous() {
             </div>
             <div className="rendezvous-form-item">
               <label htmlFor="">Nom</label>
-              <input type="text" placeholder="Entez votre Nom.." 
+              <input
+                type="text"
+                placeholder="Entez votre Nom.."
                 name="nom"
                 defaultValue={Nom}
                 onChange={(event) => setNom(event.target.value)}
@@ -117,7 +138,8 @@ export default function Rendezvous() {
           <div className="rendezvous-form-class">
             <div className="rendezvous-form-item">
               <label>Sexe</label>
-              <select name="sexe"
+              <select
+                name="sexe"
                 defaultValue={Sexe}
                 onChange={(event) => setSexe(event.target.value)}
               >
@@ -127,7 +149,9 @@ export default function Rendezvous() {
             </div>
             <div className="rendezvous-form-item">
               <label htmlFor="">Date de naissance</label>
-              <input type="date" name="DateDeNaissance" 
+              <input
+                type="date"
+                name="DateDeNaissance"
                 defaultValue={DateDeNaissance}
                 onChange={(event) => setDateDeNaissance(event.target.value)}
               />
@@ -182,8 +206,11 @@ export default function Rendezvous() {
             </div>
           </div>
           <div className="rendezvous-enregistrer-class">
-            <RendezvousProfileEnregistrerButton handlePatient={handleAddPatient}/>
+            <RendezvousProfileEnregistrerButton
+              handlePatient={handleAddPatient}
+            />
           </div>
+        </div>
       </div>
     </div>
   );

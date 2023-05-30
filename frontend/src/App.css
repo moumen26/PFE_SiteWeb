@@ -4495,17 +4495,19 @@ form.sign-in-form {
 }
 
 /* rendez-vous style */
-.Rendezvous form {
+.Rendezvous{
+  width: 100%;
+  height: 100vh;
+}
+.Rendezvous-form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  margin-top: 85px;
+  margin-top: 90px;
   gap: 24px;
+  align-items: center;
 }
 
-.rendezvous-container {
-  height: 100vh;
-}
 
 .rendezvous-form-class {
   display: flex;
@@ -4657,7 +4659,8 @@ form.sign-in-form {
 .Conculter,
 .Affichage-concultation,
 .Patients-profile,
-.Maman-profile {
+.Maman-profile,
+.Rendezvous {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -4666,7 +4669,8 @@ form.sign-in-form {
 .conculter-container,
 .affichage-concultation-container,
 .patient-profile-container,
-.maman-profile-container {
+.maman-profile-container,
+.rendezvous-container {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -5270,7 +5274,8 @@ font-weight: 700;
 .affichage-concultation-container,
 .Doctor-profile,
 .patient-profile-container,
-.maman-profile-container {
+.maman-profile-container,
+.rendezvous-container {
   z-index: 990;
   background-color: white;
 }
