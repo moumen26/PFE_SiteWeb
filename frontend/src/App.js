@@ -20,6 +20,7 @@ import AffichageConcultation from "./pages/affichageConcultation";
 import PatientProfile from "./pages/patientProfile";
 import TableConcultation from "./components/tables/tableConcultation";
 import MamanProfile from "./pages/mamanProfile";
+import ProfilePatient from "./pages/profile";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -62,8 +63,8 @@ function App() {
             }
           />
           <Route
-            path="paramètres"
-            element={user ? <Coupon /> : <Navigate to="/login" />}
+            path="profilepatients"
+            element={user ? <ProfilePatient /> : <Navigate to="/login" />}
           />
           <Route
             path="login"
