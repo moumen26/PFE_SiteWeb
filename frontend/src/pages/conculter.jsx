@@ -19,12 +19,14 @@ export default function Conculter() {
   const [OrdonanceData, setOrdonanceData] = useState("");
   const [medicament, setMedicament] = useState("");
   const [Context, setContext] = useState("");
-  const [Symptomes, setSymptomes] = useState("");
+  const [Maladie, setMaladie] = useState("");
+  const [Maladies, setMaladies] = useState("");
   const [NomMedicament, setNomMedicament] = useState("");
   const [DureeMedicament, setDureeMedicament] = useState("");
   const [DoseMedicament, setDoseMedicament] = useState("");
   const [QuantiteMedicament, setQuantiteMedicament] = useState("");
   const [PatientData , setPatientData] = useState("");
+  const [Medicaments, setMedicaments] = useState(null);
   const [medAddFormData, setMedAddFormData] = useState({
     medicament: "",
     quantite: "",
@@ -174,6 +176,56 @@ export default function Conculter() {
     };
     fetchMedicamentData();
   }, [MedicamentDB,ConsultationData,user?.token]);
+  //fetch Medicaments data base
+  useEffect(() => {
+    const fetchMedicamentDataBase = async () => {
+        await fetch(`http://localhost:8000/patients/Medicaments/all/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setMedicaments(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Medicaments data:", error);
+              });
+          } else {
+            console.error("Error resieving Medicaments date", response.error);
+          }
+        });
+    };
+    fetchMedicamentDataBase();
+  }, [Medicaments,ConsultationData,user?.token]);
+  //fetch Maladie data base
+  useEffect(() => {
+    const fetchMaladieDataBase = async () => {
+        await fetch(`http://localhost:8000/patients/Medicaments/all/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setMaladies(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Medicaments data:", error);
+              });
+          } else {
+            console.error("Error resieving Medicaments date", response.error);
+          }
+        });
+    };
+    fetchMaladieDataBase();
+  }, [Maladies,ConsultationData,user?.token]);
 //Add Diagnostic
   const handleClickAddDiagnostic = async () => {
     // Save the Diagnostic in the database
@@ -305,7 +357,7 @@ export default function Conculter() {
       const response = await axios.patch(
         `http://localhost:8000/patients/Diagnostic/${DiagnosticData._id}`,
         {
-          Context, Symptomes
+          Context, Maladie
         },
         {
           headers: {
@@ -460,11 +512,18 @@ export default function Conculter() {
                         onChange={(e) => setContext(e.target.value)}
                       ></textarea>
                       <h2>Maladie :</h2>
-                      <input type="text" placeholder="fiévre, faiblesse..." 
-                        name="Symptomes"
-                        value={Symptomes}
-                        onChange={(e) => setSymptomes(e.target.value)}
-                        />
+                      <select
+                            name="Maladie"
+                            value={Maladie}
+                            onChange={(e) => setMaladie(e.target.value)}
+                          >
+                            <option selected disabled>
+                              sélectionnez un medicament
+                            </option>
+                            {Maladies ? Maladies.map((Maladie) => (
+                              <option value={Maladie.nom}>{Maladie.nom}</option>
+                            )) : null}
+                          </select>
                     </div>
                   </div>
                 </div>
@@ -503,10 +562,9 @@ export default function Conculter() {
                             <option selected disabled>
                               sélectionnez un medicament
                             </option>
-                            <option value="med1">medicament1</option>
-                            <option value="med2">medicament2</option>
-                            <option value="med3">medicament3</option>
-                            <option value="med4">medicament4</option>
+                            {Medicaments ? Medicaments.map((Medicament) => (
+                              <option value={Medicament.nom}>{Medicament.nom}</option>
+                            )) : null}
                           </select>
                         </div>
                         <div className="ordonance-item quantite-item">

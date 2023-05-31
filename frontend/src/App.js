@@ -103,6 +103,10 @@ function App() {
             path="rendezvous"
             element={user ? <Rendezvous /> : <Navigate to="/login" />}
           />
+          <Route
+            path="Hospitalisation/:id"
+            element={user ? <Coupon /> : <Navigate to="/login" />}
+          />
         </Routes>
       </main>
     </BrowserRouter>

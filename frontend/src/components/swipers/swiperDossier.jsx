@@ -374,7 +374,7 @@ export default function MySwiper() {
                 <input
                   type="date"
                   id="date"
-                  value={DossObsData?.DateEntrer}
+                  value={CurrentDate}
                   name="DateEntrer"
                   onChange={(e) => {
                     if (e.target.value !== DateEntrer)

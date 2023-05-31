@@ -56,7 +56,8 @@ export default function AddPatient() {
           <FichierPatient />
         </div>
       </div>
-      <div className="addpatient-add-cahier">
+      {/*
+        <div className="addpatient-add-cahier">
         <AddCahierSante add={add} setAdd={setAdd} />
       </div>
       <div className={`cahier-vaccin${toggleClassAdd}`}>
@@ -145,6 +146,8 @@ export default function AddPatient() {
           </div>
         </div>
       </div>
+      */}
+      
     </div>
   );
 }

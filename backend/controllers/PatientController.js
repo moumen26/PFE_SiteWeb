@@ -101,7 +101,7 @@ const CreateNewNouveaune = async (req, res) => {
             }catch(err){
                 res.status(400).json({err: err.message});
             }
-            
+            /*
             // Create new Carnet de santé
             const newCarnetSante = new CarnetSante({
                 patientID,
@@ -120,6 +120,7 @@ const CreateNewNouveaune = async (req, res) => {
                 console.error('Error Carnet de santé:', error);
                 res.status(500).json({ message: 'Error saving Carnet de santé' });
             });
+            */
             // Send patientID to patientDetails
             await res.status(201).json({id: patientID});
         }).catch((error) => {

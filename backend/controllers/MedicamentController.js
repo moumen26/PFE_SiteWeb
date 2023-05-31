@@ -17,17 +17,10 @@ const GetAllMedicament = async (req, res) => {
     }
     await Ordonance.findById({_id: id}).then(async (ordonance)=>{
         // Find the Vaccin by ID in the database
-        await Medicament.find({OrdonanceID : ordonance._id})
-        .then((medicament) => {
-            if (!medicament) {
-            return res.status(404).json({ message: "medicament not found" });
-            }
-            res.status(200).json(medicament);
-        })
-        .catch((error) => {
-            console.error("Error retrieving medicament:", error);
-            res.status(500).json({ message: "Error retrieving medicament" });
-      });
+        if (!ordonance || !ordonance.Medicaments){
+            return res.status(404).json({ message: "Ordonance not found" });
+        }
+        res.status(200).json(ordonance.Medicaments);
       
     }).catch((error)=>{
         console.error("Error retrieving Ordonance :", error);
@@ -121,10 +114,57 @@ const DeleteMedicament = async (req, res) => {
     res.status(400).json({err: err.message});
 }
 }
-
+// get all medicament 
+const GetAllMedicaments = async (req, res) => {
+    await Medicament.find({}).then((medicaments) => {
+        if (!medicaments) {
+            return res.status(404).json({ message: "medicaments not found" });
+        }
+        res.status(200).json(medicaments);
+    }).catch((error) => {
+        console.error("Error retrieving medicaments:", error);
+        res.status(500).json({ message: "Error retrieving medicaments" });
+    });
+}
+// add new medicament
+const AddNewMedicament = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const {NomMedicament, DoseMedicament, DureeMedicament, QuantiteMedicament} = req.body;
+    //check if id is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Specified id is not valid" });
+    }
+    const newMedicament = {
+      
+    }
+    await Ordonance.findById({_id: id}).then(async (ordonance)=>{
+      if (!ordonance) {
+        return res.status(404).json({ message: 'ordonance not found' });
+      }
+      ordonance.Medicaments.push({
+        OrdonanceID: id,
+        NomMedicament: NomMedicament,
+        DoseMedicament: DoseMedicament,
+        DureeMedicament: DureeMedicament,
+        QuantiteMedicament: QuantiteMedicament,
+      });
+      ordonance.save();
+      res.status(200).json({ message: 'medicament created successfully'});
+    }).catch((error)=>{
+        console.error("Error creating new Medicament:", error);
+        res.status(500).json({ message: "Error creating new Medicament" });
+    });
+  } catch (error) {
+    console.error("Error creating new Medicament:", error);
+    res.status(500).json({ message: "Error creating new Medicament" });
+  }
+}
 module.exports = {
+    GetAllMedicaments,
     GetAllMedicament,
     GetMedicamentById,
     CreateNewMedicament,
-    DeleteMedicament
+    DeleteMedicament,
+    AddNewMedicament
 }

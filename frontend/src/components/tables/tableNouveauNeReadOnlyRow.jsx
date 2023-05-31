@@ -1,6 +1,7 @@
 import React from "react";
 import ConculterButton from "../buttons/buttonConculter";
 import VoirButton from "../buttons/buttonVoir";
+import HospitalisationButton from "../buttons/buttonHospitalisation";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 
@@ -50,8 +51,8 @@ export default function TableNouveauNe({ NouveauNe }) {
       history(`/Dossier-Nouveau-ne/${await NouveauNe._id}`);
     }
   };
-  const handleCompletePatient = async () =>{
-    history(`/antecedent/${await NouveauNe._id}`);
+  const handleAddHospitalisation = async () =>{
+    history(`/Hospitalisation/${await NouveauNe._id}`);
   }
   return (
     <tr className="table-nouveau-ne-ligne">
@@ -61,10 +62,8 @@ export default function TableNouveauNe({ NouveauNe }) {
       <td className="table-patients-td-region">{NouveauNe.Adresse}</td>
       <td className="table-patients-td table-patient-td-button">
         <ConculterButton AddConsultation={handleAddConsultation} />
+        <HospitalisationButton Hospitalisation={handleAddHospitalisation} />
         <VoirButton VoirPatient={handleVoirDossierPatient} />
-        {(NouveauNe?.maturity === "Nouveau-ne" && NouveauNe.idCarnetSante) && 
-          <VoirButton CompletePatient={handleCompletePatient} />
-        } 
       </td>
     </tr>
   );

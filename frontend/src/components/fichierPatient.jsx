@@ -19,7 +19,6 @@ export default function FichierPatient() {
   const [cinq_min, setCinq_min] = useState("");
   const [Malformation, setMalformation] = useState("");
   const [Remarque, setRemarque] = useState("");
-  const [Empreintes_digitales, setEmpreintes_digitales] = useState("");
   const { user } = useAuthContext();
   const { id } = useParams();
   const [PatientData, setPatientData] = useState(null);
@@ -142,7 +141,6 @@ export default function FichierPatient() {
             Pc,
             Malformation,
             Remarque,
-            Empreintes_digitales,
           },
           {
             headers: {
@@ -156,6 +154,7 @@ export default function FichierPatient() {
         } else if (response.status === 200) {
           window.alert("Add patient success", response.data.message);
         }
+        history(`Dossier-Nouveau-ne/${PatientData._id}`)
       } catch (error) {
         console.error(error);
       }
@@ -404,26 +403,6 @@ export default function FichierPatient() {
                   setRemarque(e.target.value);
                 }}
               />
-            </div>
-            <div className="re-annexe-textarea">
-              <div className="textarea">
-                <textarea name="rem-annexe" id="rem-annexe"></textarea>
-              </div>
-            </div>
-            <div className="empre-digi">
-              <div className="span-text">
-                <span>Empreintes digitales :</span>
-              </div>
-              <div className="textarea">
-                <textarea
-                  name="empre-digi"
-                  id="empre-digi"
-                  value={Empreintes_digitales}
-                  onChange={(e) => {
-                    setEmpreintes_digitales(e.target.value);
-                  }}
-                ></textarea>
-              </div>
             </div>
           </div>
           <div className="Enregistre-class">

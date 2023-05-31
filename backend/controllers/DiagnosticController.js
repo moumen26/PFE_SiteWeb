@@ -86,13 +86,13 @@ const CreateNewDiagnostic = async (req, res) => {
 const UpdateDiagnostic = async (req, res) => {
     try {
         const { id } = req.params;
-        const { Context, Symptomes} = req.body;
+        const { Context, Maladie} = req.body;
 
         if (!mongoose.Types.ObjectId.isValid(id)) {
             return res.status(400).json({ message: 'Specified id is not valid' });
         }
         //find id in db and update
-        await Diagnostic.findOneAndUpdate({_id: id},{Context,Symptomes}).then((diagnostic) => {
+        await Diagnostic.findOneAndUpdate({_id: id},{Context,Maladie}).then((diagnostic) => {
             if (!diagnostic) {
                 return res.status(404).json({ message: 'Diagnostic not found' });
             }

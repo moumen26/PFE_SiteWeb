@@ -25,6 +25,10 @@ export default function Antecedent() {
   const [addVisite, setAddvisite] = useState(false);
   const [addVisite2, setAddvisite2] = useState(false);
   const [addConsultation, setAddConsultation] = useState(false);
+  //get current date
+  const current = new Date();
+  const Date_daccouchement = `${current.getDate()}-${current.getMonth() + 1}-${current.getFullYear()}`;
+  const Heure_daccouchement = `${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
   let toggleClassAddVaccin = addVaccin ? " add-vaccin-active" : "";
@@ -46,6 +50,58 @@ export default function Antecedent() {
   const [Search, setSearch] = useState("");
   const [CarnetSanteData, setCarnetSante] = useState(null);
   const [VaccinData, setVaccinData] = useState(null);
+  //Save and add nouveau-ne the patient
+  const handleAddNouveauNe = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8000/patients/Nouveau-ne/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+          body: JSON.stringify({
+            idAccoucheur: user?.id,
+            Date_daccouchement,
+            Heure_daccouchement,
+          }),
+        }
+      );
+      // get the patientID via response from the server patientRouter.post
+      const data = await response.json();
+      if (!response.ok) {
+        window.alert("Add patient failed", data.error);
+      }
+      if (response.ok) {
+        try {
+          const response = await fetch(`http://localhost:8000/patients/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user?.token}`,
+            },
+            body: JSON.stringify({
+              idNouveauNe: data._id,
+            }),
+          });
+          // get the MamanID via response from the server
+          const data = await response.json();
+          if (!response.ok) {
+            window.alert("Add idNouveauNe failed", data.error);
+          }
+          if (response.ok) {
+            history(`/patients/${await data.id}`);
+          }
+        } catch (error) {
+          console.error("Error adding idNouveauNe:", error);
+        }
+        history(`/patients/${await data.id}`);
+      }
+    } catch (error) {
+      console.error("Error adding Nouveau-ne:", error);
+    }
+  };
   //delete the patient
   const handleDeletePatient = async () => {
     try {
@@ -69,161 +125,162 @@ export default function Antecedent() {
     window.alert(error.message);
   }
   };
-      // Fetch Nouveau-ne Data
-      useEffect(() => {
-        const fetchPatientData = async () => {
-          if (user?.token !== undefined) {
-            await fetch(`http://localhost:8000/patients/${id}`, {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user?.token}`,
-              },
-            }).then((response) => {
-              if (response.ok) {
-                response
-                  .json()
-                  .then((data) => {
-                    setPatientData(data);
-                  })
-                  .catch((error) => {
-                    console.error("Error fetching Patient data:", error);
-                  });
-              } else {
-                console.error("Error resieving Patient date", response.error);
-              }
-            });
+  // Fetch Nouveau-ne Data
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      if (user?.token !== undefined) {
+        await fetch(`http://localhost:8000/patients/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setPatientData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Patient data:", error);
+              });
           } else {
-            history(`/patients`);
+            console.error("Error resieving Patient date", response.error);
           }
-        };
-        fetchPatientData();
-      }, [history, id, user?.token, PatientData]);
-    
-      //Concultation data
-      useEffect(() => {
-      const fetchPatientData = async () => {
-        if (id !== undefined) {
-          await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
+        });
+      } else {
+        history(`/patients`);
+      }
+    };
+    fetchPatientData();
+  }, [history, id, user?.token, PatientData]);
+
+  //Concultation data
+  useEffect(() => {
+  const fetchPatientData = async () => {
+    if (id !== undefined) {
+      await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user?.token}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          response
+            .json()
+            .then((data) => {
+              setConcultationDB(data);
+            })
+            .catch((error) => {
+              console.error("Error fetching Concultation data:", error);
+            });
+        } else {
+          console.error("Error resieving Concultation date", response.error);
+        }
+      });
+    }
+  };
+  fetchPatientData();
+  }, [history, id, user?.token, ConcultationDB]);
+  //Get Carnet de Sante Data
+  useEffect(() => {
+    const fetchCarnetSanteData = async () => {
+      if (PatientData.idCarnetSante !== undefined) {
+        await fetch(
+          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`,
+          {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${user?.token}`,
             },
-          }).then((response) => {
-            if (response.ok) {
-              response
-                .json()
-                .then((data) => {
-                 setConcultationDB(data);
-                })
-                .catch((error) => {
-                  console.error("Error fetching Concultation data:", error);
-                });
-            } else {
-              console.error("Error resieving Concultation date", response.error);
-            }
-          });
-        }
-      };
-      fetchPatientData();
-      }, [history, id, user?.token, ConcultationDB]);
-      //Get Carnet de Sante Data
-      useEffect(() => {
-        const fetchCarnetSanteData = async () => {
-          if (PatientData.idCarnetSante !== undefined) {
-            await fetch(
-              `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`,
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                  Authorization: `Bearer ${user?.token}`,
-                },
-              }
-            ).then((response) => {
-              if (response.ok) {
-                response
-                  .json()
-                  .then((data) => {
-                    setCarnetSante(data);
-                  })
-                  .catch((error) => {
-                    console.error("Error fetching Carnet sante data:", error);
-                  });
-              } else {
-                console.error("Error fetching Carnet sante data:", response.status);
-              }
-            });
           }
-        };
-        fetchCarnetSanteData();
-      }, [history, CarnetSanteData, user?.token, PatientData?.idCarnetSante]);
-      useEffect(() => {
-        const fetchVaccinData = async () => {
-          if (id !== undefined) {
-            await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`, {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${user.token}`,
-              },
-            }).then((response) => {
-              if (response.ok) {
-                response
-                  .json()
-                  .then((data) => {
-                    setVaccinData(data);
-                  })
-                  .catch((error) => {
-                    console.error("Error fetching Vaccin data:", error);
-                  });
-              } else {
-                console.error("Error resieving vaccin date", response.error);
-              }
-            });
+        ).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setCarnetSante(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Carnet sante data:", error);
+              });
           } else {
-            history();
+            console.error("Error fetching Carnet sante data:", response.status);
           }
-        };
-        fetchVaccinData();
-      }, [history, id, VaccinData]);
-      //user have access to Pediatre
-      const giveAccessToPediatre = (speciality) => {
-          if(speciality.toLowerCase() === "pediatre"){
-            return true;
-          }else{
-            return false;
+        });
+      }
+    };
+    fetchCarnetSanteData();
+  }, [history, CarnetSanteData, user?.token, PatientData?.idCarnetSante]);
+  useEffect(() => {
+    const fetchVaccinData = async () => {
+      if (id !== undefined) {
+        await fetch(`http://localhost:8000/patients/Vaccin/all/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setVaccinData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Vaccin data:", error);
+              });
+          } else {
+            console.error("Error resieving vaccin date", response.error);
           }
+        });
+      } else {
+        history();
       }
-      //user have access to Sage Femme
-      const giveAccessToSageFemme = (speciality) => {
-        if(speciality.toLowerCase() === "sage femme"){
-          return true;
-        }else{
-          return false;
-        }
+    };
+    fetchVaccinData();
+  }, [history, id, VaccinData]);
+  //user have access to Pediatre
+  const giveAccessToPediatre = (speciality) => {
+      if(speciality.toLowerCase() === "pediatre"){
+        return true;
+      }else{
+        return false;
       }
-      //user have access to Medecin
-      const giveAccessToMedecin = (speciality) => {
-        if(speciality.toLowerCase() === "medecin"){
-          return true;
-        }else{
-          return false;
-        }
-      }
+  }
+  //user have access to Sage Femme
+  const giveAccessToSageFemme = (speciality) => {
+    if(speciality.toLowerCase() === "sage femme"){
+      return true;
+    }else{
+      return false;
+    }
+  }
+  //user have access to Medecin
+  const giveAccessToMedecin = (speciality) => {
+    if(speciality.toLowerCase() === "medecin"){
+      return true;
+    }else{
+      return false;
+    }
+  }
   return (
     <div className="Antecedent">
       <div className="antecedent-container">
         <div className="antecedent-hedear">
           <input type="submit" value="Annuler" onClick={handleDeletePatient}/>
           <h2>Dossier maman</h2>
-          <input type="submit" value="Enregistrer tout" />
+          <input type="submit" value="Enregistrer tout" onClick={handleAddNouveauNe}/>
         </div>
         <div className="antecedent-swipe">
           <div className="home-formulaire-swiper">
             <MySwiper></MySwiper>
           </div>
+          {/* 
           <div className="addpatient-add-cahier add-vaccin">
-            {/* Cahier de sante */}
             <AddCahierSante add={add} setAdd={setAdd}/>
           </div>
+          
           <div className={`cahier-vaccin${toggleClassAdd}`}>
             <div className="cahier-sante-title">
               <h2>Carnet de sante :</h2>
@@ -234,7 +291,6 @@ export default function Antecedent() {
             <div
               className={`vaccin-visite-class${toggleClassAddVaccin} vaccin-visite-class${toggleClassAddVisite2}`}
             >
-              {/* Vaccin */}
               <AddVaccinButton
                 addVaccin={addVaccin}
                 setAddvacin={setAddvacin}
@@ -261,7 +317,6 @@ export default function Antecedent() {
                     <VisiteAddButton />
                   </div>
                   <div className="addpatient-add-consultation">
-                    {/* Concultation */}
                     <AddConcultation
                       addConsultation={addConsultation}
                       setAddConsultation={setAddConsultation}
@@ -296,6 +351,8 @@ export default function Antecedent() {
               </div>
             </div>
           </div>
+          */}
+          
         </div>
       </div>
     </div>

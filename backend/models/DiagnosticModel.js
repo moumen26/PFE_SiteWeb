@@ -9,7 +9,7 @@ const DiagnosticSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    Symptomes: {
+    Maladie: {
         type: String,
         required: false,
     },

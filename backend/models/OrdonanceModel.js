@@ -6,7 +6,25 @@ const OrdonanceSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: "consultations" 
     },
     Medicaments: [{
-        type: mongoose.Schema.Types.ObjectId, ref: "medicaments" 
+        OrdonanceID: {
+            type: mongoose.Schema.Types.ObjectId, ref: "ordonances"
+        },
+        NomMedicament: {
+            type: String,
+            required: false,
+        },
+        DoseMedicament: {
+            type: String,
+            required: false,
+        },
+        DureeMedicament: {
+            type: String,
+            required: false,
+        },
+        QuantiteMedicament: {
+            type: String,
+            required: false,
+        },
     }],
 });
 

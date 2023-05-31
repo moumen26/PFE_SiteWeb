@@ -47,8 +47,15 @@ const {
     GetAllMedicament,
     GetMedicamentById,
     CreateNewMedicament,
-    DeleteMedicament
+    DeleteMedicament,
+    GetAllMedicaments,
+    AddNewMedicament
 } = require('../controllers/MedicamentController');
+const {
+    GetAllMaladies,
+    GetMaladie,
+    AddNewMaladie,
+} = require('../controllers/MaladieController');
 const router = express.Router();
 const requireAuth = require('../middleware/requireAuth');
 
@@ -99,13 +106,13 @@ router.delete('/DossObs/:id', DeleteDossObs);
 // CARNET DE SANTE
 
 //get a specific carnet de sante
-router.get('/CarnetSante/:id', GetCarnetSante);
+//router.get('/CarnetSante/:id', GetCarnetSante);
 
 //update a carnet de sante
-router.patch('/CarnetSante/:id', UpdateCarnetSante);
+//router.patch('/CarnetSante/:id', UpdateCarnetSante);
 
 //delete a carnet de sante
-router.delete('/CarnetSante/:id', DeleteCarnetSante);
+//router.delete('/CarnetSante/:id', DeleteCarnetSante);
 
 // VACCIN
 
@@ -171,13 +178,28 @@ router.delete('/Ordonance/:id', DeleteOrdonance);
 //get all medecaments
 router.get("/Medicament/all/:id", GetAllMedicament);
 
+//get all
+router.get("/Medicaments/all/", GetAllMedicaments);
+
 //post a new medecament
-router.post('/AddMedicament/:id',CreateNewMedicament);
+//router.post('/AddMedicament/:id',CreateNewMedicament);
+
+// add a new medecament
+router.post('/AddMedicament/:id',AddNewMedicament);
 
 //get a specific medecament
 router.get('/Medicament/:id', GetMedicamentById);
 
 //delete a medecament
 router.delete('/Medicament/:id', DeleteMedicament);
+
+// MALADIE
+
+// get all maladie data base
+router.get('/Maladie/all', GetAllMaladies);
+// get maladie
+router.get('/Maladie/:id', GetMaladie);
+// add a maladie
+router.post('/AddMaladie/:id',AddNewMaladie);
 
 module.exports = router;

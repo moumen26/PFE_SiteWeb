@@ -20,7 +20,7 @@ const DossierObstetriqueSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    
+    //Nouveau-ne
     Poids: {
         type: String,
         required: false, 
@@ -73,10 +73,7 @@ const DossierObstetriqueSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    Empreintes_digitales: {
-        type: String,
-        required: false,
-    },
+    //Maman
     MamanNom: {
         type: String,
         required: false,
@@ -85,7 +82,7 @@ const DossierObstetriqueSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    DateNaissance: {
+    MamanDateNaissance: {
         type: String,
         required: false,
     },
@@ -93,7 +90,7 @@ const DossierObstetriqueSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    Profession: {
+    MamanProfession: {
         type: String,
         required: false,
     },
@@ -113,12 +110,8 @@ const DossierObstetriqueSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
-    Admise: {
+    MamanAdmise: {
         type: String,
-        required: false,
-    },
-    SageFemme: {
-        type: mongoose.Schema.Types.ObjectId, ref: "users",
         required: false,
     },
     DiagnosticSortie: {
@@ -239,6 +232,6 @@ const DossierObstetriqueSchema = new mongoose.Schema({
     },
 });
 
-const DossierObss = mongoose.model('dossierObstetrique', DossierObstetriqueSchema);
+const accouchement = mongoose.model('accouchement', DossierObstetriqueSchema);
 
-module.exports = DossierObss;
+module.exports = accouchement;
