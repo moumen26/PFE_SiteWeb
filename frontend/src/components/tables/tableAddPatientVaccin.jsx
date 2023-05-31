@@ -274,12 +274,15 @@ export default function VaccinTable() {
             ))}
           </table>
         </form>
-        <div className="vaccination-add-button-class">
-          <VaccinationAddButton
-            addVaccinTable={addVaccinTable}
-            setaddVaccinTable={setaddVaccinTable}
-          />
-        </div>
+        {(user?.speciality.toLowerCase() === "sage femme" || user?.speciality.toLowerCase() === "pediatre") && 
+          <div className="vaccination-add-button-class">
+            <VaccinationAddButton
+              addVaccinTable={addVaccinTable}
+              setaddVaccinTable={setaddVaccinTable}
+            />
+          </div>
+        }
+        
       </div>
       <div className={`add-tableau-vaccin1${toggleClassAddVaccinTable}`}>
         <div className="add-tableau-vaccin1-container">

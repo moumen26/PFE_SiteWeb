@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const ReadOnlyRow = ({ VaccinData, handleEditRowClick, handleDeleteClick }) => {
-
+  
   return (
     <tr>
       <td className="vaccination-table-title-line2">

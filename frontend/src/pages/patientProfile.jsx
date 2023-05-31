@@ -152,7 +152,7 @@ export default function PatientProfile() {
           </div>
           <div className="addpatient-add-cahier add-vaccin">
             {/* Cahier de sante */}
-            <AddCahierSante add={add} setAdd={setAdd} open={giveAccessToPediatre(user.speciality)}/>
+            <AddCahierSante add={add} setAdd={setAdd}/>
           </div>
           <div className={`cahier-vaccin${toggleClassAdd}`}>
             <div className="cahier-sante-title">

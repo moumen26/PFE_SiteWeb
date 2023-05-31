@@ -66,10 +66,7 @@ function App() {
               user ? <AffichageConcultation /> : <Navigate to="/login" />
             }
           />
-          <Route
-            path="profilepatients"
-            element={user ? <ProfilePatient /> : <Navigate to="/login" />}
-          />
+          
           <Route
             path="login"
             element={
@@ -96,7 +93,7 @@ function App() {
           />
           <Route
             path="Dossier-Nouveau-ne/:id"
-            element={user ? <PatientProfile /> : <Navigate to="/login" />}
+            element={user ? <ProfilePatient /> : <Navigate to="/login" />}
           />
           <Route
             path="conculter/:id"

@@ -49,8 +49,10 @@ export default function TableNouveauNe({ NouveauNe }) {
     }else{
       history(`/Dossier-Nouveau-ne/${await NouveauNe._id}`);
     }
-    
   };
+  const handleCompletePatient = async () =>{
+    history(`/antecedent/${await NouveauNe._id}`);
+  }
   return (
     <tr className="table-nouveau-ne-ligne">
       <td className="table-patients-td-nom">{NouveauNe.Nom + " " + NouveauNe.Prenom}</td>
@@ -60,6 +62,9 @@ export default function TableNouveauNe({ NouveauNe }) {
       <td className="table-patients-td table-patient-td-button">
         <ConculterButton AddConsultation={handleAddConsultation} />
         <VoirButton VoirPatient={handleVoirDossierPatient} />
+        {(NouveauNe?.maturity === "Nouveau-ne" && NouveauNe.idCarnetSante) && 
+          <VoirButton CompletePatient={handleCompletePatient} />
+        } 
       </td>
     </tr>
   );

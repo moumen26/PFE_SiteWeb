@@ -5,7 +5,9 @@ import dataConcultation from "../../ConcultationDataBase.json";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 
-export default function TableConcultation({ ConcultationDB, Search }) {
+export default function TableConcultation({ ConcultationDB }) {
+  const [Search, setSearch] = useState("");
+
   return (
     <div className="table-concultation">
       <div className="table-concultation-center">
@@ -22,7 +24,14 @@ export default function TableConcultation({ ConcultationDB, Search }) {
             </td>
             <td className="table-concultation-td-time concultation-search">
               <div className="table-conclutation-search concultation-search">
-                <input type="search" placeholder="Search.." />
+                <input 
+                  type="search"
+                  className="class-search"
+                  placeholder="Search.."
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
+                />
                 <AiOutlineSearch className="search-icon" />
               </div>
             </td>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function VoirButton({VoirPatient}) {
+export default function VoirButton({VoirPatient,CompletePatient}) {
   
-  return <input type="submit" value="Voir" className='voir-btn' onClick={VoirPatient}/>
+  return <input type="submit" value="Voir" className='voir-btn' onClick={VoirPatient || CompletePatient}/>
 }
