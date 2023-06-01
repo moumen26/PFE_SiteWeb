@@ -1,7 +1,17 @@
-import React from 'react'
+import React from "react";
+import { FaStethoscope } from "react-icons/fa";
 
-export default function ConculterButton({AddConsultation}) {
+
+export default function ConculterButton({ AddConsultation }) {
   return (
-    <input type="submit" value="Conculter" className='conculter-btn' onClick={AddConsultation}/>
-  )
+    <div className="conculter-btn-class">
+      <FaStethoscope size={15} fill="#fff" />
+      <input
+        type="submit"
+        value="Conculter"
+        className="conculter-btn"
+        onClick={AddConsultation}
+      />
+    </div>
+  );
 }

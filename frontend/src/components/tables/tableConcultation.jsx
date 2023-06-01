@@ -22,9 +22,9 @@ export default function TableConcultation({ ConcultationDB }) {
             <td className="table-concultation-td-time table-concultation-tr">
               Heure
             </td>
-            <td className="table-concultation-td-time concultation-search">
+            <td className="table-concultation-td-search concultation-search">
               <div className="table-conclutation-search concultation-search">
-                <input 
+                <input
                   type="search"
                   className="class-search"
                   placeholder="Search.."

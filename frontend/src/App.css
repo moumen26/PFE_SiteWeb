@@ -3366,9 +3366,9 @@ form.sign-in-form {
 
 .table-enfant {
   width: 90%;
-  height: 55vh;
-  overflow-y: scroll;
+  height: fit-content;
   margin-bottom: 20px;
+
 }
 
 .table-patients table tr {
@@ -3380,7 +3380,6 @@ form.sign-in-form {
 .table-nouveau-ne-ligne:nth-child(2n),
 .Maman-profile .table-concultation-ligne:nth-child(2n) {
   background-color: rgba(218, 218, 218, 1);
-  width: 100vw;
 }
 
 .table-patients td {
@@ -3871,6 +3870,7 @@ form.sign-in-form {
 .profile-concultation,
 .profile-hospitalisation {
   margin-top: 140px;
+  padding-bottom: 30px;
 }
 
 .patient-details .sexe-date-heure,
@@ -3985,7 +3985,11 @@ form.sign-in-form {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  height: 80vh;
+  height: fit-content;
+}
+
+.add-bebe .table-patients{
+  height: fit-content;
 }
 
 .ajout-bebe {
@@ -3994,6 +3998,7 @@ form.sign-in-form {
   justify-content: space-between;
   padding-left: 112px;
   padding-right: 112px;
+  height: fit-content;
 }
 
 .ajout-bebe h2,
@@ -4139,15 +4144,22 @@ form.sign-in-form {
   color: #fff;
 }
 
-.conculter-btn,
-.voir-btn {
-  width: 91px;
+.conculter-btn-class,
+.voir-btn-class {
   height: 25px;
   border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  cursor: pointer;
 }
 
-.voir-btn {
-  width: 54px;
+.voir-btn,
+.conculter-btn{
+  width: fit-content;
 }
 
 .ajout-med-btn {
@@ -4169,8 +4181,8 @@ form.sign-in-form {
 .doctor-profile-changer-btn .changer-image-btn,
 .patient-table-container .search-item input,
 .patient-table-container .ajoute-nouveau-ne-item input,
-.conculter-btn,
-.voir-btn,
+.conculter-btn-class,
+.voir-btn-class,
 .ajout-med-btn,
 .add-concultation-btn {
   background-color: rgba(79, 129, 255, 1);
@@ -5159,6 +5171,7 @@ form.sign-in-form {
   display: flex;
 }
 
+
 .table-concultation-center table {
   width: 100%;
 }
@@ -5171,16 +5184,35 @@ form.sign-in-form {
   height: 50px;
 }
 
-.table-concultation-ligne .table-concultation-td-nom {
-  text-align: start;
-  margin-left: 42px;
+.table-concultation-ligne{
+  position: relative;
 }
 
-.table-concultation-ligne .table-concultation-td-date.table-concultation-tr {
-  text-align: center;
-  margin-left: 11.3rem;
-  margin-right: 10.8rem;
+.table-concultation-ligne .table-concultation-td-nom{
+  position: absolute;
+  left: 42px;
 }
+
+.table-concultation-ligne .table-concultation-td-date{
+  position: absolute;
+  left: 327px;
+}
+
+.table-concultation-ligne .table-concultation-td-time{
+  position: absolute;
+  left: 595px;
+}
+
+.table-concultation-ligne .table-concultation-td-search{
+  position: absolute;
+  right: 24px;
+}
+
+.table-concultation-ligne .table-concultation-td-button{
+  position: absolute;
+  right: 24px;
+}
+
 
 .table-concultation-tr {
   font-weight: 700;
@@ -5202,7 +5234,8 @@ form.sign-in-form {
 }
 
 .patient-profile-details .table-concultation {
-  width: 90%;
+  width: 100%;
+  display: flex;
 }
 
 /* maman profile style */
@@ -5318,12 +5351,15 @@ form.sign-in-form {
 }
 
 .Add-Hospitalisation-container .profile-hospitalisation .table-concultation,
-.Affichage-Hospitalisation-container .profile-hospitalisation .table-concultation {
+.Affichage-Hospitalisation-container .profile-hospitalisation .table-concultation,
+.Patients-profile .profile-hospitalisation .table-concultation,
+.Patients-profile .profile-concultation .table-concultation {
   width: 90%;
 }
 
 .Add-Hospitalisation .profile-hospitalisation,
-.Affichage-Hospitalisation .profile-hospitalisation{
+.Affichage-Hospitalisation .profile-hospitalisation,
+.Maman-profile .profile-hospitalisation {
   position: relative;
 }
 
@@ -5337,8 +5373,13 @@ form.sign-in-form {
 }
 
 .Affichage-Hospitalisation .add-concultation-btn,
-.Affichage-Hospitalisation .addpatient-hedear input{
+.Affichage-Hospitalisation .addpatient-hedear input,
+.Maman-profile .profile-cahier-swiper-title input{
   display: none;
+}
+
+.Maman-profile .profile-hospitalisation .table-concultation{
+  width: 90%;
 }
 
 .Affichage-Hospitalisation .addpatient-hedear{

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ButtonAddConcultationTable from "../components/buttons/buttonAddConcultationTable";
 import PatientDetailsReducation from "../components/patientDetailsReducation";
 import { BsCloudDownloadFill } from "react-icons/bs";
 import { FaShareSquare } from "react-icons/fa";
@@ -52,30 +53,30 @@ export default function MamanProfile() {
 
   //Concultation data
   useEffect(() => {
-  const fetchPatientData = async () => {
-    if (id !== undefined) {
-      await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
-      }).then((response) => {
-        if (response.ok) {
-          response
-            .json()
-            .then((data) => {
-             setConcultationDB(data);
-            })
-            .catch((error) => {
-              console.error("Error fetching Concultation data:", error);
-            });
-        } else {
-          console.error("Error resieving Concultation date", response.error);
-        }
-      });
-    }
-  };
-  fetchPatientData();
+    const fetchPatientData = async () => {
+      if (id !== undefined) {
+        await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setConcultationDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Concultation data:", error);
+              });
+          } else {
+            console.error("Error resieving Concultation date", response.error);
+          }
+        });
+      }
+    };
+    fetchPatientData();
   }, [history, id, user?.token, PatientData]);
   return (
     <div className="Maman-profile">
@@ -90,15 +91,20 @@ export default function MamanProfile() {
         <div className="patient-profile-details">
           <h4>Patient details</h4>
           <div className="patient-profile-details-container">
-            <AboutMaman PatientData={PatientData}/>
-            <PatientDetailsReducation ConcultationDB={ConcultationDB}/>
+            <AboutMaman PatientData={PatientData} />
+            <PatientDetailsReducation ConcultationDB={ConcultationDB} />
           </div>
           <AddBebe />
-          <div className="Maman-profile-title">
-            <h2>Conclutation :</h2>
-
+          <div className="home-formulaire-swiper profile-hospitalisation">
+            <div className="profile-cahier-swiper-title">
+              <h2>Concultation</h2>
+              <ButtonAddConcultationTable />
+            </div>
+            <div className="line-hl">
+              <div className="hl"></div>
+            </div>
+            <TableConcultation ConcultationDB={ConcultationDB} />
           </div>
-          <TableConcultation ConcultationDB={ConcultationDB}/>
         </div>
       </div>
     </div>
