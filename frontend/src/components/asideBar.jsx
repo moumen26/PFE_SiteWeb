@@ -71,10 +71,12 @@ export default function MyAsideBar() {
             </NavLink>
           </li>
           <li className="mb-6">
-            <NavLink to="affichage">
+            <NavLink to="addHospitalisation">
               <div
                 className={`link flex items-center ${
-                  location.pathname === "/affichage" ? "aside-item-active" : ""
+                  location.pathname === "/addHospitalisation"
+                    ? "aside-item-active"
+                    : ""
                 }`}
               >
                 <RiCoupon2Fill className="w-6 h-6 ml-2 " />
@@ -83,10 +85,12 @@ export default function MyAsideBar() {
             </NavLink>
           </li>
           <li className="mb-6">
-            <NavLink to="profilepatients">
+            <NavLink to="affichageHospitalisation">
               <div
                 className={`link flex items-center ${
-                  location.pathname === "/analytics" ? "aside-item-active" : ""
+                  location.pathname === "/affichageHospitalisation"
+                    ? "aside-item-active"
+                    : ""
                 }`}
               >
                 <MdAnalytics className="w-6 h-6 ml-2 " />

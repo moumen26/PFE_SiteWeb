@@ -429,12 +429,9 @@ nav {
 .profile-cahier-swiper-title {
   width: 100%;
   height: 73px;
-  margin-bottom: 2px;
 }
 
-
-
-.profile-cahier-swiper .formulaire-header{
+.profile-cahier-swiper .formulaire-header {
   display: none;
 }
 
@@ -3381,7 +3378,7 @@ form.sign-in-form {
 }
 
 .table-nouveau-ne-ligne:nth-child(2n),
-.Maman-profile .table-concultation-ligne:nth-child(2n)  {
+.Maman-profile .table-concultation-ligne:nth-child(2n) {
   background-color: rgba(218, 218, 218, 1);
   width: 100vw;
 }
@@ -3434,6 +3431,7 @@ form.sign-in-form {
   align-items: center;
   justify-content: center;
   gap: 28px;
+  padding-right: 28px;
 }
 
 .patient-details {
@@ -3870,10 +3868,10 @@ form.sign-in-form {
 
 .profile-cahier-swiper,
 .profile-cahier-table-vaccin,
-.profile-concultation{
+.profile-concultation,
+.profile-hospitalisation {
   margin-top: 140px;
 }
-
 
 .patient-details .sexe-date-heure,
 .patient-details .date-poids-taille,
@@ -4130,7 +4128,8 @@ form.sign-in-form {
 .patient-table-container .search-item input,
 .conculter-btn,
 .voir-btn,
-.ajout-med-btn {
+.ajout-med-btn,
+.add-concultation-btn {
   width: 141px;
   height: 39px;
   border-radius: 10px;
@@ -4172,7 +4171,8 @@ form.sign-in-form {
 .patient-table-container .ajoute-nouveau-ne-item input,
 .conculter-btn,
 .voir-btn,
-.ajout-med-btn {
+.ajout-med-btn,
+.add-concultation-btn {
   background-color: rgba(79, 129, 255, 1);
 }
 
@@ -4511,7 +4511,7 @@ form.sign-in-form {
 }
 
 /* rendez-vous style */
-.Rendezvous{
+.Rendezvous {
   width: 100%;
   height: 100vh;
 }
@@ -4523,7 +4523,6 @@ form.sign-in-form {
   gap: 24px;
   align-items: center;
 }
-
 
 .rendezvous-form-class {
   display: flex;
@@ -4676,7 +4675,9 @@ form.sign-in-form {
 .Affichage-concultation,
 .Patients-profile,
 .Maman-profile,
-.Rendezvous {
+.Rendezvous,
+.Add-Hospitalisation,
+.Affichage-Hospitalisation {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -4686,11 +4687,19 @@ form.sign-in-form {
 .affichage-concultation-container,
 .patient-profile-container,
 .maman-profile-container,
-.rendezvous-container {
+.rendezvous-container,
+.Add-Hospitalisation-container,
+.Affichage-Hospitalisation-container {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-top: 1px;
+}
+
+.Add-Hospitalisation-container,
+.Affichage-Hospitalisation-container {
+  align-items: center;
+  height: calc(100vh - 80px);
 }
 
 .contenu-consultation {
@@ -5096,7 +5105,7 @@ form.sign-in-form {
   align-items: center;
 }
 
-.table-concultation-container{
+.table-concultation-container {
   max-height: 646px;
   overflow-y: scroll;
 }
@@ -5164,16 +5173,17 @@ form.sign-in-form {
 
 .table-concultation-ligne .table-concultation-td-nom {
   text-align: start;
-  padding-left: 42px;
+  margin-left: 42px;
 }
 
-.table-concultation-ligne .table-concultation-td-date,
-.table-concultation-ligne .table-concultation-td-time {
-  text-align: start;
+.table-concultation-ligne .table-concultation-td-date.table-concultation-tr {
+  text-align: center;
+  margin-left: 11.3rem;
+  margin-right: 10.8rem;
 }
 
-.table-concultation-tr{
-font-weight: 700;
+.table-concultation-tr {
+  font-weight: 700;
   font-size: 15px;
   line-height: 18px;
   color: rgba(6, 14, 48);
@@ -5184,14 +5194,14 @@ font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(79, 129, 255, 1)
+  border-bottom: 1px solid rgba(79, 129, 255, 1);
 }
 
-.concultation-table .conclutation-search{
+.concultation-table .conclutation-search {
   display: none;
 }
 
-.patient-profile-details .table-concultation{
+.patient-profile-details .table-concultation {
   width: 90%;
 }
 
@@ -5236,15 +5246,15 @@ font-weight: 700;
   color: rgba(6, 14, 48, 1);
 }
 
-.Maman-profile .patient-details-reducation{
+.Maman-profile .patient-details-reducation {
   height: 356px;
 }
 
 .Maman-profile .table-concultation-ligne {
-  border-bottom: 1px solid rgba(79, 129, 255, 1)
+  border-bottom: 1px solid rgba(79, 129, 255, 1);
 }
 
-.Maman-profile .add-bebe .ajout-bebe input{
+.Maman-profile .add-bebe .ajout-bebe input {
   width: fit-content;
   display: flex;
   font-size: 16px;
@@ -5255,34 +5265,42 @@ font-weight: 700;
   height: fit-content;
 }
 
-
-.Maman-profile-title{
+.Maman-profile-title {
   border-bottom: none;
   padding-left: 112px;
   margin-bottom: 15px;
   margin-top: 15px;
 }
 
-
-.profile-cahier-table-vaccin .vaccin-table-container h2{
+.profile-cahier-table-vaccin .vaccin-table-container h2 {
   display: none;
 }
 
 .profile-cahier-table-vaccin,
-.profile-concultation{
+.profile-concultation,
+.profile-hospitalisation {
   min-height: 300px;
   height: fit-content;
 }
 
-.patient-profile-container{
+.profile-concultation .line-hl,
+.profile-hospitalisation .line-hl {
+  margin-bottom: 30px;
+}
+
+.profile-cahier-table-vaccin .line-hl {
+  margin-bottom: 40px;
+}
+
+.patient-profile-container {
   padding-bottom: 10vh;
 }
 
-.profile-cahier-table-vaccin .vaccin-table-container{
+.profile-cahier-table-vaccin .vaccin-table-container {
   width: 100%;
 }
 
-.profile-cahier-table-vaccin{
+.profile-cahier-table-vaccin {
   background-color: white;
 }
 
@@ -5293,6 +5311,40 @@ font-weight: 700;
   background-color: #f0f0f0;
 }
 
+/*add hospitalisation style */
+.Add-Hospitalisation-container .profile-hospitalisation, 
+.Affichage-Hospitalisation-container .profile-hospitalisation{
+  margin-top: 40px;
+}
+
+.Add-Hospitalisation-container .profile-hospitalisation .table-concultation,
+.Affichage-Hospitalisation-container .profile-hospitalisation .table-concultation {
+  width: 90%;
+}
+
+.Add-Hospitalisation .profile-hospitalisation,
+.Affichage-Hospitalisation .profile-hospitalisation{
+  position: relative;
+}
+
+.add-concultation-btn {
+  width: fit-content;
+  font-size: 16px;
+  padding-right: 21px;
+  padding-left: 21px;
+  position: absolute;
+  right: 24px;
+}
+
+.Affichage-Hospitalisation .add-concultation-btn,
+.Affichage-Hospitalisation .addpatient-hedear input{
+  display: none;
+}
+
+.Affichage-Hospitalisation .addpatient-hedear{
+  background-color: transparent;
+  justify-content: center;
+}
 
 
 
@@ -5301,7 +5353,8 @@ font-weight: 700;
 .table-patients::-webkit-scrollbar,
 .notification-container::-webkit-scrollbar,
 .table-enfant::-webkit-scrollbar,
-.table-concultation-center::-webkit-scrollbar {
+.table-concultation-center::-webkit-scrollbar,
+.table-concultation-container::-webkit-scrollbar {
   background-color: rgba(79, 129, 255, 0.25);
   border-radius: 2px;
   width: 5px;
@@ -5312,7 +5365,8 @@ font-weight: 700;
 .table-patients::-webkit-slider-thumb,
 .notification-container::-webkit-scrollbar-thumb,
 .table-enfant::-webkit-scrollbar-thumb,
-.table-concultation-center::-webkit-scrollbar-thumb {
+.table-concultation-center::-webkit-scrollbar-thumb,
+.table-concultation-container::-webkit-scrollbar-thumb {
   background-color: rgba(79, 129, 255, 1);
   width: 5px;
   border-radius: 2px;
@@ -5332,7 +5386,9 @@ font-weight: 700;
 .Doctor-profile,
 .patient-profile-container,
 .maman-profile-container,
-.rendezvous-container {
+.rendezvous-container,
+.Add-Hospitalisation-container,
+.Affichage-Hospitalisation-container {
   z-index: 990;
   background-color: white;
 }

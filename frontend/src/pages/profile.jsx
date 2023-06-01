@@ -183,34 +183,50 @@ export default function ProfilePatient() {
         <div className="patient-profile-details profile-cahier">
           <h4>Patient details</h4>
           <div className="patient-profile-details-container">
-            <AboutPatient PatientData={PatientData}/>
+            <AboutPatient PatientData={PatientData} />
             <PatientDetailsReducation />
           </div>
           <div className="home-formulaire-swiper profile-dossier">
             <MySwiper />
           </div>
-          {(CarnetSanteData?.VitamineK1 !== "" && CarnetSanteData?.VitamineK1 !== undefined) &&
-            <div className="home-formulaire-swiper profile-cahier-swiper">
-              <div className="profile-cahier-swiper-title">
-                <h2>Cahier de sante</h2>
+          {CarnetSanteData?.VitamineK1 !== "" &&
+            CarnetSanteData?.VitamineK1 !== undefined && (
+              <div className="home-formulaire-swiper profile-cahier-swiper">
+                <div className="profile-cahier-swiper-title">
+                  <h2>Cahier de sante</h2>
+                </div>
+                <MyCahierSwiper />
               </div>
-              <MyCahierSwiper />
-            </div>
-          }
+            )}
           <div className="home-formulaire-swiper profile-cahier-table-vaccin">
-            <div className=" profile-cahier-swiper-title">
+            <div className="profile-cahier-swiper-title">
               <h2>Vaccination</h2>
             </div>
-            <VaccinTable/>
+            <div className="line-hl">
+              <div className="hl"></div>
+            </div>
+            <VaccinTable />
           </div>
-          {(ConcultationDB?.length > 0)&&
+          {ConcultationDB?.length > 0 && (
             <div className="home-formulaire-swiper profile-concultation">
               <div className="profile-cahier-swiper-title">
                 <h2>Concultation</h2>
               </div>
-              <TableConcultation ConcultationDB={ConcultationDB}/>
+              <div className="line-hl">
+                <div className="hl"></div>
+              </div>
+              <TableConcultation ConcultationDB={ConcultationDB} />
             </div>
-          }
+          )}
+          <div className="home-formulaire-swiper profile-hospitalisation">
+            <div className="profile-cahier-swiper-title">
+              <h2>Hospitalisation</h2>
+            </div>
+            <div className="line-hl">
+              <div className="hl"></div>
+            </div>
+            <TableConcultation ConcultationDB={ConcultationDB} />
+          </div>
         </div>
       </div>
     </div>

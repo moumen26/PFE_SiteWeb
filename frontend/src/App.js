@@ -21,6 +21,8 @@ import PatientProfile from "./pages/patientProfile";
 import TableConcultation from "./components/tables/tableConcultation";
 import MamanProfile from "./pages/mamanProfile";
 import ProfilePatient from "./pages/profile";
+import AddHospitalisation from "./pages/addHospitalisation";
+import AffichageHospitalisation from "./pages/affichageHospitalisation";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -57,8 +59,12 @@ function App() {
             element={user ? <Calendrier /> : <Navigate to="/login" />}
           />
           <Route
-            path="affichage"
-
+            path="addHospitalisation"
+            element={user ? <AddHospitalisation /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="affichageHospitalisation"
+            element={user ? <AffichageHospitalisation /> : <Navigate to="/login" />}
           />
           <Route
             path="Concultation/:id"
@@ -66,7 +72,7 @@ function App() {
               user ? <AffichageConcultation /> : <Navigate to="/login" />
             }
           />
-          
+
           <Route
             path="login"
             element={
