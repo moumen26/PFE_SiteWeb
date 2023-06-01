@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import TableConcultationReadOnlyRow from "./tableConcultationReadOnlyRow";
-import dataConcultation from "../../ConcultationDataBase.json";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 

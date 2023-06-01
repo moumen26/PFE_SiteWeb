@@ -8,9 +8,7 @@ export const useSignup = () => {
     const { dispatch } = useAuthContext();
     const navigate = useNavigate();
     const sign_up = async (email, password, lname, fname, speciality, phone, Hopital) => {
-        setIsLoading(true);
-        setError(null);
-        
+        setIsLoading(true);        
         const reponse = await fetch('http://localhost:8000/user/signup', {
                 method: "POST",
                 headers: {'content-type': 'application/json',
@@ -20,16 +18,12 @@ export const useSignup = () => {
     
             const json = await reponse.json();
             if (!reponse.ok) {
-                setError(true);
                 setIsLoading(false);
-                setError(json.error);
                 window.alert(json.message);
             }
             if (reponse.ok) {
                 window.alert("signup success now wait for your validation");
             }
-        
-
     };
     return {sign_up, isloading, error};
     

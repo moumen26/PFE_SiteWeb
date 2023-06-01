@@ -5446,3 +5446,13 @@ form.sign-in-form {
   border-radius: 50%; /* Set the border radius to 50% to create a circle */
   object-fit: cover; /* Maintain the image aspect ratio */
 }
+
+.add-alert-class{
+  position: absolute;
+  top: 0;
+  opacity: 0;
+}
+
+.add-alert-active{
+  opacity: 1;
+}

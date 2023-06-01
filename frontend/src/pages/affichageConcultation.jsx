@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import data from "../MeddicamentDataBase.json";
-import { nanoid } from "nanoid";
 import AddMedicamentReadOnlyRow from "../components/tables/tableAddMedicamentReadOnlyRow";
 import { useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";

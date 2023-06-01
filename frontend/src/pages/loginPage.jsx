@@ -7,18 +7,59 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSignup } from "../hooks/useSignup";
 import { useLogin } from "../hooks/useLogin";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 export default function Login() {
+  const notify = (message) => toast.error(message);
+  const notifySuccess = (message) => toast.success(message);
+
   const [openPanel, setOpenPanel] = useState(false);
+  const [alertError, setAlertError] = useState(false);
 
   let toggleClassCheck = openPanel ? " sign-in-mode" : "";
 
   const [loginemail, setloginEmail] = useState("");
   const [loginpassword, setloginpassword] = useState("");
-  const { login, isloadingL, errorL } = useLogin();
+  const [isloadingL, setIsLoadingL] = useState(null);
+  const [errorL, setErrorL] = useState(null);
+
+  const { dispatch } = useAuthContext();
+  const navigate = useNavigate();
+
   async function submitLogin(e) {
     e.preventDefault();
-    await login(loginemail, loginpassword);
+    setIsLoadingL(true);
+    const reponse = await fetch("http://localhost:8000/user/login", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({ email: loginemail, password: loginpassword }),
+    });
+
+    const json = await reponse.json();
+
+    if (!reponse.ok) {
+      setIsLoadingL(false);
+      notify(json.message);
+    }
+    if (reponse.ok) {
+      notify(json.message);
+      //save the user in local storage
+      localStorage.setItem("user", JSON.stringify(json));
+      //apdate the auth context
+      dispatch({ type: "LOGIN", payload: json });
+      setIsLoadingL(false);
+      //redirect to home page
+      if (!json.progress) {
+        navigate("/profile");
+      } else {
+        navigate("/");
+      }
+    }
   }
   const [signinemail, setSigninEmail] = useState("");
   const [signinpassword, setSigninpassword] = useState("");
@@ -27,11 +68,36 @@ export default function Login() {
   const [speciality, setSpeciality] = useState("");
   const [phone, setPhone] = useState("");
   const [Hopital, setHopital] = useState("");
-  const { sign_up, isloading, error } = useSignup();
+  const [isloading, setIsLoading] = useState(null);
 
   async function submitSignup(e) {
     e.preventDefault();
-    await sign_up(signinemail, signinpassword, lname, fname, speciality, phone, Hopital);
+    setIsLoading(true);
+    const reponse = await fetch("http://localhost:8000/user/signup", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        email: signinemail,
+        password: signinpassword,
+        Lname: lname,
+        Fname: fname,
+        speciality: speciality,
+        phone: phone,
+        Hopital: Hopital,
+      }),
+    });
+
+    const json = await reponse.json();
+    if (!reponse.ok) {
+      setIsLoading(false);
+      notify(json.message);
+    }
+    if (reponse.ok) {
+      notifySuccess(json.message);
+    }
   }
 
   return (
@@ -77,12 +143,6 @@ export default function Login() {
               className="cnx-btn btn-solid"
               disabled={isloadingL}
             />
-            {errorL && (
-              <div className="error">
-                <p>hey its error</p>
-                {errorL.error}
-              </div>
-            )}
           </form>
 
           <form
@@ -183,7 +243,6 @@ export default function Login() {
             <button className="demande-accee2" disabled={isloading}>
               demande accee
             </button>
-            {error && <div className="error">{error}</div>}
           </form>
         </div>
       </div>
@@ -220,6 +279,7 @@ export default function Login() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

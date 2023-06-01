@@ -11,12 +11,18 @@ const createToken = (id) => {
 const Login = async (req, res) => {
     const {email, password} = req.body;
     try{
+        if(!email || !password){
+            return res
+                .status(400)
+                .json({ message: "All fields must be fieled" });
+
+        }
         await User.findOne({email: email}).then(async (userexist) => {
             if(!userexist){
-                return res.status(400).json({message: 'email not found'});
+                return res.status(400).json({message: 'Email not found'});
             }
             if(userexist.validation == false){
-                return res.status(400).json({message: 'you are not validated yet'});
+                return res.status(400).json({message: 'You are not validated yet'});
             }
             const user = await User.login(email, password);
             const token = createToken(user._id);
@@ -74,7 +80,16 @@ const Signup = async (req, res) => {
             var userspeciality = user.speciality;
             var id = user._id;
             var Hopital = user.Hopital;
-            res.status(200).json({id, Fname :userFname, speciality: userspeciality, Hopital: Hopital, token});
+            res
+              .status(200)
+              .json({
+                id,
+                Fname: userFname,
+                speciality: userspeciality,
+                Hopital: Hopital,
+                token,
+                message: "signup success now wait for your validation",
+              });
         }).catch((err) => {
             return res.status(400).json({message: err.message});
         });

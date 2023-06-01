@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import TableSesEnfant from "./tables/tableSesEnfantReadOnlyRow";
-import dataEnfant from "../SesEnfantDataBase.json";
 
 export default function AddBebe() {
   const current = new Date();
