@@ -206,25 +206,18 @@ export default function ProfilePatient() {
               <TableConcultation ConcultationDB={ConcultationDB} />
             </div>
           )}
-          <div className="home-formulaire-swiper profile-hospitalisation">
+
+          {HospitalisationDB?.length > 0 && (
+            <div className="home-formulaire-swiper profile-hospitalisation">
             <div className="profile-cahier-swiper-title">
               <h2>Hospitalisation</h2>
             </div>
             <div className="line-hl">
               <div className="hl"></div>
             </div>
-            {HospitalisationDB?.length > 0 && (
-            <div className="home-formulaire-swiper profile-concultation">
-              <div className="profile-cahier-swiper-title">
-                <h2>Concultation</h2>
-              </div>
-              <div className="line-hl">
-                <div className="hl"></div>
-              </div>
-              <TableConcultation ConcultationDB={HospitalisationDB} />
-            </div>
-          )}
+            <TableConcultation ConcultationDB={HospitalisationDB} />
           </div>
+          )}
         </div>
       </div>
     </div>
