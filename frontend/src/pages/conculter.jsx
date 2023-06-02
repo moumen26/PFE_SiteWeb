@@ -5,10 +5,14 @@ import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import AddMedicamentReadOnlyRow from "../components/tables/tableAddMedicamentReadOnlyRow";
-import Notification from "../components/notification/notification";
-import ConfirmDialog from "../components/dialoges/dialogeAlert";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
-export default function Conculter(props) {
+export default function Conculter() {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -18,18 +22,6 @@ export default function Conculter(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
-  const [notify, setNotify] = useState({
-    isOpen: false,
-    message: "",
-    type: "",
-  });
-
-  const [confirmDialog, setConfirmDialog] = useState({
-    isOpen: false,
-    title: "",
-    subTitle: "",
-  });
 
   const [examenOrdononce, setExamenOrdononce] = useState("");
   const [ConsultationData, setConsultationData] = useState("");
@@ -56,7 +48,6 @@ export default function Conculter(props) {
     dose: "",
     duree: "",
   });
-
   let toggleClassDiagnostic = diagnostic ? " diagnostic" : "";
   let toggleClassMedicament = medicament ? " medicament" : "";
   let toggleClassExamen = examenOrdononce ? " examen-ordononce" : "";
@@ -446,7 +437,6 @@ export default function Conculter(props) {
       console.error("Error Deleting Medicament:", error);
     }
   };
-
   //Add Medicament
   const handleAddMedicament = async () => {
     try {
@@ -505,7 +495,6 @@ export default function Conculter(props) {
     const newMedicamentDB = [...MedicamentDB, newMedicament];
     setMedicamentDB(newMedicamentDB);
   };
-
   return (
     <div className="Conculter">
       <div className="conculter-container">
@@ -513,35 +502,72 @@ export default function Conculter(props) {
           <input
             type="submit"
             value="Annuler"
-            // onClick={handleDeleteConsultation}
-            onClick={() => {
-              setConfirmDialog({
-                isOpen: true,
-                title: "Are you sure to delete this concultation?",
-                subTitle: "you can't undo this operation",
-                onConfirm: () => {
-                  handleDeleteConsultation();
-                },
-              });
-            }}
+            open={open}
+            variant="outlined"
+            onClick={handleDeleteConsultation}
           />
-
+          <Dialog
+            className="annuler-dialoge"
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Use Google's location service?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Let Google help apps determine location. This means sending
+                anonymous location data to Google, even when no apps are
+                running.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button
+                onClick={handleDeleteConsultation}
+                autoFocus
+              >
+                Submit
+              </Button>
+            </DialogActions>
+          </Dialog>
           <h2>Consultation</h2>
           <input
             type="submit"
             value="Enregistrer tout"
-            // onClick={handleUpdateDiagnostic}
-            onClick={() => {
-              setConfirmDialog({
-                isOpen: true,
-                title: "Are you sure to save this concultation?",
-                subTitle: "you can't undo this operation",
-                onConfirm: () => {
-                  handleUpdateDiagnostic();
-                },
-              });
-            }}
+            open={open}
+            variant="outlined"
+            onClick={handleUpdateDiagnostic}
           />
+          <Dialog
+            className="save-dialoge"
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">
+              {"Use Google's location service?"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Let Google help apps determine location. This means sending
+                anonymous location data to Google, even when no apps are
+                running.
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose}>Cancel</Button>
+              <Button
+                onClick={handleUpdateDiagnostic}
+                autoFocus
+              >
+                Submit
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
         <div className="contenu-consultation">
           <h2>contenu de la consultation :</h2>
@@ -740,11 +766,6 @@ export default function Conculter(props) {
             </div>
           </div>
         </div>
-        <Notification notify={notify} setNotify={setNotify} />
-        <ConfirmDialog
-          confirmDialog={confirmDialog}
-          setConfirmDialog={setConfirmDialog}
-        />
       </div>
     </div>
   );
