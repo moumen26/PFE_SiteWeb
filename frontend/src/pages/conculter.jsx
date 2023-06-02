@@ -367,7 +367,10 @@ export default function Conculter(props) {
   };
   //delete the consultation
   const handleDeleteConsultation = async () => {
-    
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       const response = await axios.delete(
         `http://localhost:8000/patients/Consultation/${ConsultationData._id}`,
@@ -375,14 +378,23 @@ export default function Conculter(props) {
           headers: {
             Authorization: `Bearer ${user?.token}`,
           },
-        }  
+        }
       );
       const data = await response.data;
-      history(`/Nouveaune`);
+      setNotify({
+        isOpen: true,
+        message: "Delete Successfully",
+        type: "error",
+      });
+
+      setTimeout(() => {
+        history(`/Nouveaune`);
+      }, 1000);
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
-    } 
+    }
   };
+
   //Update the Diagnostic
   const handleUpdateDiagnostic = async () => {
     setConfirmDialog({
