@@ -103,8 +103,7 @@ export default function MySwiper() {
     };
 
     fetchPatientData();
-  }, [history, id, user?.token]);
-
+  }, [history,PatientData, id, user?.token]);
   //Dossier obstetricaux data
   useEffect(() => {
     const fetchDossObsData = async () => {
@@ -982,260 +981,263 @@ export default function MySwiper() {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className="Swipe">
-        <div className="formulaire-dossier-obster">
-          <div className="formulaire-header-obster">
-            <div className="formulaire-dossier-obstetrique">
-              <h2>Dossier obstetrique</h2>
-            </div>
-          </div>
-          <div className="line-hl">
-            <div className="hl"></div>
-          </div>
-            <div className="pro-acc">
-              <h2>Protocole d’accouchement</h2>
-              <div className="date-heure-acc">
-                <div className="date-acc">
-                  <div className="span-item span-long1">
-                    <span>Date d’accouchement :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Date_daccouchement"
-                    defaultValue={DossObsData?.Date_daccouchement}
-                    readOnly
-                  />
-                </div>
-                <div className="heure-acc">
-                  <div className="span-item">
-                    <span>Heure :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Heure_daccouchement"
-                    defaultValue={DossObsData?.Heure_daccouchement}
-                    readOnly
-                  />
-                </div>
-              </div>
-              <div className="accoucheur">
-                <div className="span-text">
-                  <span>Accoucheur :</span>
-                </div>
-                <div className="textarea">
-                  <textarea
-                    name="accoucheur"
-                    id="accoucheur"
-                    value={UserData?.Fname}
-                  ></textarea>
-                </div>
+      {PatientData?.maturity === "Nouveau-ne" &&
+        (<SwiperSlide className="Swipe">
+          <div className="formulaire-dossier-obster">
+            <div className="formulaire-header-obster">
+              <div className="formulaire-dossier-obstetrique">
+                <h2>Dossier obstetrique</h2>
               </div>
             </div>
-            <div className="examen-annexes">
-              <h2>Examen des annexes :</h2>
-              <div className="annexes">
-                <div className="annexe">
-                  <div className="annexe-item">
+            <div className="line-hl">
+              <div className="hl"></div>
+            </div>
+              <div className="pro-acc">
+                <h2>Protocole d’accouchement</h2>
+                <div className="date-heure-acc">
+                  <div className="date-acc">
+                    <div className="span-item span-long1">
+                      <span>Date d’accouchement :</span>
+                    </div>
+                    <input
+                      type="text"
+                      name="Date_daccouchement"
+                      defaultValue={DossObsData?.Date_daccouchement}
+                      readOnly
+                    />
+                  </div>
+                  <div className="heure-acc">
                     <div className="span-item">
+                      <span>Heure :</span>
+                    </div>
+                    <input
+                      type="text"
+                      name="Heure_daccouchement"
+                      defaultValue={DossObsData?.Heure_daccouchement}
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="accoucheur">
+                  <div className="span-text">
+                    <span>Accoucheur :</span>
+                  </div>
+                  <div className="textarea">
+                    <textarea
+                      name="accoucheur"
+                      id="accoucheur"
+                      value={UserData?.Fname}
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div className="examen-annexes">
+                <h2>Examen des annexes :</h2>
+                <div className="annexes">
+                  <div className="annexe">
+                    <div className="annexe-item">
+                      <div className="span-item">
+                        <span>Poids :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={DossObsData?.Poids}
+                        name="Poids"
+                        readOnly
+                      />
+                    </div>
+                    <div className="annexe-item">
+                      <div className="span-item">
+                        <span>Aspect :</span>
+                      </div>
+                      <input
+                        type="text"
+                        defaultValue={DossObsData?.Aspect}
+                        name="Aspect"
+                        readOnly
+                      />
+                    </div>
+                    <div className="annexe-item">
+                      <div className="span-item">
+                        <span>Anomalies :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={DossObsData?.Anomalies}
+                        name="Anomalies"
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                  <div className="annexe annexe-two">
+                    <div className="annexe-item">
+                      <div className="span-item">
+                        <span>Placenta :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={DossObsData?.Placenta}
+                        name="Placenta"
+                        readOnly
+                      />
+                    </div>
+                    <div className="annexe-item">
+                      <div className="span-item">
+                        <span>Membranes :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={DossObsData?.Membranes}
+                        name="Membranes"
+                        readOnly
+                      />
+                    </div>
+                    <div className="annexe-item">
+                      <div className="span-item">
+                        <span>Cordon :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={DossObsData?.Cordon}
+                        name="Cordon"
+                        readOnly
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="examen-annexes">
+                <h2>Examen des annexes :</h2>
+                <div className="sexe-poids-taille-pc">
+                  <div className="date-annexe">
+                    <div className="span-item petit-span">
+                      <span>Sexe :</span>
+                    </div>
+                    <input
+                      type="text"
+                      name="Sexe"
+                      id="date-annexe"
+                      value={DossObsData?.Sexe}
+                      readOnly
+                    />
+                  </div>
+                  <div className="poids-annexe">
+                    <div className="span-item petit-span">
                       <span>Poids :</span>
                     </div>
-                    <input
-                      type="text"
+                    <input type="text" 
                       value={DossObsData?.Poids}
-                      name="Poids"
                       readOnly
                     />
                   </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Aspect :</span>
+                  <div className="taille-annexe">
+                    <div className="span-item petit-span">
+                      <span>Taille :</span>
                     </div>
-                    <input
-                      type="text"
-                      defaultValue={DossObsData?.Aspect}
-                      name="Aspect"
-                      readOnly
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Anomalies :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={DossObsData?.Anomalies}
-                      name="Anomalies"
-                      readOnly
-                    />
-                  </div>
-                </div>
-                <div className="annexe annexe-two">
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Placenta :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={DossObsData?.Placenta}
-                      name="Placenta"
-                      readOnly
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Membranes :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={DossObsData?.Membranes}
-                      name="Membranes"
-                      readOnly
-                    />
-                  </div>
-                  <div className="annexe-item">
-                    <div className="span-item">
-                      <span>Cordon :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={DossObsData?.Cordon}
-                      name="Cordon"
-                      readOnly
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="examen-annexes">
-              <h2>Examen des annexes :</h2>
-              <div className="sexe-poids-taille-pc">
-                <div className="date-annexe">
-                  <div className="span-item petit-span">
-                    <span>Sexe :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Sexe"
-                    id="date-annexe"
-                    value={DossObsData?.Sexe}
-                    readOnly
-                  />
-                </div>
-                <div className="poids-annexe">
-                  <div className="span-item petit-span">
-                    <span>Poids :</span>
-                  </div>
-                  <input type="text" 
-                    value={DossObsData?.Poids}
-                    readOnly
-                  />
-                </div>
-                <div className="taille-annexe">
-                  <div className="span-item petit-span">
-                    <span>Taille :</span>
-                  </div>
 
-                  <input
-                    type="text"
-                    value={DossObsData?.Taille}
-                    name="Taille"
-                    readOnly
-                  />
+                    <input
+                      type="text"
+                      value={DossObsData?.Taille}
+                      name="Taille"
+                      readOnly
+                    />
+                  </div>
+                  <div className="pc-annexe">
+                    <div className="span-item petit-span">
+                      <span>PC :</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={DossObsData?.Pc}
+                      name="Pc"
+                      readOnly
+                    />
+                  </div>
                 </div>
-                <div className="pc-annexe">
-                  <div className="span-item petit-span">
-                    <span>PC :</span>
+                <div className="score-dapgar">
+                  <div className="score">
+                    <span>Score d'Apgar :</span>
+                  </div>
+                  <div className="minute-1">
+                    <span>1 minute</span>
+                    <input
+                      type="checkbox"
+                      name="une_min"
+                      value={DossObsData?.une_min}
+                      readOnly
+                    />
+                  </div>
+                  <div className="minute-5">
+                    <span>5 minute</span>
+                    <input
+                      type="checkbox"
+                      name="cinq_min"
+                      value={DossObsData?.cinq_min}
+                      readOnly
+                    />
+                  </div>
+                </div>
+                <div className="malforamtion-annexe">
+                  <div className="span-item">
+                    <span>Malformation :</span>
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.Pc}
-                    name="Pc"
+                    value={DossObsData?.Malformation}
+                    name="Malformation"
                     readOnly
                   />
                 </div>
-              </div>
-              <div className="score-dapgar">
-                <div className="score">
-                  <span>Score d'Apgar :</span>
-                </div>
-                <div className="minute-1">
-                  <span>1 minute</span>
+                <div className="remarque-annexe">
+                  <div className="span-item">
+                    <span>Remarque :</span>
+                  </div>
                   <input
-                    type="checkbox"
-                    name="une_min"
-                    value={DossObsData?.une_min}
+                    type="text"
+                    name="Remarque"
+                    value={DossObsData?.Remarque}
                     readOnly
                   />
                 </div>
-                <div className="minute-5">
-                  <span>5 minute</span>
-                  <input
-                    type="checkbox"
-                    name="cinq_min"
-                    value={DossObsData?.cinq_min}
-                    readOnly
-                  />
+                <div className="re-annexe-textarea">
+                  <div className="textarea">
+                    <textarea name="rem-annexe" id="rem-annexe"></textarea>
+                  </div>
+                </div>
+                <div className="empre-digi">
+                  <div className="span-text">
+                    <span>Empreintes digitales :</span>
+                  </div>
+                  <div className="textarea">
+                    <textarea
+                      name="empre-digi"
+                      // id="empre-digi"
+                      // value={Empreintes_digitales}
+                      readOnly
+                    ></textarea>
+                  </div>
                 </div>
               </div>
-              <div className="malforamtion-annexe">
-                <div className="span-item">
-                  <span>Malformation :</span>
-                </div>
-                <input
-                  type="text"
-                  value={DossObsData?.Malformation}
-                  name="Malformation"
-                  readOnly
-                />
+            <div className="back-next-buttons back-next-dossier">
+              <div className="back">
+                <SwiperButtonBack>
+                  <div className="flex items-center justify-items-center gap-2">
+                    <BsChevronLeft /> Back
+                  </div>
+                </SwiperButtonBack>
               </div>
-              <div className="remarque-annexe">
-                <div className="span-item">
-                  <span>Remarque :</span>
-                </div>
-                <input
-                  type="text"
-                  name="Remarque"
-                  value={DossObsData?.Remarque}
-                  readOnly
-                />
+              <div className="next">
+                <SwiperButtonNext>
+                  <div className="flex items-center justify-items-center gap-2">
+                    Suivant <BsChevronRight />
+                  </div>
+                </SwiperButtonNext>
               </div>
-              <div className="re-annexe-textarea">
-                <div className="textarea">
-                  <textarea name="rem-annexe" id="rem-annexe"></textarea>
-                </div>
-              </div>
-              <div className="empre-digi">
-                <div className="span-text">
-                  <span>Empreintes digitales :</span>
-                </div>
-                <div className="textarea">
-                  <textarea
-                    name="empre-digi"
-                    // id="empre-digi"
-                    // value={Empreintes_digitales}
-                    readOnly
-                  ></textarea>
-                </div>
-              </div>
-            </div>
-          <div className="back-next-buttons back-next-dossier">
-            <div className="back">
-              <SwiperButtonBack>
-                <div className="flex items-center justify-items-center gap-2">
-                  <BsChevronLeft /> Back
-                </div>
-              </SwiperButtonBack>
-            </div>
-            <div className="next">
-              <SwiperButtonNext>
-                <div className="flex items-center justify-items-center gap-2">
-                  Suivant <BsChevronRight />
-                </div>
-              </SwiperButtonNext>
             </div>
           </div>
-        </div>
-      </SwiperSlide>
+        </SwiperSlide>)
+      }
+      
     </Swiper>
   );
 }

@@ -153,7 +153,7 @@ export default function AffichageConcultation() {
                     ></textarea>
                     <h2>Maladie :</h2>
                     <input type="text" placeholder="fiévre, faiblesse..." 
-                      defaultValue={DiagnosticData?.Context}
+                      defaultValue={DiagnosticData?.Maladie}
                       readOnly
                     />
                   </div>

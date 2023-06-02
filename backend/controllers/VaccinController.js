@@ -2,8 +2,19 @@ const Vaccin = require('../models/VaccinModel');
 const Patient = require('../models/PatientModel');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
-
-
+const Vaccination = require('../models/VaccinationModel');
+// Get All Vaccin
+const GetAllVaccin = async (req, res) => {
+    await Vaccination.find({}).then((vaccin) => {
+        if (!vaccin) {
+            return res.status(404).json({ message: "Vaccin not found" });
+        }
+        res.status(200).json(vaccin);
+    }).catch((error) => {
+        console.error("Error retrieving Vaccin:", error);
+        res.status(500).json({ message: "Error retrieving Vaccin" });
+    });
+}
 // get a specific Vaccin by ID
 const GetVaccinById = async (req, res) => {
     const { id } = req.params;
@@ -152,6 +163,7 @@ const UpdateVaccin = async (req, res) => {
 }
 
 module.exports = {
+    GetAllVaccin,
     GetAllVaccins,
     GetVaccinById,
     CreateNewVaccin,

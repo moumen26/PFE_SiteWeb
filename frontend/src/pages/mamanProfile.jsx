@@ -20,6 +20,8 @@ export default function MamanProfile() {
   // initialisation of the state of the data
   const [PatientData, setPatientData] = useState();
   const [ConcultationDB, setConcultationDB] = useState();
+  const [HospitalisationDB, setHospitalisationDB] = useState();
+
 
   // Fetch Patient Data
   useEffect(() => {
@@ -78,6 +80,34 @@ export default function MamanProfile() {
     };
     fetchPatientData();
   }, [history, id, user?.token, PatientData]);
+
+  //Hospitalisation data
+  useEffect(() => {
+    const fetchHospitalisationData = async () => {
+      if (id !== undefined) {
+        await fetch(`http://localhost:8000/patients/Hospitalisation/all/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setHospitalisationDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Hospitalisation data:", error);
+              });
+          } else {
+            console.error("Error resieving Hospitalisation date", response.error);
+          }
+        });
+      }
+    };
+    fetchHospitalisationData();
+    }, [history, id, user?.token, HospitalisationDB]);
   return (
     <div className="Maman-profile">
       <div className="maman-profile-container">
@@ -106,6 +136,17 @@ export default function MamanProfile() {
               <div className="hl"></div>
             </div>
             <TableConcultation ConcultationDB={ConcultationDB} />
+          </div>
+          )}
+          {HospitalisationDB?.length > 0 && (
+            <div className="home-formulaire-swiper profile-hospitalisation">
+            <div className="profile-cahier-swiper-title">
+              <h2>Hospitalisation</h2>
+            </div>
+            <div className="line-hl">
+              <div className="hl"></div>
+            </div>
+            <TableConcultation ConcultationDB={HospitalisationDB} />
           </div>
           )}
         </div>

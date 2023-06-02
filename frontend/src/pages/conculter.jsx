@@ -239,7 +239,7 @@ export default function Conculter(props) {
   //fetch Maladie data base
   useEffect(() => {
     const fetchMaladieDataBase = async () => {
-      await fetch(`http://localhost:8000/patients/Medicaments/all/`, {
+      await fetch(`http://localhost:8000/patients/Maladie/all/`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${user?.token}`,
@@ -420,7 +420,7 @@ export default function Conculter(props) {
       if (response.ok) {
         window.alert(data.message);
       }
-      setDiagnostic(!diagnostic);
+      history(`/patients`);
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
     }

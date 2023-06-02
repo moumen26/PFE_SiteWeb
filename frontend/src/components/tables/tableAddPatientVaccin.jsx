@@ -17,6 +17,7 @@ export default function VaccinTable() {
     : "";
 
   const [VaccinDB, setVaccinDB] = useState();
+  const [VaccinData, setVaccinData] = useState();
   const [addFormData, setAddFormData] = useState({
     vaccinationAge: "",
     vaccinationVaccin: "",
@@ -87,7 +88,31 @@ export default function VaccinTable() {
   const { user } = useAuthContext();
 
   const history = useNavigate("/patients");
-
+  // Fetch Vaccins
+  useEffect(() => {
+    const fetchVaccinDB = async () => {
+        await fetch(`http://localhost:8000/patients/Vaccin/all/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setVaccinData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Vaccin data:", error);
+              });
+          } else {
+            console.error("Error resieving vaccin date", response.error);
+          }
+        });
+    };
+    fetchVaccinDB();
+  }, [history, id,VaccinData]);
   //Create new Vaccin
   const handleNewVaccinSubmit = async (event) => {
     event.preventDefault();
@@ -349,10 +374,9 @@ export default function VaccinTable() {
                   <option selected disabled>
                     Vaccin
                   </option>
-                  <option value="vaccin1">vaccin</option>
-                  <option value="vaccin2">vaccin2</option>
-                  <option value="vaccin3">vaccin3</option>
-                  <option value="vaccin4">vaccin4</option>
+                  {VaccinData ? VaccinData.map((Vaccin) => (
+                      <option value={Vaccin.nom}>{Vaccin.nom}</option>
+                  )) : null}
                 </select>
               </div>
 

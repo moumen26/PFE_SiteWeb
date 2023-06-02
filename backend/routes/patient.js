@@ -19,6 +19,7 @@ const {
 } = require('../controllers/PatientController');
 const {
     GetAllVaccins,
+    GetAllVaccin,
     GetVaccinById,
     UpdateVaccin,
     DeleteVaccin,
@@ -122,6 +123,8 @@ router.delete('/DossObs/:id', DeleteDossObs);
 
 // VACCIN
 
+// get all vaccins
+router.get("/Vaccin/all", GetAllVaccin);
 //get all vaccins
 router.get("/Vaccin/all/:id", GetAllVaccins);
 

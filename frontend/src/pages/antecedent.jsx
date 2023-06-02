@@ -17,8 +17,21 @@ import AddBebe from "../components/addBebe";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { user } from "../hooks/useAuthContext"
+import Notification from "../components/notification/notification";
+import ConfirmDialog from "../components/dialoges/dialogeAlert";
 
 export default function Antecedent() {
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
   const [add, setAdd] = useState(false);
   const [addVaccin, setAddvacin] = useState(false);
   const [addVaccin2, setAddVaccin2] = useState(false);
@@ -52,6 +65,10 @@ export default function Antecedent() {
   const [VaccinData, setVaccinData] = useState(null);
   //Save and add nouveau-ne the patient
   const handleAddNouveauNe = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       const response = await fetch(
         `http://localhost:8000/patients/Nouveau-ne/${id}`,
@@ -104,6 +121,10 @@ export default function Antecedent() {
   };
   //delete the patient
   const handleDeletePatient = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       const response = await axios.delete(
         `http://localhost:8000/patients/${id}`,
@@ -268,9 +289,27 @@ export default function Antecedent() {
     <div className="Antecedent">
       <div className="antecedent-container">
         <div className="antecedent-hedear">
-          <input type="submit" value="Annuler" onClick={handleDeletePatient}/>
+          <input type="submit" value="Annuler" onClick={() => {
+              setConfirmDialog({
+                isOpen: true,
+                title: "Are you sure to delete this concultation?",
+                subTitle: "you can't undo this operation",
+                onConfirm: () => {
+                  handleDeletePatient();
+                },
+              });
+            }}/>
           <h2>Dossier maman</h2>
-          <input type="submit" value="Enregistrer tout" onClick={handleAddNouveauNe}/>
+          <input type="submit" value="sauvegarder et suivant" onClick={() => {
+              setConfirmDialog({
+                isOpen: true,
+                title: "Are you sure to save this concultation?",
+                subTitle: "you can't undo this operation",
+                onConfirm: () => {
+                  handleAddNouveauNe();
+                },
+              });
+            }}/>
         </div>
         <div className="antecedent-swipe">
           <div className="home-formulaire-swiper">
@@ -354,6 +393,11 @@ export default function Antecedent() {
           */}
           
         </div>
+        <Notification notify={notify} setNotify={setNotify} />
+        <ConfirmDialog
+          confirmDialog={confirmDialog}
+          setConfirmDialog={setConfirmDialog}
+        />
       </div>
     </div>
   );

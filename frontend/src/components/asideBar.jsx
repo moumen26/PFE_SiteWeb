@@ -70,34 +70,6 @@ export default function MyAsideBar() {
               </div>
             </NavLink>
           </li>
-          <li className="mb-6">
-            <NavLink to="addHospitalisation">
-              <div
-                className={`link flex items-center ${
-                  location.pathname === "/addHospitalisation"
-                    ? "aside-item-active"
-                    : ""
-                }`}
-              >
-                <RiCoupon2Fill className="w-6 h-6 ml-2 " />
-                <span className="title">Coupon</span>
-              </div>
-            </NavLink>
-          </li>
-          <li className="mb-6">
-            <NavLink to="affichageHospitalisation">
-              <div
-                className={`link flex items-center ${
-                  location.pathname === "/affichageHospitalisation"
-                    ? "aside-item-active"
-                    : ""
-                }`}
-              >
-                <MdAnalytics className="w-6 h-6 ml-2 " />
-                <span className="title">Analytique</span>
-              </div>
-            </NavLink>
-          </li>
           <li>
             <NavLink to="paramètres">
               <div
@@ -106,7 +78,7 @@ export default function MyAsideBar() {
                 }`}
               >
                 <IoIosSettings className="w-6 h-6 ml-2" />
-                <span className="title">Paramètres</span>
+                <span className="title">Profile</span>
               </div>
             </NavLink>
           </li>
