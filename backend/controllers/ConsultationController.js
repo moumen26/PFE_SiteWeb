@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
-const DossObs = require('../models/DossObsModel');
-const CarnetSante = require('../models/CarnetSanteModel');
 const Patient = require('../models/PatientModel');
 const User = require('../models/UserModel');
 const Consultation = require('../models/ConsultationModel');
-const Medicament = require('../models/MedicamentModel');
 const ExamenTest = require('../models/ExamenModel');
 const Diagnostic = require('../models/DiagnosticModel');
 const Ordonance = require('../models/OrdonanceModel');
+const Hospitalisation = require('../models/HospitalisationModel');
 
 // Define a route for fetching all Consultations
 const GetConsultation = async (req, res) => {
@@ -131,6 +129,7 @@ const DeleteConsultation = async (req, res) => {
         const DiagnosticID = consultation.DiagnosticID;
         const OrdonanceID = consultation.OrdonanceID;
         const ExamenID = consultation.ExamenID;
+        const HospitalisationID = consultation?.HospitalisationID;
         
         // Delete Consultation from patient
         Patient.updateMany({_id:patientID}, {
@@ -173,6 +172,19 @@ const DeleteConsultation = async (req, res) => {
         }).catch((error) => {
             res.status(500).json({ message: 'Failed to delete Examen' });
         });*/
+
+        // Delete Hospitalisation from db
+        if (HospitalisationID != null){
+            Hospitalisation.updateMany({_id:HospitalisationID}, {
+                $pull: {ConcultationID: id}}).then((hospitalisation) => {
+                    if (!hospitalisation) {
+                        return res.status(404).json({ message: 'Hospitalisation not found' });
+                    }
+                    console.log('hospitalisation deleted from Hospitalisation');
+                }).catch((error) => {
+                    return res.status(500).json({ message: 'Failed to update Hospitalisation' });
+                });
+        }
         // Delete Consultation from db
         Consultation.findByIdAndDelete({_id: id}).then((consultation) => {
             if (!consultation) {

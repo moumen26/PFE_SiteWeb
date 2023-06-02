@@ -31,6 +31,12 @@ const {
     UpdateConsultation,
     DeleteConsultation,
 } = require('../controllers/ConsultationController');
+const {GetHospitalisations,
+    GetHospitalisationById,
+    CreateNewHospitalisation,
+    UpdateHospitalisation,
+    GetConsultationByHospitalisationID,
+    DeleteHospitalisation} = require('../controllers/HospitalisationController');
 const {
     GetOrdonance,
     CreateNewOrdonance,
@@ -201,5 +207,25 @@ router.get('/Maladie/all', GetAllMaladies);
 router.get('/Maladie/:id', GetMaladie);
 // add a maladie
 router.post('/AddMaladie/:id',AddNewMaladie);
+
+// Hospitalisation
+
+//get all Hospitalisations
+router.get("/Hospitalisation/all/:id", GetHospitalisations);
+
+//post a new Hospitalisation
+router.post('/AddHospitalisation/:id',CreateNewHospitalisation);
+
+//get a specific Hospitalisation
+router.get('/Hospitalisation/:id', GetHospitalisationById);
+
+//update a Hospitalisation
+router.post('/Hospitalisation/:id', UpdateHospitalisation);
+
+//delete a Hospitalisation
+router.delete('/Hospitalisation/:id', DeleteHospitalisation);
+
+//get Consultation by HospitalisationID
+router.get('/ConsultationByHospitalisationID/:id', GetConsultationByHospitalisationID);
 
 module.exports = router;

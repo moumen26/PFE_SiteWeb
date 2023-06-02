@@ -28,10 +28,11 @@ export default function ProfilePatient() {
   // initialisation of the state of the data
   const [PatientData, setPatientData] = useState();
   const [ConcultationDB, setConcultationDB] = useState();
+  const [HospitalisationDB, setHospitalisationDB] = useState();
   const [Search, setSearch] = useState("");
   const [CarnetSanteData, setCarnetSante] = useState(null);
   const [VaccinData, setVaccinData] = useState(null);
-    // Fetch Nouveau-ne Data
+  // Fetch Nouveau-ne Data
   useEffect(() => {
     const fetchPatientData = async () => {
       if (user?.token !== undefined) {
@@ -60,7 +61,6 @@ export default function ProfilePatient() {
     };
     fetchPatientData();
   }, [history, id, user?.token, PatientData]);
-
   //Concultation data
   useEffect(() => {
   const fetchPatientData = async () => {
@@ -88,36 +88,33 @@ export default function ProfilePatient() {
   };
   fetchPatientData();
   }, [history, id, user?.token, ConcultationDB]);
-  //Get Carnet de Sante Data
+  //Hospitalisation data
   useEffect(() => {
-    const fetchCarnetSanteData = async () => {
-      if (PatientData.idCarnetSante !== undefined) {
-        await fetch(
-          `http://localhost:8000/patients/CarnetSante/${PatientData?.idCarnetSante}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${user?.token}`,
-            },
-          }
-        ).then((response) => {
+    const fetchHospitalisationData = async () => {
+      if (id !== undefined) {
+        await fetch(`http://localhost:8000/patients/Hospitalisation/all/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
           if (response.ok) {
             response
               .json()
               .then((data) => {
-                setCarnetSante(data);
+                setHospitalisationDB(data);
               })
               .catch((error) => {
-                console.error("Error fetching Carnet sante data:", error);
+                console.error("Error fetching Hospitalisation data:", error);
               });
           } else {
-            console.error("Error fetching Carnet sante data:", response.status);
+            console.error("Error resieving Hospitalisation date", response.error);
           }
         });
       }
     };
-    fetchCarnetSanteData();
-  }, [history, CarnetSanteData, user?.token, PatientData?.idCarnetSante]);
+    fetchHospitalisationData();
+    }, [history, id, user?.token, HospitalisationDB]);
   useEffect(() => {
     const fetchVaccinData = async () => {
       if (id !== undefined) {
@@ -189,15 +186,6 @@ export default function ProfilePatient() {
           <div className="home-formulaire-swiper profile-dossier">
             <MySwiper />
           </div>
-          {CarnetSanteData?.VitamineK1 !== "" &&
-            CarnetSanteData?.VitamineK1 !== undefined && (
-              <div className="home-formulaire-swiper profile-cahier-swiper">
-                <div className="profile-cahier-swiper-title">
-                  <h2>Cahier de sante</h2>
-                </div>
-                <MyCahierSwiper />
-              </div>
-            )}
           <div className="home-formulaire-swiper profile-cahier-table-vaccin">
             <div className="profile-cahier-swiper-title">
               <h2>Vaccination</h2>
@@ -225,7 +213,17 @@ export default function ProfilePatient() {
             <div className="line-hl">
               <div className="hl"></div>
             </div>
-            <TableConcultation ConcultationDB={ConcultationDB} />
+            {HospitalisationDB?.length > 0 && (
+            <div className="home-formulaire-swiper profile-concultation">
+              <div className="profile-cahier-swiper-title">
+                <h2>Concultation</h2>
+              </div>
+              <div className="line-hl">
+                <div className="hl"></div>
+              </div>
+              <TableConcultation ConcultationDB={HospitalisationDB} />
+            </div>
+          )}
           </div>
         </div>
       </div>

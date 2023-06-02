@@ -34,6 +34,10 @@ const PatientSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: "consultations",
         required: false,
     }],
+    HospitalisationID: [{
+        type: mongoose.Schema.Types.ObjectId, ref: "hospitalisations",
+        required: false,
+    }],
     Nom: {
         type: String,
         required: false,

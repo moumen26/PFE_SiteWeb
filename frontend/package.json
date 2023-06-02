@@ -9,7 +9,7 @@
     "@fullcalendar/interaction": "^6.1.6",
     "@fullcalendar/react": "^6.1.6",
     "@fullcalendar/timegrid": "^6.1.6",
-    "@mui/material": "^5.13.0",
+    "@mui/material": "^5.13.3",
     "@syncfusion/ej2-react-calendars": "^21.1.37",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

@@ -52,7 +52,33 @@ export default function TableNouveauNe({ NouveauNe }) {
     }
   };
   const handleAddHospitalisation = async () =>{
-    history(`/Hospitalisation/${await NouveauNe._id}`);
+    try {
+      const response = await fetch(
+        `http://localhost:8000/patients/AddHospitalisation/${NouveauNe._id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+          body: JSON.stringify({
+            Date_Hospitalisation: date,
+            Heure_Hospitalisation: time,
+            idMedecin: user?.id,
+          }),
+        }
+      );
+      // get the ConsultationID via response from the server and redirect to the Consultation page
+      const data = await response.json();
+      if (!response.ok) {
+        window.alert("Add Consultation failed", data.error);
+      }
+      if (response.ok) {
+        history(`/Hospitalisation/${await data.id}`);
+      }
+    } catch (error) {
+      console.error("Error adding Consultation:", error);
+    }
   }
   return (
     <tr className="table-nouveau-ne-ligne">

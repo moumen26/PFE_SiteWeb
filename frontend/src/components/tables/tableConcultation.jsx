@@ -37,19 +37,26 @@ export default function TableConcultation({ ConcultationDB }) {
           </tr>
           <div className="table-concultation-container">
             {ConcultationDB?.filter((item) => {
-              if (Search === "" || !Search) {
-                return item;
-              } else if (
-                item.DateConcultation.toLowerCase().includes(
-                  Search.toLowerCase()
-                ) ||
-                item.HeureConsultation.toLowerCase().includes(
-                  Search.toLowerCase()
-                ) ||
-                item.MedecinNom.toLowerCase().includes(Search.toLowerCase())
-              ) {
+              if(item.DateConcultation && item.HeureConsultation){
+                if (Search === "" || !Search) {
+                  return item;
+                } else if (
+                  item?.DateConcultation.toLowerCase().includes(Search.toLowerCase()) || item?.HeureConsultation.toLowerCase().includes(Search.toLowerCase()) ||
+                  item?.MedecinNom.toLowerCase().includes(Search.toLowerCase())) {
+                  return item;
+                }
+              }else if(item.DateHospitalisation && item.HeureHospitalisation){
+                if (Search === "" || !Search) {
+                  return item;
+                } else if (
+                  item?.DateHospitalisation.toLowerCase().includes(Search.toLowerCase()) || item?.HeureHospitalisation.toLowerCase().includes(Search.toLowerCase()) ||
+                  item?.MedecinNom.toLowerCase().includes(Search.toLowerCase())) {
+                  return item;
+                }
+              }else{
                 return item;
               }
+              
             }).map((Concultation) => (
               <TableConcultationReadOnlyRow Concultation={Concultation} />
             ))}

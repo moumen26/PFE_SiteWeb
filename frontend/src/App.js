@@ -58,14 +58,7 @@ function App() {
             path="calendrier"
             element={user ? <Calendrier /> : <Navigate to="/login" />}
           />
-          <Route
-            path="addHospitalisation"
-            element={user ? <AddHospitalisation /> : <Navigate to="/login" />}
-          />
-          <Route
-            path="affichageHospitalisation"
-            element={user ? <AffichageHospitalisation /> : <Navigate to="/login" />}
-          />
+
           <Route
             path="Concultation/:id"
             element={
@@ -111,7 +104,12 @@ function App() {
           />
           <Route
             path="Hospitalisation/:id"
-            element={user ? <Coupon /> : <Navigate to="/login" />}
+            element={user ? <AddHospitalisation /> : <Navigate to="/login" />}
+          />
+          
+          <Route
+            path="affichageHospitalisation/:id"
+            element={user ? <AffichageHospitalisation /> : <Navigate to="/login" />}
           />
         </Routes>
       </main>
