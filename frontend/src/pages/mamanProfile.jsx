@@ -95,7 +95,9 @@ export default function MamanProfile() {
             <PatientDetailsReducation ConcultationDB={ConcultationDB} />
           </div>
           <AddBebe />
-          <div className="home-formulaire-swiper profile-hospitalisation">
+          
+          {ConcultationDB?.length > 0 && (
+            <div className="home-formulaire-swiper profile-hospitalisation">
             <div className="profile-cahier-swiper-title">
               <h2>Concultation</h2>
               <ButtonAddConcultationTable />
@@ -105,6 +107,7 @@ export default function MamanProfile() {
             </div>
             <TableConcultation ConcultationDB={ConcultationDB} />
           </div>
+          )}
         </div>
       </div>
     </div>
