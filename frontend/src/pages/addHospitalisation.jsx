@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import TableConcultation from "../components/tables/tableConcultation";
-import ButtonAddConcultationTable from "../components/buttons/buttonAddConcultationTable";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 import Notification from "../components/notification/notification";
 import ConfirmDialog from "../components/dialoges/dialogeAlert";
+import DialogeAddConcultation from "../components/dialoges/dialogeAddConcultation";
+import DialogeValideVisite from "../components/dialoges/dialogeVisite";
 
 export default function AddHospitalisation(props) {
   const { id } = useParams();
@@ -21,6 +22,18 @@ export default function AddHospitalisation(props) {
   });
 
   const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
+
+  const [confirmDialogConcultation, setConfirmDialogConcultation] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
+
+  const [confirmDialogVisite, setConfirmDialogVisite] = useState({
     isOpen: false,
     title: "",
     subTitle: "",
@@ -120,6 +133,10 @@ export default function AddHospitalisation(props) {
   };
   //add concultation to hospitalisation
   const handleAddConsultation = async () => {
+    setConfirmDialogConcultation({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       // get current date
       const current = new Date();
@@ -145,11 +162,18 @@ export default function AddHospitalisation(props) {
       );
       // get the ConsultationID via response from the server and redirect to the Consultation page
       const data = await response.json();
+      setNotify({
+        isOpen: true,
+        message: "Add Successfully",
+        type: "success",
+      });
       if (!response.ok) {
         window.alert("Add Consultation failed", data.error);
       }
       if (response.ok) {
-        history(`/conculter/${await data.id}`);
+        setTimeout(() => {
+          history(`/conculter/${data.id}`);
+        }, 1000);
       }
     } catch (error) {
       console.error("Error adding Consultation:", error);
@@ -192,8 +216,20 @@ export default function AddHospitalisation(props) {
         <div className="home-formulaire-swiper profile-hospitalisation">
           <div className="profile-cahier-swiper-title">
             <h2>Concultation</h2>
-            <ButtonAddConcultationTable
-              AddConsultation={handleAddConsultation}
+            <input
+              className="add-concultation-btn"
+              type="submit"
+              value="Ajouter un concultation"
+              onClick={() => {
+                setConfirmDialogConcultation({
+                  isOpen: true,
+                  title: "Are you sure to add this concultation?",
+                  subTitle: "you can't undo this operation",
+                  onConfirm: () => {
+                    handleAddConsultation();
+                  },
+                });
+              }}
             />
           </div>
           <div className="line-hl">
@@ -205,6 +241,14 @@ export default function AddHospitalisation(props) {
         <ConfirmDialog
           confirmDialog={confirmDialog}
           setConfirmDialog={setConfirmDialog}
+        />
+        <DialogeAddConcultation
+          confirmDialogConcultation={confirmDialogConcultation}
+          setConfirmDialogConcultation={setConfirmDialogConcultation}
+        />
+        <DialogeValideVisite
+          confirmDialogVisite={confirmDialogVisite}
+          setConfirmDialogVisite={setConfirmDialogVisite}
         />
       </div>
     </div>
