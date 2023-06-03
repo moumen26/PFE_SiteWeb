@@ -10,6 +10,7 @@ import TableConcultation from "../components/tables/tableConcultation";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import TableAntecedent from "../components/tables/tableAntecedent";
+import VaccinTable from "../components/tables/tableAddPatientVaccin";
 
 export default function MamanProfile() {
   //get current user
@@ -110,15 +111,14 @@ export default function MamanProfile() {
     };
     fetchHospitalisationData();
     }, [history, id, user?.token, HospitalisationDB]);
+  const handleGoBack = () => {
+    history(-1)
+  }
   return (
     <div className="Maman-profile">
       <div className="maman-profile-container">
         <div className="patient-profile-icon">
-          <FiChevronLeft size={30} />
-          <div className="left-icon">
-            <FaShareSquare size={25} />
-            <BsCloudDownloadFill size={25} />
-          </div>
+          <FiChevronLeft size={30} onClick={handleGoBack}/>
         </div>
         <div className="patient-profile-details">
           <h4>Patient details</h4>
@@ -126,7 +126,19 @@ export default function MamanProfile() {
             <AboutMaman PatientData={PatientData} />
             <PatientDetailsReducation ConcultationDB={ConcultationDB} />
           </div>
-          <AddBebe />
+          {!(PatientData?.Sexe.toLowerCase() === "homme" || 
+              PatientData?.Sexe.toLowerCase() === "male") && 
+            <AddBebe />
+          }
+          <div className="home-formulaire-swiper profile-cahier-table-vaccin">
+            <div className="profile-cahier-swiper-title">
+              <h2>Vaccination</h2>
+            </div>
+            <div className="line-hl">
+              <div className="hl"></div>
+            </div>
+            <VaccinTable />
+          </div>
           {ConcultationDB?.length > 0 && (
             <div className="home-formulaire-swiper profile-antecedent">
               <div className="profile-cahier-swiper-title">

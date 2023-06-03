@@ -57,6 +57,10 @@ export default function Rendezvous() {
     }
   };
   const handleAddPatient = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       const response = await fetch("http://localhost:8000/patients/", {
         method: "POST",
@@ -89,16 +93,26 @@ export default function Rendezvous() {
       console.error("Error adding article:", error);
     }
   };
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
+
   return (
     <div className="Rendezvous">
       <div className="rendezvous-container">
         <div className="rendezvous-profile-title">
-          <h2>Rendez-vous</h2>
-          <span>Gerez les rendez-vous d’un patient</span>
+          <h2>Ajouter un patient</h2>
         </div>
         <div className="rendezvous-nom-hopital">
-          <div className="rendezvous-logo-hopital"></div>
-          <h2>Nom de l'hopital</h2>
+          <h2>{user.Hopital}</h2>
         </div>
         <div className="Rendezvous-form">
           <div className="rendezvous-form-class">

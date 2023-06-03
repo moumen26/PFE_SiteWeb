@@ -223,7 +223,7 @@ export default function AddPatient() {
         } else if (response.status === 200) {
           window.alert("Add patient success", response.data.message);
         }
-        history(`Dossier-Nouveau-ne/${PatientData._id}`)
+        history(`/Dossier-Nouveau-ne/${PatientData._id}`)
       } catch (error) {
         console.error(error);
       }

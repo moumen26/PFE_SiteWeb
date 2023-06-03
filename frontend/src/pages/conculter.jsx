@@ -377,7 +377,7 @@ export default function Conculter(props) {
         type: "error",
       });
       setTimeout(() => {
-        history(`/Nouveaune`);
+        history(-1);
       }, 1000);
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
@@ -391,7 +391,8 @@ export default function Conculter(props) {
       isOpen: false,
     });
     try {
-      const response = await axios.patch(
+      if(DiagnosticData._id !== undefined){
+        const response = await axios.patch(
         `http://localhost:8000/patients/Diagnostic/${DiagnosticData._id}`,
         {
           Context,
@@ -402,15 +403,15 @@ export default function Conculter(props) {
             Authorization: `Bearer ${user?.token}`,
           },
         }
-      );
-      const data = await response.data;
-      if (!response.ok) {
-        window.alert(data.message);
+        );
+        const data = await response.data;
+        setTimeout(() => {
+          history(-1);
+        }, 1000);
+      }else{
+        window.alert("you have to add one of these diagnostic ordonnance examen")
       }
-      if (response.ok) {
-        window.alert(data.message);
-      }
-      history(`/patients`);
+      
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
     }

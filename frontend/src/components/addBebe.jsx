@@ -104,37 +104,37 @@ export default function AddBebe() {
     }
   };
   const [NouveauNeData, setNouveauNeData] = useState();
-//Nouveau-ne data
-useEffect(() => {
-  const fetchNouveauNeData = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8000/patients/Nouveau-ne/list/all`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
-          },
-          body: JSON.stringify({
-            ListNouveaune: patientData,
-          }),
+  //Nouveau-ne data
+  useEffect(() => {
+    const fetchNouveauNeData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:8000/patients/Nouveau-ne/list/all`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user?.token}`,
+            },
+            body: JSON.stringify({
+              ListNouveaune: patientData,
+            }),
+          }
+        );
+        // get the patientID via response from the server patientRouter.post
+        const data = await response.json();
+        if (!response.ok) {
+          window.alert(data.message);
         }
-      );
-      // get the patientID via response from the server patientRouter.post
-      const data = await response.json();
-      if (!response.ok) {
-        window.alert(data.message);
-      }
-      if (response.ok) {
-        setNouveauNeData(data);
-      }
-  }catch (error) {
-    console.error("Error adding Nouveau-ne:", error);
-  }
-  };
-  fetchNouveauNeData();
-}, [NouveauNeData,history, id, user?.token]);
+        if (response.ok) {
+          setNouveauNeData(data);
+        }
+    }catch (error) {
+      console.error("Error adding Nouveau-ne:", error);
+    }
+    };
+    fetchNouveauNeData();
+  }, [NouveauNeData,history, id, user?.token]);
 
   const [enfantAddFormData, setenfantAddFormData] = useState({
     Nom_Nouveaune: "",
@@ -147,11 +147,13 @@ useEffect(() => {
     <div className="add-bebe">
       <div className="ajout-bebe">
         <h2>Ses enfants :</h2>
-        <input
-          type="submit"
-          value="Ajouter nouveau-ne"
-          onClick={handleAddNouveauNe}
-        />
+        {user.speciality.toLowerCase() === "sage femme" && 
+          <input
+            type="submit"
+            value="Ajouter nouveau-ne"
+            onClick={handleAddNouveauNe}
+          />
+        }
       </div>
       <div className="table-patients">
         <div className="table-enfant">

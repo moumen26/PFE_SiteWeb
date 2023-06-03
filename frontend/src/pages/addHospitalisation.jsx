@@ -14,7 +14,9 @@ export default function AddHospitalisation(props) {
   const history = useNavigate();
   const [HospitalisationData, setHospitalisationData] = useState();
   const [ConcultationData, setConcultationData] = useState();
-
+  const goBack = () => {
+    window.history.back();
+  };
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
@@ -125,7 +127,7 @@ export default function AddHospitalisation(props) {
       });
 
       setTimeout(() => {
-        history(`/Nouveaune`);
+        history(-1);
       }, 1000);
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
@@ -198,7 +200,7 @@ export default function AddHospitalisation(props) {
             }}
           />
           <h2>Hospitalisation</h2>
-          <input type="submit" value="Enregistrer tout" />
+          <input type="submit" value="terminer" onClick={() => history(-1)}/>
         </div>
         <div className="affichage-concultation-header">
           <h3>

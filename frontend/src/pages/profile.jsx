@@ -174,15 +174,14 @@ export default function ProfilePatient() {
       return false;
     }
   };
+  const handleGoBack = () => {
+    history(-1)
+  }
   return (
     <div className="Patients-profile">
       <div className="patient-profile-container">
         <div className="patient-profile-icon">
-          <FiChevronLeft size={30} />
-          <div className="left-icon">
-            <FaShareSquare size={25} />
-            <BsCloudDownloadFill size={25} />
-          </div>
+          <FiChevronLeft size={30} onClick={handleGoBack}/>
         </div>
         <div className="patient-profile-details profile-cahier">
           <h4>Patient details</h4>
