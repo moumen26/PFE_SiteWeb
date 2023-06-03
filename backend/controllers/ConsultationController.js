@@ -196,7 +196,6 @@ const DeleteConsultation = async (req, res) => {
         });
     });
 }
-
 module.exports = {
     GetConsultation,
     GetConsultationById,

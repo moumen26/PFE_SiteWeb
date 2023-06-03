@@ -110,17 +110,6 @@ router.patch('/DossObs/Nouveau-ne/:id', UpdateDossObs);
 //delete a dossier obstirique
 router.delete('/DossObs/:id', DeleteDossObs);
 
-// CARNET DE SANTE
-
-//get a specific carnet de sante
-//router.get('/CarnetSante/:id', GetCarnetSante);
-
-//update a carnet de sante
-//router.patch('/CarnetSante/:id', UpdateCarnetSante);
-
-//delete a carnet de sante
-//router.delete('/CarnetSante/:id', DeleteCarnetSante);
-
 // VACCIN
 
 // get all vaccins

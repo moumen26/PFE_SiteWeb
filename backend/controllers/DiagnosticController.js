@@ -92,10 +92,11 @@ const UpdateDiagnostic = async (req, res) => {
             return res.status(400).json({ message: 'Specified id is not valid' });
         }
         //find id in db and update
-        await Diagnostic.findOneAndUpdate({_id: id},{Context,Maladie}).then((diagnostic) => {
+        await Diagnostic.findOneAndUpdate({_id: id},{Context,Maladie}).then(async (diagnostic) => {
             if (!diagnostic) {
                 return res.status(404).json({ message: 'Diagnostic not found' });
             }
+            await Consultation.findByIdAndUpdate({_id: diagnostic.ConsultationID},{Maladie: Maladie});
             res.status(200).json({ message: 'Diagnostic Added successfully' });
         }).catch((error) => {
             console.error('Error finding diagnostic:', error);

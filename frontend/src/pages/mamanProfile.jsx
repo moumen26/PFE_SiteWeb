@@ -9,6 +9,7 @@ import AddBebe from "../components/addBebe";
 import TableConcultation from "../components/tables/tableConcultation";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
+import TableAntecedent from "../components/tables/tableAntecedent";
 
 export default function MamanProfile() {
   //get current user
@@ -20,6 +21,7 @@ export default function MamanProfile() {
   // initialisation of the state of the data
   const [PatientData, setPatientData] = useState();
   const [ConcultationDB, setConcultationDB] = useState();
+  const [ConcultationDBByMaladie, setConcultationDBByMaladie] = useState();
   const [HospitalisationDB, setHospitalisationDB] = useState();
 
 
@@ -55,7 +57,7 @@ export default function MamanProfile() {
 
   //Concultation data
   useEffect(() => {
-    const fetchPatientData = async () => {
+    const fetchConcultationDB = async () => {
       if (id !== undefined) {
         await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
           headers: {
@@ -78,7 +80,7 @@ export default function MamanProfile() {
         });
       }
     };
-    fetchPatientData();
+    fetchConcultationDB();
   }, [history, id, user?.token, PatientData]);
 
   //Hospitalisation data
@@ -125,7 +127,17 @@ export default function MamanProfile() {
             <PatientDetailsReducation ConcultationDB={ConcultationDB} />
           </div>
           <AddBebe />
-          
+          {ConcultationDB?.length > 0 && (
+            <div className="home-formulaire-swiper profile-antecedent">
+              <div className="profile-cahier-swiper-title">
+                <h2>Antecedent</h2>
+              </div>
+              <div className="line-hl">
+                <div className="hl"></div>
+              </div>
+              <TableAntecedent AntecedentDB={ConcultationDB} />
+            </div>
+          )}
           {ConcultationDB?.length > 0 && (
             <div className="home-formulaire-swiper profile-hospitalisation">
             <div className="profile-cahier-swiper-title">

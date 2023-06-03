@@ -36,6 +36,10 @@ const ConsultationSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    Maladie: {
+        type: String,
+        required: false,
+    },
 });
 
 const Consultation = mongoose.model('consultations', ConsultationSchema);

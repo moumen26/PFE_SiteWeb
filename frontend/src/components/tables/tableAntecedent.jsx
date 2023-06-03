@@ -4,8 +4,8 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import TableAntecedentReadOnlyRow from "./tableAntecedentReadOnlyRow";
 import dataAntecedent from "../../AntecedentDataBase.json";
-export default function TableAntecedent() {
-  const [AntecedentDB, setAntecedentDB] = useState(dataAntecedent);
+export default function TableAntecedent({AntecedentDB}) {
+  const [Search, setSearch] = useState("");
 
   return (
     <div className="table-Antecedent">
@@ -27,16 +27,25 @@ export default function TableAntecedent() {
                   type="search"
                   className="class-search"
                   placeholder="Search.."
-                  // onChange={(e) => {
-                  //   setSearch(e.target.value);
-                  // }}
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                 />
                 <AiOutlineSearch className="search-icon" />
               </div>
             </td>
           </tr>
           <div className="table-concultation-container">
-            {AntecedentDB.map((Antecedent) => (
+            {AntecedentDB.filter((item)=>{
+              if(item?.DiagnosticID !== undefined && item?.Maladie !== ""){
+                if(Search === "" || !Search){
+                  return item;
+                }else if(item?.Maladie.toLowerCase().includes(Search.toLowerCase()) ||
+                item?.DateConcultation.toLowerCase().includes(Search.toLowerCase()) || item?.HeureConsultation.toLowerCase().includes(Search.toLowerCase())){
+                  return item;
+                }
+              }
+            }).map((Antecedent) => (
               <TableAntecedentReadOnlyRow Antecedent={Antecedent} />
             ))}
           </div>

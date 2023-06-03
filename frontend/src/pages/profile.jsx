@@ -193,15 +193,17 @@ export default function ProfilePatient() {
           <div className="home-formulaire-swiper profile-dossier">
             <MySwiper />
           </div>
-          <div className="home-formulaire-swiper profile-antecedent">
-            <div className="profile-cahier-swiper-title">
-              <h2>Antecedent</h2>
+          {ConcultationDB?.length > 0 && (
+            <div className="home-formulaire-swiper profile-antecedent">
+              <div className="profile-cahier-swiper-title">
+                <h2>Antecedent</h2>
+              </div>
+              <div className="line-hl">
+                <div className="hl"></div>
+              </div>
+              <TableAntecedent AntecedentDB={ConcultationDB} />
             </div>
-            <div className="line-hl">
-              <div className="hl"></div>
-            </div>
-            <TableAntecedent ConcultationDB={ConcultationDB} />
-          </div>
+          )}
           <div className="home-formulaire-swiper profile-cahier-table-vaccin">
             <div className="profile-cahier-swiper-title">
               <h2>Vaccination</h2>
