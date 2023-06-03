@@ -9,8 +9,8 @@ import VisiteAddButton from "../components/buttons/buttonVisiteAdd";
 import AddVisiteButton2 from "../components/buttons/buttonAddVisite2";
 import AddVaccinButtonTable from "../components/buttons/buttonAddVaccin2";
 import VaccinTable from "../components/tables/tableAddPatientVaccin";
-import AddConcultation from "../components/buttons/buttonAddConcultation";
-import TableConcultation from "../components/tables/tableConcultation";
+import AddConsultation from "../components/buttons/buttonAddConsultation";
+import TableConsultation from "../components/tables/tableConcultation";
 import { AiOutlineSearch } from "react-icons/ai";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
@@ -118,9 +118,9 @@ export default function AddPatient() {
         window.alert(data.message);
       }
       history(`/patients`);
-  } catch (error) {
-    window.alert(error.message);
-  }
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
 
   //Get Dossier Obstetricale Data
@@ -223,45 +223,49 @@ export default function AddPatient() {
         } else if (response.status === 200) {
           window.alert("Add patient success", response.data.message);
         }
-        history(`/Dossier-Nouveau-ne/${PatientData._id}`)
+        history(`Dossier-Nouveau-ne/${PatientData._id}`);
       } catch (error) {
         console.error(error);
       }
     }
   };
-  
+
   return (
     <div className="AddPatient">
       <div className="addpatient-container">
-          <div className="addpatient-hedear">
-            <h2>Dossier nouveau-ne</h2>
-            <input type="submit" value="Enregistrer tout" onClick={() => {
-                setConfirmDialog({
-                  isOpen: true,
-                  title: "Are you sure you want to save this Nouveau-ne?",
-                  subTitle: "you can't undo this operation",
-                  onConfirm: () => {
-                    handleDossObsSubmit();
-                  },
-                });
-              }}/>
+        <div className="addpatient-hedear">
+          <h2>Dossier nouveau-ne</h2>
+          <input
+            type="submit"
+            value="Enregistrer tout"
+            onClick={() => {
+              setConfirmDialog({
+                isOpen: true,
+                title: "Are you sure you want to save this Nouveau-ne?",
+                subTitle: "you can't undo this operation",
+                onConfirm: () => {
+                  handleDossObsSubmit();
+                },
+              });
+            }}
+          />
+        </div>
+        <div className="top">
+          <div className="top-titre">
+            <h2>Dossier patient</h2>
           </div>
-          <div className="top">
-            <div className="top-titre">
-              <h2>Dossier patient</h2>
+          <div className="top-right">
+            <div className="service">
+              <h3>Nom de service :</h3>
             </div>
-            <div className="top-right">
-              <div className="service">
-                <h3>Nom de service :</h3>
-              </div>
-              <div className="paraticien">
-                <h3>Nom de praticien :</h3>
-                <a href="#">Dr. Khaldi</a>
-              </div>
+            <div className="paraticien">
+              <h3>Nom de praticien :</h3>
+              <a href="#">Dr. Khaldi</a>
             </div>
           </div>
+        </div>
         <div className="home-formulaire">
-          <div>
+          <div className="fichier-nouveau-ne">
             <div className="formulaire-dossier-obster">
               <div className="formulaire-header-obster">
                 <div className="formulaire-dossier-obstetrique">
@@ -271,9 +275,28 @@ export default function AddPatient() {
               <div className="line-hl">
                 <div className="hl"></div>
               </div>
-              <form action="" >
+              <form action="">
                 <div className="pro-acc">
                   <h2>Protocole d’accouchement</h2>
+                  <div className="malforamtion-annexe">
+                    <div className="span-item">
+                      <span>Nom :</span>
+                    </div>
+                    <input type="text" />
+                  </div>
+                  <div className="malforamtion-annexe">
+                    <div className="span-item">
+                      <span>Prenom :</span>
+                    </div>
+                    <input type="text" />
+                  </div>
+                  <div className="malforamtion-annexe">
+                    <div className="span-item">
+                      <span>Identifiant :</span>
+                    </div>
+                    <input type="text" />
+                  </div>
+
                   <div className="date-heure-acc">
                     <div className="date-acc">
                       <div className="span-item span-long1">
@@ -303,205 +326,187 @@ export default function AddPatient() {
                       <span>Accoucheur :</span>
                     </div>
                     <div className="textarea">
-                      <textarea
+                      <input
+                        type="text"
                         name="accoucheur"
                         id="accoucheur"
                         defaultValue={UserData?.Fname}
                         readOnly
-                      ></textarea>
+                      />
                     </div>
                   </div>
                 </div>
                 <div className="examen-annexes">
                   <h2>Examen des annexes :</h2>
                   <div className="annexes">
-                    <div className="annexe">
-                      <div className="annexe-item">
-                        <div className="span-item">
+                    <div className="malforamtion-annexe">
+                      <div className="span-item">
+                        <span>Aspect :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={Aspect}
+                        name="Aspect"
+                        onChange={(e) => {
+                          setAspect(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="malforamtion-annexe">
+                      <div className="span-item">
+                        <span>Anomalies :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={Anomalies}
+                        name="Anomalies"
+                        onChange={(e) => {
+                          setAnomalies(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="malforamtion-annexe">
+                      <div className="span-item">
+                        <span>Placenta :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={Placenta}
+                        name="Placenta"
+                        onChange={(e) => {
+                          setPlacenta(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="malforamtion-annexe">
+                      <div className="span-item">
+                        <span>Membranes :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={Membranes}
+                        name="Membranes"
+                        onChange={(e) => {
+                          setMembranes(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="malforamtion-annexe">
+                      <div className="span-item">
+                        <span>Cordon :</span>
+                      </div>
+                      <input
+                        type="text"
+                        value={Cordon}
+                        name="Cordon"
+                        onChange={(e) => {
+                          setCordon(e.target.value);
+                        }}
+                      />
+                    </div>
+                    <div className="sexe-poids-taille-pc">
+                      <div className="date-annexe">
+                        <div className="span-item petit-span">
+                          <span>Sexe :</span>
+                        </div>
+                        <input
+                          type="text"
+                          name="Sexe"
+                          id="date-annexe"
+                          value={Sexe}
+                          onChange={(e) => {
+                            setSexe(e.target.value);
+                          }}
+                        />
+                      </div>
+                      <div className="poids-annexe">
+                        <div className="span-item petit-span">
                           <span>Poids :</span>
                         </div>
-                        <input
-                          type="text"
-                          value={Poids}
-                          name="Poids"
-                          onChange={(e) => {
-                            setPoids(e.target.value);
-                          }}
-                        />
+                        <input type="text" />
                       </div>
-                      <div className="annexe-item">
-                        <div className="span-item">
-                          <span>Aspect :</span>
+                      <div className="taille-annexe">
+                        <div className="span-item petit-span">
+                          <span>Taille :</span>
                         </div>
-                        <input
-                          type="text"
-                          value={Aspect}
-                          name="Aspect"
-                          onChange={(e) => {
-                            setAspect(e.target.value);
-                          }}
-                        />
-                      </div>
-                      <div className="annexe-item">
-                        <div className="span-item">
-                          <span>Anomalies :</span>
-                        </div>
-                        <input
-                          type="text"
-                          value={Anomalies}
-                          name="Anomalies"
-                          onChange={(e) => {
-                            setAnomalies(e.target.value);
-                          }}
-                        />
-                      </div>
-                    </div>
-                    <div className="annexe annexe-two">
-                      <div className="annexe-item">
-                        <div className="span-item">
-                          <span>Placenta :</span>
-                        </div>
-                        <input
-                          type="text"
-                          value={Placenta}
-                          name="Placenta"
-                          onChange={(e) => {
-                            setPlacenta(e.target.value);
-                          }}
-                        />
-                      </div>
-                      <div className="annexe-item">
-                        <div className="span-item">
-                          <span>Membranes :</span>
-                        </div>
-                        <input
-                          type="text"
-                          value={Membranes}
-                          name="Membranes"
-                          onChange={(e) => {
-                            setMembranes(e.target.value);
-                          }}
-                        />
-                      </div>
-                      <div className="annexe-item">
-                        <div className="span-item">
-                          <span>Cordon :</span>
-                        </div>
-                        <input
-                          type="text"
-                          value={Cordon}
-                          name="Cordon"
-                          onChange={(e) => {
-                            setCordon(e.target.value);
-                          }}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="examen-annexes">
-                  <h2>Examen des annexes :</h2>
-                  <div className="sexe-poids-taille-pc">
-                    <div className="date-annexe">
-                      <div className="span-item petit-span">
-                        <span>Sexe :</span>
-                      </div>
-                      <input
-                        type="text"
-                        name="Sexe"
-                        id="date-annexe"
-                        value={Sexe}
-                        onChange={(e) => {
-                          setSexe(e.target.value);
-                        }}
-                      />
-                    </div>
-                    <div className="poids-annexe">
-                      <div className="span-item petit-span">
-                        <span>Poids :</span>
-                      </div>
-                      <input type="text" />
-                    </div>
-                    <div className="taille-annexe">
-                      <div className="span-item petit-span">
-                        <span>Taille :</span>
-                      </div>
 
-                      <input
-                        type="text"
-                        value={Taille}
-                        name="Taille"
-                        onChange={(e) => {
-                          setTaille(e.target.value);
-                        }}
-                      />
+                        <input
+                          type="text"
+                          value={Taille}
+                          name="Taille"
+                          onChange={(e) => {
+                            setTaille(e.target.value);
+                          }}
+                        />
+                      </div>
+                      <div className="pc-annexe">
+                        <div className="span-item petit-span">
+                          <span>PC :</span>
+                        </div>
+                        <input
+                          type="text"
+                          value={Pc}
+                          name="Pc"
+                          onChange={(e) => {
+                            setPc(e.target.value);
+                          }}
+                        />
+                      </div>
                     </div>
-                    <div className="pc-annexe">
-                      <div className="span-item petit-span">
-                        <span>PC :</span>
+                    <div className="score-dapgar">
+                      <div className="score">
+                        <span>Score d'Apgar :</span>
+                      </div>
+                      <div className="minute-1">
+                        <span>1 minute</span>
+                        <input
+                          type="checkbox"
+                          name="une_min"
+                          onChange={(e) => {
+                            setUne_min(e.target.value);
+                          }}
+                        />
+                      </div>
+                      <div className="minute-5">
+                        <span>5 minute</span>
+                        <input
+                          type="checkbox"
+                          name="cinq_min"
+                          onChange={(e) => {
+                            setCinq_min(e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className="malforamtion-annexe">
+                      <div className="span-item">
+                        <span>Malformation :</span>
                       </div>
                       <input
                         type="text"
-                        value={Pc}
-                        name="Pc"
+                        value={Malformation}
+                        name="Malformation"
                         onChange={(e) => {
-                          setPc(e.target.value);
+                          setMalformation(e.target.value);
                         }}
                       />
                     </div>
-                  </div>
-                  <div className="score-dapgar">
-                    <div className="score">
-                      <span>Score d'Apgar :</span>
-                    </div>
-                    <div className="minute-1">
-                      <span>1 minute</span>
+                    <div className="remarque-annexe">
+                      <div className="span-item">
+                        <span>Remarque :</span>
+                      </div>
                       <input
-                        type="checkbox"
-                        name="une_min"
+                        type="text"
+                        name="Remarque"
+                        value={Remarque}
                         onChange={(e) => {
-                          setUne_min(e.target.value);
+                          setRemarque(e.target.value);
                         }}
                       />
                     </div>
-                    <div className="minute-5">
-                      <span>5 minute</span>
-                      <input
-                        type="checkbox"
-                        name="cinq_min"
-                        onChange={(e) => {
-                          setCinq_min(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                  <div className="malforamtion-annexe">
-                    <div className="span-item">
-                      <span>Malformation :</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={Malformation}
-                      name="Malformation"
-                      onChange={(e) => {
-                        setMalformation(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="remarque-annexe">
-                    <div className="span-item">
-                      <span>Remarque :</span>
-                    </div>
-                    <input
-                      type="text"
-                      name="Remarque"
-                      value={Remarque}
-                      onChange={(e) => {
-                        setRemarque(e.target.value);
-                      }}
-                    />
                   </div>
                 </div>
+
                 {/*<div className="Enregistre-class">
                   <input
                     type="Submit"
@@ -509,7 +514,6 @@ export default function AddPatient() {
                     className="enregistre-btn"
                   />
                 </div> */}
-                
               </form>
             </div>
           </div>

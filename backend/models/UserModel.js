@@ -70,20 +70,20 @@ userSchema.statics.signup = async function(email, password, Lname, Fname, specia
     
     // validation
     if(!email || !password || !Lname || !Fname || !speciality || !phone ){
-        throw Error('All fields mast be filled');
+        throw Error("Tous les champs doivent être remplis");
     }
     if(!validator.isEmail(email)){
-        throw Error('Email is not valid');
+        throw Error("L'email n'est pas valide");
     }
     if(!validator.isStrongPassword(password)){
-        throw Error('Password not strong enough');
+        throw Error("Mot de passe pas assez fort");
     }
 
     // check if email already in use
     const exist = await this.findOne({email});
     
     if(exist){
-        throw Error('Email already in use');
+        throw Error("Email déjà utilisé");
     }
 
     // hash password
@@ -104,20 +104,20 @@ userSchema.statics.login = async function(email, password){
 
     // validation
     if(!email || !password){
-        throw Error('All fields mast be filled');
+        throw Error("Tous les champs doivent être remplis");
     }
 
     // check if email already in use
     const user = await this.findOne({email});
     
     if(!user){
-        throw Error('Incorrect email');
+        throw Error("Adresse Email incorrecte");
     }
 
     const match = await bcrypt.compare(password, user.password);
 
     if(!match){
-        throw Error('Incorrect password');
+        throw Error("Mot de passe incorrect");
     }
 
     return user;

@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../hooks/useAuthContext';
 
 
-export default function TableConcultationReadOnlyRow({ Concultation }) {
+export default function TableConsultationReadOnlyRow({ Concultation }) {
   const {user} = useAuthContext();
   const handleTestUser = () => {
     if(user.id === Concultation.MedecinID){

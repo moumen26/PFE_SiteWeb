@@ -23,13 +23,10 @@ export default function AboutMaman({PatientData}) {
               <span>Profession :</span>
               <h3>{PatientData?.Profession}</h3>
             </div>
-            {!(PatientData?.Sexe.toLowerCase() === "homme" || 
-              PatientData?.Sexe.toLowerCase() === "male") &&
-              <div className="maman-cart-item">
-                <span>Nom de famille du mari :</span>
-                <h3>{PatientData?.Nom}</h3>
-              </div>
-            }
+            <div className="maman-cart-item">
+              <span>Nom de famille du mari :</span>
+              <h3>{PatientData?.Nom}</h3>
+            </div>
           </div>
           <div className="maman-cart-class">
             <div className="maman-cart-item">
@@ -48,13 +45,10 @@ export default function AboutMaman({PatientData}) {
               <span>Telephone :</span>
               <h3>{PatientData?.Telephone}</h3>
             </div>
-            {!(PatientData?.Sexe.toLowerCase() === "homme" || 
-              PatientData?.Sexe.toLowerCase() === "male") &&
-              <div className="maman-cart-item">
-                <span>Poids :</span>
-                <h3>{PatientData?.Poids}</h3>
-              </div>
-            }
+            <div className="maman-cart-item">
+              <span>Poids :</span>
+              <h3>{PatientData?.Poids}</h3>
+            </div>
           </div>
           <div className="maman-cart-class">
             <div className="maman-cart-item">
@@ -69,20 +63,14 @@ export default function AboutMaman({PatientData}) {
               <span>Address :</span>
               <h3>{PatientData?.Adresse}</h3>
             </div>
-            {!(PatientData?.Sexe.toLowerCase() === "homme" || 
-              PatientData?.Sexe.toLowerCase() === "male") &&
-              <div className="maman-cart-item">
-                <span>Nombre de enfants :</span>
-                <h3>{PatientData?.NbrEnfant}</h3>
-              </div>
-            }
-            {!(PatientData?.Sexe.toLowerCase() === "homme" || 
-              PatientData?.Sexe.toLowerCase() === "male") &&
-              <div className="maman-cart-item">
-                <span>Taille :</span>
-                <h3>{PatientData?.Taille}</h3>
-              </div>
-            }
+            <div className="maman-cart-item">
+              <span>Nombre de enfants :</span>
+              <h3>{PatientData?.NbrEnfant}</h3>
+            </div>
+            <div className="maman-cart-item">
+              <span>Taille :</span>
+              <h3>{PatientData?.Taille}</h3>
+            </div>
           </div>
         </div>
       </div>

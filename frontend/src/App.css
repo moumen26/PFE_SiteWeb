@@ -1030,6 +1030,26 @@ nav {
   text-align: center;
 }
 
+.fichier-nouveau-ne form{
+ margin-top: 0;
+}
+
+.fichier-nouveau-ne .pro-acc{
+  width: 100%;
+}
+
+.fichier-nouveau-ne .pro-acc h2,
+.fichier-nouveau-ne .examen-annexes h2{
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.fichier-nouveau-ne form .accoucheur{
+  margin-top: 30px;
+}
+
+
+
 .swiper-class {
   width: 100%;
   height: 100%;
@@ -1316,7 +1336,6 @@ nav {
 .pathologique .textarea textarea,
 .familiaux .textarea textarea,
 .empre-digi .textarea textarea,
-.accoucheur .textarea textarea,
 .re-annexe-textarea .textarea textarea,
 .examen-general .textarea textarea,
 .examen-obstetrical .textarea textarea {
@@ -1324,6 +1343,10 @@ nav {
   width: 1060px;
   border-radius: 10px;
   background-color: #dadada;
+}
+
+.accoucheur .textarea input{
+  width: 1060px;
 }
 
 .re-annexe-textarea {
@@ -2439,7 +2462,6 @@ form.sign-in-form {
   font-size: 18px;
   line-height: 21.6px;
   color: #fff;
-  text-transform: capitalize;
   margin-left: 10px;
 }
 
@@ -5042,7 +5064,7 @@ form.sign-in-form {
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding-left: 4.75rem;
   padding-right: 4.75rem;
   margin-bottom: 50px;
@@ -5250,7 +5272,7 @@ form.sign-in-form {
 }
 
 .about-maman {
-  width: 75%;
+  width: 90%;
   height: 356px;
 }
 
@@ -5266,7 +5288,7 @@ form.sign-in-form {
 .about-maman-cart {
   width: 100%;
   display: flex;
-  gap: 160px;
+  gap: 200px;
   padding-left: 48px;
   margin-top: 26px;
 }
@@ -5338,6 +5360,8 @@ form.sign-in-form {
   padding-bottom: 10vh;
 }
 
+90%
+
 .profile-cahier-table-vaccin .vaccin-table-container {
   width: 100%;
 }
@@ -5365,7 +5389,8 @@ form.sign-in-form {
   .table-concultation,
 .Patients-profile .profile-hospitalisation .table-concultation,
 .Patients-profile .profile-concultation .table-concultation,
-.Patients-profile .profile-antecedent .table-Antecedent {
+.Patients-profile .profile-antecedent .table-Antecedent,
+.Maman-profile .profile-antecedent .table-Antecedent  {
   width: 90%;
 }
 

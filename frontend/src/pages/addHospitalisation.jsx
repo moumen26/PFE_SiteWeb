@@ -217,11 +217,11 @@ export default function AddHospitalisation(props) {
         </div>
         <div className="home-formulaire-swiper profile-hospitalisation">
           <div className="profile-cahier-swiper-title">
-            <h2>Concultation</h2>
+            <h2>Consultation</h2>
             <input
               className="add-concultation-btn"
               type="submit"
-              value="Ajouter un concultation"
+              value="Ajouter un consultation"
               onClick={() => {
                 setConfirmDialogConcultation({
                   isOpen: true,

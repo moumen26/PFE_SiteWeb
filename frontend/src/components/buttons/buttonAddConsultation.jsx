@@ -1,6 +1,6 @@
 import { CiLock, CiUnlock } from "react-icons/ci";
 import { useState } from "react";
-export default function AddConcultation({ addConsultation, setAddConsultation }) {
+export default function AddConsultation({ addConsultation, setAddConsultation }) {
   const handleClickAddConcultation = () => {
     setAddConsultation(!addConsultation);
   };

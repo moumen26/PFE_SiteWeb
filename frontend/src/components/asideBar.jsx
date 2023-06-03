@@ -1,9 +1,7 @@
 import { MdDashboard } from "react-icons/md";
 import { BsFilePersonFill, BsFilePerson } from "react-icons/bs";
 import { BsFillCalendarFill } from "react-icons/bs";
-import { RiCoupon2Fill } from "react-icons/ri";
-import { MdAnalytics } from "react-icons/md";
-import { IoIosSettings } from "react-icons/io";
+import { ImProfile } from "react-icons/im";
 import { FiLogOut } from "react-icons/fi";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
@@ -70,33 +68,20 @@ export default function MyAsideBar() {
               </div>
             </NavLink>
           </li>
-          <li className="mb-6">
-            <NavLink to="malade-profile">
-              <div
-                className={`link flex items-center ${
-                  location.pathname === "/malade-profile"
-                    ? "aside-item-active"
-                    : ""
-                }`}
-              >
-                <BsFillCalendarFill className="w-6 h-6 ml-2 " />
-                <span className="title">Calendrier</span>
-              </div>
-            </NavLink>
-          </li>
+
           <li>
-            <NavLink to="paramètres">
+            <NavLink to="profile">
               <div
                 className={`link flex items-center ${
-                  location.pathname === "/paramètres" ? "aside-item-active" : ""
+                  location.pathname === "/profile" ? "aside-item-active" : ""
                 }`}
               >
-                <IoIosSettings className="w-6 h-6 ml-2" />
+                <ImProfile className="w-6 h-6 ml-2" />
                 <span className="title">Profile</span>
               </div>
             </NavLink>
           </li>
-          
+
           <li>
             <NavLink to="login">
               {user && (

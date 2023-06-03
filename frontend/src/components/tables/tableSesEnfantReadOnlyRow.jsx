@@ -5,11 +5,10 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 
 export default function TableSesEnfant({ Enfant }) {
+  const { user } = useAuthContext();
+  const { id } = useParams();
   const history = useNavigate();
-  //Voir patient details
-  const handleVoirDossierPatient = async () => {
-    history(`/Dossier-Nouveau-ne/${await Enfant._id}`);
-  };
+  
   return (
     <tr className="table-nouveau-ne-ligne">
       <td className="table-patients-td-nom">{Enfant.Nom + " " + Enfant.Prenom}</td>
@@ -17,7 +16,8 @@ export default function TableSesEnfant({ Enfant }) {
       <td className="table-patients-td-willaya">{Enfant.LieuDeNaissance}</td>
       <td className="table-patients-td-region">{Enfant.Adresse}</td>
       <td className="table-patients-td table-patient-td-button">
-        <VoirButton VoirPatient={handleVoirDossierPatient}/>
+        <ConculterButton />
+        <VoirButton/>
       </td>
     </tr>
   );

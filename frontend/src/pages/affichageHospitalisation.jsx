@@ -88,7 +88,7 @@ export default function AffichageHospitalisation() {
         </div>
         <div className="home-formulaire-swiper profile-hospitalisation">
           <div className="profile-cahier-swiper-title">
-            <h2>Concultation</h2>
+            <h2>Consultation</h2>
             <ButtonAddConcultationTable />
           </div>
           <div className="line-hl">

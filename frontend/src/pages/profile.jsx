@@ -175,19 +175,18 @@ export default function ProfilePatient() {
     }
   };
   const handleGoBack = () => {
-    history(-1)
-  }
+    history(-1);
+  };
   return (
     <div className="Patients-profile">
       <div className="patient-profile-container">
         <div className="patient-profile-icon">
-          <FiChevronLeft size={30} onClick={handleGoBack}/>
+          <FiChevronLeft size={30} onClick={handleGoBack} />
         </div>
         <div className="patient-profile-details profile-cahier">
           <h4>Patient details</h4>
           <div className="patient-profile-details-container">
             <AboutPatient PatientData={PatientData} />
-            <PatientDetailsReducation />
           </div>
           <div className="home-formulaire-swiper profile-dossier">
             <MySwiper />

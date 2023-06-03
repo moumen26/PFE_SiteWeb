@@ -6,7 +6,7 @@ export default function ConculterButton({ AddConsultation }) {
   return (
     <div className="conculter-btn-class" onClick={AddConsultation}>
       <FaStethoscope size={15} fill="#fff" />
-      <input type="submit" value="Conculter" className="conculter-btn" />
+      <input type="submit" value="Consulter" className="conculter-btn" />
     </div>
   );
 }

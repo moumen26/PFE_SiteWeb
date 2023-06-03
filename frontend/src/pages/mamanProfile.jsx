@@ -124,7 +124,7 @@ export default function MamanProfile() {
           <h4>Patient details</h4>
           <div className="patient-profile-details-container">
             <AboutMaman PatientData={PatientData} />
-            <PatientDetailsReducation ConcultationDB={ConcultationDB} />
+            
           </div>
           {!(PatientData?.Sexe.toLowerCase() === "homme" || 
               PatientData?.Sexe.toLowerCase() === "male") && 

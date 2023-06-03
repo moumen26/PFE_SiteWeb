@@ -1,29 +1,25 @@
 import { BrowserRouter, Route, Routes, Navigate, useNavigate } from "react-router-dom";
 import Dashboard from "./pages/dashboard";
 import PatientDetails from "./pages/patientMaman";
-import patientProfile from "./pages/patientProfile";
 import NouveauNe from "./pages/nouveaune";
 import AddPatient from "./pages/addPatient";
 import Calendrier from "./pages/calendrier";
-import Coupon from "./pages/coupon";
-import Analytics from "./pages/analytics";
 import Login from "./pages/loginPage";
 import DoctorProfile from "./pages/doctorProfile";
 import Rendezvous from "./pages/rendezvous";
 import Antecedent from "./pages/antecedent";
 import MyAsideBar from "./components/asideBar";
-import Conculter from "./pages/conculter";
 import MyNavBar from "./components/navBar";
 import { useEffect, useState } from "react";
 import { useAuthContext } from "./hooks/useAuthContext";
 import AffichageConcultation from "./pages/affichageConcultation";
-import PatientProfile from "./pages/patientProfile";
-import TableConcultation from "./components/tables/tableConcultation";
+
 import MamanProfile from "./pages/mamanProfile";
 import ProfilePatient from "./pages/profile";
 import AddHospitalisation from "./pages/addHospitalisation";
 import AffichageHospitalisation from "./pages/affichageHospitalisation";
 import MaladeProfile from "./pages/maladeProfile";
+import Conculter from "./pages/conculter";
 
 function App() {
   const [act, setAct] = useState(false);

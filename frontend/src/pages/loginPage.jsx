@@ -111,7 +111,7 @@ export default function Login() {
           >
             <h2 className="title-login">connexion</h2>
             <div className="input-field email">
-              <label htmlFor="">email</label>
+              <label htmlFor="">Email</label>
               <input
                 type="email"
                 value={loginemail}
@@ -119,11 +119,11 @@ export default function Login() {
                 onChange={(e) => {
                   setloginEmail(e.target.value);
                 }}
-                placeholder="Enter your email.."
+                placeholder="Entez votre email.."
               />
             </div>
             <div className="input-field password">
-              <label htmlFor="">password</label>
+              <label htmlFor="">Mot de passe</label>
               <input
                 type="password"
                 value={loginpassword}
@@ -131,10 +131,10 @@ export default function Login() {
                 onChange={(e) => {
                   setloginpassword(e.target.value);
                 }}
-                placeholder="Enter your password.."
+                placeholder="Entez votre mot de passe.."
               />
               <div className="forget-class">
-                <a>I forget my password</a>
+                <a>mot de passe oublie?</a>
               </div>
             </div>
             <input
@@ -151,7 +151,7 @@ export default function Login() {
             className="sign-in-form"
           >
             <div className="input-field">
-              <label htmlFor="">Last name</label>
+              <label htmlFor="">Nom</label>
               <input
                 type="text"
                 value={lname}
@@ -159,11 +159,11 @@ export default function Login() {
                 onChange={(e) => {
                   setLname(e.target.value);
                 }}
-                placeholder="Enter your name.."
+                placeholder="Entrez votre nom.."
               />
             </div>
             <div className="input-field">
-              <label htmlFor="">first name</label>
+              <label htmlFor="">Prénom</label>
               <input
                 type="text"
                 value={fname}
@@ -171,11 +171,11 @@ export default function Login() {
                 onChange={(e) => {
                   setFname(e.target.value);
                 }}
-                placeholder="Enter your first name.."
+                placeholder="Entrez votre Prénom.."
               />
             </div>
             <div className="input-field">
-              <label htmlFor="">email</label>
+              <label htmlFor="">Email</label>
               <input
                 type="text"
                 value={signinemail}
@@ -183,11 +183,11 @@ export default function Login() {
                 onChange={(e) => {
                   setSigninEmail(e.target.value);
                 }}
-                placeholder="Enter your email.."
+                placeholder="Entez votre email.."
               />
             </div>
             <div className="input-field">
-              <label htmlFor="">password</label>
+              <label htmlFor="">Mot de passe</label>
               <input
                 type="password"
                 value={signinpassword}
@@ -195,11 +195,11 @@ export default function Login() {
                 onChange={(e) => {
                   setSigninpassword(e.target.value);
                 }}
-                placeholder="Enter your password.."
+                placeholder="Entez votre mot de passe.."
               />
             </div>
             <div className="input-field">
-              <label htmlFor="">speciality</label>
+              <label htmlFor="">Spécialité</label>
               <input
                 type="text"
                 value={speciality}
@@ -207,11 +207,11 @@ export default function Login() {
                 onChange={(e) => {
                   setSpeciality(e.target.value);
                 }}
-                placeholder="Enter your speciality.."
+                placeholder="Entez votre spécialité.."
               />
             </div>
             <div className="input-field">
-              <label htmlFor="">hopital</label>
+              <label htmlFor="">Hôpital</label>
               <select
                 class="nouveau-ne-chart"
                 name="nouveau-ne-chart"
@@ -220,7 +220,7 @@ export default function Login() {
                 onChange={(e) => setHopital(e.target.value)}
               >
                 <option selected disabled>
-                  Enter your hospital..
+                  Entez votre hôpital..
                 </option>
                 <option value="Hospital 1">Hospital 1</option>
                 <option value="Hospital 2">Hospital 2</option>
@@ -229,7 +229,7 @@ export default function Login() {
               </select>
             </div>
             <div className="input-field">
-              <label htmlFor="">phone number</label>
+              <label htmlFor="">Numero de telephone</label>
               <input
                 type="tel"
                 value={phone}
@@ -237,7 +237,7 @@ export default function Login() {
                 onChange={(e) => {
                   setPhone(e.target.value);
                 }}
-                placeholder="Enter your phone number.."
+                placeholder="Entez votre Numero de telephone.."
               />
             </div>
             <button className="demande-accee2" disabled={isloading}>
@@ -272,8 +272,8 @@ export default function Login() {
               </div>
             </a>
             <p>
-              Your request will be checked by the administration, and after a
-              few days we will inform you by e-mail and SMS
+              Votre demande sera vérifiée par l'administration, et après
+              quelques jours nous vous informerons par e-mail et SMS
             </p>
             <BackButton openPanel={openPanel} setOpenPanel={setOpenPanel} />
           </div>
