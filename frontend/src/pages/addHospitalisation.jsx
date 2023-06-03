@@ -4,13 +4,27 @@ import ButtonAddConcultationTable from "../components/buttons/buttonAddConcultat
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
+import Notification from "../components/notification/notification";
+import ConfirmDialog from "../components/dialoges/dialogeAlert";
 
-export default function AddHospitalisation() {
+export default function AddHospitalisation(props) {
   const { id } = useParams();
   const { user } = useAuthContext();
   const history = useNavigate();
-  const [ HospitalisationData, setHospitalisationData] = useState();
-  const [ ConcultationData, setConcultationData] = useState();
+  const [HospitalisationData, setHospitalisationData] = useState();
+  const [ConcultationData, setConcultationData] = useState();
+
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
 
   //get Hospitalisation data
   useEffect(() => {
@@ -32,7 +46,10 @@ export default function AddHospitalisation() {
                 console.error("Error fetching Hospitalisation data:", error);
               });
           } else {
-            console.error("Error resieving Hospitalisation date", response.error);
+            console.error(
+              "Error resieving Hospitalisation date",
+              response.error
+            );
           }
         });
       }
@@ -43,12 +60,15 @@ export default function AddHospitalisation() {
   useEffect(() => {
     const fetchConcultationData = async () => {
       if (user?.token !== undefined) {
-        await fetch(`http://localhost:8000/patients/ConsultationByHospitalisationID/${id}`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user?.token}`,
-          },
-        }).then((response) => {
+        await fetch(
+          `http://localhost:8000/patients/ConsultationByHospitalisationID/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user?.token}`,
+            },
+          }
+        ).then((response) => {
           if (response.ok) {
             response
               .json()
@@ -59,7 +79,10 @@ export default function AddHospitalisation() {
                 console.error("Error fetching Hospitalisation data:", error);
               });
           } else {
-            console.error("Error resieving Hospitalisation date", response.error);
+            console.error(
+              "Error resieving Hospitalisation date",
+              response.error
+            );
           }
         });
       }
@@ -68,6 +91,10 @@ export default function AddHospitalisation() {
   }, [ConcultationData, id, user?.token]);
   //delete the Hospitalisation
   const handleDeleteHospitalisation = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       const response = await axios.delete(
         `http://localhost:8000/patients/Hospitalisation/${HospitalisationData._id}`,
@@ -78,13 +105,15 @@ export default function AddHospitalisation() {
         }
       );
       const data = await response.data;
-      if (!response.ok) {
-        window.alert(data.message);
-      }
-      if (response.ok) {
-        window.alert(data.message);
-      }
-      history(`/Nouveaune`);
+      setNotify({
+        isOpen: true,
+        message: "Delete Successfully",
+        type: "error",
+      });
+
+      setTimeout(() => {
+        history(`/Nouveaune`);
+      }, 1000);
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
     }
@@ -130,7 +159,20 @@ export default function AddHospitalisation() {
     <div className="Add-Hospitalisation">
       <div className="Add-Hospitalisation-container">
         <div className="addpatient-hedear">
-          <input type="submit" value="Annuler" onClick={handleDeleteHospitalisation}/>
+          <input
+            type="submit"
+            value="Annuler"
+            onClick={() => {
+              setConfirmDialog({
+                isOpen: true,
+                title: "Are you sure to delete this Hospitalisation?",
+                subTitle: "you can't undo this operation",
+                onConfirm: () => {
+                  handleDeleteHospitalisation();
+                },
+              });
+            }}
+          />
           <h2>Hospitalisation</h2>
           <input type="submit" value="Enregistrer tout" />
         </div>
@@ -150,13 +192,20 @@ export default function AddHospitalisation() {
         <div className="home-formulaire-swiper profile-hospitalisation">
           <div className="profile-cahier-swiper-title">
             <h2>Concultation</h2>
-            <ButtonAddConcultationTable AddConsultation={handleAddConsultation}/>
+            <ButtonAddConcultationTable
+              AddConsultation={handleAddConsultation}
+            />
           </div>
           <div className="line-hl">
             <div className="hl"></div>
           </div>
-          <TableConcultation ConcultationDB={ConcultationData}/>
+          <TableConcultation ConcultationDB={ConcultationData} />
         </div>
+        <Notification notify={notify} setNotify={setNotify} />
+        <ConfirmDialog
+          confirmDialog={confirmDialog}
+          setConfirmDialog={setConfirmDialog}
+        />
       </div>
     </div>
   );

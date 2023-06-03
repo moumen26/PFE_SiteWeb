@@ -17,6 +17,7 @@ import AddCahierSante from "../components/buttons/buttonAddCahier";
 import TableConcultation from "../components/tables/tableConcultation";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
+import TableAntecedent from "../components/tables/tableAntecedent";
 
 export default function ProfilePatient() {
   //get current user
@@ -63,41 +64,44 @@ export default function ProfilePatient() {
   }, [history, id, user?.token, PatientData]);
   //Concultation data
   useEffect(() => {
-  const fetchPatientData = async () => {
-    if (id !== undefined) {
-      await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
-      }).then((response) => {
-        if (response.ok) {
-          response
-            .json()
-            .then((data) => {
-             setConcultationDB(data);
-            })
-            .catch((error) => {
-              console.error("Error fetching Concultation data:", error);
-            });
-        } else {
-          console.error("Error resieving Concultation date", response.error);
-        }
-      });
-    }
-  };
-  fetchPatientData();
-  }, [history, id, user?.token, ConcultationDB]);
-  //Hospitalisation data
-  useEffect(() => {
-    const fetchHospitalisationData = async () => {
+    const fetchPatientData = async () => {
       if (id !== undefined) {
-        await fetch(`http://localhost:8000/patients/Hospitalisation/all/${id}`, {
+        await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${user?.token}`,
           },
         }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setConcultationDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Concultation data:", error);
+              });
+          } else {
+            console.error("Error resieving Concultation date", response.error);
+          }
+        });
+      }
+    };
+    fetchPatientData();
+  }, [history, id, user?.token, ConcultationDB]);
+  //Hospitalisation data
+  useEffect(() => {
+    const fetchHospitalisationData = async () => {
+      if (id !== undefined) {
+        await fetch(
+          `http://localhost:8000/patients/Hospitalisation/all/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user?.token}`,
+            },
+          }
+        ).then((response) => {
           if (response.ok) {
             response
               .json()
@@ -108,13 +112,16 @@ export default function ProfilePatient() {
                 console.error("Error fetching Hospitalisation data:", error);
               });
           } else {
-            console.error("Error resieving Hospitalisation date", response.error);
+            console.error(
+              "Error resieving Hospitalisation date",
+              response.error
+            );
           }
         });
       }
     };
     fetchHospitalisationData();
-    }, [history, id, user?.token, HospitalisationDB]);
+  }, [history, id, user?.token, HospitalisationDB]);
   useEffect(() => {
     const fetchVaccinData = async () => {
       if (id !== undefined) {
@@ -145,28 +152,28 @@ export default function ProfilePatient() {
   }, [history, id, VaccinData]);
   //user have access to Pediatre
   const giveAccessToPediatre = (speciality) => {
-      if(speciality.toLowerCase() === "pediatre"){
-        return true;
-      }else{
-        return false;
-      }
-  }
+    if (speciality.toLowerCase() === "pediatre") {
+      return true;
+    } else {
+      return false;
+    }
+  };
   //user have access to Sage Femme
   const giveAccessToSageFemme = (speciality) => {
-    if(speciality.toLowerCase() === "sage femme"){
+    if (speciality.toLowerCase() === "sage femme") {
       return true;
-    }else{
+    } else {
       return false;
     }
-  }
+  };
   //user have access to Medecin
   const giveAccessToMedecin = (speciality) => {
-    if(speciality.toLowerCase() === "medecin"){
+    if (speciality.toLowerCase() === "medecin") {
       return true;
-    }else{
+    } else {
       return false;
     }
-  }
+  };
   return (
     <div className="Patients-profile">
       <div className="patient-profile-container">
@@ -185,6 +192,15 @@ export default function ProfilePatient() {
           </div>
           <div className="home-formulaire-swiper profile-dossier">
             <MySwiper />
+          </div>
+          <div className="home-formulaire-swiper profile-antecedent">
+            <div className="profile-cahier-swiper-title">
+              <h2>Antecedent</h2>
+            </div>
+            <div className="line-hl">
+              <div className="hl"></div>
+            </div>
+            <TableAntecedent ConcultationDB={ConcultationDB} />
           </div>
           <div className="home-formulaire-swiper profile-cahier-table-vaccin">
             <div className="profile-cahier-swiper-title">
@@ -209,14 +225,14 @@ export default function ProfilePatient() {
 
           {HospitalisationDB?.length > 0 && (
             <div className="home-formulaire-swiper profile-hospitalisation">
-            <div className="profile-cahier-swiper-title">
-              <h2>Hospitalisation</h2>
+              <div className="profile-cahier-swiper-title">
+                <h2>Hospitalisation</h2>
+              </div>
+              <div className="line-hl">
+                <div className="hl"></div>
+              </div>
+              <TableConcultation ConcultationDB={HospitalisationDB} />
             </div>
-            <div className="line-hl">
-              <div className="hl"></div>
-            </div>
-            <TableConcultation ConcultationDB={HospitalisationDB} />
-          </div>
           )}
         </div>
       </div>

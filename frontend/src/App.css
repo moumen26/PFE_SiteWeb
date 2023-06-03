@@ -3311,13 +3311,14 @@ form.sign-in-form {
 
 /* patient details style */
 
-.patient-table {
+.patient-table,
+.Malade-Profile {
   width: 100%;
-
   position: relative;
 }
 
-.patient-table-container {
+.patient-table-container,
+.Malade-profile-container {
   width: calc(100% - 80px);
   position: absolute;
   left: 82px;
@@ -3368,7 +3369,6 @@ form.sign-in-form {
   width: 90%;
   height: fit-content;
   margin-bottom: 20px;
-
 }
 
 .table-patients table tr {
@@ -3868,7 +3868,8 @@ form.sign-in-form {
 .profile-cahier-swiper,
 .profile-cahier-table-vaccin,
 .profile-concultation,
-.profile-hospitalisation {
+.profile-hospitalisation,
+.profile-antecedent {
   margin-top: 140px;
   padding-bottom: 30px;
 }
@@ -3957,7 +3958,8 @@ form.sign-in-form {
 .addpatient-hedear input,
 .conculter-hedear input,
 .ajout-bebe input,
-.enregistre-btn {
+.enregistre-btn,
+.malade-profile-header input {
   padding: 0;
   height: 39px;
   background-color: rgba(79, 129, 255, 1);
@@ -3965,6 +3967,11 @@ form.sign-in-form {
   line-height: 21.6px;
   color: #fff;
   cursor: pointer;
+}
+
+.malade-profile-header input {
+  padding-right: 15px;
+  padding-left: 15px;
 }
 
 .antecedent-hedear input:last-child,
@@ -3988,7 +3995,7 @@ form.sign-in-form {
   height: fit-content;
 }
 
-.add-bebe .table-patients{
+.add-bebe .table-patients {
   height: fit-content;
 }
 
@@ -4158,7 +4165,7 @@ form.sign-in-form {
 }
 
 .voir-btn,
-.conculter-btn{
+.conculter-btn {
   width: fit-content;
 }
 
@@ -4995,7 +5002,7 @@ form.sign-in-form {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 53px;
+  margin-top: 73px;
   padding-left: 99px;
   padding-right: 121px;
 }
@@ -5101,7 +5108,8 @@ form.sign-in-form {
   margin-top: 0;
 }
 
-.table-concultation {
+.table-concultation,
+.table-Antecedent {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -5171,7 +5179,6 @@ form.sign-in-form {
   display: flex;
 }
 
-
 .table-concultation-center table {
   width: 100%;
 }
@@ -5184,35 +5191,34 @@ form.sign-in-form {
   height: 50px;
 }
 
-.table-concultation-ligne{
+.table-concultation-ligne {
   position: relative;
 }
 
-.table-concultation-ligne .table-concultation-td-nom{
+.table-concultation-ligne .table-concultation-td-nom {
   position: absolute;
   left: 42px;
 }
 
-.table-concultation-ligne .table-concultation-td-date{
+.table-concultation-ligne .table-concultation-td-date {
   position: absolute;
   left: 327px;
 }
 
-.table-concultation-ligne .table-concultation-td-time{
+.table-concultation-ligne .table-concultation-td-time {
   position: absolute;
   left: 595px;
 }
 
-.table-concultation-ligne .table-concultation-td-search{
+.table-concultation-ligne .table-concultation-td-search {
   position: absolute;
   right: 24px;
 }
 
-.table-concultation-ligne .table-concultation-td-button{
+.table-concultation-ligne .table-concultation-td-button {
   position: absolute;
   right: 24px;
 }
-
 
 .table-concultation-tr {
   font-weight: 700;
@@ -5311,13 +5317,16 @@ form.sign-in-form {
 
 .profile-cahier-table-vaccin,
 .profile-concultation,
-.profile-hospitalisation {
+.profile-hospitalisation,
+.profile-antecedent {
   min-height: 300px;
   height: fit-content;
 }
 
 .profile-concultation .line-hl,
-.profile-hospitalisation .line-hl {
+.profile-hospitalisation .line-hl,
+.profile-antecedent .line-hl,
+.profile-cahier-table-vaccin .line-hl {
   margin-bottom: 30px;
 }
 
@@ -5345,15 +5354,18 @@ form.sign-in-form {
 }
 
 /*add hospitalisation style */
-.Add-Hospitalisation-container .profile-hospitalisation, 
-.Affichage-Hospitalisation-container .profile-hospitalisation{
+.Add-Hospitalisation-container .profile-hospitalisation,
+.Affichage-Hospitalisation-container .profile-hospitalisation {
   margin-top: 40px;
 }
 
 .Add-Hospitalisation-container .profile-hospitalisation .table-concultation,
-.Affichage-Hospitalisation-container .profile-hospitalisation .table-concultation,
+.Affichage-Hospitalisation-container
+  .profile-hospitalisation
+  .table-concultation,
 .Patients-profile .profile-hospitalisation .table-concultation,
-.Patients-profile .profile-concultation .table-concultation {
+.Patients-profile .profile-concultation .table-concultation,
+.Patients-profile .profile-antecedent .table-Antecedent {
   width: 90%;
 }
 
@@ -5374,18 +5386,119 @@ form.sign-in-form {
 
 .Affichage-Hospitalisation .add-concultation-btn,
 .Affichage-Hospitalisation .addpatient-hedear input,
-.Maman-profile .profile-cahier-swiper-title input{
+.Maman-profile .profile-cahier-swiper-title input {
   display: none;
 }
 
-.Maman-profile .profile-hospitalisation .table-concultation{
+.Maman-profile .profile-hospitalisation .table-concultation {
   width: 90%;
 }
 
-.Affichage-Hospitalisation .addpatient-hedear{
+.Affichage-Hospitalisation .addpatient-hedear {
   background-color: transparent;
   justify-content: center;
 }
+
+/* malade profile style */
+.malade-profile-header {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 42px;
+  padding-right: 60px;
+  margin-top: 25px;
+}
+
+.malade-profile-left-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.malade-profle-image {
+  width: 123px;
+  height: 123px;
+  border-radius: 50%;
+  background-color: rgba(217, 217, 217, 1);
+}
+
+.malade-profile-name-id h2 {
+  font-weight: 500;
+  font-size: 25px;
+  color: rgb(6, 14, 48);
+  text-transform: uppercase;
+}
+
+.malade-profile-name-id span {
+  font-weight: 500;
+  font-size: 20px;
+  color: rgb(106, 110, 131);
+}
+
+.malade-profile-information{
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: 30px;
+}
+
+.malade-profile-form-class{
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.malade-profile-form-item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.malade-profile-form-item label {
+  font-weight: 500;
+  line-height: 14.4px;
+  font-size: 12px;
+  color: rgba(6, 14, 48);
+  margin-left: 10px;
+}
+
+.malade-profile-form-item input,
+.malade-profile-form-item select,
+.malade-profile-form-item textarea {
+  width: 310px;
+  height: 53px;
+  border: 1px solid rgba(106, 110, 131, 1);
+  border-radius: 10px;
+  padding-left: 15px;
+  color: rgba(106, 110, 131, 1);
+  background-color: transparent;
+  padding-right: 10px;
+}
+
+.malade-profile-form-item textarea {
+  width: 511px;
+  height: 440px;
+  padding-top: 10px;
+}
+
+.malade-profile-form-item .telephone-input input {
+  width: 90%;
+  height: 100%;
+  background-color: transparent;
+  border: 0;
+  padding-left: 5px;
+}
+
+
+
+
+
 
 
 
@@ -5447,12 +5560,12 @@ form.sign-in-form {
   object-fit: cover; /* Maintain the image aspect ratio */
 }
 
-.add-alert-class{
+.add-alert-class {
   position: absolute;
   top: 0;
   opacity: 0;
 }
 
-.add-alert-active{
+.add-alert-active {
   opacity: 1;
 }

@@ -9,16 +9,6 @@ import Notification from "../components/notification/notification";
 import ConfirmDialog from "../components/dialoges/dialogeAlert";
 
 export default function Conculter(props) {
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",

@@ -23,6 +23,7 @@ import MamanProfile from "./pages/mamanProfile";
 import ProfilePatient from "./pages/profile";
 import AddHospitalisation from "./pages/addHospitalisation";
 import AffichageHospitalisation from "./pages/affichageHospitalisation";
+import MaladeProfile from "./pages/maladeProfile";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -102,14 +103,21 @@ function App() {
             path="rendezvous"
             element={user ? <Rendezvous /> : <Navigate to="/login" />}
           />
+
+          <Route
+            path="malade-profile"
+            element={user ? <MaladeProfile /> : <Navigate to="/login" />}
+          />
           <Route
             path="Hospitalisation/:id"
             element={user ? <AddHospitalisation /> : <Navigate to="/login" />}
           />
-          
+
           <Route
             path="affichageHospitalisation/:id"
-            element={user ? <AffichageHospitalisation /> : <Navigate to="/login" />}
+            element={
+              user ? <AffichageHospitalisation /> : <Navigate to="/login" />
+            }
           />
         </Routes>
       </main>

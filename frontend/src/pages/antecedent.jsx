@@ -87,6 +87,11 @@ export default function Antecedent() {
       );
       // get the patientID via response from the server patientRouter.post
       const data = await response.json();
+      setNotify({
+        isOpen: true,
+        message: "Add Successfully",
+        type: "success",
+      });
       if (!response.ok) {
         window.alert("Add patient failed", data.error);
       }
@@ -104,6 +109,7 @@ export default function Antecedent() {
           });
           // get the MamanID via response from the server
           const data = await response.json();
+          
           if (!response.ok) {
             window.alert("Add idNouveauNe failed", data.error);
           }
@@ -113,7 +119,9 @@ export default function Antecedent() {
         } catch (error) {
           console.error("Error adding idNouveauNe:", error);
         }
-        history(`/patients/${await data.id}`);
+        setTimeout(() => {
+          history(`/patients/${data.id}`);
+        }, 1000);
       }
     } catch (error) {
       console.error("Error adding Nouveau-ne:", error);
@@ -300,7 +308,7 @@ export default function Antecedent() {
               });
             }}/>
           <h2>Dossier maman</h2>
-          <input type="submit" value="sauvegarder et suivant" onClick={() => {
+          <input type="submit" value="Sauvegarder et Suivant" onClick={() => {
               setConfirmDialog({
                 isOpen: true,
                 title: "Are you sure to save this concultation?",

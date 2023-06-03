@@ -133,26 +133,26 @@ export default function PatientProfile() {
     <div className="Patients-profile">
       <div className="patient-profile-container">
         <div className="patient-profile-icon">
-          <FiChevronLeft size={30} />
+          <FiChevronLeft size={30} cursor="pointer" />
           <div className="left-icon">
-            <FaShareSquare size={25} />
-            <BsCloudDownloadFill size={25} />
+            <FaShareSquare size={25} cursor="pointer" />
+            <BsCloudDownloadFill size={25} cursor="pointer" />
           </div>
         </div>
         <div className="patient-profile-details">
           {/* Patient details */}
           <h4>Patient details</h4>
           <div className="patient-profile-details-container">
-            <AboutPatient PatientData={PatientData}/>
+            <AboutPatient PatientData={PatientData} />
             <PatientDetailsReducation />
           </div>
           <div className="home-formulaire-swiper">
             {/* Patient details */}
-            <MySwiper/>
+            <MySwiper />
           </div>
           <div className="addpatient-add-cahier add-vaccin">
             {/* Cahier de sante */}
-            <AddCahierSante add={add} setAdd={setAdd}/>
+            <AddCahierSante add={add} setAdd={setAdd} />
           </div>
           <div className={`cahier-vaccin${toggleClassAdd}`}>
             <div className="cahier-sante-title">
@@ -175,7 +175,6 @@ export default function PatientProfile() {
               />
             </div>
             <div className={`vaccin-table${toggleClassAddVaccin}`}>
-              
               <VaccinTable />
               <div className="addpatient-add-visite">
                 <AddVisiteButton
@@ -215,7 +214,10 @@ export default function PatientProfile() {
                       <AiOutlineSearch className="search-icon" />
                     </div>
                   </div>
-                  <TableConcultation ConcultationDB={ConcultationDB} Search={Search}/>
+                  <TableConcultation
+                    ConcultationDB={ConcultationDB}
+                    Search={Search}
+                  />
                 </div>
               </div>
             </div>
@@ -259,7 +261,10 @@ export default function PatientProfile() {
                       <AiOutlineSearch className="search-icon" />
                     </div>
                   </div>
-                  <TableConcultation ConcultationDB={ConcultationDB} Search={Search}/>
+                  <TableConcultation
+                    ConcultationDB={ConcultationDB}
+                    Search={Search}
+                  />
                 </div>
               </div>
             </div>

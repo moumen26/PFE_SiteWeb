@@ -70,6 +70,20 @@ export default function MyAsideBar() {
               </div>
             </NavLink>
           </li>
+          <li className="mb-6">
+            <NavLink to="malade-profile">
+              <div
+                className={`link flex items-center ${
+                  location.pathname === "/malade-profile"
+                    ? "aside-item-active"
+                    : ""
+                }`}
+              >
+                <BsFillCalendarFill className="w-6 h-6 ml-2 " />
+                <span className="title">Calendrier</span>
+              </div>
+            </NavLink>
+          </li>
           <li>
             <NavLink to="paramètres">
               <div
@@ -82,6 +96,7 @@ export default function MyAsideBar() {
               </div>
             </NavLink>
           </li>
+          
           <li>
             <NavLink to="login">
               {user && (
