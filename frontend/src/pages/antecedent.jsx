@@ -16,7 +16,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import AddBebe from "../components/addBebe";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { user } from "../hooks/useAuthContext"
+import { user } from "../hooks/useAuthContext";
 import Notification from "../components/notification/notification";
 import ConfirmDialog from "../components/dialoges/dialogeAlert";
 
@@ -40,7 +40,9 @@ export default function Antecedent() {
   const [addConsultation, setAddConsultation] = useState(false);
   //get current date
   const current = new Date();
-  const Date_daccouchement = `${current.getDate()}-${current.getMonth() + 1}-${current.getFullYear()}`;
+  const Date_daccouchement = `${current.getDate()}-${
+    current.getMonth() + 1
+  }-${current.getFullYear()}`;
   const Heure_daccouchement = `${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
 
   let toggleClassAdd = add ? " add-cahier-active" : "";
@@ -109,7 +111,7 @@ export default function Antecedent() {
           });
           // get the MamanID via response from the server
           const data = await response.json();
-          
+
           if (!response.ok) {
             window.alert("Add idNouveauNe failed", data.error);
           }
@@ -143,16 +145,17 @@ export default function Antecedent() {
         }
       );
       const data = await response.data;
-      if (!response.ok) {
-        window.alert(data.message);
-      }
-      if (response.ok) {
-        window.alert(data.message);
-      }
-      history(`/patients`);
-  } catch (error) {
-    window.alert(error.message);
-  }
+      setNotify({
+        isOpen: true,
+        message: "Suppression réussie",
+        type: "error",
+      });
+      setTimeout(() => {
+        history(`/patients`);
+      }, 1000);
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
   // Fetch Nouveau-ne Data
   useEffect(() => {
@@ -186,30 +189,30 @@ export default function Antecedent() {
 
   //Concultation data
   useEffect(() => {
-  const fetchPatientData = async () => {
-    if (id !== undefined) {
-      await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
-      }).then((response) => {
-        if (response.ok) {
-          response
-            .json()
-            .then((data) => {
-              setConcultationDB(data);
-            })
-            .catch((error) => {
-              console.error("Error fetching Concultation data:", error);
-            });
-        } else {
-          console.error("Error resieving Concultation date", response.error);
-        }
-      });
-    }
-  };
-  fetchPatientData();
+    const fetchPatientData = async () => {
+      if (id !== undefined) {
+        await fetch(`http://localhost:8000/patients/Consultation/all/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setConcultationDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Concultation data:", error);
+              });
+          } else {
+            console.error("Error resieving Concultation date", response.error);
+          }
+        });
+      }
+    };
+    fetchPatientData();
   }, [history, id, user?.token, ConcultationDB]);
   //Get Carnet de Sante Data
   useEffect(() => {
@@ -271,53 +274,61 @@ export default function Antecedent() {
   }, [history, id, VaccinData]);
   //user have access to Pediatre
   const giveAccessToPediatre = (speciality) => {
-      if(speciality.toLowerCase() === "pediatre"){
-        return true;
-      }else{
-        return false;
-      }
-  }
+    if (speciality.toLowerCase() === "pediatre") {
+      return true;
+    } else {
+      return false;
+    }
+  };
   //user have access to Sage Femme
   const giveAccessToSageFemme = (speciality) => {
-    if(speciality.toLowerCase() === "sage femme"){
+    if (speciality.toLowerCase() === "sage femme") {
       return true;
-    }else{
+    } else {
       return false;
     }
-  }
+  };
   //user have access to Medecin
   const giveAccessToMedecin = (speciality) => {
-    if(speciality.toLowerCase() === "medecin"){
+    if (speciality.toLowerCase() === "medecin") {
       return true;
-    }else{
+    } else {
       return false;
     }
-  }
+  };
   return (
     <div className="Antecedent">
       <div className="antecedent-container">
         <div className="antecedent-hedear">
-          <input type="submit" value="Annuler" onClick={() => {
+          <input
+            type="submit"
+            value="Annuler"
+            onClick={() => {
               setConfirmDialog({
                 isOpen: true,
-                title: "Are you sure to delete this concultation?",
-                subTitle: "you can't undo this operation",
+                title: "Êtes-vous sûr de supprimer cette Dossier maman?",
+                subTitle: "Vous ne pouvez pas annuler cette opération",
                 onConfirm: () => {
                   handleDeletePatient();
                 },
               });
-            }}/>
+            }}
+          />
           <h2>Dossier maman</h2>
-          <input type="submit" value="Sauvegarder et Suivant" onClick={() => {
+          <input
+            type="submit"
+            value="Suivant"
+            onClick={() => {
               setConfirmDialog({
                 isOpen: true,
-                title: "Are you sure to save this concultation?",
-                subTitle: "you can't undo this operation",
+                title: "Voulez-vous vraiment enregistrer Dossier maman ?",
+                subTitle: "Vous ne pouvez pas annuler cette opération",
                 onConfirm: () => {
                   handleAddNouveauNe();
                 },
               });
-            }}/>
+            }}
+          />
         </div>
         <div className="antecedent-swipe">
           <div className="home-formulaire-swiper">
@@ -399,7 +410,6 @@ export default function Antecedent() {
             </div>
           </div>
           */}
-          
         </div>
         <Notification notify={notify} setNotify={setNotify} />
         <ConfirmDialog

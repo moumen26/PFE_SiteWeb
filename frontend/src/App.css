@@ -1030,25 +1030,23 @@ nav {
   text-align: center;
 }
 
-.fichier-nouveau-ne form{
- margin-top: 0;
+.fichier-nouveau-ne form {
+  margin-top: 0;
 }
 
-.fichier-nouveau-ne .pro-acc{
+.fichier-nouveau-ne .pro-acc {
   width: 100%;
 }
 
 .fichier-nouveau-ne .pro-acc h2,
-.fichier-nouveau-ne .examen-annexes h2{
+.fichier-nouveau-ne .examen-annexes h2 {
   padding-left: 0;
   margin-left: 0;
 }
 
-.fichier-nouveau-ne form .accoucheur{
+.fichier-nouveau-ne form .accoucheur {
   margin-top: 30px;
 }
-
-
 
 .swiper-class {
   width: 100%;
@@ -1345,7 +1343,7 @@ nav {
   background-color: #dadada;
 }
 
-.accoucheur .textarea input{
+.accoucheur .textarea input {
   width: 1060px;
 }
 
@@ -4455,7 +4453,7 @@ form.sign-in-form {
 }
 
 .add-tableau-vaccin1 {
-  /* top: 215vh; */
+  margin-top: -19vh;
   justify-content: center;
 }
 
@@ -4812,6 +4810,13 @@ form.sign-in-form {
   padding-left: 21px;
   padding-right: 21px;
   border: 1px solid rgba(79, 129, 255, 1);
+}
+
+.consultation-table-item-context-header {
+  background-color: rgba(243, 243, 243, 1);
+}
+.consultation-table-item-header {
+  background-color: white;
 }
 
 .consultation-table-item-context-header form {
@@ -5360,9 +5365,7 @@ form.sign-in-form {
   padding-bottom: 10vh;
 }
 
-90%
-
-.profile-cahier-table-vaccin .vaccin-table-container {
+90% .profile-cahier-table-vaccin .vaccin-table-container {
   width: 100%;
 }
 
@@ -5390,7 +5393,7 @@ form.sign-in-form {
 .Patients-profile .profile-hospitalisation .table-concultation,
 .Patients-profile .profile-concultation .table-concultation,
 .Patients-profile .profile-antecedent .table-Antecedent,
-.Maman-profile .profile-antecedent .table-Antecedent  {
+.Maman-profile .profile-antecedent .table-Antecedent {
   width: 90%;
 }
 
@@ -5462,7 +5465,7 @@ form.sign-in-form {
   color: rgb(106, 110, 131);
 }
 
-.malade-profile-information{
+.malade-profile-information {
   width: 100%;
   height: fit-content;
   display: flex;
@@ -5473,7 +5476,7 @@ form.sign-in-form {
   margin-top: 30px;
 }
 
-.malade-profile-form-class{
+.malade-profile-form-class {
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -5519,13 +5522,6 @@ form.sign-in-form {
   border: 0;
   padding-left: 5px;
 }
-
-
-
-
-
-
-
 
 .dashboard-table-container::-webkit-scrollbar,
 .patient-details-examen::-webkit-scrollbar,

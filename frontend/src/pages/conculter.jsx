@@ -7,9 +7,16 @@ import { useNavigate, useParams } from "react-router-dom";
 import AddMedicamentReadOnlyRow from "../components/tables/tableAddMedicamentReadOnlyRow";
 import Notification from "../components/notification/notification";
 import ConfirmDialog from "../components/dialoges/dialogeAlert";
+import AjouteNotification from "../components/notification/notificationAjoute";
 
 export default function Conculter(props) {
   const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
+  const [notifyAjoute, setNotifyAjoute] = useState({
     isOpen: false,
     message: "",
     type: "",
@@ -373,7 +380,7 @@ export default function Conculter(props) {
       const data = await response.data;
       setNotify({
         isOpen: true,
-        message: "Delete Successfully",
+        message: "Suppression réussie",
         type: "error",
       });
       setTimeout(() => {
@@ -409,15 +416,20 @@ export default function Conculter(props) {
           history(-1);
         }, 1000);
       }else{
-        window.alert("you have to add one of these diagnostic ordonnance examen")
+        setNotifyAjoute({
+          isOpen: true,
+          message: "Vous devez ajouter un de ces diagnostic ordonnance examen",
+          type: "error",
+        });
       }
+      
       
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
     }
     setNotify({
       isOpen: true,
-      message: "Save Successfully",
+      message: "Sauvegarde réussie",
       type: "success",
     });
   };
@@ -514,8 +526,8 @@ export default function Conculter(props) {
             onClick={() => {
               setConfirmDialog({
                 isOpen: true,
-                title: "Are you sure to delete this concultation?",
-                subTitle: "you can't undo this operation",
+                title: "Êtes-vous sûr de supprimer cette Consultation ?",
+                subTitle: "Vous ne pouvez pas annuler cette opération",
                 onConfirm: () => {
                   handleDeleteConsultation();
                 },
@@ -530,8 +542,8 @@ export default function Conculter(props) {
             onClick={() => {
               setConfirmDialog({
                 isOpen: true,
-                title: "Are you sure to save this concultation?",
-                subTitle: "you can't undo this operation",
+                title: "Voulez-vous vraiment enregistrer cette Consultation ?",
+                subTitle: "Vous ne pouvez pas annuler cette opération",
                 onConfirm: () => {
                   handleUpdateDiagnostic();
                 },
@@ -736,6 +748,10 @@ export default function Conculter(props) {
             </div>
           </div>
         </div>
+        <AjouteNotification
+          notifyAjoute={notifyAjoute}
+          setNotifyAjoute={setNotifyAjoute}
+        />
         <Notification notify={notify} setNotify={setNotify} />
         <ConfirmDialog
           confirmDialog={confirmDialog}

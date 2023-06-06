@@ -27,10 +27,10 @@ export default function ConfirmDialog(props) {
         <Button
           onClick={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
         >
-          Disagree
+          Annuler
         </Button>
         <Button onClick={confirmDialog.onConfirm} autoFocus>
-          Agree
+          Accepter
         </Button>
       </DialogActions>
     </Dialog>

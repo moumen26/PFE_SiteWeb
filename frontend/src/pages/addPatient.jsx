@@ -219,11 +219,21 @@ export default function AddPatient() {
         );
         // Handle response as needed
         if (!response.status === 200) {
-          window.alert("Add patient failed", response.data.message);
+          setNotify({
+            isOpen: true,
+            message: "Ajoute patient échoué",
+            type: "error",
+          });
         } else if (response.status === 200) {
-          window.alert("Add patient success", response.data.message);
+          setNotify({
+            isOpen: true,
+            message: "Ajoute patient réussie",
+            type: "success",
+          });
         }
-        history(`Dossier-Nouveau-ne/${PatientData._id}`);
+        setTimeout(() => {
+          history(`Dossier-Nouveau-ne/${PatientData._id}`);
+        }, 1000);
       } catch (error) {
         console.error(error);
       }
@@ -241,8 +251,8 @@ export default function AddPatient() {
             onClick={() => {
               setConfirmDialog({
                 isOpen: true,
-                title: "Are you sure you want to save this Nouveau-ne?",
-                subTitle: "you can't undo this operation",
+                title: "Voulez-vous vraiment enregistrer ce Nouveau-ne ?",
+                subTitle: "Vous ne pouvez pas annuler cette opération",
                 onConfirm: () => {
                   handleDossObsSubmit();
                 },

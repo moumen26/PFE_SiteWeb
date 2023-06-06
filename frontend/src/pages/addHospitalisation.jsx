@@ -122,7 +122,7 @@ export default function AddHospitalisation(props) {
       const data = await response.data;
       setNotify({
         isOpen: true,
-        message: "Delete Successfully",
+        message: "Suppression réussie",
         type: "error",
       });
 
@@ -191,8 +191,8 @@ export default function AddHospitalisation(props) {
             onClick={() => {
               setConfirmDialog({
                 isOpen: true,
-                title: "Are you sure to delete this Hospitalisation?",
-                subTitle: "you can't undo this operation",
+                title: "Êtes-vous sûr de supprimer cette Hospitalisation ?",
+                subTitle: "Vous ne pouvez pas annuler cette opération",
                 onConfirm: () => {
                   handleDeleteHospitalisation();
                 },
@@ -200,7 +200,8 @@ export default function AddHospitalisation(props) {
             }}
           />
           <h2>Hospitalisation</h2>
-          <input type="submit" value="terminer" onClick={() => history(-1)}/>
+          <input type="submit" value="Terminer"
+           onClick={() => history(-1)}/>
         </div>
         <div className="affichage-concultation-header">
           <h3>
@@ -225,8 +226,8 @@ export default function AddHospitalisation(props) {
               onClick={() => {
                 setConfirmDialogConcultation({
                   isOpen: true,
-                  title: "Are you sure to add this concultation?",
-                  subTitle: "you can't undo this operation",
+                  title: "Voulez-vous vraiment ajouter cette Consultation ?",
+                  subTitle: "Vous ne pouvez pas annuler cette opération",
                   onConfirm: () => {
                     handleAddConsultation();
                   },
