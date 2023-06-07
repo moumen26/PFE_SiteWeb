@@ -18,6 +18,10 @@ export default function VaccinTable() {
 
   const [VaccinDB, setVaccinDB] = useState();
   const [VaccinData, setVaccinData] = useState();
+  const [AgeRecommande, setAgeRecommande] = useState();
+  const [ContreQuoi, setContreQuoi] = useState();
+  const [Technique, setTechnique] = useState();
+  const [NumeroLot, setNumeroLot] = useState();
   const [addFormData, setAddFormData] = useState({
     vaccinationAge: "",
     vaccinationVaccin: "",
@@ -44,7 +48,31 @@ export default function VaccinTable() {
 
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-
+    const fetchVaccinDB = async () => {
+      await fetch(`http://localhost:8000/patients/Vaccin/${fieldValue}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          response
+            .json()
+            .then((data) => {
+              setAgeRecommande(data.age_recommande);
+              setContreQuoi(data.contre_quoi);
+              setTechnique(data.technique_vaccinale);
+              setNumeroLot(data.numero_lot);
+            })
+            .catch((error) => {
+              console.error("Error fetching Vaccin data:", error);
+            });
+        } else {
+          console.error("Error resieving vaccin date", response.error);
+        }
+      });
+    };
+    fetchVaccinDB();
     const newFormData = { ...addFormData };
     newFormData[fieldName] = fieldValue;
 
@@ -56,7 +84,7 @@ export default function VaccinTable() {
 
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-
+    
     const newFormData = { ...editFormData };
     newFormData[fieldName] = fieldValue;
 
@@ -65,7 +93,9 @@ export default function VaccinTable() {
 
   const handleEditRowClick = (event, VaccinData) => {
     event.preventDefault();
+
     setEditVaccinId(VaccinData?._id);
+
     const formValues = {
       Nom_vaccin: VaccinData.vaccinationVaccin,
       Date_vaccination: VaccinData.vaccinationDate,
@@ -82,9 +112,9 @@ export default function VaccinTable() {
     setEditVaccinId(null);
   };
 
-  //Get patient id from url
+  //Get patient id from parms
   const { id } = useParams();
-  //Get user id
+  //Get user 
   const { user } = useAuthContext();
 
   const history = useNavigate("/patients");
@@ -192,10 +222,6 @@ export default function VaccinTable() {
           {
             Nom_vaccin: editFormData.vaccinationVaccin,
             Date_vaccination: editFormData.vaccinationDate,
-            Age_vaccination: editFormData.vaccinationAge,
-            Contre_vaccin: editFormData.vaccinationContre,
-            Technique_vaccinale: editFormData.vaccinationTechnique,
-            Numero_lot: editFormData.vaccinationNumero,
           },
           {
             headers: {
@@ -284,7 +310,7 @@ export default function VaccinTable() {
               <Fragment>
                 {editVaccinId === VaccinData?._id ? (
                   <EditRow
-                    editFromData={editFormData}
+                    editFromData={VaccinData}
                     handleEditFromChange={handleEditFormChange}
                     handleCancelClick={handleCancelClick}
                   />
@@ -352,15 +378,13 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationAge"
                   id="vaccination-age"
-                  onChange={handleAddFormChange}
+                  value={AgeRecommande}
+                  onChange={(e) => {setAgeRecommande(e.target.value)}}
                 >
                   <option selected disabled>
-                    Age
+                    {AgeRecommande || "Age"}
                   </option>
 
-                  <option value="1mois">1 mois</option>
-                  <option value="2mois">2 mois</option>
-                  <option value="3mois">3 mois</option>
                 </select>
               </div>
 
@@ -385,15 +409,12 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationContre"
                   id="vaccination-contre"
-                  onChange={handleAddFormChange}
+                  onChange={(e) => {setContreQuoi(e.target.value)}}
                 >
                   <option selected disabled>
-                    Contre
+                    {ContreQuoi || "Contre"}
                   </option>
-                  <option value="contre1">contre</option>
-                  <option value="contre2">contre2</option>
-                  <option value="contre3">contre3</option>
-                  <option value="contre4">contre4</option>
+
                 </select>
               </div>
 
@@ -402,15 +423,12 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationTechnique"
                   id="vaccination-technique"
-                  onChange={handleAddFormChange}
+                  onChange={(e) => {setTechnique(e.target.value)}}
                 >
                   <option selected disabled>
-                    Technique
+                    { Technique || "Technique"}
                   </option>
-                  <option value="technique1">technique1</option>
-                  <option value="technique2">technique2</option>
-                  <option value="technique3">technique3</option>
-                  <option value="technique4">technique4</option>
+                  
                 </select>
               </div>
 
@@ -419,15 +437,12 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationNumero"
                   id="vaccination-numero"
-                  onChange={handleAddFormChange}
+                  onChange={(e) => {setNumeroLot(e.target.value)}}
                 >
                   <option selected disabled>
-                    Numero
+                    {NumeroLot || "Numero"}
                   </option>
-                  <option value="numero1">numero1</option>
-                  <option value="numero2">numero2</option>
-                  <option value="numero3">numero3</option>
-                  <option value="numero4">numero4</option>
+                  
                 </select>
               </div>
 

@@ -1,24 +1,14 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 
-const VaccinationSchema = new mongoose.Schema({
-    ID_Patient: {
-        type: mongoose.Schema.Types.ObjectId, ref: "patients"
-    },
-    ID_vaccinateur: {
-        type: mongoose.Schema.Types.ObjectId, ref: "users"
-    },
-    Nom_vaccin: {
+const VaccinSchema = new mongoose.Schema({
+    nom: {
         type: String,
-        required: false,
+        required: true,
     },
-    Date_vaccination: {
+    description: {
         type: String,
-        required: false,
-    },
-    Age_vaccination: {
-        type: String,
-        required: false,
+        required: true,
     },
     Contre_vaccin: {
         type: String,
@@ -32,8 +22,12 @@ const VaccinationSchema = new mongoose.Schema({
         type: String,
         required: false,
     },
+    age_recommande: {
+        type: String,
+        required: true,
+    },
 },{ timestamps: true });
 
-const Vaccination = mongoose.model('vaccins', VaccinationSchema);
+const Vaccin = mongoose.model('vaccins', VaccinSchema);
 
-module.exports = Vaccination;
+module.exports = Vaccin;

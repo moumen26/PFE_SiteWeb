@@ -437,10 +437,11 @@ export default function Conculter(props) {
   const handleMedDeleteClick = async (MedicamentId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8000/patients/Medicament/${MedicamentId}`,
+        `http://localhost:8000/patients/Medicament/${OrdonanceData[0]._id}`,
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
+            data : {MedicamentId},
           },
         }
       );

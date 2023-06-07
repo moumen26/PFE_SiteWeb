@@ -334,7 +334,6 @@ const DeletePatient = async (req, res) => {
             console.error('Error deleting patient:', error);
             res.status(500).json({ message: 'Failed to delete patient' });
         });
-
         
     }).catch((error) => {
         console.error('Error deleting patient:', error);

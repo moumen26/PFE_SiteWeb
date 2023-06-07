@@ -6,6 +6,7 @@ const cors = require('cors');
 const usersroutes = require('./routes/users');
 const patientsroute = require('./routes/patient');
 const body = require('body-parser');
+
 //express app
 const app = express();
  

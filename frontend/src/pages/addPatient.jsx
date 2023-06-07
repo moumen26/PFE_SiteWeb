@@ -232,7 +232,7 @@ export default function AddPatient() {
           });
         }
         setTimeout(() => {
-          history(`Dossier-Nouveau-ne/${PatientData._id}`);
+          history(`/Dossier-Nouveau-ne/${PatientData._id}`);
         }, 1000);
       } catch (error) {
         console.error(error);

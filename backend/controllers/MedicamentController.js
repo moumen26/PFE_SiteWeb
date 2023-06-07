@@ -89,30 +89,21 @@ const CreateNewMedicament = async (req, res) => {
 const DeleteMedicament = async (req, res) => {
   try {
     const { id } = req.params;
-    // Delete Ordonance
-    await Medicament.findByIdAndDelete({_id: id}).then((medicament) => {
-        if (!medicament) {
-            return res.status(404).json({ message: 'medicament not found' });
-        }
-        // Delete medicament from Ordonance
-        Ordonance.updateMany({_id: medicament.OrdonanceID}, {
-          $pull: {Medicaments: id}}).then((medicament) => {
-              if (!medicament) {
-                  return res.status(404).json({ message: 'medicament not found' });
-              }
-              console.log('medicament deleted from medicament');
-          }).catch((error) => {
-              console.error('Error updating medicament:', error);
-              res.status(500).json({ message: 'Failed to update medicament' });
-          });
-        res.status(200).json({ message: 'medicamentID deleted successfully from Ordonance' });
-        console.log('medicament deleted');
-    }).catch((error) => {
-        res.status(500).json({ message: 'Failed to delete medicament' });
-    });
-}catch(err){
-    res.status(400).json({err: err.message});
-}
+    const {data} = req.headers;
+    Ordonance.updateMany({_id: id}, {
+      $pull: {Medicaments: { _id: data }}}).then((medicament) => {
+          if (!medicament || medicament.modifiedCount == 0) {
+              return res.status(404).json({ message: 'medicament not found' });
+          }
+          res.status(200).json({ message: 'medicament deleted successfully'});
+          console.log('medicament deleted');
+      }).catch((error) => {
+          console.error('Error updating medicament:', error);
+          res.status(500).json({ message: 'Failed to update medicament' });
+      });
+  }catch(err){
+      res.status(400).json({err: err.message});
+  }
 }
 // get all medicament 
 const GetAllMedicaments = async (req, res) => {

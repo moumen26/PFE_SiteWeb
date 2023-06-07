@@ -14,7 +14,7 @@ const Login = async (req, res) => {
         if(!email || !password){
             return res
                 .status(400)
-                .json({ message: "All fields must be fieled" });
+                .json({ message: "Tout les champs doivent etre remplis" });
 
         }
         await User.findOne({email: email}).then(async (userexist) => {

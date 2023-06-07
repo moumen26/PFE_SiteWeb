@@ -24,6 +24,7 @@ const {
     UpdateVaccin,
     DeleteVaccin,
     CreateNewVaccin,
+    GetVaccinByName,
 } = require('../controllers/VaccinController');
 const {
     GetConsultation,
@@ -116,7 +117,8 @@ router.delete('/DossObs/:id', DeleteDossObs);
 router.get("/Vaccin/all", GetAllVaccin);
 //get all vaccins
 router.get("/Vaccin/all/:id", GetAllVaccins);
-
+//get vaccin by name 
+router.get("/Vaccin/:nom", GetVaccinByName);
 //post a new vaccin
 router.post('/AddVaccin/:id',CreateNewVaccin);
 

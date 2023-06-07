@@ -1,6 +1,103 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAuthContext } from "../../hooks/useAuthContext";
 
 function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
+  const [VaccinData, setVaccinData] = useState();
+  const [AgeRecommande, setAgeRecommande] = useState();
+  const [ContreQuoi, setContreQuoi] = useState();
+  const [Technique, setTechnique] = useState();
+  const [NumeroLot, setNumeroLot] = useState();
+  //Get patient id from parms
+  const { id } = useParams();
+  //Get user 
+  const { user } = useAuthContext();
+  //Get navigate
+  const history = useNavigate("/patients");
+  // Fetch Vaccins
+  useEffect(() => {
+    const fetchVaccinDB = async () => {
+        await fetch(`http://localhost:8000/patients/Vaccin/all/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setVaccinData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Vaccin data:", error);
+              });
+          } else {
+            console.error("Error resieving vaccin date", response.error);
+          }
+        });
+    };
+    fetchVaccinDB();
+  }, [history, id, VaccinData, user.token]);
+  // Fetch vaccin data
+  useEffect(() => {
+    const fetchVaccinDB = async () => {
+      await fetch(`http://localhost:8000/patients/Vaccin/${editFromData?.Nom_vaccin}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          response
+            .json()
+            .then((data) => {
+              setAgeRecommande(data.age_recommande);
+              setContreQuoi(data.contre_quoi);
+              setTechnique(data.technique_vaccinale);
+              setNumeroLot(data.numero_lot);
+            })
+            .catch((error) => {
+              console.error("Error fetching Vaccin data:", error);
+            });
+        } else {
+          console.error("Error resieving vaccin date", response.error);
+        }
+      });
+    };
+    fetchVaccinDB();
+  }, [editFromData?.Nom_vaccin, user.token]);
+  const handleselectchanged = (event) => {
+    const fetchVaccinDB = async () => {
+      await fetch(`http://localhost:8000/patients/Vaccin/${event}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          response
+            .json()
+            .then((data) => {
+              setAgeRecommande(data.age_recommande);
+              setContreQuoi(data.contre_quoi);
+              setTechnique(data.technique_vaccinale);
+              setNumeroLot(data.numero_lot);
+            })
+            .catch((error) => {
+              console.error("Error fetching Vaccin data:", error);
+            });
+        } else {
+          console.error("Error resieving vaccin date", response.error);
+        }
+      });
+    };
+    fetchVaccinDB();
+  };
+  const handleVaccinonChange = (event) => {
+    handleEditFromChange(event);
+    handleselectchanged(event);
+  };
   return (
     <tr>
       <td>
@@ -9,16 +106,12 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationAge"
           id="vaccination-age"
           required="required"
-          value={editFromData?.Age_vaccination}
-          onChange={handleEditFromChange}
+          defaultValue={editFromData?.Age_vaccination}
         >
           <option selected disabled>
-            Age
+            {AgeRecommande || "Age"}
           </option>
 
-          <option value="1mois">1 mois</option>
-          <option value="2mois">2 mois</option>
-          <option value="3mois">3 mois</option>
         </select>
       </td>
       <td>
@@ -27,16 +120,15 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationVaccin"
           id="vaccination-vaccin"
           required="required"
-          value={editFromData?.Nom_vaccin}
-          onChange={handleEditFromChange}
+          defaultValue={editFromData?.Nom_vaccin}
+          onChange={handleVaccinonChange}
         >
           <option selected disabled>
-            Vaccin
+            {editFromData?.Nom_vaccin}
           </option>
-          <option value="vaccin1">vaccin</option>
-          <option value="vaccin2">vaccin2</option>
-          <option value="vaccin3">vaccin3</option>
-          <option value="vaccin4">vaccin4</option>
+          {VaccinData ? VaccinData.map((Vaccin) => (
+            <option value={Vaccin.nom}>{Vaccin.nom}</option>
+          )) : null}
         </select>
       </td>
       <td>
@@ -45,16 +137,12 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationContre"
           id="vaccination-contre"
           required="required"
-          value={editFromData?.Contre_vaccin}
-          onChange={handleEditFromChange}
+          defaultValue={editFromData?.Contre_vaccin}
         >
           <option selected disabled>
-            Contre
+            {ContreQuoi || "Contre"}
           </option>
-          <option value="contre1">contre</option>
-          <option value="contre2">contre2</option>
-          <option value="contre3">contre3</option>
-          <option value="contre4">contre4</option>
+
         </select>
       </td>
       <td>
@@ -63,16 +151,12 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationTechnique"
           id="vaccination-technique"
           required="required"
-          value={editFromData?.Technique_vaccinale}
-          onChange={handleEditFromChange}
+          defaultValue={editFromData?.Technique_vaccinale}
         >
           <option selected disabled>
-            Technique
+            {Technique || "Technique"}
           </option>
-          <option value="technique1">technique1</option>
-          <option value="technique2">technique2</option>
-          <option value="technique3">technique3</option>
-          <option value="technique4">technique4</option>
+    
         </select>
       </td>
       <td>
@@ -81,16 +165,12 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           name="vaccinationNumero"
           id="vaccination-numero"
           required="required"
-          value={editFromData?.Numero_lot}
-          onChange={handleEditFromChange}
+          defaultValue={editFromData?.Numero_lot}
         >
           <option selected disabled>
-            Numero
+            {NumeroLot || "Numero"}
           </option>
-          <option value="numero1">numero1</option>
-          <option value="numero2">numero2</option>
-          <option value="numero3">numero3</option>
-          <option value="numero4">numero4</option>
+          
         </select>
       </td>
       <td>
@@ -99,7 +179,7 @@ function EditRow({ editFromData, handleEditFromChange, handleCancelClick }) {
           type="date"
           name="vaccinationDate"
           required="required"
-          value={editFromData?.Date_vaccination}
+          defaultValue={editFromData?.Date_vaccination}
           onChange={handleEditFromChange}
         />
       </td>
