@@ -264,7 +264,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.MamanNom}
+                  value={PatientData?.Nom}
                   name="MamanNom"
                   onChange={(e) => {
                     if (e.target.value !== MamanNom) {

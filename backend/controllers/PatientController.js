@@ -106,6 +106,45 @@ const CreateNewNouveaune = async (req, res) => {
         res.status(500).json({ error: 'Failed to create patient' });
       }
 }
+// Create a new patient
+const CreateNewNouveauneToMaman = async (req, res) => {
+    try {
+        const {id} = req.params;
+        var { idAccoucheur, Date_Entree } = req.body;
+        if (!idAccoucheur) {
+            return res.status(400).json({ error: 'You must provide all fields' });
+        }
+        const user = await User.findOne({_id :idAccoucheur});
+        if (!user) {
+            return res.status(400).json({ error: 'User not found' });
+        }
+        
+        // Create new Dossier Obstitrique
+        const newDossObs = new DossObs({
+            patientID: id,
+            Date_Entree: Date_Entree,
+            AccoucheurID: idAccoucheur,
+        });
+        // Save to db Dossier Obstitrique
+        newDossObs.save()
+        .then(async (savedDossObs) => {
+            // Get the DossObsID
+            const savedDossObsId = savedDossObs._id;
+            // Add to maman the DossObsID
+            await Patient.findOneAndUpdate({_id: id},
+                {idDossObs: savedDossObsId}, {new: true}
+            );
+            res.status(201).json({id});
+        }).catch((error) => {
+            console.error('Error Dossier obstitrique:', error);
+            res.status(500).json({ message: 'Error saving Dossier obstitrique' });
+        }); 
+
+      } catch (error) {
+        console.error('Error creating patient:', error);
+        res.status(500).json({ error: 'Failed to create patient' });
+      }
+}
 // update a Patient by ID
 const UpdateNouveaune = async (req, res) => {
     const {id} = req.params;
@@ -453,5 +492,6 @@ module.exports = {
     GetDossObs,
     UpdateDossObs,
     DeleteDossObs,
-    UpdateNouveaune
+    UpdateNouveaune,
+    CreateNewNouveauneToMaman,
 }
