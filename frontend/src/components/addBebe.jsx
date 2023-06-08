@@ -98,29 +98,7 @@ export default function AddBebe() {
         // window.alert("Échec de l'ajout d'un patient", data.error);
       }
       if (response.ok) {
-        try {
-          const response = await fetch(`http://localhost:8000/patients/${id}`, {
-            method: "PATCH",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${user?.token}`,
-            },
-            body: JSON.stringify({
-              idNouveauNe: data._id,
-            }),
-          });
-          // get the MamanID via response from the server
-          const data = await response.json();
-          if (!response.ok) {
-            window.alert("Add idNouveauNe failed", data.error);
-          }
-          if (response.ok) {
-            history(`/antecedent/${await data.id}`);
-          }
-        } catch (error) {
-          console.error("Error adding idNouveauNe:", error);
-        }
-        history(`/antecedent/${await data.id}`);
+        history(`/antecedent/${id}`);
       }
     } catch (error) {
       console.error("Error adding Nouveau-ne:", error);
