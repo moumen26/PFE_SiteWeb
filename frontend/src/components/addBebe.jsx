@@ -2,8 +2,22 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../hooks/useAuthContext";
 import TableSesEnfant from "./tables/tableSesEnfantReadOnlyRow";
+import AddPatientNotification from "./notification/notificationAddPatient";
+import ConfirmDialog from "./dialoges/dialogeAlert";
 
 export default function AddBebe() {
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
+
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
   const current = new Date();
   const Date_daccouchement = `${current.getDate()}-${
     current.getMonth() + 1
@@ -53,6 +67,10 @@ export default function AddBebe() {
   }, [history, id, user?.token]);
   // Add NouveauNe
   const handleAddNouveauNe = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       const response = await fetch(
         `http://localhost:8000/patients/Nouveau-ne/maman/${id}`,
@@ -72,10 +90,37 @@ export default function AddBebe() {
       // get the patientID via response from the server patientRouter.post
       const data = await response.json();
       if (!response.ok) {
-        window.alert("Add patient failed", data.error);
+        setNotify({
+          isOpen: true,
+          message: "Échec de l'ajout d'un patient",
+          type: "error",
+        });
+        // window.alert("Échec de l'ajout d'un patient", data.error);
       }
       if (response.ok) {
-        history(`/antecedent/${id}`);
+        try {
+          const response = await fetch(`http://localhost:8000/patients/${id}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user?.token}`,
+            },
+            body: JSON.stringify({
+              idNouveauNe: data._id,
+            }),
+          });
+          // get the MamanID via response from the server
+          const data = await response.json();
+          if (!response.ok) {
+            window.alert("Add idNouveauNe failed", data.error);
+          }
+          if (response.ok) {
+            history(`/antecedent/${await data.id}`);
+          }
+        } catch (error) {
+          console.error("Error adding idNouveauNe:", error);
+        }
+        history(`/antecedent/${await data.id}`);
       }
     } catch (error) {
       console.error("Error adding Nouveau-ne:", error);
@@ -107,12 +152,12 @@ export default function AddBebe() {
         if (response.ok) {
           setNouveauNeData(data);
         }
-    }catch (error) {
-      console.error("Error adding Nouveau-ne:", error);
-    }
+      } catch (error) {
+        console.error("Error adding Nouveau-ne:", error);
+      }
     };
     fetchNouveauNeData();
-  }, [NouveauNeData,history, id, user?.token]);
+  }, [NouveauNeData, history, id, user?.token]);
 
   const [enfantAddFormData, setenfantAddFormData] = useState({
     Nom_Nouveaune: "",
@@ -125,13 +170,23 @@ export default function AddBebe() {
     <div className="add-bebe">
       <div className="ajout-bebe">
         <h2>Ses enfants :</h2>
-        {user.speciality.toLowerCase() === "sage femme" && 
+        {user.speciality.toLowerCase() === "sage femme" && (
           <input
             type="submit"
             value="Ajouter nouveau-ne"
-            onClick={handleAddNouveauNe}
+            // onClick={handleAddNouveauNe}
+            onClick={() => {
+              setConfirmDialog({
+                isOpen: true,
+                title: "Voulez-vous vraiment ajouter un patient ?",
+                subTitle: "Vous ne pouvez pas annuler cette opération",
+                onConfirm: () => {
+                  handleAddNouveauNe();
+                },
+              });
+            }}
           />
-        }
+        )}
       </div>
       <div className="table-patients">
         <div className="table-enfant">
@@ -148,6 +203,11 @@ export default function AddBebe() {
             ))}
           </table>
         </div>
+        <AddPatientNotification notify={notify} setNotify={setNotify} />
+        <ConfirmDialog
+          confirmDialog={confirmDialog}
+          setConfirmDialog={setConfirmDialog}
+        />
       </div>
     </div>
   );

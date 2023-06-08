@@ -118,7 +118,9 @@ export default function MamanProfile() {
     <div className="Maman-profile">
       <div className="maman-profile-container">
         <div className="patient-profile-icon">
-          <FiChevronLeft size={30} onClick={handleGoBack}/>
+          <FiChevronLeft size={30} 
+          cursor='pointer'
+          onClick={handleGoBack}/>
         </div>
         <div className="patient-profile-details">
           <h4>Patient details</h4>

@@ -6,8 +6,16 @@ import { useUserProfile } from "../hooks/useUserProfile";
 import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import ConfirmDialog from "../components/dialoges/dialogeAlert";
+import Notification from "../components/notification";
 
 export default function DoctorProfile() {
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+
   const [act, setAct] = useState(false);
   const [userData, setUserData] = useState({});
   const history = useNavigate();
@@ -108,11 +116,21 @@ export default function DoctorProfile() {
       // Handle response as needed
       const data = await response.data;
       if (!response.status === 200) {
-        window.alert("profile not updated", data.message);
+        setNotify({
+          isOpen: true,
+          message: "Profil non mis à jour",
+          type: "error",
+        });
       } else if (response.status === 200) {
-        window.alert("profile updated successfully", data.message);
+        setNotify({
+          isOpen: true,
+          message: "Mise à jour du profil réussie",
+          type: "success",
+        });
         handleSubmitIMG(e);
-        history(`/`);
+        setTimeout(() => {
+          history(`/`);
+        }, 1000);
       }
     } catch (err) {
       console.log(err.message);
@@ -306,6 +324,8 @@ export default function DoctorProfile() {
           </div>
         </form>
       </div>
+      <Notification notify={notify} setNotify={setNotify} />
+      
     </div>
   );
 }
