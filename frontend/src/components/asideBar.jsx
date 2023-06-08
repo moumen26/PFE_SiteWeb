@@ -70,7 +70,7 @@ export default function MyAsideBar() {
           </li>
 
           <li>
-            <NavLink to="profile">
+            <NavLink to="rendezvous2">
               <div
                 className={`link flex items-center ${
                   location.pathname === "/profile" ? "aside-item-active" : ""

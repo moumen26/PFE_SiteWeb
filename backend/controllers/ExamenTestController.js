@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const DossObs = require('../models/DossObsModel');
-const CarnetSante = require('../models/CarnetSanteModel');
 const Patient = require('../models/PatientModel');
 const User = require('../models/UserModel');
 const Concultation = require('../models/ConsultationModel');

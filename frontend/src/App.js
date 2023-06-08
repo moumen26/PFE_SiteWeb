@@ -20,6 +20,7 @@ import AddHospitalisation from "./pages/addHospitalisation";
 import AffichageHospitalisation from "./pages/affichageHospitalisation";
 import MaladeProfile from "./pages/maladeProfile";
 import Conculter from "./pages/conculter";
+import PatientRendezvous from "./pages/rendezvous2";
 
 function App() {
   const [act, setAct] = useState(false);
@@ -32,7 +33,7 @@ function App() {
         <MyAsideBar />
         <Routes>
           <Route
-            index
+            path="/"
             element={user ? <Dashboard /> : <Navigate to="/login" />}
           />
           <Route
@@ -98,6 +99,10 @@ function App() {
           <Route
             path="rendezvous"
             element={user ? <Rendezvous /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="rendezvous2"
+            element={user ? <PatientRendezvous /> : <Navigate to="/login" />}
           />
 
           <Route

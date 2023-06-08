@@ -16,7 +16,7 @@ import MyCahierSwiper from "../components/swipers/swiperCahier";
 import AddCahierSante from "../components/buttons/buttonAddCahier";
 import TableConcultation from "../components/tables/tableConcultation";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import TableAntecedent from "../components/tables/tableAntecedent";
 
 export default function ProfilePatient() {
@@ -181,7 +181,11 @@ export default function ProfilePatient() {
     <div className="Patients-profile">
       <div className="patient-profile-container">
         <div className="patient-profile-icon">
-          <FiChevronLeft size={30} onClick={handleGoBack} />
+          <FiChevronLeft
+            size={30}
+            cursor="pointer"
+            onClick={handleGoBack}
+          />
         </div>
         <div className="patient-profile-details profile-cahier">
           <h4>Patient details</h4>
