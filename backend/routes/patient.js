@@ -13,9 +13,7 @@ const {
     GetDossObs,
     UpdateDossObs,
     DeleteDossObs,
-    UpdateCarnetSante,
-    GetCarnetSante,
-    DeleteCarnetSante,
+    UpdateNouveaune
 } = require('../controllers/PatientController');
 const {
     GetAllVaccins,
@@ -75,6 +73,9 @@ router.get('/', GetAllPatient);
 
 //get all nouveau ne
 router.get('/Nouveau-ne/', GetAllNouveaune);
+
+//update nouveau ne
+router.patch('/Nouveau-ne/:id', UpdateNouveaune);
 
 //get all nouveau ne by idmaman
 router.get('/Nouveau-ne/:id', GetAllNouveauneById);

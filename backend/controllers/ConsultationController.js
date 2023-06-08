@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const Patient = require('../models/PatientModel');
 const User = require('../models/UserModel');
 const Consultation = require('../models/ConsultationModel');
-const ExamenTest = require('../models/ExamenModel');
 const Diagnostic = require('../models/DiagnosticModel');
 const Ordonance = require('../models/OrdonanceModel');
 const Hospitalisation = require('../models/HospitalisationModel');

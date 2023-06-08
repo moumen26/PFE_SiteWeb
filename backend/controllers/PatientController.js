@@ -1,14 +1,7 @@
 const mongoose = require('mongoose');
 const DossObs = require('../models/DossObsModel');
-const CarnetSante = require('../models/CarnetSanteModel');
 const Patient = require('../models/PatientModel');
 const User = require('../models/UserModel');
-const Consultation = require('../models/ConsultationModel');
-const Medicament = require('../models/MedicamentModel');
-const ExamenTest = require('../models/ExamenModel');
-const Diagnostic = require('../models/DiagnosticModel');
-const Ordonance = require('../models/OrdonanceModel');
-const jwt = require('jsonwebtoken');
 const {
     generateEncodedID,
     generateEncodedIDAdult
@@ -101,26 +94,6 @@ const CreateNewNouveaune = async (req, res) => {
             }catch(err){
                 res.status(400).json({err: err.message});
             }
-            /*
-            // Create new Carnet de santé
-            const newCarnetSante = new CarnetSante({
-                patientID,
-                Date_daccouchement,
-                Heure_daccouchement,
-            });
-            // Save to db Carnet de santé
-            newCarnetSante.save().then(async (savedCarnetSante) => {
-                // Get the CarnetSanteID
-                const savedCarnetSanteId = savedCarnetSante._id;
-                // Add to patient the CarnetSanteID
-                const patient = await Patient.findOneAndUpdate({_id: patientID},
-                    {idCarnetSante: savedCarnetSanteId}, {new: true}
-                );
-            }).catch((error) => {
-                console.error('Error Carnet de santé:', error);
-                res.status(500).json({ message: 'Error saving Carnet de santé' });
-            });
-            */
             // Send patientID to patientDetails
             await res.status(201).json({id: patientID});
         }).catch((error) => {
@@ -133,7 +106,29 @@ const CreateNewNouveaune = async (req, res) => {
         res.status(500).json({ error: 'Failed to create patient' });
       }
 }
-
+// update a Patient by ID
+const UpdateNouveaune = async (req, res) => {
+    const {id} = req.params;
+    const { Nom, Prenom } = req.body;
+    try{
+        //check if id is valid
+        if(!mongoose.Types.ObjectId.isValid(id)){
+            return res.status(400).json({err: 'patient not found'});
+        }
+        //find id in db and update
+        const patient = await Patient.findOneAndUpdate({_id: id},
+            {Prenom: Prenom, Nom: Nom}
+        );
+        //if not found return error
+        if(!patient){
+            return res.status(404).json({err: 'patient not found'});
+        }
+        //return user
+        res.status(200).json({message: 'patient updated successfully'});
+    }catch(err){
+        res.status(400).json({err: err.message});
+    }
+}
 // update a DossObs Nouveau-ne by ID
 const UpdateDossObsNouveaune = async (req, res) => {
     const {id} = req.params;
@@ -207,6 +202,7 @@ const GetNouveauneByListOfID = async (req, res) => {
         res.status(400).json({err: err.message});
     }
 }
+
 // PATIENTS
 
 //get all Patients
@@ -367,7 +363,6 @@ const UpdatePatient = async (req, res) => {
     }
 }
 
-
 // DOSSIER OBSTITRIQUE
 
 // Define a route for fetching a Dossier Obstitrique by ID
@@ -393,7 +388,7 @@ const GetDossObs = async (req, res) => {
 const UpdateDossObs = async (req, res) => {
     const {id} = req.params;
     const { Date_daccouchement,Heure_daccouchement, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-        ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales,
+        ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque,
         MamanNom,MamanEpouse,DateNaissance,AdresseActuelle,Profession,Salle,NumLit,DateEntrer,
         DateSortie,Admise,SageFemme,DiagnosticSortie,ResumerObservation,MotifHospitalisation,
         DRR,TermeCalc,Menarchie,CarcterCycle,AgeMariage,Contraception,GroupSanguin,FNS,
@@ -408,9 +403,9 @@ const UpdateDossObs = async (req, res) => {
         //find id in db and update
         const DossierObstetrique = await DossObs.findOneAndUpdate({_id: id},
             {Date_daccouchement,Heure_daccouchement, Poids, Aspect, Anomalies, Placenta, Membranes, Cordon
-            ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque, Empreintes_digitales
-            ,MamanNom,MamanEpouse,DateNaissance,AdresseActuelle,Profession,Salle,NumLit,DateEntrer,
-            DateSortie,Admise,SageFemme,DiagnosticSortie,ResumerObservation,MotifHospitalisation,
+            ,Sexe, Taille, Pc, une_min, cinq_min, Malformation, Remarque
+            ,MamanNom,MamanEpouse,DateNaissance,AdresseActuelle,MamanProfession : Profession,Salle,NumLit,DateEntrer,
+            DateSortie,MamanAdmise: Admise,AccoucheurID: SageFemme,DiagnosticSortie,ResumerObservation,MotifHospitalisation,
             DRR,TermeCalc,Menarchie,CarcterCycle,AgeMariage,Contraception,GroupSanguin,FNS,
             Glycemle,UreeSanguine,Albuminurie,BW,Serodiagnostic,Toxoplasmose,Rubeole,MamanPoids,
             MamanTaille,MamanPoule,TA,HU,ConstractionUterines,Presentation,BCF,Uterus,Speculum,
@@ -444,90 +439,6 @@ const DeleteDossObs = async (req, res) => {
     res.status(200).json(dossierObstetrique);
 }
 
-
-// CARNET DE SANTE
-
-// Define a route for fetching a Carnet de Sante by ID
-const GetCarnetSante = async (req, res) => {
-    const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(400).json({ message: 'Specified id is not valid' });
-    }
-    // Find the patient by ID in the database
-    await CarnetSante.findById(id)
-        .then((CarnetSante) => {
-            if (!CarnetSante) {
-                return res.status(404).json({ message: 'Patient not found' });
-            }
-            res.status(200).json(CarnetSante);
-        })
-        .catch((error) => {
-            console.error('Error retrieving Carnet De Sante:', error);
-            res.status(500).json({ message: 'Error retrieving Carnet De Sante' });
-        });
-}
-// Update a specific Carnet de Sante
-const UpdateCarnetSante = async (req, res) => {
-    const {id} = req.params;
-    const { Date_daccouchement,Heure_daccouchement,Sexe,une_min,cinq_min,Reanimation,
-        Duree,Malformation,Transfert,MotifTransfert,ExamenCordon,EmissionUrine,EmissionMeconium,
-        CatheterismeChoanes,RechercheAtresieLoesophage,OrganesGenitauxExternes,VitamineK1,Collyre} = req.body;
-    try{
-        //check if id is valid
-        if(!mongoose.Types.ObjectId.isValid(id)){
-            return res.status(400).json({err: 'Carnet De Sante not found'});
-        }
-        //find id in db and update
-        const CarnetDeSante = await CarnetSante.findOneAndUpdate({_id: id},
-            {
-                Date_daccouchement,
-                Heure_daccouchement,
-                Sexe,
-                une_min,
-                cinq_min,
-                Reanimation,
-                Duree,
-                Malformation,
-                Transfert,
-                MotifTransfert,
-                ExamenCordon,
-                EmissionUrine,
-                EmissionMeconium,
-                CatheterismeChoanes,
-                RechercheAtresieLoesophage,
-                OrganesGenitauxExternes,
-                VitamineK1,
-                Collyre
-            }
-        );
-        //if not found return error
-        if(!CarnetDeSante){
-            return res.status(404).json({err: 'Carnet De Sante not found'});
-        }
-        //return user
-        res.status(200).json(CarnetDeSante);
-    }catch(err){
-        res.status(400).json({err: err.message});
-    }
-    
-}
-//delete a specific Carnet de Sante
-const DeleteCarnetSante = async (req, res) => {
-    const {id} = req.params;
-    //check if id is valid
-    if(!mongoose.Types.ObjectId.isValid(id)){
-        return res.status(400).json({err: 'Carnet de Sante not found'});
-    }
-    //find id in db and delete
-    const CarnetDeSante = await CarnetSante.findByIdAndDelete({_id: id});
-    //if not found return error
-    if(!CarnetDeSante){
-        return res.status(404).json({err: 'Carnet de Sante not found'});
-    }
-    //return user
-    res.status(200).json(CarnetDeSante);
-}
-
 module.exports = {
     CreateNewNouveaune,
     UpdateDossObsNouveaune,
@@ -542,7 +453,5 @@ module.exports = {
     GetDossObs,
     UpdateDossObs,
     DeleteDossObs,
-    UpdateCarnetSante,
-    GetCarnetSante,
-    DeleteCarnetSante,
+    UpdateNouveaune
 }

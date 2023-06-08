@@ -1,13 +1,5 @@
 const mongoose = require('mongoose');
-const DossObs = require('../models/DossObsModel');
-const CarnetSante = require('../models/CarnetSanteModel');
-const Patient = require('../models/PatientModel');
-const User = require('../models/UserModel');
-const Consultation = require('../models/ConsultationModel');
-const Medicament = require('../models/MedicamentModel');
-const ExamenTest = require('../models/ExamenModel');
 const Diagnostic = require('../models/DiagnosticModel');
-const Ordonance = require('../models/OrdonanceModel');
 const Maladie = require('../models/MaladieModel');
 // Get All Medicament
 const GetAllMaladies = async (req, res) => {

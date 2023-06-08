@@ -3,7 +3,6 @@ const Patient = require('../models/PatientModel');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const Vaccination = require('../models/VaccinationModel');
-const ordonanace = require('../models/OrdonanceModel');
 // Get All Vaccin
 const GetAllVaccin = async (req, res) => {
     await Vaccin.find({}).then((vaccin) => {

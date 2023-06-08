@@ -26,7 +26,6 @@ export default function MySwiper() {
   const [DateEntrer, setDateEntrer] = useState("");
   const [DateSortie, setDateSortie] = useState("");
   const [Admise, setAdmise] = useState("");
-  const [SageFemme, setSageFemme] = useState("");
   const [DiagnosticSortie, setDiagnosticSortie] = useState("");
   const [ResumerObservation, setResumerObservation] = useState("");
   const [MotifHospitalisation, setMotifHospitalisation] = useState("");
@@ -241,11 +240,6 @@ export default function MySwiper() {
       history();
     }
   };
-
-  // if (!PatientData) {
-  //   return <CircularProgress />;
-  // }
-
   return (
     <Swiper
       className="swiper-formulaire"
@@ -270,7 +264,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={PatientData?.Nom || DossObsData?.MamanNom}
+                  value={DossObsData?.MamanNom}
                   name="MamanNom"
                   onChange={(e) => {
                     if (e.target.value !== MamanNom) {
@@ -285,7 +279,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.MamanEpouse}
+                  defaultValue={DossObsData?.MamanEpouse}
                   name="MamanEpouse"
                   onChange={(e) => {
                     if (e.target.value !== MamanEpouse)
@@ -330,7 +324,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.Profession}
+                  defaultValue={DossObsData?.MamanProfession}
                   name="Profession"
                   onChange={(e) => {
                     if (e.target.value !== Profession)
@@ -346,7 +340,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.Salle}
+                  defaultValue={DossObsData?.Salle}
                   name="Salle"
                   onChange={(e) => {
                     if (e.target.value !== Salle) setSalle(e.target.value);
@@ -359,7 +353,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.NumLit}
+                  defaultValue={DossObsData?.NumLit}
                   name="NumLit"
                   onChange={(e) => {
                     if (e.target.value !== NumLit) setNumLit(e.target.value);
@@ -373,7 +367,7 @@ export default function MySwiper() {
                 <input
                   type="date"
                   id="date"
-                  value={CurrentDate}
+                  defaultValue={CurrentDate}
                   name="DateEntrer"
                   onChange={(e) => {
                     if (e.target.value !== DateEntrer)
@@ -388,7 +382,7 @@ export default function MySwiper() {
                 <input
                   type="date"
                   id="date"
-                  value={DossObsData?.DateSortie}
+                  defaultValue={DossObsData?.DateSortie}
                   name="DateSortie"
                   onChange={(e) => {
                     if (e.target.value !== DateSortie)
@@ -401,28 +395,20 @@ export default function MySwiper() {
           <div className="add-adm-vit">
             <div className="add-adm-vit-item">
               <div className="span-item">
-                <span>Addresse par :</span>
-              </div>
-              <input type="text" />
-            </div>
-            <div className="add-adm-vit-item">
-              <div className="span-item">
                 <span>Admise :</span>
               </div>
               <input
                 type="text"
-                value={DossObsData?.Admise}
+                defaultValue={DossObsData?.MamanAdmise}
                 name="Admise"
-                onChange={(e) => {
-                  if (e.target.value !== Admise) setAdmise(e.target.value);
-                }}
+                onChange={(e) => {setAdmise(e.target.value)}}
               />
             </div>
             <div className="add-adm-vit-item">
               <div className="span-item">
-                <span>SageFemme :</span>
+                <span>Sage Femme :</span>
               </div>
-              <input type="text" value={SageFemme} name="SageFemme" />
+              <input type="text" value={user?.Fname} name="SageFemme" />
             </div>
           </div>
           <div className="diag-sor">
@@ -430,7 +416,7 @@ export default function MySwiper() {
             <div className="textarea">
               <textarea
                 id="diag-sortie"
-                value={DossObsData?.DiagnosticSortie}
+                defaultValue={DossObsData?.DiagnosticSortie}
                 name="DiagnosticSortie"
                 onChange={(e) => {
                   if (e.target.value !== DiagnosticSortie)
@@ -444,7 +430,7 @@ export default function MySwiper() {
             <div className="textarea">
               <textarea
                 id="resume-obser"
-                value={DossObsData?.ResumerObservation}
+                defaultValue={DossObsData?.ResumerObservation}
                 name="ResumerObservation"
                 onChange={(e) => {
                   if (e.target.value !== ResumerObservation)
@@ -481,7 +467,7 @@ export default function MySwiper() {
               <div className="textarea">
                 <textarea
                   id="motif-hosp"
-                  value={DossObsData?.MotifHospitalisation}
+                  defaultValue={DossObsData?.MotifHospitalisation}
                   name="MotifHospitalisation"
                   onChange={(e) => {
                     if (e.target.value !== MotifHospitalisation)
@@ -496,7 +482,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.DRR}
+                    defaultValue={DossObsData?.DRR}
                     name="DRR"
                     onChange={(e) => {
                       if (e.target.value !== DRR) setDRR(e.target.value);
@@ -509,7 +495,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.TermeCalc}
+                    defaultValue={DossObsData?.TermeCalc}
                     name="TermeCalc"
                     onChange={(e) => {
                       if (e.target.value !== TermeCalc)
@@ -519,247 +505,6 @@ export default function MySwiper() {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="antecedents">
-            <h2>Antecedents</h2>
-            <div className="personnels">
-              <div className="span-text">
-                <span>1- Personnels :</span>
-              </div>
-              <div className="psychologiques">
-                <span>Psychologiques</span>
-                <div className="pyscho-item">
-                  <div className="span-item span-long">
-                    <span>Menarchie :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.Menarchie}
-                    name="Menarchie"
-                    onChange={(e) => {
-                      if (e.target.value !== Menarchie)
-                        setMenarchie(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="pyscho-item">
-                  <div className="span-item span-long">
-                    <span>Caractere de cycle :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.CarcterCycle}
-                    name="CarcterCycle"
-                    onChange={(e) => {
-                      if (e.target.value !== CarcterCycle)
-                        setCarcterCycle(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="textarea">
-                  <textarea name="psycho" id="psycho"></textarea>
-                </div>
-                <div className="pyscho-item">
-                  <div className="span-item span-long">
-                    <span>Age de mariage :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.AgeMariage}
-                    name="AgeMariage"
-                    onChange={(e) => {
-                      if (e.target.value !== AgeMariage)
-                        setAgeMariage(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="pyscho-item">
-                  <div className="span-item span-long">
-                    <span>Contraception :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.Contraception}
-                    name="Contraception"
-                    onChange={(e) => {
-                      if (e.target.value !== Contraception)
-                        setContraception(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="examen-comple">
-              <div className="span-text">
-                <span>2- Examen complementaire :</span>
-              </div>
-              <div className="examen-bio">
-                <span>Examen biologique</span>
-                <div className="examen-bio-item">
-                  <div className="span-item span-long">
-                    <span>Group SANGUIN :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.GroupSanguin}
-                    name="GroupSanguin"
-                    onChange={(e) => {
-                      if (e.target.value !== GroupSanguin)
-                        setGroupSanguin(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="textarea">
-                  <textarea name="examen-bio" id="examen-bio"></textarea>
-                </div>
-                <div className="examen-bio-item">
-                  <div className="span-item span-long">
-                    <span>FNS :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.FNS}
-                    name="FNS"
-                    onChange={(e) => {
-                      if (e.target.value !== FNS) setFNS(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="pyscho-item">
-                  <div className="psycho-class">
-                    <div className="pyscho-left">
-                      <div className="span-item">
-                        <span>Glycemie :</span>
-                      </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.Glycemle}
-                        name="Glycemle"
-                        onChange={(e) => {
-                          if (e.target.value !== Glycemle)
-                            setGlycemle(e.target.value);
-                        }}
-                      />
-                    </div>
-                    <div className="pyscho-right">
-                      <div className="span-item">
-                        <span>Uree sanguine :</span>
-                      </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.UreeSanguine}
-                        name="UreeSanguine"
-                        onChange={(e) => {
-                          if (e.target.value !== UreeSanguine)
-                            setUreeSanguine(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="pyscho-item">
-                  <div className="psycho-class">
-                    <div className="pyscho-left">
-                      <div className="span-item">
-                        <span>Albuminurie :</span>
-                      </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.Albuminurie}
-                        name="Albuminurie"
-                        onChange={(e) => {
-                          if (e.target.value !== Albuminurie)
-                            setAlbuminurie(e.target.value);
-                        }}
-                      />
-                    </div>
-                    <div className="pyscho-right">
-                      <div className="span-item">
-                        <span>B.W :</span>
-                      </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.BW}
-                        name="BW"
-                        onChange={(e) => {
-                          if (e.target.value !== BW) setBW(e.target.value);
-                        }}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="pyscho-item">
-                  <div className="span-item span-long">
-                    <span>Serodiagnostic de :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.Serodiagnostic}
-                    name="Serodiagnostic"
-                    onChange={(e) => {
-                      if (e.target.value !== Serodiagnostic)
-                        setSerodiagnostic(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="pyscho-item">
-                  <div className="span-item span-long">
-                    <span>Toxoplasmose :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.Toxoplasmose}
-                    name="Toxoplasmose"
-                    onChange={(e) => {
-                      if (e.target.value !== Toxoplasmose)
-                        setToxoplasmose(e.target.value);
-                    }}
-                  />
-                </div>
-                <div className="pyscho-item">
-                  <div className="span-item span-long">
-                    <span>Rubeole :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.Rubeole}
-                    name="Rubeole"
-                    onChange={(e) => {
-                      if (e.target.value !== Rubeole)
-                        setRubeole(e.target.value);
-                    }}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="back-next-buttons back-next-dossier">
-            <div className="back">
-              <SwiperButtonBack>
-                <div className="flex items-center justify-items-center gap-2">
-                  <BsChevronLeft /> Back
-                </div>
-              </SwiperButtonBack>
-            </div>
-            <div className="next">
-              <SwiperButtonNext>
-                <div className="flex items-center justify-items-center gap-2">
-                  Suivant <BsChevronRight />
-                </div>
-              </SwiperButtonNext>
-            </div>
-          </div>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide className="Swipe">
-        <div className="formulaire-dossier-obster">
-          <div className="formulaire-header-obster">
-            <div className="formulaire-dossier-obstetrique">
-              <h2>Dossier obstetrique</h2>
-            </div>
-          </div>
-          <div className="line-hl">
-            <div className="hl"></div>
           </div>
           <div className="examen-entree">
             <h2>Examen d’entree</h2>
@@ -774,7 +519,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.MamanPoids}
+                    defaultValue={DossObsData?.MamanPoids}
                     name="MamanPoids"
                     onChange={(e) => {
                       if (e.target.value !== MamanPoids)
@@ -788,7 +533,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.MamanTaille}
+                    defaultValue={DossObsData?.MamanTaille}
                     name="MamanTaille"
                     onChange={(e) => {
                       if (e.target.value !== MamanTaille)
@@ -802,7 +547,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.MamanPoule}
+                    defaultValue={DossObsData?.MamanPoule}
                     name="MamanPoule"
                     onChange={(e) => {
                       if (e.target.value !== MamanPoule)
@@ -816,7 +561,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.TA}
+                    defaultValue={DossObsData?.TA}
                     name="TA"
                     onChange={(e) => {
                       if (e.target.value !== TA) setTA(e.target.value);
@@ -824,31 +569,7 @@ export default function MySwiper() {
                   />
                 </div>
               </div>
-              <div className="examen-entree-item">
-                <div className="glycemie">
-                  <div className="span-item">
-                    <span>Glycemie :</span>
-                  </div>
-                  <input type="text" value={DossObsData?.Glycemle} name="Glycemle" />
-                </div>
-                <div className="uree">
-                  <div className="span-item">
-                    <span>Uree sanguine :</span>
-                  </div>
-                  <input type="text" value={DossObsData?.UreeSanguine} name="UreeSanguine" />
-                </div>
-              </div>
-              <div className="examen-entree-item2">
-                <div className="span-item span-long">
-                  <span>Caractere de cycle :</span>
-                </div>
-                <input type="text" value={DossObsData?.CarcterCycle} name="CarcterCycle" />
-              </div>
-              <div className="textarea">
-                <textarea name="exa-gene" id="exa-gene"></textarea>
-              </div>
             </div>
-
             <div className="examen-obstetrical">
               <div className="span-text">
                 <span>2- Examen obstetrical :</span>
@@ -860,7 +581,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.HU}
+                    defaultValue={DossObsData?.HU}
                     name="HU"
                     onChange={(e) => {
                       if (e.target.value !== HU) setHU(e.target.value);
@@ -873,7 +594,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.ConstractionUterines}
+                    defaultValue={DossObsData?.ConstractionUterines}
                     name="ConstractionUterines"
                     onChange={(e) => {
                       if (e.target.value !== ConstractionUterines)
@@ -889,7 +610,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.Presentation}
+                    defaultValue={DossObsData?.Presentation}
                     name="Presentation"
                     onChange={(e) => {
                       if (e.target.value !== Presentation)
@@ -903,7 +624,7 @@ export default function MySwiper() {
                   </div>
                   <input
                     type="text"
-                    value={DossObsData?.BCF}
+                    defaultValue={DossObsData?.BCF}
                     name="BCF"
                     onChange={(e) => {
                       if (e.target.value !== BCF) setBCF(e.target.value);
@@ -917,7 +638,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.Uterus}
+                  defaultValue={DossObsData?.Uterus}
                   name="Uterus"
                   onChange={(e) => {
                     if (e.target.value !== Uterus) setUterus(e.target.value);
@@ -930,7 +651,7 @@ export default function MySwiper() {
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.Speculum}
+                  defaultValue={DossObsData?.Speculum}
                   name="Speculum"
                   onChange={(e) => {
                     if (e.target.value !== Speculum)
@@ -938,16 +659,13 @@ export default function MySwiper() {
                   }}
                 />
               </div>
-              <div className="textarea">
-                <textarea name="exa-obs1" id="exa-obs1"></textarea>
-              </div>
               <div className="examen-entree-item2">
                 <div className="span-item">
                   <span>Toucher vaginal :</span>
                 </div>
                 <input
                   type="text"
-                  value={DossObsData?.ToucherVaginal}
+                  defaultValue={DossObsData?.ToucherVaginal}
                   name="ToucherVaginal"
                   onChange={(e) => {
                     if (e.target.value !== ToucherVaginal)
@@ -955,11 +673,215 @@ export default function MySwiper() {
                   }}
                 />
               </div>
-              <div className="textarea">
-                <textarea name="exa-obs2" id="exa-obs2"></textarea>
+            </div>
+            </div>
+            <div className="antecedents">
+              <h2>Antecedents</h2>
+              <div className="personnels">
+                <div className="span-text">
+                  <span>1- Personnels :</span>
+                </div>
+                <div className="psychologiques">
+                  <span>Psychologiques</span>
+                  <div className="pyscho-item">
+                    <div className="span-item span-long">
+                      <span>Menarchie :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.Menarchie}
+                      name="Menarchie"
+                      onChange={(e) => {
+                        if (e.target.value !== Menarchie)
+                          setMenarchie(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="span-item span-long">
+                      <span>Caractere de cycle :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.CarcterCycle}
+                      name="CarcterCycle"
+                      onChange={(e) => {
+                        if (e.target.value !== CarcterCycle)
+                          setCarcterCycle(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="span-item span-long">
+                      <span>Age de mariage :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.AgeMariage}
+                      name="AgeMariage"
+                      onChange={(e) => {
+                        if (e.target.value !== AgeMariage)
+                          setAgeMariage(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="span-item span-long">
+                      <span>Contraception :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.Contraception}
+                      name="Contraception"
+                      onChange={(e) => {
+                        if (e.target.value !== Contraception)
+                          setContraception(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="examen-comple">
+                <div className="span-text">
+                  <span>2- Examen complementaire :</span>
+                </div>
+                <div className="examen-bio">
+                  <span>Examen biologique</span>
+                  <div className="examen-bio-item">
+                    <div className="span-item span-long">
+                      <span>Group SANGUIN :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.GroupSanguin}
+                      name="GroupSanguin"
+                      onChange={(e) => {
+                        if (e.target.value !== GroupSanguin)
+                          setGroupSanguin(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="examen-bio-item">
+                    <div className="span-item span-long">
+                      <span>FNS :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.FNS}
+                      name="FNS"
+                      onChange={(e) => {
+                        if (e.target.value !== FNS) setFNS(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="psycho-class">
+                      <div className="pyscho-left">
+                        <div className="span-item">
+                          <span>Glycemie :</span>
+                        </div>
+                        <input
+                          type="text"
+                          defaultValue={DossObsData?.Glycemle}
+                          name="Glycemle"
+                          onChange={(e) => {
+                            if (e.target.value !== Glycemle)
+                              setGlycemle(e.target.value);
+                          }}
+                        />
+                      </div>
+                      <div className="pyscho-right">
+                        <div className="span-item">
+                          <span>Uree sanguine :</span>
+                        </div>
+                        <input
+                          type="text"
+                          defaultValue={DossObsData?.UreeSanguine}
+                          name="UreeSanguine"
+                          onChange={(e) => {
+                            if (e.target.value !== UreeSanguine)
+                              setUreeSanguine(e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="psycho-class">
+                      <div className="pyscho-left">
+                        <div className="span-item">
+                          <span>Albuminurie :</span>
+                        </div>
+                        <input
+                          type="text"
+                          defaultValue={DossObsData?.Albuminurie}
+                          name="Albuminurie"
+                          onChange={(e) => {
+                            if (e.target.value !== Albuminurie)
+                              setAlbuminurie(e.target.value);
+                          }}
+                        />
+                      </div>
+                      <div className="pyscho-right">
+                        <div className="span-item">
+                          <span>B.W :</span>
+                        </div>
+                        <input
+                          type="text"
+                          defaultValue={DossObsData?.BW}
+                          name="BW"
+                          onChange={(e) => {
+                            if (e.target.value !== BW) setBW(e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="span-item span-long">
+                      <span>Serodiagnostic de :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.Serodiagnostic}
+                      name="Serodiagnostic"
+                      onChange={(e) => {
+                        if (e.target.value !== Serodiagnostic)
+                          setSerodiagnostic(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="span-item span-long">
+                      <span>Toxoplasmose :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.Toxoplasmose}
+                      name="Toxoplasmose"
+                      onChange={(e) => {
+                        if (e.target.value !== Toxoplasmose)
+                          setToxoplasmose(e.target.value);
+                      }}
+                    />
+                  </div>
+                  <div className="pyscho-item">
+                    <div className="span-item span-long">
+                      <span>Rubeole :</span>
+                    </div>
+                    <input
+                      type="text"
+                      defaultValue={DossObsData?.Rubeole}
+                      name="Rubeole"
+                      onChange={(e) => {
+                        if (e.target.value !== Rubeole)
+                          setRubeole(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
           <div className="back-next-buttons back-next-dossier">
             <div className="back">
               <SwiperButtonBack>
@@ -968,12 +890,11 @@ export default function MySwiper() {
                 </div>
               </SwiperButtonBack>
             </div>
-            <div className="next">
+            <div className="next"
+              onClick={handleDossObsSubmit}
+            >
               <SwiperButtonNext>
-                <div
-                  className="flex items-center justify-items-center gap-2"
-                  onClick={!DossObsData?.MamanNom || DossObsData?.MamanNom === "" ? handleDossObsSubmit : null} 
-                >
+                <div className="flex items-center justify-items-center gap-2">
                   Suivant <BsChevronRight />
                 </div>
               </SwiperButtonNext>
@@ -983,258 +904,235 @@ export default function MySwiper() {
       </SwiperSlide>
       {PatientData?.maturity === "Nouveau-ne" &&
         (<SwiperSlide className="Swipe">
-          <div className="formulaire-dossier-obster">
-            <div className="formulaire-header-obster">
-              <div className="formulaire-dossier-obstetrique">
-                <h2>Dossier obstetrique</h2>
-              </div>
-            </div>
-            <div className="line-hl">
-              <div className="hl"></div>
-            </div>
-              <div className="pro-acc">
-                <h2>Protocole d’accouchement</h2>
-                <div className="date-heure-acc">
-                  <div className="date-acc">
-                    <div className="span-item span-long1">
-                      <span>Date d’accouchement :</span>
+              <div className="fichier-nouveau-ne">
+                <div className="formulaire-dossier-obster">
+                  <div className="formulaire-header-obster">
+                    <div className="formulaire-dossier-obstetrique">
+                      <h2>Dossier obstetrique</h2>
                     </div>
-                    <input
-                      type="text"
-                      name="Date_daccouchement"
-                      defaultValue={DossObsData?.Date_daccouchement}
-                      readOnly
-                    />
                   </div>
-                  <div className="heure-acc">
-                    <div className="span-item">
-                      <span>Heure :</span>
-                    </div>
-                    <input
-                      type="text"
-                      name="Heure_daccouchement"
-                      defaultValue={DossObsData?.Heure_daccouchement}
-                      readOnly
-                    />
+                  <div className="line-hl">
+                    <div className="hl"></div>
                   </div>
-                </div>
-                <div className="accoucheur">
-                  <div className="span-text">
-                    <span>Accoucheur :</span>
-                  </div>
-                  <div className="textarea">
-                    <textarea
-                      name="accoucheur"
-                      id="accoucheur"
-                      value={UserData?.Fname}
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
-              <div className="examen-annexes">
-                <h2>Examen des annexes :</h2>
-                <div className="annexes">
-                  <div className="annexe">
-                    <div className="annexe-item">
-                      <div className="span-item">
-                        <span>Poids :</span>
+                  <form action="">
+                    <div className="pro-acc">
+                      <h2>Protocole d’accouchement</h2>
+                      <div className="malforamtion-annexe">
+                        <div className="span-item">
+                          <span>Nom :</span>
+                        </div>
+                        <input type="text" readOnly
+                          value={PatientData?.Nom}
+                        />
                       </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.Poids}
-                        name="Poids"
-                        readOnly
-                      />
-                    </div>
-                    <div className="annexe-item">
-                      <div className="span-item">
-                        <span>Aspect :</span>
+                      <div className="malforamtion-annexe">
+                        <div className="span-item">
+                          <span>Prenom :</span>
+                        </div>
+                        <input type="text" readOnly
+                          value={PatientData?.Prenom}
+                        />
                       </div>
-                      <input
-                        type="text"
-                        defaultValue={DossObsData?.Aspect}
-                        name="Aspect"
-                        readOnly
-                      />
-                    </div>
-                    <div className="annexe-item">
-                      <div className="span-item">
-                        <span>Anomalies :</span>
+                      <div className="malforamtion-annexe">
+                        <div className="span-item">
+                          <span>Identifiant :</span>
+                        </div>
+                        <input type="text"
+                          value={PatientData?.Identification}
+                          readOnly/>
                       </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.Anomalies}
-                        name="Anomalies"
-                        readOnly
-                      />
-                    </div>
-                  </div>
-                  <div className="annexe annexe-two">
-                    <div className="annexe-item">
-                      <div className="span-item">
-                        <span>Placenta :</span>
-                      </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.Placenta}
-                        name="Placenta"
-                        readOnly
-                      />
-                    </div>
-                    <div className="annexe-item">
-                      <div className="span-item">
-                        <span>Membranes :</span>
-                      </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.Membranes}
-                        name="Membranes"
-                        readOnly
-                      />
-                    </div>
-                    <div className="annexe-item">
-                      <div className="span-item">
-                        <span>Cordon :</span>
-                      </div>
-                      <input
-                        type="text"
-                        value={DossObsData?.Cordon}
-                        name="Cordon"
-                        readOnly
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="examen-annexes">
-                <h2>Examen des annexes :</h2>
-                <div className="sexe-poids-taille-pc">
-                  <div className="date-annexe">
-                    <div className="span-item petit-span">
-                      <span>Sexe :</span>
-                    </div>
-                    <input
-                      type="text"
-                      name="Sexe"
-                      id="date-annexe"
-                      value={DossObsData?.Sexe}
-                      readOnly
-                    />
-                  </div>
-                  <div className="poids-annexe">
-                    <div className="span-item petit-span">
-                      <span>Poids :</span>
-                    </div>
-                    <input type="text" 
-                      value={DossObsData?.Poids}
-                      readOnly
-                    />
-                  </div>
-                  <div className="taille-annexe">
-                    <div className="span-item petit-span">
-                      <span>Taille :</span>
-                    </div>
 
-                    <input
-                      type="text"
-                      value={DossObsData?.Taille}
-                      name="Taille"
-                      readOnly
-                    />
-                  </div>
-                  <div className="pc-annexe">
-                    <div className="span-item petit-span">
-                      <span>PC :</span>
+                      <div className="date-heure-acc">
+                        <div className="date-acc">
+                          <div className="span-item span-long1">
+                            <span>Date d’accouchement :</span>
+                          </div>
+                          <input
+                            type="text"
+                            name="Date_daccouchement"
+                            defaultValue={DossObsData?.Date_daccouchement}
+                            readOnly
+                          />
+                        </div>
+                        <div className="heure-acc">
+                          <div className="span-item">
+                            <span>Heure :</span>
+                          </div>
+                          <input
+                            type="text"
+                            name="Heure_daccouchement"
+                            defaultValue={DossObsData?.Heure_daccouchement}
+                            readOnly
+                          />
+                        </div>
+                      </div>
+                      <div className="accoucheur">
+                        <div className="span-text">
+                          <span>Accoucheur :</span>
+                        </div>
+                        <div className="textarea">
+                          <input
+                            type="text"
+                            name="accoucheur"
+                            id="accoucheur"
+                            defaultValue={UserData?.Fname}
+                            readOnly
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <input
-                      type="text"
-                      value={DossObsData?.Pc}
-                      name="Pc"
-                      readOnly
-                    />
-                  </div>
-                </div>
-                <div className="score-dapgar">
-                  <div className="score">
-                    <span>Score d'Apgar :</span>
-                  </div>
-                  <div className="minute-1">
-                    <span>1 minute</span>
-                    <input
-                      type="checkbox"
-                      name="une_min"
-                      value={DossObsData?.une_min}
-                      readOnly
-                    />
-                  </div>
-                  <div className="minute-5">
-                    <span>5 minute</span>
-                    <input
-                      type="checkbox"
-                      name="cinq_min"
-                      value={DossObsData?.cinq_min}
-                      readOnly
-                    />
-                  </div>
-                </div>
-                <div className="malforamtion-annexe">
-                  <div className="span-item">
-                    <span>Malformation :</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={DossObsData?.Malformation}
-                    name="Malformation"
-                    readOnly
-                  />
-                </div>
-                <div className="remarque-annexe">
-                  <div className="span-item">
-                    <span>Remarque :</span>
-                  </div>
-                  <input
-                    type="text"
-                    name="Remarque"
-                    value={DossObsData?.Remarque}
-                    readOnly
-                  />
-                </div>
-                <div className="re-annexe-textarea">
-                  <div className="textarea">
-                    <textarea name="rem-annexe" id="rem-annexe"></textarea>
-                  </div>
-                </div>
-                <div className="empre-digi">
-                  <div className="span-text">
-                    <span>Empreintes digitales :</span>
-                  </div>
-                  <div className="textarea">
-                    <textarea
-                      name="empre-digi"
-                      // id="empre-digi"
-                      // value={Empreintes_digitales}
-                      readOnly
-                    ></textarea>
-                  </div>
+                    <div className="examen-annexes">
+                      <h2>Examen des annexes :</h2>
+                      <div className="annexes">
+                        <div className="malforamtion-annexe">
+                          <div className="span-item">
+                            <span>Aspect :</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={DossObsData?.Aspect}
+                            name="Aspect"
+                            readOnly
+                          />
+                        </div>
+                        <div className="malforamtion-annexe">
+                          <div className="span-item">
+                            <span>Anomalies :</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={DossObsData?.Anomalies}
+                            name="Anomalies"
+                            readOnly
+                          />
+                        </div>
+                        <div className="malforamtion-annexe">
+                          <div className="span-item">
+                            <span>Placenta :</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={DossObsData?.Placenta}
+                            name="Placenta"
+                            readOnly
+                          />
+                        </div>
+                        <div className="malforamtion-annexe">
+                          <div className="span-item">
+                            <span>Membranes :</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={DossObsData?.Membranes}
+                            name="Membranes"
+                            readOnly
+                          />
+                        </div>
+                        <div className="malforamtion-annexe">
+                          <div className="span-item">
+                            <span>Cordon :</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={DossObsData?.Cordon}
+                            name="Cordon"
+                            readOnly
+                          />
+                        </div>
+                        <div className="sexe-poids-taille-pc">
+                          <div className="date-annexe">
+                            <div className="span-item petit-span">
+                              <span>Sexe :</span>
+                            </div>
+                            <input
+                              type="text"
+                              name="Sexe"
+                              id="date-annexe"
+                              value={DossObsData?.Sexe}
+                              readOnly
+                            />
+                          </div>
+                          <div className="poids-annexe">
+                            <div className="span-item petit-span">
+                              <span>Poids :</span>
+                            </div>
+                            <input type="text" 
+                              value={DossObsData?.Poids}
+                              readOnly
+                            />
+                          </div>
+                          <div className="taille-annexe">
+                            <div className="span-item petit-span">
+                              <span>Taille :</span>
+                            </div>
+
+                            <input
+                              type="text"
+                              value={DossObsData?.Taille}
+                              name="Taille"
+                              readOnly
+                            />
+                          </div>
+                          <div className="pc-annexe">
+                            <div className="span-item petit-span">
+                              <span>PC :</span>
+                            </div>
+                            <input
+                              type="text"
+                              value={DossObsData?.Pc}
+                              name="Pc"
+                              readOnly
+                            />
+                          </div>
+                        </div>
+                        <div className="score-dapgar">
+                          <div className="score">
+                            <span>Score d'Apgar :</span>
+                          </div>
+                          <div className="minute-1">
+                            <span>1 minute</span>
+                            <input
+                              type="checkbox"
+                              name="une_min"
+                              readOnly
+                            />
+                          </div>
+                          <div className="minute-5">
+                            <span>5 minute</span>
+                            <input
+                              type="checkbox"
+                              name="cinq_min"
+                              readOnly
+                            />
+                          </div>
+                        </div>
+                        <div className="malforamtion-annexe">
+                          <div className="span-item">
+                            <span>Malformation :</span>
+                          </div>
+                          <input
+                            type="text"
+                            value={DossObsData?.Malformation}
+                            name="Malformation"
+                            readOnly
+                          />
+                        </div>
+                        <div className="remarque-annexe">
+                          <div className="span-item">
+                            <span>Remarque :</span>
+                          </div>
+                          <input
+                            type="text"
+                            name="Remarque"
+                            value={DossObsData?.Remarque}
+                            readOnly
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
-            <div className="back-next-buttons back-next-dossier">
-              <div className="back">
-                <SwiperButtonBack>
-                  <div className="flex items-center justify-items-center gap-2">
-                    <BsChevronLeft /> Back
-                  </div>
-                </SwiperButtonBack>
-              </div>
-              <div className="next">
-                <SwiperButtonNext>
-                  <div className="flex items-center justify-items-center gap-2">
-                    Suivant <BsChevronRight />
-                  </div>
-                </SwiperButtonNext>
-              </div>
-            </div>
-          </div>
         </SwiperSlide>)
       }
       

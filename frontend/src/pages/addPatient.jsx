@@ -45,6 +45,8 @@ export default function AddPatient() {
   let toggleClassAddConcultation = addConsultation
     ? " add-concultation-active"
     : "";
+  const [Nom, setNom] = useState("");
+  const [Prenom, setPrenom] = useState("");
   const [Poids, setPoids] = useState("");
   const [Aspect, setAspect] = useState("");
   const [Anomalies, setAnomalies] = useState("");
@@ -189,6 +191,44 @@ export default function AddPatient() {
     fetchUsertData();
   }, [UserData, DossObsData?.AccoucheurID]);
 
+  const handleNouveauNeUpdate = async () => {
+      if (id !== undefined) {
+        try {
+          const response = await axios.patch(
+            `http://localhost:8000/patients/Nouveau-ne/${id}`,
+            { 
+              Nom,
+              Prenom,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+          // Handle response as needed
+          if (!response.status === 200) {
+            setNotify({
+              isOpen: true,
+              message: "Ajoute patient échoué",
+              type: "error",
+            });
+          } else if (response.status === 200) {
+            setNotify({
+              isOpen: true,
+              message: "Ajoute patient réussie",
+              type: "success",
+            });
+          }
+          setTimeout(() => {
+            history(`/Dossier-Nouveau-ne/${PatientData._id}`);
+          }, 1000);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+  };
+
   const handleDossObsSubmit = async () => {
     setConfirmDialog({
       ...confirmDialog,
@@ -198,7 +238,7 @@ export default function AddPatient() {
       try {
         const response = await axios.patch(
           `http://localhost:8000/patients/DossObs/${PatientData?.idDossObs}`,
-          {
+          { 
             Poids,
             Aspect,
             Anomalies,
@@ -225,6 +265,7 @@ export default function AddPatient() {
             type: "error",
           });
         } else if (response.status === 200) {
+          handleNouveauNeUpdate();
           setNotify({
             isOpen: true,
             message: "Ajoute patient réussie",
@@ -239,7 +280,7 @@ export default function AddPatient() {
       }
     }
   };
-
+  
   return (
     <div className="AddPatient">
       <div className="addpatient-container">
@@ -265,12 +306,9 @@ export default function AddPatient() {
             <h2>Dossier patient</h2>
           </div>
           <div className="top-right">
-            <div className="service">
-              <h3>Nom de service :</h3>
-            </div>
             <div className="paraticien">
               <h3>Nom de praticien :</h3>
-              <a href="#">Dr. Khaldi</a>
+              <a>{user?.Fname}</a>
             </div>
           </div>
         </div>
@@ -292,19 +330,26 @@ export default function AddPatient() {
                     <div className="span-item">
                       <span>Nom :</span>
                     </div>
-                    <input type="text" />
+                    <input type="text" 
+                      onChange={(e) => {setNom(e.target.value)}}
+                    />
                   </div>
                   <div className="malforamtion-annexe">
                     <div className="span-item">
                       <span>Prenom :</span>
                     </div>
-                    <input type="text" />
+                    <input type="text" 
+                      onChange={(e) => {setPrenom(e.target.value)}}
+                    />
                   </div>
                   <div className="malforamtion-annexe">
                     <div className="span-item">
                       <span>Identifiant :</span>
                     </div>
-                    <input type="text" />
+                    <input type="text" 
+                      value={PatientData?.Identification}
+                      readOnly
+                    />
                   </div>
 
                   <div className="date-heure-acc">
@@ -433,7 +478,9 @@ export default function AddPatient() {
                         <div className="span-item petit-span">
                           <span>Poids :</span>
                         </div>
-                        <input type="text" />
+                        <input type="text" 
+                          onChange={(e) => {setPoids(e.target.value)}}
+                        />
                       </div>
                       <div className="taille-annexe">
                         <div className="span-item petit-span">

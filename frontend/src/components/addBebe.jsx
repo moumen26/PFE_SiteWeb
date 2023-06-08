@@ -92,12 +92,12 @@ export default function AddBebe() {
             window.alert("Add idNouveauNe failed", data.error);
           }
           if (response.ok) {
-            history(`/patients/${await data.id}`);
+            history(`/antecedent/${await data.id}`);
           }
         } catch (error) {
           console.error("Error adding idNouveauNe:", error);
         }
-        history(`/patients/${await data.id}`);
+        history(`/antecedent/${await data.id}`);
       }
     } catch (error) {
       console.error("Error adding Nouveau-ne:", error);
