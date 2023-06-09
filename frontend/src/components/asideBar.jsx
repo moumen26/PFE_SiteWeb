@@ -6,6 +6,7 @@ import { FiLogOut } from "react-icons/fi";
 import { useLogout } from "../hooks/useLogout";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { NavLink, useLocation } from "react-router-dom";
+import { IoMdSettings } from "react-icons/io";
 
 export default function MyAsideBar() {
   const { logout } = useLogout();
@@ -76,7 +77,7 @@ export default function MyAsideBar() {
                   location.pathname === "/profile" ? "aside-item-active" : ""
                 }`}
               >
-                <ImProfile className="w-6 h-6 ml-2" />
+                <IoMdSettings className="w-6 h-6 ml-2" />
                 <span className="title">Profile</span>
               </div>
             </NavLink>

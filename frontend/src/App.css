@@ -260,6 +260,11 @@ nav {
   text-transform: capitalize;
 }
 
+.aside ul li:nth-child(5){
+position: absolute;
+  bottom: 90px; 
+}
+
 .aside ul li:last-child {
   position: absolute;
   bottom: 20px;
@@ -4823,12 +4828,16 @@ form.sign-in-form {
   border: 1px solid rgba(79, 129, 255, 1);
 }
 
-.consultation-table-item-context-header {
+.consultation-table-item-context-container,
+.consultation-table-item-context-header{
+  gap: 10px;
   background-color: rgba(243, 243, 243, 1);
 }
-.consultation-table-item-header {
+.consultation-table-item-header,
+.bg-consultation {
   background-color: white;
 }
+
 
 .consultation-table-item-context-header form {
   display: flex;
@@ -5375,8 +5384,7 @@ form.sign-in-form {
 .patient-profile-container {
   padding-bottom: 10vh;
 }
-
-90% .profile-cahier-table-vaccin .vaccin-table-container {
+.profile-cahier-table-vaccin .vaccin-table-container {
   width: 100%;
 }
 
@@ -5486,6 +5494,8 @@ form.sign-in-form {
   padding-right: 24px;
   margin-top: 30px;
 }
+
+
 
 .malade-profile-form-class {
   display: flex;

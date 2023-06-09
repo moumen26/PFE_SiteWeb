@@ -480,6 +480,9 @@ export default function Conculter(props) {
       message: "Sauvegarde réussie",
       type: "success",
     });
+    setTimeout(() => {
+      history(-1);
+    }, 2000);
   };
   //delete Medicament
   const handleMedDeleteClick = async (MedicamentId) => {
@@ -665,11 +668,8 @@ export default function Conculter(props) {
                   <div
                     className={`consultation-table-item-context${toggleClassDiagnostic}`}
                   >
-                    <div className="consultation-table-item-context-header">
-                      <h2>Context :</h2>
-                      {/* <IoIosClose className="close-icon" /> */}
-                    </div>
                     <div className="consultation-table-item-context-container">
+                      <h2>Context :</h2>
                       <textarea
                         id=""
                         placeholder="Ecrire ici..."
