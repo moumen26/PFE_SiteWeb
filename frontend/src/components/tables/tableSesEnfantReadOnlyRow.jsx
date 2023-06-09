@@ -53,7 +53,9 @@ export default function TableSesEnfant({ Enfant }) {
       <td className="table-patients-td-willaya">{Enfant.LieuDeNaissance}</td>
       <td className="table-patients-td-region">{Enfant.Adresse}</td>
       <td className="table-patients-td table-patient-td-button">
-        <ConculterButton AddConsultation={handleAddConsultation}/>
+        {user?.speciality === "Pediatre" &&
+          <ConculterButton AddConsultation={handleAddConsultation}/>
+        }
         <VoirButton VoirPatient={handleVoirDossierPatient}/>
       </td>
     </tr>

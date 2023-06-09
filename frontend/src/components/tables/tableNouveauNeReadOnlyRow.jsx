@@ -87,8 +87,18 @@ export default function TableNouveauNe({ NouveauNe }) {
       <td className="table-patients-td-willaya">{NouveauNe.LieuDeNaissance}</td>
       <td className="table-patients-td-region">{NouveauNe.Adresse}</td>
       <td className="table-patients-td table-patient-td-button">
-        <ConculterButton AddConsultation={handleAddConsultation} />
-        <HospitalisationButton Hospitalisation={handleAddHospitalisation} />
+        {NouveauNe.maturity === "Adulte" && user?.speciality === "Medecin" &&
+          <ConculterButton AddConsultation={handleAddConsultation} />
+        }
+        {NouveauNe.maturity === "Nouveau-ne" && user?.speciality === "Pediatre" &&
+          <ConculterButton AddConsultation={handleAddConsultation} />
+        }
+        {NouveauNe.maturity === "Adulte" && user?.speciality === "Medecin" &&
+          <HospitalisationButton Hospitalisation={handleAddHospitalisation} />
+        }
+        {NouveauNe.maturity === "Nouveau-ne" && (user?.speciality === "Pediatre" || user?.speciality === "Medecin") &&
+          <HospitalisationButton Hospitalisation={handleAddHospitalisation} />
+        }
         <VoirButton VoirPatient={handleVoirDossierPatient} />
       </td>
     </tr>
