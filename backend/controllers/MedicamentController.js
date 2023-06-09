@@ -68,7 +68,7 @@ const CreateNewMedicament = async (req, res) => {
         console.error("Error retrieving Ordonance :", error);
         res.status(500).json({ message: "Error retrieving Ordonance" });
       });
-      res.status(200).json({ message: 'medicament created successfully'});
+      res.status(200).json({ message: "Médicament créé avec succès" });
     }).catch((error)=>{
         console.error("Error creating new Medicament:", error);
         res.status(500).json({ message: "Error creating new Medicament" });
@@ -88,7 +88,7 @@ const DeleteMedicament = async (req, res) => {
           if (!medicament || medicament.modifiedCount == 0) {
               return res.status(404).json({ message: 'medicament not found' });
           }
-          res.status(200).json({ message: 'medicament deleted successfully'});
+          res.status(200).json({ message: "Médicament supprimé avec succès" });
           console.log('medicament deleted');
       }).catch((error) => {
           console.error('Error updating medicament:', error);
@@ -134,7 +134,7 @@ const AddNewMedicament = async (req, res) => {
         QuantiteMedicament: QuantiteMedicament,
       });
       ordonance.save();
-      res.status(200).json({ message: 'medicament created successfully'});
+      res.status(200).json({ message: "Médicament ajouté avec succès" });
     }).catch((error)=>{
         console.error("Error creating new Medicament:", error);
         res.status(500).json({ message: "Error creating new Medicament" });

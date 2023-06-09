@@ -55,7 +55,7 @@ const CreateNewOrdonance = async (req, res) => {
                 });
     
                 // return ordonance
-                res.status(201).json({ message: 'You can now Add Ordonance content'});
+                res.status(201).json({ message: "Vous pouvez maintenant ajouter du contenu d'ordonnance"});
             }).catch((error) => {
                 console.error('Error creating Ordonance:', error);
                 res.status(500).json({ error: 'Failed to create Ordonance' });
@@ -91,7 +91,9 @@ const DeleteOrdonance = async (req, res) => {
                 });
             //return success message
             if (consultationresponce) {
-                res.status(200).json({ message: 'Ordonance deleted successfully' });
+                res
+                  .status(200)
+                  .json({ message: "Ordonnance supprimée avec succès" });
             }
         }).catch((error) => {
             res.status(500).json({ message: 'Failed to delete Ordonance' });

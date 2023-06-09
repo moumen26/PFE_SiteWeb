@@ -131,7 +131,7 @@ export default function AffichageConcultation() {
           </h3>
           <div className="time-date-concultation">
             <h3>Heure : {ConsultationData?.HeureConsultation}</h3>
-            <h3>Date :  {ConsultationData?.DateConcultation}</h3>
+            <h3>Date : {ConsultationData?.DateConcultation}</h3>
           </div>
         </div>
         <div className="consultation-table">
@@ -142,17 +142,18 @@ export default function AffichageConcultation() {
               </div>
               <div className="consultation-table-item-contenu">
                 <div className="consultation-table-item-context">
-                  <div className="consultation-table-item-context-header">
-                    <h2>Context :</h2>
-                  </div>
+                  
                   <div className="consultation-table-item-context-container">
+                    <h2>Context :</h2>
                     <textarea
                       defaultValue={DiagnosticData?.Context}
                       readOnly
                       placeholder="Context"
                     ></textarea>
                     <h2>Maladie :</h2>
-                    <input type="text" placeholder="fiévre, faiblesse..." 
+                    <input
+                      type="text"
+                      placeholder="fiévre, faiblesse..."
                       defaultValue={DiagnosticData?.Maladie}
                       readOnly
                     />

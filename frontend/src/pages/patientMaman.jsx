@@ -114,9 +114,7 @@ export default function PatientDetails() {
               placeholder="Search.."
               onChange={(e) => setSearch(e.target.value)}
             />
-            <div className="search-item">
-              <SearchButton />
-            </div>
+            
 
             <div className="ajoute-nouveau-ne-item">
               <input

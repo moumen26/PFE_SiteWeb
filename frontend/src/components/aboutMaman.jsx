@@ -35,7 +35,7 @@ export default function AboutMaman({PatientData}) {
             </div>
             <div className="maman-cart-item">
               <span>Age :</span>
-              <h3>{PatientData?.Age}</h3>
+              <h3>{PatientData?.Age}ans</h3>
             </div>
             <div className="maman-cart-item">
               <span>Ne (e) en :</span>
@@ -43,11 +43,11 @@ export default function AboutMaman({PatientData}) {
             </div>
             <div className="maman-cart-item">
               <span>Telephone :</span>
-              <h3>{PatientData?.Telephone}</h3>
+              <h3>0{PatientData?.Telephone}</h3>
             </div>
             <div className="maman-cart-item">
               <span>Poids :</span>
-              <h3>{PatientData?.Poids}</h3>
+              <h3>{PatientData?.Poids}kg</h3>
             </div>
           </div>
           <div className="maman-cart-class">
@@ -69,7 +69,7 @@ export default function AboutMaman({PatientData}) {
             </div>
             <div className="maman-cart-item">
               <span>Taille :</span>
-              <h3>{PatientData?.Taille}</h3>
+              <h3>{PatientData?.Taille}cm</h3>
             </div>
           </div>
         </div>

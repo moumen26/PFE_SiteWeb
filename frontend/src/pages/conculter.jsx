@@ -275,11 +275,22 @@ export default function Conculter(props) {
       );
       // get the DiagnosticID via response from the server and redirect to the Diagnostic page
       const data = await response.json();
+
       if (!response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "error",
+        });
+        // window.alert(data.message);
       }
       if (response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "success",
+        });
+        // window.alert(data.message);
         setDiagnostic(!diagnostic);
       }
     } catch (error) {
@@ -288,6 +299,10 @@ export default function Conculter(props) {
   };
   //delete Diagnostic
   const handleClickDeleteDiagnostic = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     // Delete the Diagnostic in the database
     try {
       const response = await axios.delete(
@@ -300,10 +315,21 @@ export default function Conculter(props) {
       );
       const data = await response.data;
       if (!response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "error",
+        });
+        // window.alert(data.message);
       }
       if (response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "success",
+        });
+
+        // window.alert(data.message);
       }
       setDiagnostic(!diagnostic);
     } catch (error) {
@@ -327,10 +353,20 @@ export default function Conculter(props) {
       );
       const data = await response.json();
       if (!response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "error",
+        });
+        // window.alert(data.message);
       }
       if (response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "success",
+        });
+        // window.alert(data.message);
         setMedicament(!medicament);
       }
       console.error(MedicamentDB);
@@ -340,6 +376,10 @@ export default function Conculter(props) {
   };
   //delete Ordonance
   const handleClickDeleteOrdonance = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     // Delete the Ordonance in the database
     try {
       const response = await axios.delete(
@@ -352,10 +392,20 @@ export default function Conculter(props) {
       );
       const data = await response.data;
       if (!response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "error",
+        });
+        // window.alert(data.message);
       }
       if (response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "success",
+        });
+        // window.alert(data.message);
       }
       setMedicament(!medicament);
     } catch (error) {
@@ -398,32 +448,30 @@ export default function Conculter(props) {
       isOpen: false,
     });
     try {
-      if(DiagnosticData._id !== undefined){
+      if (DiagnosticData._id !== undefined) {
         const response = await axios.patch(
-        `http://localhost:8000/patients/Diagnostic/${DiagnosticData._id}`,
-        {
-          Context,
-          Maladie,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${user?.token}`,
+          `http://localhost:8000/patients/Diagnostic/${DiagnosticData._id}`,
+          {
+            Context,
+            Maladie,
           },
-        }
+          {
+            headers: {
+              Authorization: `Bearer ${user?.token}`,
+            },
+          }
         );
         const data = await response.data;
         setTimeout(() => {
           history(-1);
         }, 1000);
-      }else{
+      } else {
         setNotifyAjoute({
           isOpen: true,
           message: "Vous devez ajouter un de ces diagnostic ordonnance examen",
           type: "error",
         });
       }
-      
-      
     } catch (error) {
       console.error("Error Deleting Diagnostic:", error);
     }
@@ -441,7 +489,7 @@ export default function Conculter(props) {
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
-            data : {MedicamentId},
+            data: { MedicamentId },
           },
         }
       );
@@ -476,10 +524,20 @@ export default function Conculter(props) {
       );
       const data = await response.data;
       if (!response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "success",
+        });
+        // window.alert(data.message);
       }
       if (response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "error",
+        });
+        // window.alert(data.message);
       }
     } catch (error) {
       console.error("Error Adding Medicament:", error);
@@ -582,7 +640,17 @@ export default function Conculter(props) {
                   <h2>Diagnostic</h2>
                   <BiChevronUp
                     className="up-icon"
-                    onClick={handleClickDeleteDiagnostic}
+                    onClick={() => {
+                      setConfirmDialog({
+                        isOpen: true,
+                        title: "Êtes-vous sûr de supprimer cette Diagnostic ?",
+                        subTitle: "Vous ne pouvez pas annuler cette opération",
+                        onConfirm: () => {
+                          handleClickDeleteDiagnostic();
+                        },
+                      });
+                    }}
+                    // onClick={handleClickDeleteDiagnostic}
                     diagnostic={diagnostic}
                     setDiagnostic={setDiagnostic}
                   />
@@ -599,7 +667,7 @@ export default function Conculter(props) {
                   >
                     <div className="consultation-table-item-context-header">
                       <h2>Context :</h2>
-                      <IoIosClose className="close-icon" />
+                      {/* <IoIosClose className="close-icon" /> */}
                     </div>
                     <div className="consultation-table-item-context-container">
                       <textarea
@@ -635,7 +703,17 @@ export default function Conculter(props) {
                   <h2>Ordonance</h2>
                   <BiChevronUp
                     className="up-icon"
-                    onClick={handleClickDeleteOrdonance}
+                    onClick={() => {
+                      setConfirmDialog({
+                        isOpen: true,
+                        title: "Êtes-vous sûr de supprimer cette Ordonnance ?",
+                        subTitle: "Vous ne pouvez pas annuler cette opération",
+                        onConfirm: () => {
+                          handleClickDeleteOrdonance();
+                        },
+                      });
+                    }}
+                    // onClick={handleClickDeleteOrdonance}
                     medicament={medicament}
                     setMedicament={setMedicament}
                   />

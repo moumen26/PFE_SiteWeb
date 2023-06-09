@@ -3,8 +3,20 @@ import { MdDelete } from "react-icons/md";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import axios from "axios";
+import Notification from "../notification/notification";
+import ConfirmDialog from "../dialoges/dialogeAlert";
 
-export default function AddMedicamentReadOnlyRow({Medicament,handleMedDeleteClick,}) {
+export default function AddMedicamentReadOnlyRow({Medicament,handleMedDeleteClick}) {
+   const [notify, setNotify] = useState({
+     isOpen: false,
+     message: "",
+     type: "",
+   });
+   const [confirmDialog, setConfirmDialog] = useState({
+     isOpen: false,
+     title: "",
+     subTitle: "",
+   });
   const {id} = useParams();
   const {user} = useAuthContext();
   const history = useNavigate();
@@ -71,6 +83,10 @@ export default function AddMedicamentReadOnlyRow({Medicament,handleMedDeleteClic
   }, [OrdonanceData, ConsultationData, user?.token]);
   //delete Medicament
   const handleMedicamentDeleteClick = async () => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     try {
       const response = await axios.delete(
         `http://localhost:8000/patients/Medicament/${OrdonanceData[0]._id}`,
@@ -83,10 +99,20 @@ export default function AddMedicamentReadOnlyRow({Medicament,handleMedDeleteClic
       );
       const data = await response.data;
       if (!response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "error",
+        });
+        // window.alert(data.message);
       }
       if (response.ok) {
-        window.alert(data.message);
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "error",
+        });
+        // window.alert(data.message);
       }
     } catch (error) {
       console.error("Error Deleting Medicament:", error);
@@ -103,9 +129,24 @@ export default function AddMedicamentReadOnlyRow({Medicament,handleMedDeleteClic
       <div className="action-table-med">
         <MdDelete
           className="delete-btn-icon"
-          onClick={handleMedicamentDeleteClick}
+          onClick={() => {
+            setConfirmDialog({
+              isOpen: true,
+              title: "Êtes-vous sûr de supprimer ce Medicament ?",
+              subTitle: "Vous ne pouvez pas annuler cette opération",
+              onConfirm: () => {
+                handleMedicamentDeleteClick();
+              },
+            });
+          }}
+          // onClick={handleMedicamentDeleteClick}
         />
       </div>
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
+      <Notification notify={notify} setNotify={setNotify} />
     </div>
   );
 }

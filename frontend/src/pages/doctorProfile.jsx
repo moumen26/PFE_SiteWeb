@@ -7,8 +7,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ConfirmDialog from "../components/dialoges/dialogeAlert";
-import Notification from "../components/notification";
-
+import NotificationSaveMise from "../components/notification/notificationSaveMise";
 export default function DoctorProfile() {
   const [notify, setNotify] = useState({
     isOpen: false,
@@ -324,8 +323,7 @@ export default function DoctorProfile() {
           </div>
         </form>
       </div>
-      <Notification notify={notify} setNotify={setNotify} />
-      
+      <NotificationSaveMise notify={notify} setNotify={setNotify} />
     </div>
   );
 }

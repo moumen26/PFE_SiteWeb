@@ -60,7 +60,13 @@ const CreateNewDiagnostic = async (req, res) => {
                 });
     
                 // Adding diagnostic
-                res.status(201).json({id: diagnostic._id, message: 'You can now Add Diagnostic content'});
+                res
+                  .status(201)
+                  .json({
+                    id: diagnostic._id,
+                    message:
+                      "Vous pouvez maintenant ajouter du contenu de diagnostic",
+                  });
             }).catch((error) => {
                 console.error('Error creating Diagnostic:', error);
                 res.status(500).json({ error: 'Failed to create Diagnostic' });
@@ -119,7 +125,11 @@ const DeleteDiagnostic = async (req, res) => {
                     console.error('Error deleting Diagnostic from consultation:', error);
                     res.status(500).json({ message: 'Failed to delete Diagnostic from consultation' });
                 });
-            res.status(200).json({ message: 'Diagnostic deleted successfully from consultation' });
+            res
+              .status(200)
+              .json({
+                message: "Diagnostic de consultation supprimé avec succès",
+              });
         }).catch((error) => {
             res.status(500).json({ message: 'Failed to delete Diagnostic' });
         });

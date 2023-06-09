@@ -39,37 +39,37 @@ export default function NouveauNe() {
   let toggleClassAdd = add ? " add-cahier-active" : "";
 
   const [NouveauneDB, setNouveauneDB] = useState();
-  const [UserData , setUserData] = useState();
+  const [UserData, setUserData] = useState();
   const { user } = useAuthContext();
- // Fetch Patient Data
- useEffect(() => {
-  const fetchPatientData = async () => {
-    if (user?.token !== undefined) {
-      await fetch(`http://localhost:8000/patients/Nouveau-ne/`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${user?.token}`,
-        },
-      }).then((response) => {
-        if (response.ok) {
-          response
-            .json()
-            .then((data) => {
-              setNouveauneDB(data);
-            })
-            .catch((error) => {
-              console.error("Error fetching Patient data:", error);
-            });
-        } else {
-          console.error("Error resieving Patient date", response.error);
-        }
-      });
-    } else {
-      history("/login");
-    }
-  };
-  fetchPatientData();
-}, [history, user?.token]);
+  // Fetch Patient Data
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      if (user?.token !== undefined) {
+        await fetch(`http://localhost:8000/patients/Nouveau-ne/`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setNouveauneDB(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Patient data:", error);
+              });
+          } else {
+            console.error("Error resieving Patient date", response.error);
+          }
+        });
+      } else {
+        history("/login");
+      }
+    };
+    fetchPatientData();
+  }, [history, user?.token]);
   return (
     <div>
       <div className="patient-table">
@@ -126,9 +126,6 @@ export default function NouveauNe() {
                 setSearch(e.target.value);
               }}
             />
-            <div className="search-item">
-              <SearchButton />
-            </div>
           </div>
           <div className="table-patients">
             <table>
@@ -140,19 +137,35 @@ export default function NouveauNe() {
                 <td className="table-patients-header-button"></td>
               </tr>
               {NouveauneDB?.filter((item) => {
-                if (item.DateDeNaissance && item.LieuDeNaissance && item.Adresse) {
+                if (
+                  item.DateDeNaissance &&
+                  item.LieuDeNaissance &&
+                  item.Adresse
+                ) {
                   if (search.toLowerCase() === "") {
                     if (naissance === "All") {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
-                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
+                      } else if (
+                        item.LieuDeNaissance.toLowerCase().includes(
+                          wilaya.toLowerCase()
+                        )
+                      ) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
                       }
@@ -160,13 +173,25 @@ export default function NouveauNe() {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
-                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
+                      } else if (
+                        item.LieuDeNaissance.toLowerCase().includes(
+                          wilaya.toLowerCase()
+                        )
+                      ) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
                       }
@@ -180,13 +205,25 @@ export default function NouveauNe() {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
-                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
+                      } else if (
+                        item.LieuDeNaissance.toLowerCase().includes(
+                          wilaya.toLowerCase()
+                        )
+                      ) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
                       }
@@ -194,13 +231,25 @@ export default function NouveauNe() {
                       if (wilaya === "All") {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
-                      } else if (item.LieuDeNaissance.toLowerCase().includes(wilaya.toLowerCase())) {
+                      } else if (
+                        item.LieuDeNaissance.toLowerCase().includes(
+                          wilaya.toLowerCase()
+                        )
+                      ) {
                         if (region === "All") {
                           return item;
-                        } else if (item.Adresse.toLowerCase().includes(region.toLowerCase())) {
+                        } else if (
+                          item.Adresse.toLowerCase().includes(
+                            region.toLowerCase()
+                          )
+                        ) {
                           return item;
                         }
                       }
