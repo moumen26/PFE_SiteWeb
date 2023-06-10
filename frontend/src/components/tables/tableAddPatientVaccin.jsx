@@ -8,9 +8,17 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Notification from "../notification/notification";
 
 export default function VaccinTable() {
   const [addVaccinTable, setaddVaccinTable] = useState(false);
+
+   const [notify, setNotify] = useState({
+     isOpen: false,
+     message: "",
+     type: "",
+   });
+
 
   let toggleClassAddVaccinTable = addVaccinTable
     ? " add-Vaccin-Table-active"
@@ -170,10 +178,20 @@ export default function VaccinTable() {
         // get the patientID via response from the server patientRouter.post
         const data = await response.json();
         if (!response.ok) {
-          window.alert("Add vaccin failed", data.error);
+          setNotify({
+            isOpen: true,
+            message: `${data.error}`,
+            type: "error",
+          });
+          // window.alert("Add vaccin failed", data.error);
         }
         if (response.ok) {
-          window.alert("Add vaccin success", data.error);
+          setNotify({
+            isOpen: true,
+            message: `${data.message}`,
+            type: "success",
+          });
+          // window.alert("Add vaccin success", data.error);
         }
       } catch (error) {
         window.alert("Add Vaccin error");
@@ -258,9 +276,19 @@ export default function VaccinTable() {
         );
         // Handle response as needed
         if (!response.status === 200) {
-          window.alert("Deleting vaccin failed", response.error);
+          setNotify({
+            isOpen: true,
+            message: "Deleting vaccin failed",
+            type: "error",
+          });
+          // window.alert("Deleting vaccin failed", response.error);
         } else if (response.status === 200) {
-          window.alert("Deleting vaccin success", response.error);
+          setNotify({
+            isOpen: true,
+            message: "Deleting vaccin success",
+            type: "error",
+          });
+          // window.alert("Deleting vaccin success", response.error);
         }
       } catch (error) {
         window.alert(error);
@@ -325,15 +353,15 @@ export default function VaccinTable() {
             ))}
           </table>
         </form>
-        {(user?.speciality.toLowerCase() === "sage femme" || user?.speciality.toLowerCase() === "pediatre") && 
+        {(user?.speciality.toLowerCase() === "sage femme" ||
+          user?.speciality.toLowerCase() === "pediatre") && (
           <div className="vaccination-add-button-class">
             <VaccinationAddButton
               addVaccinTable={addVaccinTable}
               setaddVaccinTable={setaddVaccinTable}
             />
           </div>
-        }
-        
+        )}
       </div>
       <div className={`add-tableau-vaccin1${toggleClassAddVaccinTable}`}>
         <div className="add-tableau-vaccin1-container">
@@ -379,12 +407,13 @@ export default function VaccinTable() {
                   name="vaccinationAge"
                   id="vaccination-age"
                   value={AgeRecommande}
-                  onChange={(e) => {setAgeRecommande(e.target.value)}}
+                  onChange={(e) => {
+                    setAgeRecommande(e.target.value);
+                  }}
                 >
                   <option selected disabled>
                     {AgeRecommande || "Age"}
                   </option>
-
                 </select>
               </div>
 
@@ -398,9 +427,11 @@ export default function VaccinTable() {
                   <option selected disabled>
                     Vaccin
                   </option>
-                  {VaccinData ? VaccinData.map((Vaccin) => (
-                      <option value={Vaccin.nom}>{Vaccin.nom}</option>
-                  )) : null}
+                  {VaccinData
+                    ? VaccinData.map((Vaccin) => (
+                        <option value={Vaccin.nom}>{Vaccin.nom}</option>
+                      ))
+                    : null}
                 </select>
               </div>
 
@@ -409,12 +440,13 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationContre"
                   id="vaccination-contre"
-                  onChange={(e) => {setContreQuoi(e.target.value)}}
+                  onChange={(e) => {
+                    setContreQuoi(e.target.value);
+                  }}
                 >
                   <option selected disabled>
                     {ContreQuoi || "Contre"}
                   </option>
-
                 </select>
               </div>
 
@@ -423,12 +455,13 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationTechnique"
                   id="vaccination-technique"
-                  onChange={(e) => {setTechnique(e.target.value)}}
+                  onChange={(e) => {
+                    setTechnique(e.target.value);
+                  }}
                 >
                   <option selected disabled>
-                    { Technique || "Technique"}
+                    {Technique || "Technique"}
                   </option>
-                  
                 </select>
               </div>
 
@@ -437,12 +470,13 @@ export default function VaccinTable() {
                   className="vaccination-select"
                   name="vaccinationNumero"
                   id="vaccination-numero"
-                  onChange={(e) => {setNumeroLot(e.target.value)}}
+                  onChange={(e) => {
+                    setNumeroLot(e.target.value);
+                  }}
                 >
                   <option selected disabled>
                     {NumeroLot || "Numero"}
                   </option>
-                  
                 </select>
               </div>
 
@@ -465,6 +499,7 @@ export default function VaccinTable() {
           </form>
         </div>
       </div>
+      <Notification notify={notify} setNotify={setNotify} />
     </div>
   );
 }

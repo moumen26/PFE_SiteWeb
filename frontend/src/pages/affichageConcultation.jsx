@@ -138,7 +138,7 @@ export default function AffichageConcultation() {
           <div className="consultation-table-container">
             <div className="consultation-table-item">
               <div className="consultation-table-item-header bg-consultation">
-                <h2>Diagccrsnostic</h2>
+                <h2>Diagnostic</h2>
               </div>
               <div className="consultation-table-item-contenu">
                 <div className="consultation-table-item-context">

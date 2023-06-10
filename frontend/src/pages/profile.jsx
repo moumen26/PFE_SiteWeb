@@ -218,7 +218,7 @@ export default function ProfilePatient() {
           {ConcultationDB?.length > 0 && (
             <div className="home-formulaire-swiper profile-concultation">
               <div className="profile-cahier-swiper-title">
-                <h2>Concultation</h2>
+                <h2>Consultation</h2>
               </div>
               <div className="line-hl">
                 <div className="hl"></div>
