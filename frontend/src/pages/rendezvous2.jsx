@@ -19,49 +19,13 @@ export default function PatientRendezvous() {
   const [LieuDeNaissance, setLieuDeNaissance] = useState("");
   const [AddressActuel, setAddressActuel] = useState("");
   const [NombreEnfant, setNombreEnfant] = useState("");
-  const handleUpdatePatient = async () => {
-    if (id !== undefined) {
-      try {
-        const response = await axios.patch(
-          `http://localhost:8000/patients/${id}`,
-          {
-            identificationMaman,
-            Prenom,
-            Nom,
-            DateDeNaissance,
-            Sexe,
-            Phone,
-            LieuDeNaissance,
-            AddressActuel,
-            NombreEnfant,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${user.token}`,
-            },
-          }
-        );
-        const data = await response.status;
-        if (data === 200) {
-          history(`/antecedent/${id}`);
-        }
-        if (data !== 200) {
-          window.alert("Erreur lors de l'enregistrement");
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      history(`/patients`);
-    }
-  };
   const handleAddPatient = async () => {
     setConfirmDialog({
       ...confirmDialog,
       isOpen: false,
     });
     try {
-      const response = await fetch("http://localhost:8000/patients/", {
+      const response = await fetch("http://localhost:8000/patients/normal/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -77,7 +41,6 @@ export default function PatientRendezvous() {
           Phone,
           LieuDeNaissance,
           AddressActuel,
-          NombreEnfant,
         }),
       });
       // get the patientID via response from the server patientRouter.post
@@ -86,7 +49,7 @@ export default function PatientRendezvous() {
         window.alert("Add patient failed", data.error);
       }
       if (response.ok) {
-        history(`/antecedent/${await data.id}`);
+        history(-1);
       }
     } catch (error) {
       console.error("Error adding article:", error);
@@ -209,7 +172,7 @@ export default function PatientRendezvous() {
 
           <div className="rendezvous-enregistrer-class">
             <RendezvousProfileEnregistrerButton2
-            //   handlePatient={handleAddPatient}
+              handlePatient={handleAddPatient}
             />
           </div>
         </div>

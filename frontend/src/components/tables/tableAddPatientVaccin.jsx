@@ -23,7 +23,7 @@ export default function VaccinTable() {
   let toggleClassAddVaccinTable = addVaccinTable
     ? " add-Vaccin-Table-active"
     : "";
-
+  const [PatientData, setPatientData] = useState();
   const [VaccinDB, setVaccinDB] = useState();
   const [VaccinData, setVaccinData] = useState();
   const [AgeRecommande, setAgeRecommande] = useState();
@@ -126,6 +126,35 @@ export default function VaccinTable() {
   const { user } = useAuthContext();
 
   const history = useNavigate("/patients");
+  // Fetch Patient Data
+  useEffect(() => {
+    const fetchPatientData = async () => {
+      if (user?.token !== undefined) {
+        await fetch(`http://localhost:8000/patients/${id}`, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }).then((response) => {
+          if (response.ok) {
+            response
+              .json()
+              .then((data) => {
+                setPatientData(data);
+              })
+              .catch((error) => {
+                console.error("Error fetching Patient data:", error);
+              });
+          } else {
+            console.error("Error resieving Patient date", response.error);
+          }
+        });
+      } else {
+        history(`/patients`);
+      }
+    };
+    fetchPatientData();
+  }, [history, id, user?.token, PatientData]);
   // Fetch Vaccins
   useEffect(() => {
     const fetchVaccinDB = async () => {
@@ -150,7 +179,7 @@ export default function VaccinTable() {
         });
     };
     fetchVaccinDB();
-  }, [history, id,VaccinData]);
+  }, [history, id, VaccinData, user.token]);
   //Create new Vaccin
   const handleNewVaccinSubmit = async (event) => {
     event.preventDefault();
@@ -180,7 +209,7 @@ export default function VaccinTable() {
         if (!response.ok) {
           setNotify({
             isOpen: true,
-            message: `${data.error}`,
+            message: `${data.message}`,
             type: "error",
           });
           // window.alert("Add vaccin failed", data.error);
@@ -228,7 +257,7 @@ export default function VaccinTable() {
       }
     };
     fetchVaccinData();
-  }, [history, id]);
+  }, [history, id, user.token, VaccinDB]);
   // Edit Vaccin
   const handleEditRowSubmitt = async (event) => {
     event.preventDefault();
@@ -249,9 +278,17 @@ export default function VaccinTable() {
         );
         // Handle response as needed
         if (!response.status === 200) {
-          window.alert("Update vaccin failed", response.error);
+          setNotify({
+            isOpen: true,
+            message: "vaccin updating failed",
+            type: "error",
+          });
         } else if (response.status === 200) {
-          window.alert("Update vaccin success", response.error);
+          setNotify({
+            isOpen: true,
+            message: "vaccin updated successfully",
+            type: "success",
+          });
         }
       } catch (error) {
         window.alert(error);
@@ -353,8 +390,10 @@ export default function VaccinTable() {
             ))}
           </table>
         </form>
-        {(user?.speciality.toLowerCase() === "sage femme" ||
-          user?.speciality.toLowerCase() === "pediatre") && (
+        {((user?.speciality.toLowerCase() === "sage femme" ||
+          user?.speciality.toLowerCase() === "pediatre") ||
+          (user?.speciality.toLowerCase() === "medecin" &&
+            !(PatientData?.maturity === "Nouveau-ne"))) && (
           <div className="vaccination-add-button-class">
             <VaccinationAddButton
               addVaccinTable={addVaccinTable}

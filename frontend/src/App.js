@@ -97,16 +97,16 @@ function App() {
             element={user ? <Conculter /> : <Navigate to="/login" />}
           />
           <Route
-            path="rendezvous"
+            path="Ajout-Nouveau-ne"
             element={user ? <Rendezvous /> : <Navigate to="/login" />}
           />
           <Route
-            path="rendezvous2"
+            path="Ajout-Patient"
             element={user ? <PatientRendezvous /> : <Navigate to="/login" />}
           />
 
           <Route
-            path="malade-profile"
+            path="user-profile"
             element={user ? <MaladeProfile /> : <Navigate to="/login" />}
           />
           <Route

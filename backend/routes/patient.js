@@ -15,6 +15,7 @@ const {
     DeleteDossObs,
     UpdateNouveaune,
     CreateNewNouveauneToMaman,
+    CreateNewPatientnormal
 } = require('../controllers/PatientController');
 const {
     GetAllVaccins,
@@ -89,6 +90,8 @@ router.get('/:id', GetPatient);
 
 //post a new patient 
 router.post('/',CreateNewPatient);
+//post a new patient normal
+router.post('/normal',CreateNewPatientnormal);
 
 //post a new nouveau ne to maman
 router.post('/Nouveau-ne/maman/:id',CreateNewNouveauneToMaman);

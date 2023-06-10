@@ -86,7 +86,11 @@ function generateEncodedIDAdult(year, Lieu, sexe) {
         decimalToGray(sexeBinary) +
         Math.floor(Math.random() * 100); // Génération aléatoire des 3 derniers chiffres
     // return result
-    return encodedID;
+    if (encodedID > 0) {
+        return encodedID;
+    } else {
+        return encodedID*(-1);
+    }
 }
 
 module.exports = {

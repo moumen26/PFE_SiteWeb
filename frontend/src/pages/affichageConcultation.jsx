@@ -10,7 +10,8 @@ export default function AffichageConcultation() {
   const [ ConsultationData, setConsultationData] = useState();
   const [ DiagnosticData, setDiagnosticData] = useState();
   const [ OrdonanceData, setOrdonanceData] = useState();
-  const [ MedicamentData, setMedicamentData] = useState(data);
+  const [ ExamenDate, setExamenDate] = useState();
+  const [ MedicamentData, setMedicamentData] = useState();
   const [ UserData, setUserData] = useState();
   //get User data
   useEffect(() => {
@@ -138,51 +139,57 @@ export default function AffichageConcultation() {
           <div className="consultation-table-container">
             <div className="consultation-table-item">
               <div className="consultation-table-item-header bg-consultation">
-                <h2>Diagnostic</h2>
+              <h2>Diagnostic</h2>
               </div>
-              <div className="consultation-table-item-contenu">
-                <div className="consultation-table-item-context">
-                  <div className="consultation-table-item-context-container">
-                    <h2>Context :</h2>
-                    <textarea
-                      defaultValue={DiagnosticData?.Context}
-                      readOnly
-                      placeholder="Context"
-                    ></textarea>
-                    <h2>Maladie :</h2>
-                    <input
-                      type="text"
-                      placeholder="fiévre, faiblesse..."
-                      defaultValue={DiagnosticData?.Maladie}
-                      readOnly
-                    />
+              {DiagnosticData &&        
+                  <div className="consultation-table-item-contenu">
+                    <div className="consultation-table-item-context">
+                      <div className="consultation-table-item-context-container">
+                        <h2>Context :</h2>
+                        <textarea
+                          defaultValue={DiagnosticData?.Context}
+                          readOnly
+                          placeholder="Context"
+                        ></textarea>
+                        <h2>Maladie :</h2>
+                        <input
+                          type="text"
+                          placeholder="fiévre, faiblesse..."
+                          defaultValue={DiagnosticData?.Maladie}
+                          readOnly
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
+              }
             </div>
             <div className="consultation-table-item">
               <div className="consultation-table-item-header consul-ligne2">
                 <h2>Ordonance</h2>
               </div>
-              <div className="consultation-table-item-contenu">
-                <div className="consultation-table-item-context">
-                  {MedicamentData?.map((Medicament) => (
-                    <div className="consultation-table-item-context-container ord-med">
-                      <AddMedicamentReadOnlyRow Medicament={Medicament} />
-                    </div>
-                  ))}
+              {MedicamentData &&     
+                <div className="consultation-table-item-contenu">
+                  <div className="consultation-table-item-context">
+                    {MedicamentData?.map((Medicament) => (
+                      <div className="consultation-table-item-context-container ord-med">
+                        <AddMedicamentReadOnlyRow Medicament={Medicament} />
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              }
             </div>
             <div className="consultation-table-item">
               <div className="consultation-table-item-header consul-ligne2">
                 <h2>Examen</h2>
               </div>
-              <div className="consultation-table-item-contenu">
-                <div className="consultation-table-item-context">
-                  <div className="consultation-table-item-context-container consultation-examen"></div>
+              {ExamenDate &&
+                <div className="consultation-table-item-contenu">
+                  <div className="consultation-table-item-context">
+                    <div className="consultation-table-item-context-container consultation-examen"></div>
+                  </div>
                 </div>
-              </div>
+              }
             </div>
           </div>
         </div>

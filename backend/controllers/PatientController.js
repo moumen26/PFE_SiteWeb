@@ -21,20 +21,20 @@ const CreateNewNouveaune = async (req, res) => {
             return res.status(400).json({ error: 'You must provide all fields' });
         }
         //find patient by id 
-        const sexe = "0";
+        var sexe = "0";
         const Maman = await Patient.findById({_id: id});
         if(Maman.Sexe.toLowerCase() === "femme" || Maman.Sexe.toLowerCase() === "female"){
-            const sexe = "1";
+             sexe = "1";
         }else{
-            const sexe = "0";
+             sexe = "0";
         }
-        const Lieu = "31000"
+        var Lieu = "31000"
         if(Maman.LieuDeNaissance.toLowerCase() === "medea" || Maman.LieuDeNaissance.toLowerCase() === "médéa"){
-            const Lieu = "26000"
+             Lieu = "26000"
         }else if(Maman.LieuDeNaissance.toLowerCase() === "blida"){
-            const Lieu = "09000"
+             Lieu = "09000"
         }else if(Maman.LieuDeNaissance.toLowerCase() === "alger"){
-            const Lieu = "16000"
+             Lieu = "16000"
         }
         // Generate encoded ID
         const ID = generateEncodedID(Date_daccouchement, Lieu, sexe, Heure_daccouchement)
@@ -283,12 +283,20 @@ const CreateNewPatient = async (req, res) => {
         if (!user) {
             return res.status(400).json({ error: 'User not found' });
         }
-        const sexe = "0";
         if (!identificationMaman || identificationMaman === "") {
+            var sexe = "0";
             if(Sexe.toLowerCase() === "femme" || Sexe.toLowerCase() === "female"){
-                const sexe = "1";
+                sexe = "1";
             }else{
-                const sexe = "0";
+                sexe = "0";
+            }
+            var Lieu = "31000"
+            if(LieuDeNaissance.toLowerCase() === "medea" || LieuDeNaissance.toLowerCase() === "médéa"){
+                Lieu = "26000"
+            }else if(LieuDeNaissance.toLowerCase() === "blida"){
+                Lieu = "09000"
+            }else if(LieuDeNaissance.toLowerCase() === "alger"){
+                Lieu = "16000"
             }
             // Generate ID
             const ID = generateEncodedIDAdult(DateDeNaissance, LieuDeNaissance, sexe);
@@ -342,7 +350,67 @@ const CreateNewPatient = async (req, res) => {
         res.status(500).json({ error: 'Failed to create patient' });
       }
 }
+// Creat a new patient Non nouveau-ne
+const CreateNewPatientnormal = async (req, res) => {
+    try {
+        var { idAccoucheur, identificationMaman, Prenom, Nom, DateDeNaissance, Sexe, Phone, LieuDeNaissance, 
+            AddressActuel } = req.body;
+        const  maturity = "Adulte";
+        if (!idAccoucheur) {
+            return res.status(400).json({ error: 'You must provide all fields' });
+        }
+        const user = await User.findOne({_id :idAccoucheur});
+        if (!user) {
+            return res.status(400).json({ error: 'User not found' });
+        }
+        
+        if (!identificationMaman || identificationMaman === "") {
+            var sexe = "0";
+            if(Sexe.toLowerCase() === "femme" || Sexe.toLowerCase() === "female"){
+                sexe = "1";
+            }else{
+                sexe = "0";
+            }
+            var Lieu = "31000"
+            if(LieuDeNaissance.toLowerCase() === "medea" || LieuDeNaissance.toLowerCase() === "médéa"){
+                Lieu = "26000"
+            }else if(LieuDeNaissance.toLowerCase() === "blida"){
+                Lieu = "09000"
+            }else if(LieuDeNaissance.toLowerCase() === "alger"){
+                Lieu = "16000"
+            }
+            // Generate ID
+            const ID = generateEncodedIDAdult(DateDeNaissance, Lieu, sexe);
+            identificationMaman = ID;
+        }
+        
+        // Create new patient
+        const newPatient = new Patient({
+            Identification : identificationMaman,
+            idAccoucheur, Hopital: user.Hopital,
+            maturity, Identification: identificationMaman, Prenom, Nom, 
+            DateDeNaissance, Sexe: Sexe, Telephone: Phone, LieuDeNaissance, 
+            Adresse: AddressActuel
+        });
+        newPatient.save().then(async (savedPatient) => {
+            const patientID = savedPatient._id;
 
+            // Save to user the patientID
+            user.PatientID.push(patientID);
+            user.save();
+
+            // Send patientID to patientDetails
+            await res.status(201).json({id: patientID});
+        }).catch((error) => {
+            console.error('Error creating patient:', error);
+            res.status(500).json({ message: 'Failed to create patient' });
+        });
+            
+      } catch (error) {
+        console.error('Error creating patient:', error);
+        res.status(500).json({ error: 'Failed to create patient' });
+      }
+}
 //delete a specific patient
 const DeletePatient = async (req, res) => {
     const {id} = req.params;
@@ -449,13 +517,19 @@ const UpdateDossObs = async (req, res) => {
             Glycemle,UreeSanguine,Albuminurie,BW,Serodiagnostic,Toxoplasmose,Rubeole,MamanPoids,
             MamanTaille,MamanPoule,TA,HU,ConstractionUterines,Presentation,BCF,Uterus,Speculum,
             ToucherVaginal}
-        );
-        //if not found return error
+        ).then(async (DossierObstetrique) => {
+            //if not found return error
         if(!DossierObstetrique){
             return res.status(404).json({err: 'DossierObstetrique not found'});
         }
+        await Patient.findOneAndUpdate({_id: DossierObstetrique.idNouveauNe},{Sexe:Sexe});
         //return user
         res.status(200).json(DossierObstetrique);
+        }).catch((error) => {
+            console.error('Error updating DossierObstetrique:', error);
+            res.status(500).json({ message: 'Error updating DossierObstetrique' });
+        });
+        
     }catch(err){
         res.status(400).json({err: err.message});
     }
@@ -494,4 +568,5 @@ module.exports = {
     DeleteDossObs,
     UpdateNouveaune,
     CreateNewNouveauneToMaman,
+    CreateNewPatientnormal,
 }

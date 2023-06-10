@@ -13,8 +13,14 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../hooks/useAuthContext";
 //import { CircularProgress } from "@mui/material";
+import Notification from "../notification/notification";
 
 export default function MySwiper() {
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
   //initialisation of the states
   const [MamanNom, setMamanNom] = useState("");
   const [MamanEpouse, setMamanEpouse] = useState("");
@@ -225,13 +231,20 @@ export default function MySwiper() {
           }
         );
         if (!response.status === 200) {
-          window.alert("Add Dossier obstetrique failed", response.data.message);
-          setErrorPart_1(errorPart_1);
+          setNotify({
+            isOpen: true,
+            message: "Vous devez ajouter un de ces diagnostic ordonnance examen",
+            type: "error",
+          });
         } else if (response.status === 200) {
-          window.alert(
-            "Add Dossier obstetrique success",
-            response.data.message
-          );
+          setNotify({
+            isOpen: true,
+            message: "Sauvegarde réussie",
+            type: "success",
+          });
+          setTimeout(() => {
+            
+          }, 2000);
         }
       } catch (error) {
         console.log(error);
@@ -1135,7 +1148,7 @@ export default function MySwiper() {
               </div>
         </SwiperSlide>)
       }
-      
+      <Notification notify={notify} setNotify={setNotify} />
     </Swiper>
   );
 }

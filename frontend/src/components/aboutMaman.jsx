@@ -19,10 +19,12 @@ export default function AboutMaman({PatientData}) {
               <span>SEXE :</span>
               <h3>{PatientData?.Sexe}</h3>
             </div>
-            <div className="maman-cart-item">
+            {PatientData?.Profession &&
+              <div className="maman-cart-item">
               <span>Profession :</span>
               <h3>{PatientData?.Profession}</h3>
             </div>
+            }
             <div className="maman-cart-item">
               <span>Nom de famille du mari :</span>
               <h3>{PatientData?.Nom}</h3>
@@ -33,10 +35,13 @@ export default function AboutMaman({PatientData}) {
               <span>Ne (e) le :</span>
               <h3>{PatientData?.DateDeNaissance}</h3>
             </div>
-            <div className="maman-cart-item">
+            {PatientData?.Age &&
+              <div className="maman-cart-item">
               <span>Age :</span>
               <h3>{PatientData?.Age}ans</h3>
             </div>
+            }
+            
             <div className="maman-cart-item">
               <span>Ne (e) en :</span>
               <h3>{PatientData?.LieuDeNaissance}</h3>
@@ -45,10 +50,13 @@ export default function AboutMaman({PatientData}) {
               <span>Telephone :</span>
               <h3>0{PatientData?.Telephone}</h3>
             </div>
-            <div className="maman-cart-item">
-              <span>Poids :</span>
-              <h3>{PatientData?.Poids}kg</h3>
-            </div>
+            {PatientData?.Poids &&
+              <div className="maman-cart-item">
+                <span>Poids :</span>
+                <h3>{PatientData?.Poids + " "} kg</h3>
+              </div>
+            }
+            
           </div>
           <div className="maman-cart-class">
             <div className="maman-cart-item">
@@ -63,14 +71,18 @@ export default function AboutMaman({PatientData}) {
               <span>Address :</span>
               <h3>{PatientData?.Adresse}</h3>
             </div>
-            <div className="maman-cart-item">
-              <span>Nombre de enfants :</span>
-              <h3>{PatientData?.NbrEnfant}</h3>
-            </div>
-            <div className="maman-cart-item">
-              <span>Taille :</span>
-              <h3>{PatientData?.Taille}cm</h3>
-            </div>
+            {PatientData?.NbrEnfant &&
+              <div className="maman-cart-item">
+                <span>Nombre de enfants :</span>
+                <h3>{PatientData?.NbrEnfant}</h3>
+              </div>
+            }
+            {PatientData?.Taille &&
+              <div className="maman-cart-item">
+                <span>Taille :</span>
+                <h3>{PatientData?.Taille + " "}cm</h3>
+              </div>
+            }
           </div>
         </div>
       </div>

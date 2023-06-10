@@ -323,7 +323,13 @@ export default function FichierPatient() {
                 <div className="span-item petit-span">
                   <span>Poids :</span>
                 </div>
-                <input type="text" />
+                <input type="text" 
+                  value={Poids}
+                  name="Taille"
+                  onChange={(e) => {
+                    setPoids(e.target.value);
+                  }}
+                />
               </div>
               <div className="taille-annexe">
                 <div className="span-item petit-span">

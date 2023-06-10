@@ -108,7 +108,7 @@ const CreateNewVaccin = async (req, res) => {
             });
             
             // Send vaccinID to server
-            await res.status(200).json(savedVaccin);
+            await res.status(200).json({message: "vaccin added successfully"});
         }).catch((error) => {
             console.error('Error creating vaccin:', error);
             res.status(500).json({ message: 'Failed to create vaccin' });
@@ -138,7 +138,7 @@ const DeleteVaccin = async (req, res) => {
                     return res.status(404).json({ message: 'patient not found' });
                 }
                 //return user
-                res.status(200).json(vaccin);
+                res.status(200).json({message: "accin deleted from patient",vaccin: vaccin});
                 console.log('vaccin deleted from patient');
             }).catch((error) => {
                 return res.status(500).json({ message: 'Failed to update patient' });
@@ -154,17 +154,17 @@ const UpdateVaccin = async (req, res) => {
     try{
         //check if id is valid
         if(!mongoose.Types.ObjectId.isValid(id)){
-            return res.status(400).json({err: 'Vaccin not found'});
+            return res.status(400).json({message: 'Vaccin not found'});
         }
         //find id in db and update
         await Vaccination.findByIdAndUpdate({_id: id},
             {Nom_vaccin, Date_vaccination}
             ).then(async (vaccin) => {
                 if(!vaccin){
-                    return res.status(404).json({err: 'Vaccin not found'});
+                    return res.status(404).json({message: 'Vaccin not found'});
                 }
                 //return vaccin
-                res.status(200).json(vaccin);
+                res.status(200).json({message: "vaccin updated successfully"});
             }).catch((error) => {
                 console.error('Error updating vaccin:', error);
             });

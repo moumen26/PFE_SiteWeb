@@ -91,12 +91,9 @@ export default function Antecedent() {
       const data = await response.json();
       setNotify({
         isOpen: true,
-        message: "Add Successfully",
+        message: "Addede Successfully",
         type: "success",
       });
-      if (!response.ok) {
-        window.alert("Add patient failed", data.error);
-      }
       if (response.ok) {
         try {
           const response = await fetch(`http://localhost:8000/patients/${id}`, {

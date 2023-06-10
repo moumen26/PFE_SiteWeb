@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Notification from "../notification/notification";
 import ConfirmDialog from "../dialoges/dialogeAlert";
-export default function RendezvousProfileEnregistrerButton2({ }) {
+export default function RendezvousProfileEnregistrerButton2({handlePatient}) {
   const [notify, setNotify] = useState({
     isOpen: false,
     message: "",
@@ -23,7 +23,9 @@ export default function RendezvousProfileEnregistrerButton2({ }) {
           setConfirmDialog({
             isOpen: true,
             title: "Voulez-vous ajouter un patient ?",
-            onConfirm: () => {},
+            onConfirm: () => {
+              handlePatient();
+            },
           });
         }}
       />

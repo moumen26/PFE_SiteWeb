@@ -5,8 +5,19 @@ import RendezvousProfileEnregistrerButton from "../components/buttons/buttonRend
 import { useAuthContext } from "../hooks/useAuthContext";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import Notification from "../components/notification/notification";
 
 export default function Rendezvous() {
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
   const [act, setAct] = useState(false);
   const { user } = useAuthContext();
   const history = useNavigate();
@@ -86,24 +97,21 @@ export default function Rendezvous() {
       if (!response.ok) {
         window.alert("Add patient failed", data.error);
       }
-      if (response.ok) {
-        history(`/antecedent/${await data.id}`);
-      }
+        setNotify({
+          isOpen: true,
+          message: `${data.message}`,
+          type: "success",
+        });
+        setTimeout(() => {
+          history(`/antecedent/${data.id}`);
+        }, 1000);
+      
     } catch (error) {
       console.error("Error adding article:", error);
     }
   };
-  const [notify, setNotify] = useState({
-    isOpen: false,
-    message: "",
-    type: "",
-  });
 
-  const [confirmDialog, setConfirmDialog] = useState({
-    isOpen: false,
-    title: "",
-    subTitle: "",
-  });
+
 
   return (
     <div className="Rendezvous">
@@ -225,6 +233,7 @@ export default function Rendezvous() {
             />
           </div>
         </div>
+        <Notification notify={notify} setNotify={setNotify} />
       </div>
     </div>
   );
