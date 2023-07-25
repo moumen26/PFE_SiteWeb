@@ -13,7 +13,7 @@ export default function DialogeAddConcultation(props) {
     title: "",
     subTitle: "",
   });
-  
+
   return (
     <Dialog
       open={confirmDialogConcultation.isOpen}
@@ -33,14 +33,12 @@ export default function DialogeAddConcultation(props) {
           className="visite-btn"
           onClick={() =>
             setConfirmDialogConcultation({
-              ...confirmDialogVisite,
-              isOpen: true,
-              title: "Visite",
-              subTitle: "La date de cette visite : 2023-05-22",
+              ...confirmDialogConcultation,
+              isOpen: false,
             })
           }
         >
-          visite
+          Annuler
         </Button>
         <Button onClick={confirmDialogConcultation.onConfirm} autoFocus>
           Concultation

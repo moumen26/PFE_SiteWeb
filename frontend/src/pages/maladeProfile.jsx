@@ -40,7 +40,9 @@ console.log(userData);
           <div className="malade-profile-left-header">
             <div className="malade-profle-image"></div>
             <div className="malade-profile-name-id">
-              <h2>Khaldi Abdelmoumen</h2>
+              <h2>
+                {userData?.Lname} {userData?.Fname}
+              </h2>
               <span>{userData?._id}</span>
             </div>
           </div>
@@ -49,7 +51,7 @@ console.log(userData);
           <div className="malade-profile-form-class">
             <div className="malade-profile-form-item">
               <label htmlFor="">Prénom</label>
-              <input type="text" readOnly value= {userData?.Lname} />
+              <input type="text" readOnly value={userData?.Fname} />
             </div>
             <div className="malade-profile-form-item">
               <label htmlFor="">Specialite</label>
@@ -65,7 +67,7 @@ console.log(userData);
             </div>
             <div className="malade-profile-form-item">
               <label htmlFor="">Address actuel</label>
-              <input type="text" readOnly value={userData?.AddressActuel}/>
+              <input type="text" readOnly value={userData?.AddressActuel} />
             </div>
           </div>
           <div className="malade-profile-form-class">
@@ -90,13 +92,17 @@ console.log(userData);
             </div>
             <div className="malade-profile-form-item">
               <label htmlFor="">Hopital</label>
-              <input type="text" readOnly value={user?.Hopital}/>
+              <input type="text" readOnly value={user?.Hopital} />
             </div>
           </div>
           <div className="malade-profile-form-class">
             <div className="malade-profile-form-item">
               <label htmlFor="">Biographie</label>
-              <textarea name="" readOnly value={userData?.Biographie}></textarea>
+              <textarea
+                name=""
+                readOnly
+                value={userData?.Biographie}
+              ></textarea>
             </div>
           </div>
         </div>

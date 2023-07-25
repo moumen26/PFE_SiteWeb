@@ -9,16 +9,23 @@ import { useAuthContext } from "../../hooks/useAuthContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Notification from "../notification/notification";
+import ConfirmDialog from "../dialoges/dialogeAlert";
+import NotificationSaveMise from "../notification/notificationSaveMise";
 
 export default function VaccinTable() {
   const [addVaccinTable, setaddVaccinTable] = useState(false);
 
-   const [notify, setNotify] = useState({
-     isOpen: false,
-     message: "",
-     type: "",
-   });
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: "",
+  });
 
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+  });
 
   let toggleClassAddVaccinTable = addVaccinTable
     ? " add-Vaccin-Table-active"
@@ -92,7 +99,7 @@ export default function VaccinTable() {
 
     const fieldName = event.target.getAttribute("name");
     const fieldValue = event.target.value;
-    
+
     const newFormData = { ...editFormData };
     newFormData[fieldName] = fieldValue;
 
@@ -122,7 +129,7 @@ export default function VaccinTable() {
 
   //Get patient id from parms
   const { id } = useParams();
-  //Get user 
+  //Get user
   const { user } = useAuthContext();
 
   const history = useNavigate("/patients");
@@ -158,25 +165,25 @@ export default function VaccinTable() {
   // Fetch Vaccins
   useEffect(() => {
     const fetchVaccinDB = async () => {
-        await fetch(`http://localhost:8000/patients/Vaccin/all/`, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${user.token}`,
-          },
-        }).then((response) => {
-          if (response.ok) {
-            response
-              .json()
-              .then((data) => {
-                setVaccinData(data);
-              })
-              .catch((error) => {
-                console.error("Error fetching Vaccin data:", error);
-              });
-          } else {
-            console.error("Error resieving vaccin date", response.error);
-          }
-        });
+      await fetch(`http://localhost:8000/patients/Vaccin/all/`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+      }).then((response) => {
+        if (response.ok) {
+          response
+            .json()
+            .then((data) => {
+              setVaccinData(data);
+            })
+            .catch((error) => {
+              console.error("Error fetching Vaccin data:", error);
+            });
+        } else {
+          console.error("Error resieving vaccin date", response.error);
+        }
+      });
     };
     fetchVaccinDB();
   }, [history, id, VaccinData, user.token]);
@@ -299,6 +306,10 @@ export default function VaccinTable() {
   };
   // Delete Vaccin
   const handleDeleteClick = async (event, VaccinData) => {
+    setConfirmDialog({
+      ...confirmDialog,
+      isOpen: false,
+    });
     event.preventDefault();
 
     if (VaccinData !== undefined) {
@@ -328,7 +339,7 @@ export default function VaccinTable() {
           // window.alert("Deleting vaccin success", response.error);
         }
       } catch (error) {
-        window.alert(error);
+        // window.alert(error);
       }
     } else {
       window.alert("VaccinData undefined");
@@ -384,14 +395,16 @@ export default function VaccinTable() {
                     VaccinData={VaccinData}
                     handleEditRowClick={handleEditRowClick}
                     handleDeleteClick={handleDeleteClick}
+                    // confirmDialog={confirmDialog}
+                    // setConfirmDialog={setConfirmDialog}
                   />
                 )}
               </Fragment>
             ))}
           </table>
         </form>
-        {((user?.speciality.toLowerCase() === "sage femme" ||
-          user?.speciality.toLowerCase() === "pediatre") ||
+        {(user?.speciality.toLowerCase() === "sage femme" ||
+          user?.speciality.toLowerCase() === "pediatre" ||
           (user?.speciality.toLowerCase() === "medecin" &&
             !(PatientData?.maturity === "Nouveau-ne"))) && (
           <div className="vaccination-add-button-class">
@@ -538,7 +551,11 @@ export default function VaccinTable() {
           </form>
         </div>
       </div>
-      <Notification notify={notify} setNotify={setNotify} />
+      {/* <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      /> */}
+      <NotificationSaveMise notify={notify} setNotify={setNotify} />
     </div>
   );
 }

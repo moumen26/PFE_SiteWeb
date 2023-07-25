@@ -37,7 +37,7 @@ export default function DialogeAddConsultation(props) {
             setConfirmDialogConcultation({
               ...confirmDialogVisite,
               isOpen: true,
-              title: "Visite",
+              title: "Annuler",
               subTitle: "La date de cette visite : 2023-05-22",
               annulerbtn: "Annuler",
             })
